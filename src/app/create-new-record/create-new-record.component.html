@@ -1,0 +1,21 @@
+<h2>Create New Record</h2>
+
+<table border="1">
+    <tbody>		
+        <tr>
+            <th>Record ID</th>
+            <td><input type="text" [(ngModel)]="record.recordId" /></td>
+        </tr>
+        
+        <tr>
+            <th>Record Name</th>
+            <td><input type="text" [(ngModel)]="record.recordName" /></td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <button (click)="createRecord()">Create Record</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
