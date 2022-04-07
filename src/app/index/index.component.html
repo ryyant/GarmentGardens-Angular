@@ -1,21 +1,29 @@
 <app-breadcrumb></app-breadcrumb>
 
 <article *ngIf="sessionService.getIsLogin() == false">
-    <h3>Welcome</h3>
-    
+  <div class="banner-container">
     <p>
-        This version of the retail Point-Of-Sale (POS) system includes the following enhancements:
+      This version of the retail Point-Of-Sale (POS) system includes the
+      following enhancements:
     </p>
-    <ul style="margin-left: 20px;">
-        <li>Enhancement of existing use cases to meet v5.0 expanded logical data model.</li>
-        <li>Implementation of new use cases in v5.0 (except customer related use cases).</li>
+    <ul style="margin-left: 20px">
+      <li>
+        Enhancement of existing use cases to meet v5.0 expanded logical data
+        model.
+      </li>
+      <li>
+        Implementation of new use cases in v5.0 (except customer related use
+        cases).
+      </li>
     </ul>
+  </div>
+  <h3>Welcome</h3>
 </article>
 
-<ng-template [ngIf]="sessionService.getIsLogin() == true">		
-    <br/><br/>
-    <h1>Gong xi ni you success</h1>
-    <!-- <div *ngFor="let motd of motds">
+<ng-template [ngIf]="sessionService.getIsLogin() == true">
+  <br /><br />
+  <h1>Gong xi ni you success</h1>
+  <!-- <div *ngFor="let motd of motds">
         <div class="motdTitle">
             {{parseDate(motd.messageDate) | date:'EEE, MMM d, yy'}}			
                 - 
