@@ -6,8 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Product } from '../models/product'
-import { CreateProductReq } from '../models/create-product-req';
-import { UpdateProductReq } from '../models/update-product-req';
+// import { CreateProductReq } from '../models/create-product-req';
+// import { UpdateProductReq } from '../models/update-product-req';
 
 
 
@@ -53,27 +53,27 @@ export class ProductService
 	
 	
 	
-    createNewProduct(newProduct: Product, categoryId: number | null, tagIds: number[]): Observable<number>
-    {		
-      let createProductReq: CreateProductReq = new CreateProductReq(this.sessionService.getUsername(), this.sessionService.getPassword(), newProduct, categoryId, tagIds);
+    // createNewProduct(newProduct: Product, categoryId: number | null, tagIds: number[]): Observable<number>
+    // {		
+    //   let createProductReq: CreateProductReq = new CreateProductReq(this.sessionService.getUsername(), this.sessionService.getPassword(), newProduct, categoryId, tagIds);
       
-      return this.httpClient.put<number>(this.baseUrl, createProductReq, httpOptions).pipe
-      (
-        catchError(this.handleError)
-      );
-    }
+    //   return this.httpClient.put<number>(this.baseUrl, createProductReq, httpOptions).pipe
+    //   (
+    //     catchError(this.handleError)
+    //   );
+    // }
 	
 	
 	
-    updateProduct(productToUpdate: Product, categoryId: number | undefined | null, tagIds: number[]): Observable<any>
-    {
-      let updateProductReq: UpdateProductReq = new UpdateProductReq(this.sessionService.getUsername(), this.sessionService.getPassword(), productToUpdate, categoryId, tagIds);
+    // updateProduct(productToUpdate: Product, categoryId: number | undefined | null, tagIds: number[]): Observable<any>
+    // {
+    //   let updateProductReq: UpdateProductReq = new UpdateProductReq(this.sessionService.getUsername(), this.sessionService.getPassword(), productToUpdate, categoryId, tagIds);
       
-      return this.httpClient.post<any>(this.baseUrl, updateProductReq, httpOptions).pipe
-      (
-        catchError(this.handleError)
-      );
-    }
+    //   return this.httpClient.post<any>(this.baseUrl, updateProductReq, httpOptions).pipe
+    //   (
+    //     catchError(this.handleError)
+    //   );
+    // }
 	
   
   

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AccessRightEnum } from '../models/access-right-enum';
 import { Staff } from '../models/staff';
-import { MessageOfTheDay } from '../models/message-of-the-day';
+
 
 
 
@@ -35,21 +35,6 @@ export class SessionService
   {
     sessionStorage['isLogin'] = isLogin;
   }
-
-
-
-  getMotds(): MessageOfTheDay[]
-  {
-    return JSON.parse(sessionStorage['motds']);
-  }
-
-
-
-  setMotds(motds: MessageOfTheDay[]): void
-  {
-    sessionStorage['motds'] = JSON.stringify(motds);
-  }
-
 
 
   getCurrentStaff(): Staff
@@ -102,7 +87,7 @@ export class SessionService
     {
       let staff: Staff = this.getCurrentStaff();
 
-      if(staff.accessRightEnum == AccessRightEnum.CASHIER)
+      if(staff.accessRightEnum == AccessRightEnum.ADMINISTRATOR)
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||

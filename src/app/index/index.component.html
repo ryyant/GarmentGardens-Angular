@@ -1,4 +1,29 @@
-<ul>
-    <li><a routerLink="/viewAllRecords">1: View All Records</a></li>
-    <li><a routerLink="/createNewRecord">2: Create New Record</a></li>
-</ul>
+<app-breadcrumb></app-breadcrumb>
+
+<article *ngIf="sessionService.getIsLogin() == false">
+    <h3>Welcome</h3>
+    
+    <p>
+        This version of the retail Point-Of-Sale (POS) system includes the following enhancements:
+    </p>
+    <ul style="margin-left: 20px;">
+        <li>Enhancement of existing use cases to meet v5.0 expanded logical data model.</li>
+        <li>Implementation of new use cases in v5.0 (except customer related use cases).</li>
+    </ul>
+</article>
+
+<ng-template [ngIf]="sessionService.getIsLogin() == true">		
+    <br/><br/>
+    <h1>Gong xi ni you success</h1>
+    <!-- <div *ngFor="let motd of motds">
+        <div class="motdTitle">
+            {{parseDate(motd.messageDate) | date:'EEE, MMM d, yy'}}			
+                - 
+            {{motd.title}}
+        </div>
+        <div class="motdMessage">
+            {{motd.message}}
+        </div>
+        <br/>
+    </div> -->
+</ng-template>

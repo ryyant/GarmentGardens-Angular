@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { SessionService } from '../services/session.service';
 import { StaffService } from '../services/staff.service';
-import { MotdService } from '../services/motd.service';
 import { AccessRightEnum } from '../models/access-right-enum';
 import { Staff } from '../models/staff';
 
@@ -26,8 +25,7 @@ export class HeaderComponent implements OnInit
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               public sessionService: SessionService,
-              private staffService: StaffService,
-              private motdService: MotdService)
+              private staffService: StaffService)
   {
     this.loginError = false;
   }
@@ -49,9 +47,9 @@ export class HeaderComponent implements OnInit
       next:(response)=>{
         let staff: Staff = response;
 
-				if(response.accessRightEnum?.toString() == 'CASHIER')
+				if(response.accessRightEnum?.toString() == 'ADMINISTRATOR')
 				{
-					staff.accessRightEnum = AccessRightEnum.CASHIER;
+					staff.accessRightEnum = AccessRightEnum.ADMINISTRATOR;
 				}
 				else if(response.accessRightEnum?.toString() == 'MANAGER')
 				{
@@ -64,16 +62,16 @@ export class HeaderComponent implements OnInit
 					this.sessionService.setCurrentStaff(staff);					
 					this.loginError = false;
 
-          this.motdService.getMotds().subscribe({
-            next:(response)=>{
-              this.sessionService.setMotds(response);
-              // this.router.navigate(["/index"]);
-              window.location.reload();
-            },
-            error:(error)=>{
-              console.log('********** IndexComponent.ts: ' + error);
-            }
-          });					                    					
+          // this.motdService.getMotds().subscribe({
+          //   next:(response)=>{
+          //     this.sessionService.setMotds(response);
+          //     // this.router.navigate(["/index"]);
+          //     window.location.reload();
+          //   },
+          //   error:(error)=>{
+          //     console.log('********** IndexComponent.ts: ' + error);
+          //   }
+          // });					                    					
 				}
 				else
 				{
@@ -93,7 +91,7 @@ export class HeaderComponent implements OnInit
   {
     this.sessionService.setIsLogin(false);
     this.sessionService.setCurrentStaff(null);
-    this.sessionService.setMotds(new Array());
+    // this.sessionService.setMotds(new Array());
 
     this.router.navigate(["/index"]);
   }

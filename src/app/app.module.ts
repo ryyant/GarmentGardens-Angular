@@ -19,8 +19,6 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
-import { ViewAllRecordsComponent } from './view-all-records/view-all-records.component';
-import { CreateNewRecordComponent } from './create-new-record/create-new-record.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +29,7 @@ import { CreateNewRecordComponent } from './create-new-record/create-new-record.
     MainMenuComponent,
     SidebarComponent,
     BreadcrumbComponent,
-    AccessRightErrorComponent,
-    ViewAllRecordsComponent,
-    CreateNewRecordComponent
+    AccessRightErrorComponent
   ],
   imports: [
     BrowserModule,
