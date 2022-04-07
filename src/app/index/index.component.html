@@ -1,37 +1,55 @@
 <app-breadcrumb></app-breadcrumb>
 
 <article *ngIf="sessionService.getIsLogin() == false">
-  <div class="banner-container">
-    <p>
-      This version of the retail Point-Of-Sale (POS) system includes the
-      following enhancements:
-    </p>
-    <ul style="margin-left: 20px">
-      <li>
-        Enhancement of existing use cases to meet v5.0 expanded logical data
-        model.
-      </li>
-      <li>
-        Implementation of new use cases in v5.0 (except customer related use
-        cases).
-      </li>
-    </ul>
-  </div>
-  <h3>Welcome</h3>
+<p-fieldset legend="Garment Gardens">
+    Garment Gardens is a one stop platform for you to get onboard the latest fashion trends and do your part for the environment as well. All our vendors have been verified to sell sustainable clothing which have been verified by industry professionals.
+</p-fieldset>
+
+<p-fieldset legend="Sustainable Fashion">
+  Sustainable fashion has been gaining traction in the past 2-3 years, reasonably so. The fashion industry generates and enormouse amount of carbon footprint in the production of apparels. Furthermore, fashion companies that outsource labour to developing countries tend to impact locals negatively, with lower wages and unfair working conditions. More needs to be done to raise awarenes in this industry. 
+</p-fieldset>
+
+<p-fieldset legend="The impact you can make">
+  By buying apparel from garment gardens, you are positively contributing to the environment in the following ways:
+  <ul>
+    <li>
+      Reducing your carbon footprint
+    </li>
+    <li>
+      Ensuring that the apparel you are receiving is not at the expense of the well-being of others
+    </li>
+    <li>
+      Doing your part for the community and supporitng brands pledged to sustainable fashion 
+    </li>
+    <li>
+      Rasing awareness and encouraging the adoption of sustainable apparel
+    </li>
+  </ul>
+</p-fieldset>
+
+<p align="center">
+  <video src="assets/media/gif.mp4" loop="true" autoplay="on" width="40%"></video>
+</p>
+
+
 </article>
 
 <ng-template [ngIf]="sessionService.getIsLogin() == true">
-  <br /><br />
-  <h1>Gong xi ni you success</h1>
-  <!-- <div *ngFor="let motd of motds">
-        <div class="motdTitle">
-            {{parseDate(motd.messageDate) | date:'EEE, MMM d, yy'}}			
-                - 
-            {{motd.title}}
-        </div>
-        <div class="motdMessage">
-            {{motd.message}}
-        </div>
-        <br/>
-    </div> -->
+  <p-fieldset legend="Welcome">
+    What Do You Feel Like Getting Today?
+    <ul>
+      <li>
+        Shirts
+      </li>
+      <li>
+        Pants
+      </li>
+      <li>
+        Caps
+      </li>
+      <li>
+        Shoes
+      </li>
+    </ul>
+  </p-fieldset>
 </ng-template>

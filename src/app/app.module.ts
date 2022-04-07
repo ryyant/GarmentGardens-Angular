@@ -33,6 +33,7 @@ import { Toast, ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import {FieldsetModule} from 'primeng/fieldset';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ import { AccessRightErrorComponent } from './access-right-error/access-right-err
     ToolbarModule,
     TooltipModule,
     DialogModule,
+    FieldsetModule
   ],
   providers: [],
   bootstrap: [AppComponent],
