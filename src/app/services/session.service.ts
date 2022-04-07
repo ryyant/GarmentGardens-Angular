@@ -1,21 +1,153 @@
 import { Injectable } from '@angular/core';
-import { Record } from '../models/record';
+
+import { AccessRightEnum } from '../models/access-right-enum';
+import { Staff } from '../models/staff';
+import { MessageOfTheDay } from '../models/message-of-the-day';
+
+
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class SessionService {
-  constructor() {}
+export class SessionService
+{
+  constructor()
+  {
+  }
 
-  getRecords(): Record[] | null {
-    try {
-      return JSON.parse(sessionStorage['records']);
-    } catch {
-      return null;
+
+
+  getIsLogin(): boolean
+  {
+    if(sessionStorage['isLogin'] == "true")
+    {
+      return true;
+    }
+    else
+    {
+      return false;
     }
   }
 
-  setRecords(records: Record[]): void {
-    sessionStorage['records'] = JSON.stringify(records);
+
+
+  setIsLogin(isLogin: boolean): void
+  {
+    sessionStorage['isLogin'] = isLogin;
+  }
+
+
+
+  getMotds(): MessageOfTheDay[]
+  {
+    return JSON.parse(sessionStorage['motds']);
+  }
+
+
+
+  setMotds(motds: MessageOfTheDay[]): void
+  {
+    sessionStorage['motds'] = JSON.stringify(motds);
+  }
+
+
+
+  getCurrentStaff(): Staff
+  {
+    return JSON.parse(sessionStorage['currentStaff']);
+  }
+
+
+
+  setCurrentStaff(currentStaff: Staff | null): void
+  {		 
+    sessionStorage['currentStaff'] = JSON.stringify(currentStaff);
+  }
+
+
+
+  getUsername(): string
+  {
+    return sessionStorage['username'];
+  }
+
+
+
+  setUsername(username: string | undefined): void
+  {
+    sessionStorage['username'] = username;
+  }
+  
+  
+  
+  getPassword(): string
+  {
+    return sessionStorage['password'];
+  }
+
+
+
+  setPassword(password: string | undefined): void
+  {
+    sessionStorage['password'] = password;
+  }
+  
+  
+  
+  checkAccessRight(path : string): boolean
+  {
+    console.log("********** path: " + path);
+
+    if(this.getIsLogin())
+    {
+      let staff: Staff = this.getCurrentStaff();
+
+      if(staff.accessRightEnum == AccessRightEnum.CASHIER)
+      {
+        if(path == "/cashierOperation/checkout" ||
+            path == "/cashierOperation/voidRefund" ||
+            path == "/cashierOperation/viewMySaleTransactions")
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else if(staff.accessRightEnum == AccessRightEnum.MANAGER)
+      {
+        if(path == "/cashierOperation/checkout" ||
+            path == "/cashierOperation/voidRefund" ||
+            path == "/cashierOperation/viewMySaleTransactions" ||
+            path == "/systemAdministration/createNewStaff" ||
+            path.startsWith("/systemAdministration/viewStaffDetails") ||
+            path.startsWith("/systemAdministration/updateStaff") ||
+            path.startsWith("/systemAdministration/deleteStaff") ||
+            path == "/systemAdministration/viewAllStaffs" ||
+            path == "/systemAdministration/createNewProduct" ||
+            path.startsWith("/systemAdministration/viewProductDetails") ||
+            path.startsWith("/systemAdministration/updateProduct") ||
+            path.startsWith("/systemAdministration/deleteProduct") ||
+            path == "/systemAdministration/viewAllProducts" ||
+            path == "/systemAdministration/viewAllProductsPf" ||
+            path == "/systemAdministration/searchProductsByName" ||
+            path == "/systemAdministration/filterProductsByCategory" ||
+            path == "/systemAdministration/filterProductsByTags")
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+
+      return false;
+    }
+    else
+    {
+      return false;
+    }
   }
 }
