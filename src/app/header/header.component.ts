@@ -50,10 +50,12 @@ export class HeaderComponent implements OnInit
 				if(response.accessRightEnum?.toString() == 'ADMINISTRATOR')
 				{
 					staff.accessRightEnum = AccessRightEnum.ADMINISTRATOR;
+          console.log('Admin Boi');
 				}
 				else if(response.accessRightEnum?.toString() == 'MANAGER')
 				{
 					staff.accessRightEnum = AccessRightEnum.MANAGER;
+          console.log('Manager Boi');
 				}
 				
 				if(staff != null)
@@ -61,6 +63,7 @@ export class HeaderComponent implements OnInit
 					this.sessionService.setIsLogin(true);
 					this.sessionService.setCurrentStaff(staff);					
 					this.loginError = false;
+          console.log('Successful Login');
 
           // this.motdService.getMotds().subscribe({
           //   next:(response)=>{
@@ -80,7 +83,8 @@ export class HeaderComponent implements OnInit
       },
       error:(error)=>{
         this.loginError = true;
-				this.errorMessage = error
+				this.errorMessage = error;
+        console.log('Error in logging in');
       }
     });
   }

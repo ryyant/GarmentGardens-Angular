@@ -1,4 +1,4 @@
 export enum AccessRightEnum {
-    MANAGER,
-    ADMINISTRATOR
+    0,
+    1
 }
