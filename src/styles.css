@@ -12,3 +12,78 @@ body {
     padding-right: 2%;
     padding-top: 1%;
 }
+
+a {
+	text-decoration-line: none;	
+}
+
+a:hover {
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.mainmenu {
+	display: block;
+    width: 100%;
+	margin: 0.5% 0% 0.5% 0%;
+	padding: 3px 3px 3px 3px;
+	float: left;
+}
+
+.content {
+	display: block;
+	width: 85%;
+	float: left;
+}
+
+.sidebar {
+	display: block;
+    margin: 2.5% 0% 0.5% 0%;
+	width: 15%;
+	float: right;
+	text-align: center;
+}
+
+
+.footer {
+	display: block;
+	margin: 0.5% 0% 0% 0%;
+	padding: 3px 3px 3px 3px;
+	clear: both;
+}
+
+.advertisement {
+	margin: 5px 0px 5px 0px;
+}
+
+.rowheader {
+	font-weight: bold;
+}
+
+.dataTable {
+    border-style: solid;
+    border-width: thin;
+}
+
+.dataTableLabel {
+    width: 20%;
+    border-style: solid;
+    border-width: thin;
+}
+
+.dataTableValue {
+    width: 80%;
+    border-style: solid;
+    border-width: thin;
+}
+
+.breadcrumb {
+    display: block;
+    width: 100%;
+    margin: -2px 0% 10px 0%;
+    padding: 3px 3px 3px 3px;
+    float: left;
+    color: white;    
+    font-size: smaller;
+}
+
