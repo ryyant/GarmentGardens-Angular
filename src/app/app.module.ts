@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FileUploadModule } from 'primeng/fileupload';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
@@ -95,6 +95,7 @@ import { DeleteProductComponent } from './systemAdministration/delete-product/de
     DividerModule,
     DropdownModule,
     FormsModule,
+    FileUploadModule,
     HttpClientModule,
     InputNumberModule,
     InputTextModule,

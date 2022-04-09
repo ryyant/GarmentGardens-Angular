@@ -1,53 +1,21 @@
 <header>
-  <p-menubar >
+  <p-menubar>
     <ng-template pTemplate="start">
       <a href="#" routerLink="/">
-        <img
-          src="assets/images/gg-brandlogo-glow.png"
-          width="20%"
-          height="20%"
-        />
+        <img src="assets/images/gg-brandlogo-glow.png" width="20%" height="20%" />
       </a>
     </ng-template>
-    <div
-      *ngIf="sessionService.getIsLogin() == false"
-      style="text-align: center"
-    >
-      <input
-        pInputText
-        placeholder="Username"
-        type="text"
-        [(ngModel)]="username"
-        required
-        maxlength="32"
-      />
+    <div *ngIf="sessionService.getIsLogin() == false" style="text-align: center">
+      <input pInputText placeholder="Username" type="text" [(ngModel)]="username" required maxlength="32" />
       &nbsp;
-      <input
-        pInputText
-        placeholder="password"
-        type="password"
-        [(ngModel)]="password"
-        required
-        maxlength="32"
-      />
+      <input pInputText placeholder="password" type="password" [(ngModel)]="password" required maxlength="32" />
       &nbsp;
       <div>
-        <button
-          pButton
-          type="reset"
-          value="Clear"
-          class="p-button-rounded p-button-text"
-        >
+        <button pButton type="reset" value="Clear" class="p-button-rounded p-button-text">
           Clear
         </button>
         &nbsp;
-        <button
-          pButton
-          type="button"
-          (click)="userLogin()"
-          class="p-button-rounded p-button-text"
-          value="Login"
-        >
+        <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
           Login
         </button>
       </div>
@@ -58,29 +26,18 @@
     </div>
 
     <div *ngIf="sessionService.getIsLogin() == true" style="text-align: center; width: 200px;">
-      <button
-        pButton
-        type="button"
-        icon="pi pi-user"
-        class="p-button-rounded"
-      ></button>
+      <button pButton type="button" icon="pi pi-user" class="p-button-rounded"></button>
       <h3>
         {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
       </h3>
-        (Access Right:
-        <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
-        <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>)
-        <button
-        pButton
-        type="button"
-        (click)="userLogout()"
-        class="p-button-rounded p-button-text"
-        value="Logout"
-        >
+      (Access Right:
+      <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
+      <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>)
+      <button pButton type="button" (click)="userLogout()" class="p-button-rounded p-button-text" value="Logout">
         Logout
-        </button>
-      </div>
-      
-    </p-menubar>
+      </button>
+    </div>
+
+  </p-menubar>
 </header>

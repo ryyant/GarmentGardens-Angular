@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectItem } from 'primeng/api';
+import { ProductService } from '../../services/product.service';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-view-all-products',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewAllProductsComponent implements OnInit {
 
-  constructor() { }
+  
 
-  ngOnInit(): void {
+  constructor(private productService: ProductService) { }
+
+  ngOnInit() {
+      
   }
+  
+  
 
 }
