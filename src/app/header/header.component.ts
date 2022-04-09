@@ -52,13 +52,13 @@ export class HeaderComponent implements OnInit
       next:(response)=>{
         let user: User = response;
 
-				if(response.roleEnum?.toString() == 'CUSTOMER')
+				if(response.role?.toString() == 'CUSTOMER')
 				{
-					user.roleEnum = RoleEnum.CUSTOMER;
+					user.role = RoleEnum.CUSTOMER;
 				}
-				else if(response.roleEnum?.toString() == 'SELLER')
+				else if(response.role?.toString() == 'SELLER')
 				{
-					user.roleEnum = RoleEnum.SELLER;
+					user.role = RoleEnum.SELLER;
           
 				}
 				

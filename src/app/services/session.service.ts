@@ -99,7 +99,7 @@ export class SessionService
     {
       let user: User = this.getCurrentUser();
 
-      if(user.roleEnum == RoleEnum.CUSTOMER)
+      if(user.role == RoleEnum.CUSTOMER)
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
@@ -112,7 +112,7 @@ export class SessionService
           return false;
         }
       }
-      else if(user.roleEnum == RoleEnum.SELLER)
+      else if(user.role == RoleEnum.SELLER)
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||

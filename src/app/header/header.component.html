@@ -68,9 +68,9 @@
         {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
       </h3>
-        <!-- (Access Right:
-        <span *ngIf="sessionService.getCurrentUser().roleEnum == 0">SELLER</span>
-        <span *ngIf="sessionService.getCurrentUser().roleEnum == 1">CUSTOMER</span>) -->
+        (Access Right:
+        <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
+        <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>)
         <button
         pButton
         type="button"

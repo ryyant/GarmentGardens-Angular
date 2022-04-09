@@ -15,7 +15,7 @@ export class User
 	password: string | undefined;
     dateOfBirth: Date | undefined;
     address : String | undefined;
-    roleEnum: RoleEnum | undefined;
+    role: RoleEnum | undefined;
     tiering: TierEnum | undefined;
     chlorophyll: number | undefined;
     wallet: number | undefined;
@@ -28,7 +28,7 @@ export class User
 
 
 
-    constructor(userId?: number, firstName?: string, lastName?: string, email?: string, username?: string, password?: string, dateOfBirth?: Date, address?: string, roleEnum?: RoleEnum, tiering?: TierEnum, chlorophyll?: number, wallet?: number)
+    constructor(userId?: number, firstName?: string, lastName?: string, email?: string, username?: string, password?: string, dateOfBirth?: Date, address?: string, role?: RoleEnum, tiering?: TierEnum, chlorophyll?: number, wallet?: number)
 	{
 		this.userId = userId;		
 		this.firstName = firstName;
@@ -38,7 +38,7 @@ export class User
 		this.password = password;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.roleEnum = roleEnum;
+		this.role = role;
 		this.tiering = tiering;
 		this.chlorophyll = chlorophyll;
 		this.wallet = wallet;
