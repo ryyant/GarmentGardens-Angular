@@ -44,6 +44,17 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
+import { CheckoutComponent } from './cashierOperation/checkout/checkout.component';
+import { VoidRefundComponent } from './cashierOperation/void-refund/void-refund.component';
+import { ViewMySaleTransactionsComponent } from './cashierOperation/view-my-sale-transactions/view-my-sale-transactions.component';
+import { CreateNewStaffComponent } from './systemAdministration/create-new-staff/create-new-staff.component';
+import { ViewAllStaffsComponent } from './systemAdministration/view-all-staffs/view-all-staffs.component';
+import { CreateNewProductComponent } from './systemAdministration/create-new-product/create-new-product.component';
+import { ViewAllProductsComponent } from './systemAdministration/view-all-products/view-all-products.component';
+import { ViewAllProductsPfComponent } from './systemAdministration/view-all-products-pf/view-all-products-pf.component';
+import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
+import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
+import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +66,17 @@ import { AccessRightErrorComponent } from './access-right-error/access-right-err
     SidebarComponent,
     BreadcrumbComponent,
     AccessRightErrorComponent,
+    CheckoutComponent,
+    VoidRefundComponent,
+    ViewMySaleTransactionsComponent,
+    CreateNewStaffComponent,
+    ViewAllStaffsComponent,
+    CreateNewProductComponent,
+    ViewAllProductsComponent,
+    ViewAllProductsPfComponent,
+    ViewProductDetailsComponent,
+    UpdateProductComponent,
+    DeleteProductComponent,
   ],
   imports: [
     AppRoutingModule,

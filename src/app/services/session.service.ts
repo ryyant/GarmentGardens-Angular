@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { AccessRightEnum } from '../models/access-right-enum';
-import { Staff } from '../models/staff';
-
+import { RoleEnum } from '../models/role-enum';
+import { User } from '../models/user';
+import { MessageOfTheDay } from '../models/message-of-the-day';
 
 
 
@@ -36,17 +36,29 @@ export class SessionService
     sessionStorage['isLogin'] = isLogin;
   }
 
-
-  getCurrentStaff(): Staff
+  getMotds(): MessageOfTheDay[]
   {
-    return JSON.parse(sessionStorage['currentStaff']);
+    return JSON.parse(sessionStorage['motds']);
   }
 
 
 
-  setCurrentStaff(currentStaff: Staff | null): void
+  setMotds(motds: MessageOfTheDay[]): void
+  {
+    sessionStorage['motds'] = JSON.stringify(motds);
+  }
+
+
+  getCurrentUser(): User
+  {
+    return JSON.parse(sessionStorage['currentUser']);
+  }
+
+
+
+  setCurrentUser(currentUser: User | null): void
   {		 
-    sessionStorage['currentStaff'] = JSON.stringify(currentStaff);
+    sessionStorage['currentUser'] = JSON.stringify(currentUser);
   }
 
 
@@ -85,9 +97,9 @@ export class SessionService
 
     if(this.getIsLogin())
     {
-      let staff: Staff = this.getCurrentStaff();
+      let user: User = this.getCurrentUser();
 
-      if(staff.accessRightEnum == AccessRightEnum.ADMINISTRATOR)
+      if(user.roleEnum == RoleEnum.CUSTOMER)
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
@@ -100,7 +112,7 @@ export class SessionService
           return false;
         }
       }
-      else if(staff.accessRightEnum == AccessRightEnum.MANAGER)
+      else if(user.roleEnum == RoleEnum.SELLER)
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||

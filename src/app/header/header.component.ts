@@ -3,8 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { SessionService } from '../services/session.service';
 import { StaffService } from '../services/staff.service';
-import { AccessRightEnum } from '../models/access-right-enum';
+import { MotdService } from '../services/motd.service';
+import { RoleEnum } from '../models/role-enum';
 import { Staff } from '../models/staff';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
+
 
 
 
@@ -25,7 +29,8 @@ export class HeaderComponent implements OnInit
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               public sessionService: SessionService,
-              private staffService: StaffService)
+              private userService: UserService,
+              private motdService: MotdService)
   {
     this.loginError = false;
   }
@@ -38,43 +43,42 @@ export class HeaderComponent implements OnInit
 
 
 
-  staffLogin(): void
+  userLogin(): void
   {
     this.sessionService.setUsername(this.username);
 		this.sessionService.setPassword(this.password);
 					
-		this.staffService.staffLogin(this.username, this.password).subscribe({
+		this.userService.userLogin(this.username, this.password).subscribe({
       next:(response)=>{
-        let staff: Staff = response;
+        let user: User = response;
 
-				if(response.accessRightEnum?.toString() == 'ADMINISTRATOR')
+				if(response.roleEnum?.toString() == 'CUSTOMER')
 				{
-					staff.accessRightEnum = AccessRightEnum.ADMINISTRATOR;
-          console.log('Admin Boi');
+					user.roleEnum = RoleEnum.CUSTOMER;
 				}
-				else if(response.accessRightEnum?.toString() == 'MANAGER')
+				else if(response.roleEnum?.toString() == 'SELLER')
 				{
-					staff.accessRightEnum = AccessRightEnum.MANAGER;
+					user.roleEnum = RoleEnum.SELLER;
           console.log('Manager Boi');
 				}
 				
-				if(staff != null)
+				if(user != null)
 				{
 					this.sessionService.setIsLogin(true);
-					this.sessionService.setCurrentStaff(staff);					
+					this.sessionService.setCurrentUser(user);					
 					this.loginError = false;
           console.log('Successful Login');
 
-          // this.motdService.getMotds().subscribe({
-          //   next:(response)=>{
-          //     this.sessionService.setMotds(response);
-          //     // this.router.navigate(["/index"]);
-          //     window.location.reload();
-          //   },
-          //   error:(error)=>{
-          //     console.log('********** IndexComponent.ts: ' + error);
-          //   }
-          // });					                    					
+          this.motdService.getMotds().subscribe({
+            next:(response)=>{
+              this.sessionService.setMotds(response);
+              // this.router.navigate(["/index"]);
+              window.location.reload();
+            },
+            error:(error)=>{
+              console.log('********** IndexComponent.ts: ' + error);
+            }
+          });					                    					
 				}
 				else
 				{
@@ -91,11 +95,11 @@ export class HeaderComponent implements OnInit
 
 
 
-  staffLogout(): void
+  userLogout(): void
   {
     this.sessionService.setIsLogin(false);
-    this.sessionService.setCurrentStaff(null);
-    // this.sessionService.setMotds(new Array());
+    this.sessionService.setCurrentUser(null);
+    this.sessionService.setMotds(new Array());
 
     this.router.navigate(["/index"]);
   }

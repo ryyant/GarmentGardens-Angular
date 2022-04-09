@@ -3,7 +3,7 @@
         "target": "http://localhost:8080/GarmentGardens-Rws/Resources",
         "secure": false,
         "pathRewrite": {
-            "^api": ""
+            "^/api": ""
         }
     }
 }

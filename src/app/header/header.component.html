@@ -16,7 +16,7 @@
           Clear
         </button>
         &nbsp;
-        <button pButton type="button" (click)="staffLogin()" class="p-button-rounded p-button-text" value="Login">
+        <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
           Login
         </button>
       </div>
@@ -26,12 +26,12 @@
       </div>
 
       <div *ngIf="sessionService.getIsLogin() == true">
-        You are login as {{ sessionService.getCurrentStaff().firstName }}
-        {{ sessionService.getCurrentStaff().lastName }}
+        You are login as {{ sessionService.getCurrentUser().firstName }}
+        {{ sessionService.getCurrentUser().lastName }}
         (Access Right:
-        <span *ngIf="sessionService.getCurrentStaff().accessRightEnum == 0">CASHIER</span>
-        <span *ngIf="sessionService.getCurrentStaff().accessRightEnum == 1">MANAGER</span>)
-        <input type="button" (click)="staffLogout()" value="Logout" />
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 0">CASHIER</span>
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 1">MANAGER</span>)
+        <input type="button" (click)="userLogout()" value="Logout" />
       </div>
     </p-menubar>
   </div>
