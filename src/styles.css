@@ -87,3 +87,9 @@ a:hover {
     font-size: smaller;
 }
 
+.sidebar {
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    border-color: rgb(65, 94, 63);
+    border-style: solid;
+}

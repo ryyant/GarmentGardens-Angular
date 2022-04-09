@@ -32,7 +32,7 @@ import { Toast, ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
-import { FieldsetModule} from 'primeng/fieldset';
+import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CarouselModule } from 'primeng/carousel';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
+
 import { CheckoutComponent } from './cashierOperation/checkout/checkout.component';
 import { VoidRefundComponent } from './cashierOperation/void-refund/void-refund.component';
 import { ViewMySaleTransactionsComponent } from './cashierOperation/view-my-sale-transactions/view-my-sale-transactions.component';
@@ -117,7 +118,7 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
     ToolbarModule,
     TooltipModule,
     DialogModule,
-    FieldsetModule
+    FieldsetModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

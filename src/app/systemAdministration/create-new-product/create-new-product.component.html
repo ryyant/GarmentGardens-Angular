@@ -3,54 +3,55 @@
 <h3>Create New Product</h3>
 <br />
 
-<div *ngIf="resultSuccess == true" style="color:blue;">
-    {{message}}
+<div *ngIf="resultSuccess == true" style="color: blue">
+    {{ message }}
 </div>
 
-<div *ngIf="resultError == true" style="color:red;">
-    {{message}}
+<div *ngIf="resultError == true" style="color: red">
+    {{ message }}
 </div>
-
-
 
 <form #createProductForm="ngForm" (ngSubmit)="create(createProductForm)">
-
     <table width="100%">
         <tr>
-            <td width="20%" style="font-weight: bold;">SKU Code</td>
+            <td width="20%" style="font-weight: bold">SKU Code</td>
             <td>
-                <input pInputText placeholder="PROD999" id="skuCode" type="text" name="skuCode" #skuCode="ngModel" [(ngModel)]="newProduct.skuCode" required="true" />
+                <input pInputText placeholder="PROD999" id="skuCode" type="text" name="skuCode" #skuCode="ngModel"
+                    [(ngModel)]="newProduct.skuCode" required="true" />
             </td>
             <td>
-                <div *ngIf="skuCode.invalid && (skuCode.dirty || skuCode.touched || submitted)" class="errorText">
-                    <div *ngIf="skuCode.errors?.['required']">
-                        SKU Code is required.
-                    </div>
+                <div *ngIf="
+            skuCode.invalid && (skuCode.dirty || skuCode.touched || submitted)
+          " class="errorText">
+                    <div *ngIf="skuCode.errors?.['required']">SKU Code is required.</div>
                 </div>
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Name</td>
+            <td width="20%" style="font-weight: bold">Name</td>
             <td>
                 <!-- <input id="name" name="name" #name="ngModel" type="text" placeholder="Product 1"
                     [(ngModel)]="newProduct.name" required="true" /> -->
-                <input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel" [(ngModel)]="newProduct.name" required="true" /></td>
+                <input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel"
+                    [(ngModel)]="newProduct.name" required="true" />
+            </td>
             <td>
                 <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
-                    <div *ngIf="name.errors?.['required']">
-                        Name is required.
-                    </div>
+                    <div *ngIf="name.errors?.['required']">Name is required.</div>
                 </div>
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Description</td>
+            <td width="20%" style="font-weight: bold">Description</td>
             <td>
-                <input pInputText placeholder="Product 1" id="description" type="text" name="description" #description="ngModel" [(ngModel)]="newProduct.description" required="true" />
-                </td>
+                <input pInputText placeholder="Product 1" id="description" type="text" name="description"
+                    #description="ngModel" [(ngModel)]="newProduct.description" required="true" />
+            </td>
             <td>
-                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)"
-                    class="errorText">
+                <div *ngIf="
+            description.invalid &&
+            (description.dirty || description.touched || submitted)
+          " class="errorText">
                     <div *ngIf="description.errors?.['required']">
                         Description is required.
                     </div>
@@ -58,13 +59,16 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Quantity On Hand</td>
+            <td width="20%" style="font-weight: bold">Quantity On Hand</td>
             <td>
-                    <input pInputText placeholder="99" id="quantityOnHand" type="number" name="quantityOnHand" #quantityOnHand="ngModel" [(ngModel)]="newProduct.quantityOnHand" required="true" />
-                </td>
+                <input pInputText placeholder="99" id="quantityOnHand" type="number" name="quantityOnHand"
+                    #quantityOnHand="ngModel" [(ngModel)]="newProduct.quantityOnHand" required="true" />
+            </td>
             <td>
-                <div *ngIf="quantityOnHand.invalid && (quantityOnHand.dirty || quantityOnHand.touched || submitted)"
-                    class="errorText">
+                <div *ngIf="
+            quantityOnHand.invalid &&
+            (quantityOnHand.dirty || quantityOnHand.touched || submitted)
+          " class="errorText">
                     <div *ngIf="quantityOnHand.errors?.['required']">
                         Quantity On Hand is required.
                     </div>
@@ -72,13 +76,16 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Unit Price</td>
+            <td width="20%" style="font-weight: bold">Unit Price</td>
             <td>
-                    <input pInputText placeholder="10.00" id="unitPrice" type="number" name="unitPrice" #unitPrice="ngModel" [(ngModel)]="newProduct.unitPrice" required="true" />
-                
-                </td>
+                <input pInputText placeholder="10.00" id="unitPrice" type="number" name="unitPrice" #unitPrice="ngModel"
+                    [(ngModel)]="newProduct.unitPrice" required="true" />
+            </td>
             <td>
-                <div *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched || submitted)" class="errorText">
+                <div *ngIf="
+            unitPrice.invalid &&
+            (unitPrice.dirty || unitPrice.touched || submitted)
+          " class="errorText">
                     <div *ngIf="unitPrice.errors?.['required']">
                         Unit Price is required.
                     </div>
@@ -86,16 +93,19 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Category</td>
+            <td width="20%" style="font-weight: bold">Category</td>
             <td>
-                <select p-dropdown id="category" name="category" #category="ngModel" [(ngModel)]="categoryId" required="true">
-                    <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.name}}
+                <select id="category" name="category" #category="ngModel" [(ngModel)]="categoryId" required="true">
+                    <option *ngFor="let category of categories" value="{{ category.categoryId }}">
+                        {{ category.name }}
                     </option>
                 </select>
-                
             </td>
             <td>
-                <div *ngIf="category.invalid && (category.dirty || category.touched || submitted)" class="errorText">
+                <div *ngIf="
+            category.invalid &&
+            (category.dirty || category.touched || submitted)
+          " class="errorText">
                     <div *ngIf="category.errors != null && category.errors['required']">
                         Category is required.
                     </div>
@@ -103,25 +113,22 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Tags</td>
+            <td width="20%" style="font-weight: bold">Tags</td>
             <td>
                 <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
-                    <option *ngFor="let tag of tags" value="{{tag.tagId}}">{{tag.name}}</option>
+                    <option *ngFor="let tag of tags" value="{{ tag.tagId }}">
+                        {{ tag.name }}
+                    </option>
                 </select>
-
             </td>
-            <td>
-                &nbsp;
-            </td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center;">
+            <td colspan="3" style="text-align: center">
                 <button (click)="clear()">Clear</button>
                 &nbsp;
                 <input type="submit" value="Create New Product" />
             </td>
         </tr>
-
     </table>
-
 </form>
