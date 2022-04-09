@@ -103,7 +103,8 @@ export class SessionService
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
-            path == "/cashierOperation/viewMySaleTransactions")
+            path == "/cashierOperation/viewMySaleTransactions" ||
+            path == "/systemAdministration/viewAllProductsPf")
         {
           return true;
         }

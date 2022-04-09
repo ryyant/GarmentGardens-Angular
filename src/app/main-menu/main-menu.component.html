@@ -1,8 +1,11 @@
  <ng-template [ngIf]="sessionService.getIsLogin() == true">
     <p-menubar [model]="items">
+        <a routerLink="/systemAdministration/viewAllProductsPf">View All Products (PF)</a>
         <input type="text" pInputText placeholder="Search" />
         <button pButton icon="pi pi-search"></button>
     </p-menubar>
+
+    
 
     <!-- <h4 class="menuHeader1">Cashier Operation</h4>
     <ul class="secondaryMenu">

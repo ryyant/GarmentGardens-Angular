@@ -58,3 +58,4 @@ export class ViewAllProductsPfComponent implements OnInit
 		}
 	}
 }
+
