@@ -93,8 +93,6 @@ export class HeaderComponent implements OnInit
     });
   }
 
-
-
   userLogout(): void
   {
     this.sessionService.setIsLogin(false);

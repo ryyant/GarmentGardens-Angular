@@ -3,10 +3,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
 import { SessionService } from '../services/session.service';
-import { AccessRightEnum } from '../models/access-right-enum';
 import { User } from '../models/user';
+import { CreateUserReq } from '../models/create-user-req';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,6 +31,16 @@ userLogin(username: string | undefined, password: string | undefined): Observabl
     catchError(this.handleError)
   );
 }
+
+createNewUser(newUser: User): Observable<number>
+    {		
+      let createUserReq: CreateUserReq = new CreateUserReq(newUser);
+      
+      return this.httpClient.put<number>(this.baseUrl, createUserReq, httpOptions).pipe
+      (
+        catchError(this.handleError)
+      );
+    }
 
 private handleError(error: HttpErrorResponse)
 {

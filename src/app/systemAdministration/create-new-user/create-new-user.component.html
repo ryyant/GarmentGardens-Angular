@@ -1,0 +1,141 @@
+<h3>Create New User</h3>
+<br />
+
+<div *ngIf="resultSuccess == true" style="color:blue;">
+    {{message}}
+</div>
+
+<div *ngIf="resultError == true" style="color:red;">
+    {{message}}
+</div>
+
+
+<form #createUserForm="ngForm" (ngSubmit)="create(createUserForm)">
+
+    <table width="100%">
+        <tr>
+            <td width="20%" style="font-weight: bold;">First Name</td>
+            <td>
+                <input pInputText placeholder="firstname" id="firstName" type="text" name="firstName"
+                    #firstName="ngModel" [(ngModel)]="newUser.firstName" required="true" />
+            </td>
+            <td>
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)" class="errorText">
+                    <div *ngIf="firstName.errors?.['required']">
+                        First Name is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Last Name</td>
+            <td>
+                <input pInputText placeholder="lastname" id="lastName" type="text" name="lastName" #lastName="ngModel"
+                    [(ngModel)]="newUser.lastName" required="true" />
+            </td>
+            <td>
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)" class="errorText">
+                    <div *ngIf="lastName.errors?.['required']">
+                        Last Name is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Email</td>
+            <td>
+                <input pInputText placeholder="Email" id="email" type="text" name="email" #email="ngModel"
+                    [(ngModel)]="newUser.email" required="true" />
+            </td>
+            <td>
+                <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+                    <div *ngIf="email.errors?.['required']">
+                        Email is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Username</td>
+            <td>
+                <input pInputText placeholder="Username" id="username" type="text" name="username" #username="ngModel"
+                    [(ngModel)]="newUser.username" required="true" />
+            </td>
+            <td>
+                <div *ngIf="username.invalid && (username.dirty || username.touched || submitted)" class="errorText">
+                    <div *ngIf="username.errors?.['required']">
+                        Username is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Password</td>
+            <td>
+                <input pInputText placeholder="Password" id="password" type="password" name="password"
+                    #password="ngModel" [(ngModel)]="newUser.password" required="true" />
+
+            </td>
+            <td>
+                <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
+                    <div *ngIf="password.errors?.['required']">
+                        Password is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Date</td>
+            <td>
+                <!-- <input pInputText placeholder="Date" id="dateOfBirth" type="datetime" name="dateOfBirth"
+                    #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" required="true" /> -->
+                <p-calendar id="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+            </td>
+            <td>
+                <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched || submitted)"
+                    class="errorText">
+                    <div *ngIf="dateOfBirth.errors != null && dateOfBirth.errors['required']">
+                        Date is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Address</td>
+            <td>
+                <input pInputText placeholder="address" id="address" type="text" name="address" #address="ngModel"
+                    [(ngModel)]="newUser.address" required="true" />
+            </td>
+            <td>
+                <div *ngIf="address.invalid && (address.dirty || address.touched || submitted)" class="errorText">
+                    <div *ngIf="address.errors?.['required']">
+                        Address is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Role</td>
+            <td>
+                <input pInputText placeholder="role" id="role" type="text" name="role" #role="ngModel"
+                    [(ngModel)]="newUser.role" required="true" />
+            </td>
+            <td>
+                <div *ngIf="role.invalid && (role.dirty || role.touched || submitted)" class="errorText">
+                    <div *ngIf="role.errors?.['required']">
+                        Role is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">
+                <button (click)="clear()">Clear</button>
+                &nbsp;
+                <input type="submit" value="Create New User" />
+            </td>
+        </tr>
+
+    </table>
+
+</form>

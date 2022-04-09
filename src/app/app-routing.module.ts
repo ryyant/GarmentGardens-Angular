@@ -14,6 +14,7 @@ import { ViewProductDetailsComponent } from './systemAdministration/view-product
 import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
 import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
 import { ViewAllProductsPfComponent } from './systemAdministration/view-all-products-pf/view-all-products-pf.component';
+import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'systemAdministration/deleteProduct', component: DeleteProductComponent },
   { path: 'systemAdministration/deleteProduct/:productId', component: DeleteProductComponent },
   { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsPfComponent },
+  { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent}
 ];
 
 @NgModule({

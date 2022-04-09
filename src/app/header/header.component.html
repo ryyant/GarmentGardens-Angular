@@ -14,11 +14,11 @@
         <button pButton type="reset" value="Clear" class="p-button-rounded p-button-text">
           Clear
         </button>
-        &nbsp;
+        <a routerLink="/systemAdministration/createNewUser">Create New User</a>
         <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
           Login
         </button>
-      </div>
+      </div>    
     </div>
 
     <div *ngIf="loginError == true" style="text-align: right; color: red">
