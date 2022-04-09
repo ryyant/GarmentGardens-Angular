@@ -29,8 +29,8 @@
         You are login as {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
         (Access Right:
-        <span *ngIf="sessionService.getCurrentUser().roleEnum == 0">CASHIER</span>
-        <span *ngIf="sessionService.getCurrentUser().roleEnum == 1">MANAGER</span>)
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 0">SELLER</span>
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 1">CUSTOMER</span>)
         <input type="button" (click)="userLogout()" value="Logout" />
       </div>
     </p-menubar>

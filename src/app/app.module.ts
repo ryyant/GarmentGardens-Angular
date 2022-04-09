@@ -33,7 +33,8 @@ import { Toast, ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
-import {FieldsetModule} from 'primeng/fieldset';
+import { FieldsetModule} from 'primeng/fieldset';
+import { PanelModule } from 'primeng/panel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -102,6 +103,7 @@ import { DeleteProductComponent } from './systemAdministration/delete-product/de
     MenubarModule,
     MultiSelectModule,
     PasswordModule,
+    PanelModule,
     RatingModule,
     SelectButtonModule,
     SharedModule,

@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit
 				else if(response.roleEnum?.toString() == 'SELLER')
 				{
 					user.roleEnum = RoleEnum.SELLER;
-          console.log('Manager Boi');
+          
 				}
 				
 				if(user != null)
@@ -69,16 +69,16 @@ export class HeaderComponent implements OnInit
 					this.loginError = false;
           console.log('Successful Login');
 
-          this.motdService.getMotds().subscribe({
-            next:(response)=>{
-              this.sessionService.setMotds(response);
-              // this.router.navigate(["/index"]);
-              window.location.reload();
-            },
-            error:(error)=>{
-              console.log('********** IndexComponent.ts: ' + error);
-            }
-          });					                    					
+          // this.motdService.getMotds().subscribe({
+          //   next:(response)=>{
+          //     this.sessionService.setMotds(response);
+          //     // this.router.navigate(["/index"]);
+          //     window.location.reload();
+          //   },
+          //   error:(error)=>{
+          //     console.log('********** IndexComponent.ts: ' + error);
+          //   }
+          // });					                    					
 				}
 				else
 				{

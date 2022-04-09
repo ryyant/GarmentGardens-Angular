@@ -1,4 +1,3 @@
-import { AccessRightEnum } from './access-right-enum';
 import { RoleEnum } from './role-enum';
 import { TierEnum } from './tier-enum';
 import { CreditCard } from './credit-card';
