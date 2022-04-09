@@ -67,24 +67,20 @@
       <h3>
         {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
-        <!-- (Access Right:
-          <span *ngIf="sessionService.getCurrentUser().roleEnum == 0"
-            >CASHIER</span
-          >
-          <span *ngIf="sessionService.getCurrentUser().roleEnum == 1"
-            >MANAGER</span
-          >) -->
       </h3>
-
-      <button
+        <!-- (Access Right:
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 0">SELLER</span>
+        <span *ngIf="sessionService.getCurrentUser().roleEnum == 1">CUSTOMER</span>) -->
+        <button
         pButton
         type="button"
         (click)="userLogout()"
         class="p-button-rounded p-button-text"
         value="Logout"
-      >
+        >
         Logout
-      </button>
-    </div>
-  </p-menubar>
+        </button>
+      </div>
+      
+    </p-menubar>
 </header>
