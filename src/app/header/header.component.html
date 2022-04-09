@@ -8,7 +8,7 @@
     <div *ngIf="sessionService.getIsLogin() == false" style="text-align: center">
       <input pInputText placeholder="Username" type="text" [(ngModel)]="username" required maxlength="32" />
       &nbsp;
-      <input pInputText placeholder="password" type="password" [(ngModel)]="password" required maxlength="32" />
+      <input pInputText placeholder="Password" type="password" [(ngModel)]="password" required maxlength="32" />
       &nbsp;
       <div>
         <button pButton type="reset" value="Clear" class="p-button-rounded p-button-text">
@@ -25,7 +25,7 @@
       Invalid login credential: Username does not exist or invalid password!
     </div>
 
-    <div *ngIf="sessionService.getIsLogin() == true" style="text-align: center; width: 200px;">
+    <div *ngIf="sessionService.getIsLogin() == true" style="text-align: center; width: 200px">
       <button pButton type="button" icon="pi pi-user" class="p-button-rounded"></button>
       <h3>
         {{ sessionService.getCurrentUser().firstName }}
@@ -38,6 +38,5 @@
         Logout
       </button>
     </div>
-
   </p-menubar>
 </header>
