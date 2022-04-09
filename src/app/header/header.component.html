@@ -18,7 +18,7 @@
         <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
           Login
         </button>
-      </div>    
+      </div>
     </div>
 
     <div *ngIf="loginError == true" style="text-align: right; color: red">
@@ -26,15 +26,18 @@
     </div>
 
     <div *ngIf="sessionService.getIsLogin() == true" style="text-align: center; width: 200px">
-      <button pButton type="button" icon="pi pi-user" class="p-button-rounded"></button>
-      <h3>
+      <button pButton type="button" class="p-button-text"> Hi,
         {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
-      </h3>
-      (Access Right:
-      <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
-      <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>)
-      <button pButton type="button" (click)="userLogout()" class="p-button-rounded p-button-text" value="Logout">
+      </button>
+      &nbsp;
+      <button pButton type="button" icon="pi pi-user" class="p-button-rounded"></button>
+
+      <!-- <span *ngIf=" sessionService.getCurrentUser().role==0">CUSTOMER</span>
+        <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>) -->
+      <br />
+      <br />
+      <button pButton type="button" (click)="userLogout()" class="p-button-rounded p-button-outlined" value="Logout">
         Logout
       </button>
     </div>
