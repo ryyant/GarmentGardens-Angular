@@ -1,16 +1,16 @@
 <h3>Create New User</h3>
 
-<div *ngIf="resultSuccess == true" style="color:blue;">
-    {{message}}
-</div>
 
-<div *ngIf="resultError == true" style="color:red;">
-    {{message}}
-</div>
 
 
 <form #createUserForm="ngForm" (ngSubmit)="create(createUserForm)" class="createUserForm">
-
+    <div *ngIf="resultSuccess == true" class="boxSuccessMessage" >
+        {{message}}
+    </div>
+    
+    <div *ngIf="resultError == true" class="boxErrorMessage">
+        {{message}}
+    </div>
     <table width="100%">
         <tr>
             <td width="50%" style="font-weight: bold;">First Name</td>
@@ -19,8 +19,8 @@
                     #firstName="ngModel" [(ngModel)]="newUser.firstName" required="true" />
             </td>
             <td>
-                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)" class="errorText">
-                    <div *ngIf="firstName.errors?.['required']">
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched )" class="errorText">
+                    <div *ngIf="firstName.errors?.['required']" class="errorMessage">
                         First Name is required.
                     </div>
                 </div>
@@ -33,8 +33,8 @@
                     [(ngModel)]="newUser.lastName" required="true" />
             </td>
             <td>
-                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)" class="errorText">
-                    <div *ngIf="lastName.errors?.['required']">
+                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched )" class="errorText">
+                    <div *ngIf="lastName.errors?.['required']" class="errorMessage">
                         Last Name is required.
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                     [(ngModel)]="newUser.email" required="true" />
             </td>
             <td>
-                <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
-                    <div *ngIf="email.errors?.['required']">
+                <div *ngIf="email.invalid && (email.dirty || email.touched )" class="errorText">
+                    <div *ngIf="email.errors?.['required']" class="errorMessage">
                         Email is required.
                     </div>
                 </div>
@@ -61,8 +61,8 @@
                     [(ngModel)]="newUser.username" required="true" />
             </td>
             <td>
-                <div *ngIf="username.invalid && (username.dirty || username.touched || submitted)" class="errorText">
-                    <div *ngIf="username.errors?.['required']">
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" class="errorText">
+                    <div *ngIf="username.errors?.['required']" class="errorMessage">
                         Username is required.
                     </div>
                 </div>
@@ -76,8 +76,8 @@
 
             </td>
             <td>
-                <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
-                    <div *ngIf="password.errors?.['required']">
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="errorText">
+                    <div *ngIf="password.errors?.['required']" class="errorMessage">
                         Password is required.
                     </div>
                 </div>
@@ -88,12 +88,12 @@
             <td>
                 <!-- <input pInputText placeholder="Date" id="dateOfBirth" type="datetime" name="dateOfBirth"
                     #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" required="true" /> -->
-                <p-calendar placeholder="Date" id="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+                <p-calendar placeholder="Date" id="dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" dateFormat="dd.mm.yy" [required]="true" ></p-calendar>
             </td>
             <td>
-                <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched || submitted)"
+                <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
                     class="errorText">
-                    <div *ngIf="dateOfBirth.errors != null && dateOfBirth.errors['required']">
+                    <div *ngIf="dateOfBirth.errors != null && dateOfBirth.errors['required']" class="errorMessage">
                         Date is required.
                     </div>
                 </div>
@@ -106,8 +106,8 @@
                     [(ngModel)]="newUser.address" required="true" />
             </td>
             <td>
-                <div *ngIf="address.invalid && (address.dirty || address.touched || submitted)" class="errorText">
-                    <div *ngIf="address.errors?.['required']">
+                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="errorText">
+                    <div *ngIf="address.errors?.['required']" class="errorMessage">
                         Address is required.
                     </div>
                 </div>
@@ -127,7 +127,15 @@
                         <p-radioButton name="role" value="CUSTOMER" [(ngModel)]="newUser.role" inputId="city3"></p-radioButton>
                         <label for="city3">Customer</label>
                     </div> -->
-                    <p-selectButton [options]="stateOptions" [(ngModel)]="newUser.role" optionLabel="label" optionValue="value"></p-selectButton>
+
+                    <p-selectButton id="role" name="role" #role="ngModel" [options]="stateOptions" [(ngModel)]="newUser.role" optionLabel="label" optionValue="value" required="true"></p-selectButton>
+            </td>
+            <td>
+                <div *ngIf="role.invalid && (role.dirty || role.touched)" class="errorText" class="errorMessage">
+                    <div *ngIf="role.errors?.['required']">
+                        Role is required.
+                    </div>
+                </div>
             </td>
             <td>
                 

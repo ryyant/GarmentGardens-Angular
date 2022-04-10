@@ -24,6 +24,7 @@ export class CreateNewUserComponent implements OnInit {
   message: string | undefined;
 
   stateOptions: any[];
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -31,16 +32,14 @@ export class CreateNewUserComponent implements OnInit {
     private primeNGConfig: PrimeNGConfig
   ) {
     this.submitted = false;
-    this.newUser = new User();
+    this.newUser = new User()
 
     this.resultSuccess = false;
     this.resultError = false;
-
     this.stateOptions = [
       { label: 'Customer', value: 'CUSTOMER' },
       { label: 'Seller', value: 'SELLER' },
-    ];
-
+    ];  
   }
 
   ngOnInit(): void {}
@@ -53,6 +52,7 @@ export class CreateNewUserComponent implements OnInit {
     if (createUserForm.valid) {
       this.userService.createNewUser(this.newUser).subscribe({
         next: (response) => {
+          console.log(response);
           let newProductId: number = response;
           this.resultSuccess = true;
           this.resultError = false;
@@ -71,6 +71,8 @@ export class CreateNewUserComponent implements OnInit {
           console.log('********** CreateNewProductComponent.ts: ' + error);
         },
       });
+    } else {
+      console.log("fail");
     }
   }
 
