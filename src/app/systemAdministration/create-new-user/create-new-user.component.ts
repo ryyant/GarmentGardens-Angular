@@ -10,38 +10,36 @@ import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { User } from '../../models/user';
 
-
 @Component({
   selector: 'app-create-new-user',
   templateUrl: './create-new-user.component.html',
-  styleUrls: ['./create-new-user.component.css']
+  styleUrls: ['./create-new-user.component.css'],
 })
 export class CreateNewUserComponent implements OnInit {
-
   submitted: boolean;
   newUser: User;
 
   resultSuccess: boolean;
   resultError: boolean;
   message: string | undefined;
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService) {
+    private userService: UserService
+  ) {
     this.submitted = false;
     this.newUser = new User();
-
 
     this.resultSuccess = false;
     this.resultError = false;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   create(createUserForm: NgForm) {
     this.submitted = true;
 
-    console.log('Hiiiiiiiiiiiiiiiiiiiiiii');
+    console.log('Creating...');
 
     if (createUserForm.valid) {
       this.userService.createNewUser(this.newUser).subscribe({
@@ -49,7 +47,7 @@ export class CreateNewUserComponent implements OnInit {
           let newProductId: number = response;
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = "New user " + newProductId + " created successfully";
+          this.message = 'New user ' + newProductId + ' created successfully';
 
           this.newUser = new User();
           createUserForm.resetForm();
@@ -58,10 +56,11 @@ export class CreateNewUserComponent implements OnInit {
         error: (error) => {
           this.resultError = true;
           this.resultSuccess = false;
-          this.message = "An error has occurred while creating the new product: " + error;
+          this.message =
+            'An error has occurred while creating the new product: ' + error;
 
           console.log('********** CreateNewProductComponent.ts: ' + error);
-        }
+        },
       });
     }
   }
@@ -70,5 +69,4 @@ export class CreateNewUserComponent implements OnInit {
     this.submitted = false;
     this.newUser = new User();
   }
-
 }

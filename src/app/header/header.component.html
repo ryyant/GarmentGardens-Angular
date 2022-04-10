@@ -14,7 +14,11 @@
         <button pButton type="reset" value="Clear" class="p-button-rounded p-button-text">
           Clear
         </button>
-        <a routerLink="/systemAdministration/createNewUser">Create New User</a>
+
+        <a routerLink="/systemAdministration/createNewUser">        
+          <button pButton type="button" class="p-button-rounded p-button-text registerButton" value="Register">
+          Register
+        </button></a>
         <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
           Login
         </button>

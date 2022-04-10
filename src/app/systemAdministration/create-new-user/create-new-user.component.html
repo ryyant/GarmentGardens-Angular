@@ -10,7 +10,7 @@
 </div>
 
 
-<form #createUserForm="ngForm" (ngSubmit)="create(createUserForm)">
+<form #createUserForm="ngForm" (ngSubmit)="create(createUserForm)" class="createUserForm">
 
     <table width="100%">
         <tr>
@@ -85,11 +85,11 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Date</td>
+            <td width="20%" style="font-weight: bold;">Date Of Birth</td>
             <td>
                 <!-- <input pInputText placeholder="Date" id="dateOfBirth" type="datetime" name="dateOfBirth"
                     #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" required="true" /> -->
-                <p-calendar id="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+                <p-calendar placeholder="Date" id="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
             </td>
             <td>
                 <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched || submitted)"
@@ -130,9 +130,15 @@
         </tr>
         <tr>
             <td colspan="3" style="text-align: center;">
-                <button (click)="clear()">Clear</button>
+                <button pButton (click)="clear()" type="reset" value="Clear" class="p-button-rounded p-button-text">
+                    Clear
+                  </button>
                 &nbsp;
-                <input type="submit" value="Create New User" />
+
+                <button pButton type="submit" class="p-button-rounded p-button-outlined" value="Create">
+                    Submit
+                  </button>
+
             </td>
         </tr>
 
