@@ -1,5 +1,4 @@
 <h3>Create New User</h3>
-<br />
 
 <div *ngIf="resultSuccess == true" style="color:blue;">
     {{message}}
@@ -14,8 +13,8 @@
 
     <table width="100%">
         <tr>
-            <td width="20%" style="font-weight: bold;">First Name</td>
-            <td>
+            <td width="50%" style="font-weight: bold;">First Name</td>
+            <td width="30%">
                 <input pInputText placeholder="firstname" id="firstName" type="text" name="firstName"
                     #firstName="ngModel" [(ngModel)]="newUser.firstName" required="true" />
             </td>
@@ -28,7 +27,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Last Name</td>
+            <td width="50%" style="font-weight: bold;">Last Name</td>
             <td>
                 <input pInputText placeholder="lastname" id="lastName" type="text" name="lastName" #lastName="ngModel"
                     [(ngModel)]="newUser.lastName" required="true" />
@@ -42,7 +41,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Email</td>
+            <td width="50%" style="font-weight: bold;">Email</td>
             <td>
                 <input pInputText placeholder="Email" id="email" type="text" name="email" #email="ngModel"
                     [(ngModel)]="newUser.email" required="true" />
@@ -56,7 +55,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Username</td>
+            <td width="50%" style="font-weight: bold;">Username</td>
             <td>
                 <input pInputText placeholder="Username" id="username" type="text" name="username" #username="ngModel"
                     [(ngModel)]="newUser.username" required="true" />
@@ -70,7 +69,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Password</td>
+            <td width="50%" style="font-weight: bold;">Password</td>
             <td>
                 <input pInputText placeholder="Password" id="password" type="password" name="password"
                     #password="ngModel" [(ngModel)]="newUser.password" required="true" />
@@ -85,7 +84,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Date Of Birth</td>
+            <td width="50%" style="font-weight: bold;">Date Of Birth</td>
             <td>
                 <!-- <input pInputText placeholder="Date" id="dateOfBirth" type="datetime" name="dateOfBirth"
                     #dateOfBirth="ngModel" [(ngModel)]="newUser.dateOfBirth" required="true" /> -->
@@ -101,7 +100,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Address</td>
+            <td width="50%" style="font-weight: bold;">Address</td>
             <td>
                 <input pInputText placeholder="address" id="address" type="text" name="address" #address="ngModel"
                     [(ngModel)]="newUser.address" required="true" />
@@ -115,7 +114,7 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" style="font-weight: bold;">Role</td>
+            <td width="50%" style="font-weight: bold;">Role</td>
             <td>
                 <input pInputText placeholder="role" id="role" type="text" name="role" #role="ngModel"
                     [(ngModel)]="newUser.role" required="true" />
@@ -129,7 +128,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center;">
+            <td colspan="3">
                 <button pButton (click)="clear()" type="reset" value="Clear" class="p-button-rounded p-button-text">
                     Clear
                   </button>

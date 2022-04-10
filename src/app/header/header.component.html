@@ -1,6 +1,6 @@
 <header>
-  <p-menubar>
-    <ng-template pTemplate="start">
+  <p-menubar >
+    <ng-template pTemplate="start" >
       <a href="#" routerLink="/">
         <img src="assets/images/gg-brandlogo-glow.png" width="20%" height="20%" />
       </a>
@@ -16,7 +16,7 @@
         </button>
 
         <a routerLink="/systemAdministration/createNewUser">        
-          <button pButton type="button" class="p-button-rounded p-button-text registerButton" value="Register">
+          <button pButton type="button" class="p-button-rounded p-button-outlined" value="Register">
           Register
         </button></a>
         <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
