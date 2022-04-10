@@ -101,4 +101,10 @@ export class HeaderComponent implements OnInit
 
     this.router.navigate(["/index"]);
   }
+
+  viewProfile(): void
+  {
+    this.router.navigate(["/systemAdministration/viewProfilePage"]);
+  }
+
 }

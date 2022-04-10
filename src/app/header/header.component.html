@@ -35,7 +35,7 @@
         {{ sessionService.getCurrentUser().lastName }}
       </button>
       &nbsp;
-      <button pButton type="button" icon="pi pi-user" class="p-button-rounded"></button>
+      <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>
 
       <!-- <span *ngIf=" sessionService.getCurrentUser().role==0">CUSTOMER</span>
         <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>) -->
