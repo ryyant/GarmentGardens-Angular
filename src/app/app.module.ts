@@ -52,11 +52,11 @@ import { CreateNewStaffComponent } from './systemAdministration/create-new-staff
 import { ViewAllStaffsComponent } from './systemAdministration/view-all-staffs/view-all-staffs.component';
 import { CreateNewProductComponent } from './systemAdministration/create-new-product/create-new-product.component';
 import { ViewAllProductsComponent } from './systemAdministration/view-all-products/view-all-products.component';
-import { ViewAllProductsPfComponent } from './systemAdministration/view-all-products-pf/view-all-products-pf.component';
 import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
 import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
 import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
+import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 
 @NgModule({
   declarations: [
@@ -75,11 +75,11 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
     ViewAllStaffsComponent,
     CreateNewProductComponent,
     ViewAllProductsComponent,
-    ViewAllProductsPfComponent,
     ViewProductDetailsComponent,
     UpdateProductComponent,
     DeleteProductComponent,
     CreateNewUserComponent,
+    ViewSellerProductsComponent,
   ],
   imports: [
     AppRoutingModule,

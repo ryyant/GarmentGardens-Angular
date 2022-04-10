@@ -13,8 +13,8 @@ import { ViewAllProductsComponent } from './systemAdministration/view-all-produc
 import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
 import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
 import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
-import { ViewAllProductsPfComponent } from './systemAdministration/view-all-products-pf/view-all-products-pf.component';
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
+import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -33,8 +33,8 @@ const routes: Routes = [
   { path: 'systemAdministration/updateProduct/:productId', component: UpdateProductComponent },
   { path: 'systemAdministration/deleteProduct', component: DeleteProductComponent },
   { path: 'systemAdministration/deleteProduct/:productId', component: DeleteProductComponent },
-  { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsPfComponent },
-  { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent}
+  { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent},
+  { path: 'systemAdministration/viewSellerProducts', component: ViewSellerProductsComponent}
 ];
 
 @NgModule({
