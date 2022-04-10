@@ -23,7 +23,7 @@ a:hover {
 }
 
 .topBar {
-    box-shadow: 0 2px 4px 2px rgb(125, 228, 156);
+    box-shadow: 0 2px 4px 2px #C5E1A5;
     border-radius: 5px;
 }
 
@@ -70,18 +70,6 @@ a:hover {
     border-width: thin;
 }
 
-.dataTableLabel {
-    width: 20%;
-    border-style: solid;
-    border-width: thin;
-}
-
-.dataTableValue {
-    width: 80%;
-    border-style: solid;
-    border-width: thin;
-}
-
 .breadcrumb {
     display: block;
     width: 100%;
@@ -95,6 +83,46 @@ a:hover {
 .sidebar {
     padding-left: 0.5%;
     padding-right: 0.5%;
-    border-color: rgb(65, 94, 63);
+}
+
+.boxSuccessMessage {
+    color: greenyellow;
     border-style: solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-color: greenyellow;
+    border-width: 2px;
+    border-radius: 15px;
+}
+
+.boxErrorMessage {
+    color: red;
+    border-style: solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-color: red;
+    border-width: 2px;
+    border-radius: 15px;
+}
+
+.successMessage {
+    font-size: smaller;
+    color: greenyellow;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 4px;
+}
+
+.errorMessage {
+    font-size: smaller;
+    color: red;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 4px;
+}
+
+.glow {
+    box-shadow: 0 2px 4px 2px #C5E1A5;
 }

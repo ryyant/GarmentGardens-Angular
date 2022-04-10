@@ -12,19 +12,25 @@ import { SessionService } from '../services/session.service';
 export class MainMenuComponent implements OnInit {
   constructor(private router: Router, public sessionService: SessionService) {}
 
-  items: MenuItem[] = [];
+  menu: MenuItem[] = [];
+  restrictedMenu: MenuItem[] = [];
 
   ngOnInit() {
-    this.items = [
+
+    this.restrictedMenu = [
       {
         label: 'Browse',
         items: [
+          {
+            label: 'All',
+            routerLink: ['/systemAdministration/viewAllProducts'],
+          },
           {
             label: 'Tops',
             items: [
               {
                 label: 'Products',
-                routerLink: ['/systemAdministration/viewAllProductsPf'],
+                routerLink: ['/systemAdministration/'],
               },
               { label: 'Other', routerLink: ['/pagename'] },
             ],
@@ -34,7 +40,7 @@ export class MainMenuComponent implements OnInit {
             items: [
               {
                 label: 'Products',
-                routerLink: ['/systemAdministration/viewAllProducts'],
+                routerLink: ['/systemAdministration/'],
               },
               { label: 'Other', routerLink: ['/pagename'] },
             ],
@@ -44,27 +50,32 @@ export class MainMenuComponent implements OnInit {
             items: [
               {
                 label: 'Products',
-                routerLink: ['/systemAdministration/viewAllProducts'],
+                routerLink: ['/systemAdministration/'],
               },
               { label: 'Other', routerLink: ['/pagename'] },
             ],
           },
-        ],
-      },
+        ]
+      }
+    ]
+
+
+    this.menu = [
+        this.restrictedMenu[0],
       {
         label: 'Customer',
         items: [
           {
             label: 'Transactions',
-            routerLink: ['/systemAdministration/viewAllProducts'],
+            routerLink: ['/systemAdministration/'],
           },
           {
             label: 'Cart',
-            routerLink: ['/systemAdministration/viewAllProducts'],
+            routerLink: ['/systemAdministration/'],
           },
           {
             label: 'Disputes',
-            routerLink: ['/systemAdministration/viewAllProducts'],
+            routerLink: ['/systemAdministration/'],
           },
         ],
       },
@@ -73,11 +84,11 @@ export class MainMenuComponent implements OnInit {
         items: [
           {
             label: 'Manage Products',
-            routerLink: ['/systemAdministration/viewAllProducts'],
+            routerLink: ['/systemAdministration/viewSellerProducts'],
           },
           {
             label: 'Disputes',
-            routerLink: ['/systemAdministration/viewAllProducts'],
+            routerLink: ['/systemAdministration/'],
           },
         ],
       },

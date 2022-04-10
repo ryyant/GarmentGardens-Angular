@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewAllProductsPfComponent } from './view-all-products-pf.component';
+import { ViewSellerProductsComponent } from './view-seller-products.component';
 
-describe('ViewAllProductsPfComponent', () => {
-  let component: ViewAllProductsPfComponent;
-  let fixture: ComponentFixture<ViewAllProductsPfComponent>;
+describe('ViewSellerProductsComponent', () => {
+  let component: ViewSellerProductsComponent;
+  let fixture: ComponentFixture<ViewSellerProductsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewAllProductsPfComponent ]
+      declarations: [ ViewSellerProductsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewAllProductsPfComponent);
+    fixture = TestBed.createComponent(ViewSellerProductsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
