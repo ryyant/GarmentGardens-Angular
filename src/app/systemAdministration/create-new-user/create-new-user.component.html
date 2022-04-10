@@ -117,15 +117,21 @@
         <tr>
             <td width="20%" style="font-weight: bold;">Role</td>
             <td>
-                <input pInputText placeholder="role" id="role" type="text" name="role" #role="ngModel"
-                    [(ngModel)]="newUser.role" required="true" />
+                <!-- <input pInputText placeholder="role" id="role" type="text" name="role" #role="ngModel"
+                    [(ngModel)]="newUser.role" required="true" /> -->
+
+                    <!-- <div class="p-field-radiobutton">
+                        <p-radioButton name="role" value="SELLER" [(ngModel)]="newUser.role" inputId="city2"></p-radioButton>
+                        <label for="city2">Seller</label>
+                    </div>
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="role" value="CUSTOMER" [(ngModel)]="newUser.role" inputId="city3"></p-radioButton>
+                        <label for="city3">Customer</label>
+                    </div> -->
+                    <p-selectButton [options]="stateOptions" [(ngModel)]="newUser.role" optionLabel="label" optionValue="value"></p-selectButton>
             </td>
             <td>
-                <div *ngIf="role.invalid && (role.dirty || role.touched || submitted)" class="errorText">
-                    <div *ngIf="role.errors?.['required']">
-                        Role is required.
-                    </div>
-                </div>
+                
             </td>
         </tr>
         <tr>

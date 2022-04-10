@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-
+import { SelectItem, PrimeNGConfig } from 'primeng/api';
 import { SessionService } from '../../services/session.service';
 import { UserService } from '../../services/user.service';
 import { CategoryService } from '../../services/category.service';
@@ -22,16 +22,25 @@ export class CreateNewUserComponent implements OnInit {
   resultSuccess: boolean;
   resultError: boolean;
   message: string | undefined;
+
+  stateOptions: any[];
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private primeNGConfig: PrimeNGConfig
   ) {
     this.submitted = false;
     this.newUser = new User();
 
     this.resultSuccess = false;
     this.resultError = false;
+
+    this.stateOptions = [
+      { label: 'Customer', value: 'CUSTOMER' },
+      { label: 'Seller', value: 'SELLER' },
+    ];
+
   }
 
   ngOnInit(): void {}
