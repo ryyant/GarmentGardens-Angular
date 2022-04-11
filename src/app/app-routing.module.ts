@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'systemAdministration/updateProduct/:productId', component: UpdateProductComponent },
   { path: 'systemAdministration/deleteProduct', component: DeleteProductComponent },
   { path: 'systemAdministration/deleteProduct/:productId', component: DeleteProductComponent },
-  { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsPfComponent },
+  { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsComponent },
   { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent},
   { path: 'systemAdministration/viewProfilePage', component: ViewProfilePageComponent},
   { path: 'systemAdministration/viewSellerProducts', component: ViewSellerProductsComponent}
