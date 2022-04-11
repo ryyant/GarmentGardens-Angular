@@ -44,6 +44,19 @@ export class MainMenuComponent implements OnInit {
 
     this.menu = [
         this.restrictedMenu[0],
+        {
+          label: 'Rewards',
+          items: [
+            {
+              label: 'My Rewards',
+              routerLink: ['/systemAdministration/'],
+            },
+            {
+              label: 'View All Available Rewards',
+              routerLink: ['/systemAdministration/'],
+            },
+          ],
+        },
       {
         label: 'Customer',
         items: [
