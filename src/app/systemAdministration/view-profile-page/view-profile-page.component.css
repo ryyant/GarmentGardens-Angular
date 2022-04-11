@@ -1,0 +1,27 @@
+.save-button {
+    margin: 1em 0 2em;
+    width: 10%;
+}
+
+.updateProfileForm {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: #252525;
+    padding: 15px;
+    width: 60%;
+    text-align: center;
+    height: 80%;
+    margin: auto;
+    padding-bottom: 2%;
+  }
+  
+  td {
+    padding: 5px;
+    margin-top: 5px;
+    margin-top: 5px;
+    margin:auto;
+  }
+
+  table{
+      margin: auto;
+  }

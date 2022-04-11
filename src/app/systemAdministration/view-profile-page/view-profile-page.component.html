@@ -1,1 +1,105 @@
-<p>view-profile-page works!</p>
+<div>
+    <h2>My Profile</h2>
+    <p>Manage your profile</p>
+
+    <hr style="opacity: 0.1" />
+
+    <form #updateProfileForm="ngForm" (ngSubmit)="updateProfile(updateProfileForm)" class="updateProfileForm">
+        <div *ngIf="resultError == true" class="boxErrorMessage">
+            {{message}}
+        </div>
+        <table width="50%">
+            <tr>
+                <td width="50%" style="font-weight: bold;">Username</td>
+                <td width="30%">
+                    <input #username="ngModel" id="username" name="username" type="text" [(ngModel)]="currUser.username"
+                        required pInputText disabled />
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">First Name</td>
+                <td width="30%">
+                    <input #firstName="ngModel" id="firstName" type="text" name="firstName"
+                        [(ngModel)]="currUser.firstName" required pInputText />
+                </td>
+                <td>
+                    <div *ngIf="
+                            firstName.invalid && (firstName.dirty || firstName.touched || submitted)"
+                        class="errorText">
+                        <div *ngIf="firstName.errors?.['required']" class="errorMessage">
+                            First Name is required.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">Last Name</td>
+                <td width="30%">
+                    <input #lastName="ngModel" id="lastName" name="lastName" type="text" [(ngModel)]="currUser.lastName"
+                        required pInputText />
+                </td>
+                <td>
+                    <div *ngIf="
+                                lastName.invalid &&
+                                (lastName.dirty || lastName.touched || submitted)" class="errorText">
+                        <div *ngIf="lastName.errors != null" class="errorMessage">
+                            First Name is required.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">Email</td>
+                <td width="30%">
+                    <input #email="ngModel" id="email" name="email" type="text" [(ngModel)]="currUser.email" required
+                        pInputText />
+                </td>
+                <td>
+                    <div *ngIf="
+                            email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+                        <div *ngIf="email.errors != null" class="errorMessage">
+                            Email is required.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">Address</td>
+                <td width="30%">
+                    <input #address="ngModel" id="address" name="address" type="text" [(ngModel)]="currUser.address"
+                        required pInputText />
+                </td>
+                <td>
+                    <div *ngIf="
+                    address.invalid && (address.dirty || address.touched || submitted)" class="errorText">
+                        <div *ngIf="address.errors != null" class="errorMessage">
+                            Address is required.address
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">Date of Birth</td>
+                <td>
+                    <p-calendar #dateOfBirth="ngModel" id="dateOfBirth" name="dateOfBirth"
+                        [(ngModel)]="currUser.dateOfBirth" dateFormat="dd.mm.yy" [required]="true"></p-calendar>
+                </td>
+                <td>
+                    <div *ngIf="
+                    dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched || submitted)" class="errorText">
+                        <div *ngIf="email.errors != null" class="errorMessage">
+                            Date of Birth is required.
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <div class="account-save-button">
+            <span>
+                <p-button label="Save" type="submit"></p-button>
+            </span>
+        </div>
+    </form>
+</div>
