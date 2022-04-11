@@ -34,7 +34,6 @@ export class MainMenuComponent implements OnInit {
 
       this.categoryService.getRootCategories().subscribe({
         next: (rootCategories) => {
-          console.log(rootCategories);
             let items = this.restrictedMenu[0].items;
             this.addToTree(items, rootCategories);
         },
@@ -42,10 +41,6 @@ export class MainMenuComponent implements OnInit {
           console.log('Generating Root Categories error, ' + error);
         }
       })
-    
-
-
-
 
     this.menu = [
         this.restrictedMenu[0],
@@ -90,32 +85,23 @@ export class MainMenuComponent implements OnInit {
       if (categoryId != null) {
       this.categoryService.getSubCategories(categoryId).subscribe({
         next: (subCategories) => {
-          console.log("id of " + categoryId + "has" + subCategories);
           if (subCategories != null) {
-            console.log("add to mid   " + categories[i].name);
             if (treeItems) {
               treeItems.push({
                 label: categories[i].name,
                 items: [],
               });
             }
-
             let idx = 0;
-            console.log("length: " + treeItems.length);
             for (let x=0; x<treeItems.length; x++) {
-              console.log("label: " + treeItems[x].label);
-              console.log("Name: " + categories[i].name);
               if (treeItems[x].label === categories[i].name) {
-                
                 idx = x;
               }
             }
 
-            console.log("index: " + idx);
             this.addToTree(treeItems[idx].items, subCategories);
 
           } else {
-            console.log("add to endpoint   " + categories[i].name);
             if (treeItems) {
               treeItems.push({
                 label: categories[i].name,
