@@ -82,7 +82,8 @@
                 <td width="50%" style="font-weight: bold;">Date of Birth</td>
                 <td>
                     <p-calendar #dateOfBirth="ngModel" id="dateOfBirth" name="dateOfBirth"
-                        [(ngModel)]="currUser.dateOfBirth" dateFormat="dd.mm.yy" [required]="true"></p-calendar>
+                        [(ngModel)]="currUser.dateOfBirth" [required]="true" [yearNavigator]="true"
+                        [monthNavigator]="true" [maxDate]="maxDate" [yearRange]="yearRange"></p-calendar>
                 </td>
                 <td>
                     <div *ngIf="
@@ -91,6 +92,13 @@
                             Date of Birth is required.
                         </div>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" style="font-weight: bold;">Account Type</td>
+                <td width="30%">
+                    <input #username="ngModel" id="role" name="role" type="text" [(ngModel)]="currUser.role" required
+                        pInputText disabled />
                 </td>
             </tr>
         </table>
