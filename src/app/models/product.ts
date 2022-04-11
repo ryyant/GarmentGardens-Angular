@@ -14,7 +14,8 @@ export class Product
   description: string | undefined;
   quantityOnHand: number | undefined;
   unitPrice: number | undefined;
-  isListed: boolean | undefined;	
+  isListed: boolean | undefined;
+  imageLink: string | undefined;	
   
   productRating: Rating[] | undefined;
   category: Category | undefined;
@@ -24,7 +25,7 @@ export class Product
 
 
 
-  constructor(productId?: number, skuCode?: string, name?: string, description?: string, quantityOnHand?: number, unitPrice?: number)
+  constructor(productId?: number, skuCode?: string, name?: string, description?: string, quantityOnHand?: number, unitPrice?: number, imageLink?: string)
   {
     this.productId = productId;
     this.skuCode = skuCode;
@@ -32,6 +33,7 @@ export class Product
     this.description = description;
     this.quantityOnHand = quantityOnHand;
     this.isListed = true;
-    this.unitPrice = unitPrice;		
+    this.unitPrice = unitPrice;	
+    this.imageLink = imageLink;	
   }
 }
