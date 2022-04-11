@@ -49,11 +49,11 @@ export class MainMenuComponent implements OnInit {
           items: [
             {
               label: 'My Rewards',
-              routerLink: ['/systemAdministration/'],
+              routerLink: ['/systemAdministration/viewMyRewards'],
             },
             {
-              label: 'View All Available Rewards',
-              routerLink: ['/systemAdministration/'],
+              label: 'All Rewards',
+              routerLink: ['/systemAdministration/viewAllRewards'],
             },
           ],
         },

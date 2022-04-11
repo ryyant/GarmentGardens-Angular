@@ -104,7 +104,7 @@ export class SessionService
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
             path == "/cashierOperation/viewMySaleTransactions" ||
-            path == "/systemAdministration/viewAllProductsPf")
+            path == "/systemAdministration/viewAllProducts")
         {
           return true;
         }
@@ -116,19 +116,14 @@ export class SessionService
       else if(user.role == RoleEnum.SELLER)
       {
         if(path == "/cashierOperation/checkout" ||
-            path == "/cashierOperation/voidRefund" ||
             path == "/cashierOperation/viewMySaleTransactions" ||
-            path == "/systemAdministration/createNewStaff" ||
             path.startsWith("/systemAdministration/viewStaffDetails") ||
-            path.startsWith("/systemAdministration/updateStaff") ||
-            path.startsWith("/systemAdministration/deleteStaff") ||
             path == "/systemAdministration/viewAllStaffs" ||
             path == "/systemAdministration/createNewProduct" ||
             path.startsWith("/systemAdministration/viewProductDetails") ||
             path.startsWith("/systemAdministration/updateProduct") ||
             path.startsWith("/systemAdministration/deleteProduct") ||
             path == "/systemAdministration/viewAllProducts" ||
-            path == "/systemAdministration/viewAllProductsPf" ||
             path == "/systemAdministration/searchProductsByName" ||
             path == "/systemAdministration/filterProductsByCategory" ||
             path == "/systemAdministration/filterProductsByTags")

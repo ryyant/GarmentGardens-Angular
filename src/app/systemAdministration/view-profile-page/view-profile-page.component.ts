@@ -66,8 +66,8 @@ export class ViewProfilePageComponent implements OnInit {
     let tempUser: User = Object.assign({}, this.currUser);
     tempUser.dateOfBirth = undefined;
     tempUser.password = this.sessionService.getPassword();
-    console.log('Temp User role is ::' + tempUser.role);
-    console.log('Temp User role type is ::' + typeof tempUser.role);
+/*     console.log('Temp User role is ::' + tempUser.role);
+    console.log('Temp User role type is ::' + typeof tempUser.role); */
 
     if (updateProfileForm.valid) {
       this.userService.updateUser(tempUser).subscribe({

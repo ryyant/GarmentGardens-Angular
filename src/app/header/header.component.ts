@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit
       next:(response)=>{
         let user: User = response;
 
+        console.log(response);
 				if(response.role?.toString() == 'CUSTOMER')
 				{
 					user.role = RoleEnum.CUSTOMER;

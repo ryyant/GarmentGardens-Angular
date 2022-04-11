@@ -1,7 +1,7 @@
 <app-breadcrumb></app-breadcrumb>
 
-<article *ngIf="sessionService.getIsLogin() == false">
-<p-fieldset legend="Garment Gardens">
+<article *ngIf="sessionService.getIsLogin() == false" style="width: 95%;">
+<p-fieldset legend="Garment Gardens" >
     Garment Gardens is a one stop platform for you to get onboard the latest fashion trends and do your part for the environment as well. All our vendors have been verified to sell sustainable clothing which have been verified by industry professionals.
 </p-fieldset>
 <br/>
@@ -35,22 +35,16 @@
 
 </article>
 
-<ng-template [ngIf]="sessionService.getIsLogin() == true">
+<article *ngIf="sessionService.getIsLogin() == true" style="width: 95%;">
   <p-fieldset legend="Welcome">
-    What Do You Feel Like Getting Today?
-    <ul>
-      <li>
-        Shirts
-      </li>
-      <li>
-        Pants
-      </li>
-      <li>
-        Caps
-      </li>
-      <li>
-        Shoes
-      </li>
-    </ul>
+    What Do You Feel Like Getting Today? 
   </p-fieldset>
-</ng-template>
+  <br/>
+  <p-fieldset legend="Rewards">
+    Enjoy exclusive rewards and discounts by Shopping with Garment Gardens! 
+  </p-fieldset>
+  <br/>
+  <p-fieldset legend="Donate">
+    Want to donate to Garment Gardens Reserves? Contact Us!
+  </p-fieldset>
+</article>

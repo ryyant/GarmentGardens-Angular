@@ -19,11 +19,11 @@ export class ViewAllProductsComponent implements OnInit
 	display: boolean;
 	productToView: Product;
   
-  sortOptions: SelectItem[];
+  sortOptions: SelectItem[] = [];
 
-  sortOrder: number;
+  sortOrder: number = 0;
 
-  sortField: string;
+  sortField: string = "";
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -74,7 +74,7 @@ export class ViewAllProductsComponent implements OnInit
     this.productToView = productToView;
   }
 
-  onSortChange(event) {
+  onSortChange(event: any) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {

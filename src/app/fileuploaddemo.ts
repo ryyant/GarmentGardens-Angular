@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MessageService} from 'primeng/api';
 
-@Component({
+/* @Component({
     templateUrl: './create-new-product.component.html',
     providers: [MessageService]
 })
@@ -11,7 +11,7 @@ export class FileUploadDemo {
     
     constructor(private messageService: MessageService) {}
 
-    onUpload(event) {
+    onUpload(event: any) {
         for(let file of event.files) {
             this.uploadedFiles.push(file);
         }
@@ -19,12 +19,12 @@ export class FileUploadDemo {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded'});
     }
     
-    onBasicUpload(event) {
+    onBasicUpload(event: any) {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
     }
     
-    onBasicUploadAuto(event) {
+    onBasicUploadAuto(event: any) {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode'});
     }
     
-}
+} */

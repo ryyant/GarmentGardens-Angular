@@ -5,6 +5,11 @@
         <img src="assets/images/gg-brandlogo-glow.png" width="20%" height="20%" />
       </a>
     </ng-template>
+
+    <div *ngIf="loginError == true" style="text-align: center;" class="boxErrorMessage">
+      Invalid login credentials!
+    </div>
+
     <div *ngIf="sessionService.getIsLogin() == false" style="text-align: center">
       <input pInputText placeholder="Username" type="text" [(ngModel)]="username" required maxlength="32" />
       &nbsp;
@@ -15,30 +20,35 @@
           Clear
         </button>
 
+        <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
+          Login
+        </button>
+
         <a routerLink="/systemAdministration/createNewUser">        
           <button pButton type="button" class="p-button-rounded p-button-outlined" value="Register">
           Register
         </button></a>
-        <button pButton type="button" (click)="userLogin()" class="p-button-rounded p-button-text" value="Login">
-          Login
-        </button>
       </div>
     </div>
 
-    <div *ngIf="loginError == true" style="text-align: right; color: red">
-      Invalid login credential: Username does not exist or invalid password!
-    </div>
+
 
     <div *ngIf="sessionService.getIsLogin() == true" style="text-align: center; width: 200px">
-      <button pButton type="button" class="p-button-text"> Hi,
+      <!-- <h3>
+        Hi,
         {{ sessionService.getCurrentUser().firstName }}
         {{ sessionService.getCurrentUser().lastName }}
-      </button>
-      &nbsp;
-      <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>
+      </h3> 
+      &nbsp; -->
 
-      <span *ngIf=" sessionService.getCurrentUser().role==0">CUSTOMER</span>
-      <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>
+      <div style="padding: 5px;">
+        <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
+        <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>
+      </div>
+
+        <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>
+
+
       <br />
       <br />
       <button pButton type="button" (click)="userLogout()" class="p-button-rounded p-button-outlined" value="Logout">

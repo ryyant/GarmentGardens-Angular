@@ -4,10 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
 import { CheckoutComponent } from './cashierOperation/checkout/checkout.component';
-import { VoidRefundComponent } from './cashierOperation/void-refund/void-refund.component';
 import { ViewMySaleTransactionsComponent } from './cashierOperation/view-my-sale-transactions/view-my-sale-transactions.component';
-import { CreateNewStaffComponent } from './systemAdministration/create-new-staff/create-new-staff.component';
-import { ViewAllStaffsComponent } from './systemAdministration/view-all-staffs/view-all-staffs.component';
 import { CreateNewProductComponent } from './systemAdministration/create-new-product/create-new-product.component';
 import { ViewAllProductsComponent } from './systemAdministration/view-all-products/view-all-products.component';
 import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
@@ -22,10 +19,7 @@ const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: 'accessRightError', component: AccessRightErrorComponent },
   { path: 'cashierOperation/checkout', component: CheckoutComponent },
-  { path: 'cashierOperation/voidRefund', component: VoidRefundComponent },
   { path: 'cashierOperation/viewMySaleTransactions', component: ViewMySaleTransactionsComponent },
-  { path: 'systemAdministration/createNewStaff', component: CreateNewStaffComponent },
-  { path: 'systemAdministration/viewAllStaffs', component: ViewAllStaffsComponent },
   { path: 'systemAdministration/createNewProduct', component: CreateNewProductComponent },
   { path: 'systemAdministration/viewAllProducts', component: ViewAllProductsComponent },
   { path: 'systemAdministration/viewProductDetails', component: ViewProductDetailsComponent },
