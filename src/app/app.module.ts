@@ -58,7 +58,6 @@ import { DeleteProductComponent } from './systemAdministration/delete-product/de
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
-import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +82,6 @@ import { TestComponent } from './test/test.component';
     CreateNewUserComponent,
     ViewProfilePageComponent,
     ViewSellerProductsComponent,
-    TestComponent,
   ],
   imports: [
     AppRoutingModule,
