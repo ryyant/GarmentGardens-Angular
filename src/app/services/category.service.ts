@@ -39,7 +39,21 @@ export class CategoryService
     );
   }
 
+  getRootCategories(): Observable<Category[]>
+  {		
+    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveOnlyParentCategories?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
 
+  getSubCategories(categoryId : number): Observable<Category[]>
+  {	
+    return this.httpClient.get<Category[]>(this.baseUrl + "/getSubCategories/" + categoryId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
 
   getLeafCategories(): Observable<Category[]>
   {		

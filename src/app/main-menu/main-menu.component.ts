@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { Category } from '../models/category';
+import { CategoryService } from '../services/category.service';
 
 import { SessionService } from '../services/session.service';
 
@@ -10,7 +12,8 @@ import { SessionService } from '../services/session.service';
   styleUrls: ['./main-menu.component.css'],
 })
 export class MainMenuComponent implements OnInit {
-  constructor(private router: Router, public sessionService: SessionService) {}
+  constructor(private router: Router, public sessionService: SessionService, private categoryService: CategoryService
+    ) {}
 
   menu: MenuItem[] = [];
   restrictedMenu: MenuItem[] = [];
@@ -25,39 +28,23 @@ export class MainMenuComponent implements OnInit {
             label: 'All',
             routerLink: ['/systemAdministration/viewAllProducts'],
           },
-          {
-            label: 'Tops',
-            items: [
-              {
-                label: 'Products',
-                routerLink: ['/systemAdministration/'],
-              },
-              { label: 'Other', routerLink: ['/pagename'] },
-            ],
-          },
-          {
-            label: 'Bottoms',
-            items: [
-              {
-                label: 'Products',
-                routerLink: ['/systemAdministration/'],
-              },
-              { label: 'Other', routerLink: ['/pagename'] },
-            ],
-          },
-          {
-            label: 'Shoes',
-            items: [
-              {
-                label: 'Products',
-                routerLink: ['/systemAdministration/'],
-              },
-              { label: 'Other', routerLink: ['/pagename'] },
-            ],
-          },
         ]
       }
     ]
+
+      this.categoryService.getRootCategories().subscribe({
+        next: (rootCategories) => {
+          console.log(rootCategories);
+            let items = this.restrictedMenu[0].items;
+            this.addToTree(items, rootCategories);
+        },
+        error: (error) => {
+          console.log('Generating Root Categories error, ' + error);
+        }
+      })
+    
+
+
 
 
     this.menu = [
@@ -93,6 +80,56 @@ export class MainMenuComponent implements OnInit {
         ],
       },
     ];
+  }
+
+
+  addToTree(treeItems: any, categories: Category[]): void {
+
+    for (let i=0; i < categories.length; i++) {
+      let categoryId = categories[i].categoryId;
+      if (categoryId != null) {
+      this.categoryService.getSubCategories(categoryId).subscribe({
+        next: (subCategories) => {
+          console.log("id of " + categoryId + "has" + subCategories);
+          if (subCategories != null) {
+            console.log("add to mid   " + categories[i].name);
+            if (treeItems) {
+              treeItems.push({
+                label: categories[i].name,
+                items: [],
+              });
+            }
+
+            let idx = 0;
+            console.log("length: " + treeItems.length);
+            for (let x=0; x<treeItems.length; x++) {
+              console.log("label: " + treeItems[x].label);
+              console.log("Name: " + categories[i].name);
+              if (treeItems[x].label === categories[i].name) {
+                
+                idx = x;
+              }
+            }
+
+            console.log("index: " + idx);
+            this.addToTree(treeItems[idx].items, subCategories);
+
+          } else {
+            console.log("add to endpoint   " + categories[i].name);
+            if (treeItems) {
+              treeItems.push({
+                label: categories[i].name,
+                routerLink: ['/' + categories[i].name]
+              });
+            }
+          }
+        },
+        error: (error) => {
+          console.log('Generating Sub Categories error, ' + error);
+        }
+      })
+    }
+  }
   }
 
   userLogout(): void {
