@@ -56,10 +56,6 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
-import { ViewAllBottomsComponent } from './systemAdministration/view-all-bottoms/view-all-bottoms.component';
-import { ViewAllTopsComponent } from './systemAdministration/view-all-tops/view-all-tops.component';
-import { ViewAllUndergarmentsComponent } from './systemAdministration/view-all-undergarments/view-all-undergarments.component';
-import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headwears/view-all-headwears.component';
 import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
 
 @NgModule({
@@ -83,10 +79,6 @@ import { ViewProductByCategoryComponent } from './view-product-by-category/view-
     ViewProfilePageComponent,
     ViewSellerProductsComponent,
     ViewAllRewardsComponent,
-    ViewAllBottomsComponent,
-    ViewAllTopsComponent,
-    ViewAllUndergarmentsComponent,
-    ViewAllHeadwearsComponent,
     ViewProductByCategoryComponent,
   ],
   imports: [
