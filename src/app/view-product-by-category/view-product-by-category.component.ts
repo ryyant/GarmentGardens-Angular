@@ -3,10 +3,12 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import { SessionService } from '../services/session.service';
 import { ProductService } from '../services/product.service';
+import { CategoryService } from '../services/category.service';
 import { Product } from '../models/product'
 
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { Category } from '../models/category';
 
 @Component({
   selector: 'app-view-product-by-category',
@@ -19,7 +21,7 @@ export class ViewProductByCategoryComponent implements OnInit {
 	productToView: Product;
   
   categoryId: string | null;
-
+  viewCategory: Category | null;
 
   sortOptions: SelectItem[] = [];
 
@@ -27,11 +29,12 @@ export class ViewProductByCategoryComponent implements OnInit {
   sortKey: string = "";
   sortField: string = "";
 
-  dummyValue: number = 1;
+  qtyToAdd: number = 0;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
+    private categoryService: CategoryService,
     private productService: ProductService,
     private primengConfig: PrimeNGConfig)
   {
@@ -39,30 +42,21 @@ export class ViewProductByCategoryComponent implements OnInit {
     this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
     this.display = false;
 		this.productToView = new Product();
+    this.viewCategory = new Category();
   }
 
   ngOnInit(): void
   {
+    this.renderProducts();
 
     // IMPORTANT FOR SAME ROUTE, DYNAMIC CHANGE
     this.router.events.subscribe(event =>{
       if (event instanceof NavigationEnd){
         this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
+        this.renderProducts();
         console.log("Browsing Category: " + this.categoryId);
       }
    })
-
-    if(this.categoryId != null) {
-      this.productService.getFilteredProducts(parseInt(this.categoryId)).subscribe({
-        next:(response)=>{ 
-          this.products = response;
-        },
-        error:(error)=>{
-          console.log('********** ViewAllProductsComponent.ts: ' + error);
-        }
-      });
-    }
-
 
     this.sortOptions = [
       { label: 'Price High to Low', value: '!price' },
@@ -72,16 +66,43 @@ export class ViewProductByCategoryComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
+  renderProducts()
+  {
+    if(this.categoryId != null) {
+      this.categoryService.getCategoryByCategoryId(parseInt(this.categoryId)).subscribe({
+        next:(response)=>{ 
+          this.viewCategory = response;
+        },
+        error:(error)=>{
+          console.log('********** ViewAllProductsComponent.ts: ' + error);
+        }
+      });
+
+      this.productService.getFilteredProducts(parseInt(this.categoryId)).subscribe({
+        next:(response)=>{ 
+          this.products = response;
+        },
+        error:(error)=>{
+          console.log('********** ViewAllProductsComponent.ts: ' + error);
+        }
+      });
+    }
+  }
+
   showDialog(productToView: Product)
 	{
     this.display = true;
     this.productToView = productToView;
   }
 
-  addToCart(productToView: Product)
+  viewProductDetails()
+  {
+    this.router.navigate(["/systemAdministration/viewProductDetails/" + this.productToView.productId]);
+  }
+
+  addToCart()
 	{
-    this.display = true;
-    this.productToView = productToView;
+    // CALL SERVICE HERE, TAKE IN qtyToAdd
   }
 
   onSortChange(event: { value: any; }) {

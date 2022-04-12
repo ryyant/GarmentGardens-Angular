@@ -29,7 +29,11 @@ export class CategoryService
   {    
   }
 
-
+  getCategoryByCategoryId(categoryId: number): Observable<Category> {
+    return this.httpClient
+      .get<Category>(this.baseUrl + '/retrieveCategory/' + categoryId)
+      .pipe(catchError(this.handleError));
+  }
 
   getCategories(): Observable<Category[]>
   {		

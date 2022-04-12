@@ -105,6 +105,7 @@ export class MainMenuComponent implements OnInit {
             if (treeItems) {
               treeItems.push({
                 label: categories[i].name,
+                routerLink: ['/systemAdministration/viewProductByCategory/' + categories[i].categoryId],
                 items: [],
               });
             }
