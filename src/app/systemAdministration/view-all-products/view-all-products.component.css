@@ -71,6 +71,7 @@
   border: 1px solid #dee2e6;
   width: 30%;
   display: inline-block;
+  background-color: #191919;
 }
 
 .product-grid-item .product-grid-item-top {
