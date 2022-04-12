@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import { SessionService } from '../services/session.service';
 import { ProductService } from '../services/product.service';
@@ -36,23 +36,25 @@ export class ViewProductByCategoryComponent implements OnInit {
     private primengConfig: PrimeNGConfig)
   {
     this.products = new Array();
-    this.categoryId = null;
+    this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
     this.display = false;
 		this.productToView = new Product();
   }
 
   ngOnInit(): void
   {
-    this.checkAccessRight()
 
-    this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
+    // IMPORTANT FOR SAME ROUTE, DYNAMIC CHANGE
+    this.router.events.subscribe(event =>{
+      if (event instanceof NavigationEnd){
+        this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
+        console.log("Browsing Category: " + this.categoryId);
+      }
+   })
 
     if(this.categoryId != null) {
       this.productService.getFilteredProducts(parseInt(this.categoryId)).subscribe({
         next:(response)=>{ 
-          for(let i=0;i<response.length;i++) {
-          console.log(response[i].name)
-        }
           this.products = response;
         },
         error:(error)=>{
@@ -94,13 +96,5 @@ export class ViewProductByCategoryComponent implements OnInit {
         this.sortField = value;
     }
 }
-
-  checkAccessRight()
-	{
-		if(!this.sessionService.checkAccessRight(this.router.url))
-		{
-			this.router.navigate(["/accessRightError"]);
-		}
-	}
 
 }

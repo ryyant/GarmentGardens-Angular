@@ -25,7 +25,7 @@ export class ViewAllProductsComponent implements OnInit
   sortKey: string = "";
   sortField: string = "";
 
-  dummyValue: number = 1;
+  qtyToAdd: number = 0;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -40,13 +40,8 @@ export class ViewAllProductsComponent implements OnInit
 
   ngOnInit(): void
   {
-    this.checkAccessRight()
-
     this.productService.getProducts().subscribe({
       next:(response)=>{ 
-        for(let i=0;i<response.length;i++) {
-        console.log(response[i].name)
-      }
         this.products = response;
       },
       error:(error)=>{
@@ -68,10 +63,14 @@ export class ViewAllProductsComponent implements OnInit
     this.productToView = productToView;
   }
 
-  addToCart(productToView: Product)
+  viewProductDetails()
+  {
+    this.router.navigate(["/systemAdministration/viewProductDetails/" + this.productToView.productId]);
+  }
+
+  addToCart()
 	{
-    this.display = true;
-    this.productToView = productToView;
+    // CALL SERVICE HERE, TAKE IN qtyToAdd
   }
 
   onSortChange(event: { value: any; }) {
@@ -87,12 +86,5 @@ export class ViewAllProductsComponent implements OnInit
     }
 }
 
-  checkAccessRight()
-	{
-		if(!this.sessionService.checkAccessRight(this.router.url))
-		{
-			this.router.navigate(["/accessRightError"]);
-		}
-	}
 }
 

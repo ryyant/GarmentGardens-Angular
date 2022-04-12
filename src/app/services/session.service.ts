@@ -103,12 +103,8 @@ export class SessionService
       {
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
-            path == "/cashierOperation/viewMySaleTransactions" ||
-            path == "/systemAdministration/viewAllProducts" ||
-            path == "/systemAdministration/viewAllBottoms" ||
-            path == "/systemAdministration/viewAllTops" ||
-            path == "/systemAdministration/viewAllHeadwears" ||
-            path == "/systemAdministration/viewAllUndergarments")
+            path == "/systemAdministration/viewProfilePage" ||
+            path == "/cashierOperation/viewMySaleTransactions")
         {
           return true;
         }
@@ -119,22 +115,11 @@ export class SessionService
       }
       else if(user.role == RoleEnum.SELLER)
       {
-        if(path == "/cashierOperation/checkout" ||
-            path == "/cashierOperation/viewMySaleTransactions" ||
-            path.startsWith("/systemAdministration/viewStaffDetails") ||
-            path == "/systemAdministration/viewAllStaffs" ||
+        if(path == "/systemAdministration/viewProfilePage" ||
+            path == "/systemAdministration/viewSellerProducts" ||
             path == "/systemAdministration/createNewProduct" ||
-            path.startsWith("/systemAdministration/viewProductDetails") ||
             path.startsWith("/systemAdministration/updateProduct") ||
-            path.startsWith("/systemAdministration/deleteProduct") ||
-            path == "/systemAdministration/viewAllProducts" ||
-            path == "/systemAdministration/searchProductsByName" ||
-            path == "/systemAdministration/filterProductsByCategory" ||
-            path == "/systemAdministration/filterProductsByTags" ||
-            path == "/systemAdministration/viewAllBottoms" ||
-            path == "/systemAdministration/viewAllTops" ||
-            path == "/systemAdministration/viewAllHeadwears" ||
-            path == "/systemAdministration/viewAllUndergarments")
+            path.startsWith("/systemAdministration/deleteProduct"))
         {
           return true;
         }

@@ -2,7 +2,7 @@
 
 <h3>All Products</h3>
 
-<div class="card alignCenter">
+<div class="allProducts">
   <p-dataView
     #dv
     [value]="products"
@@ -115,78 +115,70 @@
   >
     <div style="display: inline-block">
       <span>
-        <h1 style="font-size: 40px;">
+        <h1 style="font-size: 40px">
           {{ productToView.name }}
         </h1>
       </span>
 
-      <table width="100%">
-          <tr>
-            <td style="width: 30%; margin: 20px;">
-                <p>Product ID: {{ productToView.productId }}</p>
-                <p>SKU Code: {{ productToView.skuCode }}</p>
-                <img style="border-radius: 15px; margin: 20px;" src="{{ productToView.imageLink }}" />
-            </td>
-            <div style="text-align: left;">
-                  <h2>Description:</h2>
-                  <div class="ui-g-6">{{ productToView.description }}</div>
-                &nbsp;
-                  <div class="ui-g-6 boldText">Quantity On Hand</div>
-                  <div class="ui-g-6">{{ productToView.quantityOnHand }}</div>
-                &nbsp;
-                <div class="ui-g">
-                  <div class="ui-g-6 boldText">Unit Price</div>
-                  <div class="ui-g-6">{{ productToView.unitPrice | currency }}</div>
-                </div>
-                &nbsp;
-                <div class="ui-g">
-                  <div class="ui-g-6 boldText">Category</div>
-                  <div class="ui-g-6 boldText">
-                    {{
-                      productToView.category != null ? productToView.category.name : ""
-                    }}
-                  </div>
-                </div>
-                &nbsp;
-                <div class="ui-g">
-                  <div class="ui-g-6 boldText">Tag(s)</div>
-                  <div class="ui-g-6">
-                    <ul style="margin-left: 20px">
-                      <li *ngFor="let tag of productToView.tags">{{ tag.name }}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-        
-            <td>
-
-            </td>
-          </tr>
+      <table width="100%" [cellSpacing]="20">
+        <tr>
+          <td style="width: 30%">
+            <p>Product ID: {{ productToView.productId }}</p>
+            <p>SKU Code: {{ productToView.skuCode }}</p>
+            <img
+              style="border-radius: 15px; margin: 20px"
+              src="{{ productToView.imageLink }}"
+            />
+          </td>
+          <div style="text-align: left">
+            <h3>Description:</h3>
+            <p>{{ productToView.description }}</p>
+            <h3>Quantity Left:</h3>
+            <p>{{ productToView.quantityOnHand }}</p>
+              <h3>Price:</h3>
+              <p>{{ productToView.unitPrice | currency }}</p>
+              <h3>Category:</h3>
+              <p>
+                {{
+                  productToView.category != null
+                    ? productToView.category.name
+                    : ""
+                }}
+              </p>
+              <h3>Tags:</h3>
+                <p *ngFor="let tag of productToView.tags">{{ tag.name }}</p>
+          </div>
+        </tr>
+        <tr>
+          <td><p-button
+            label="View More"
+            (onClick)="viewProductDetails()"
+          >
+          </p-button></td>
+          <td><h3>Quantity: </h3></td>
+          <td>
+            <input
+              pInputText
+              placeholder="1"
+              id="username"
+              type="text"
+              name="username"
+              #username="ngModel"
+              [(ngModel)]="qtyToAdd"
+              required="true"
+            />
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-shopping-cart"
+              label="Add To Cart"
+              (onClick)="addToCart()"
+            >
+            </p-button>
+          </td>
+        </tr>
       </table>
 
-      
-      <td width="50%" class="boldText">Quantity</td>
-      <td>
-        <input
-          pInputText
-          placeholder="1"
-          id="username"
-          type="text"
-          name="username"
-          #username="ngModel"
-          [(ngModel)]="dummyValue"
-          required="true"
-        />
-      </td>
-      &nbsp;
-      <td>
-        <p-button
-          icon="pi pi-shopping-cart"
-          label="Add To Cart"
-          (onClick)="addToCart(productToView)"
-        >
-        </p-button>
-      </td>
     </div>
   </p-dialog>
 </div>
