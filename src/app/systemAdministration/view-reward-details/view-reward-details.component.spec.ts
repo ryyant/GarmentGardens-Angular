@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewAllHeadwearsComponent } from './view-all-headwears.component';
+import { ViewRewardDetailsComponent } from './view-reward-details.component';
 
-describe('ViewAllHeadwearsComponent', () => {
-  let component: ViewAllHeadwearsComponent;
-  let fixture: ComponentFixture<ViewAllHeadwearsComponent>;
+describe('ViewRewardDetailsComponent', () => {
+  let component: ViewRewardDetailsComponent;
+  let fixture: ComponentFixture<ViewRewardDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewAllHeadwearsComponent ]
+      declarations: [ ViewRewardDetailsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewAllHeadwearsComponent);
+    fixture = TestBed.createComponent(ViewRewardDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

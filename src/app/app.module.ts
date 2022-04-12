@@ -35,6 +35,10 @@ import { DialogModule } from 'primeng/dialog';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CarouselModule } from 'primeng/carousel';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
@@ -44,6 +48,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
+
 
 import { CheckoutComponent } from './cashierOperation/checkout/checkout.component';
 import { ViewMySaleTransactionsComponent } from './cashierOperation/view-my-sale-transactions/view-my-sale-transactions.component';
@@ -56,10 +61,8 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
-import { ViewAllBottomsComponent } from './systemAdministration/view-all-bottoms/view-all-bottoms.component';
-import { ViewAllTopsComponent } from './systemAdministration/view-all-tops/view-all-tops.component';
-import { ViewAllUndergarmentsComponent } from './systemAdministration/view-all-undergarments/view-all-undergarments.component';
-import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headwears/view-all-headwears.component';
+import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
+import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-details/view-reward-details.component';
 
 @NgModule({
   declarations: [
@@ -82,10 +85,8 @@ import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headw
     ViewProfilePageComponent,
     ViewSellerProductsComponent,
     ViewAllRewardsComponent,
-    ViewAllBottomsComponent,
-    ViewAllTopsComponent,
-    ViewAllUndergarmentsComponent,
-    ViewAllHeadwearsComponent,
+    ViewProductByCategoryComponent,
+    ViewRewardDetailsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -125,6 +126,7 @@ import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headw
     TooltipModule,
     DialogModule,
     FieldsetModule,
+    VirtualScrollerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

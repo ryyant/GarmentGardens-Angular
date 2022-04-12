@@ -15,19 +15,17 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ViewAllProductsComponent implements OnInit 
 {
-  products: any[];
+  products: Product[];
 	display: boolean;
 	productToView: Product;
-
-  sortKey: string;
   
   sortOptions: SelectItem[] = [];
 
   sortOrder: number = 0;
-
+  sortKey: string = "";
   sortField: string = "";
 
-  dummyValue: number = 1;
+  qtyToAdd: number = 0;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -42,12 +40,8 @@ export class ViewAllProductsComponent implements OnInit
 
   ngOnInit(): void
   {
-    this.checkAccessRight()
-
     this.productService.getProducts().subscribe({
-      next:(response)=>{ for(let i=0;i<response.length;i++) {
-        console.log(response[i].name)
-      }
+      next:(response)=>{ 
         this.products = response;
       },
       error:(error)=>{
@@ -63,22 +57,23 @@ export class ViewAllProductsComponent implements OnInit
     this.primengConfig.ripple = true;
   }
 
-
-
-
   showDialog(productToView: Product)
 	{
     this.display = true;
     this.productToView = productToView;
   }
 
-  addToCart(productToView: Product)
-	{
-    this.display = true;
-    this.productToView = productToView;
+  viewProductDetails()
+  {
+    this.router.navigate(["/systemAdministration/viewProductDetails/" + this.productToView.productId]);
   }
 
-  onSortChange(event: any) {
+  addToCart()
+	{
+    // CALL SERVICE HERE, TAKE IN qtyToAdd
+  }
+
+  onSortChange(event: { value: any; }) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {
@@ -89,16 +84,7 @@ export class ViewAllProductsComponent implements OnInit
         this.sortOrder = 1;
         this.sortField = value;
     }
-  }
+}
 
-
-
-  checkAccessRight()
-	{
-		if(!this.sessionService.checkAccessRight(this.router.url))
-		{
-			this.router.navigate(["/accessRightError"]);
-		}
-	}
 }
 

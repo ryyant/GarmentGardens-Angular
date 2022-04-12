@@ -1,6 +1,12 @@
-<app-breadcrumb [pageName]="'viewAllProducts'"></app-breadcrumb>
+<app-breadcrumb [pageName]="'productByCategory'"></app-breadcrumb>
 
-<h3 style="color: white;">All Products</h3>
+<div *ngIf="products.length == 0" style="text-align: center">
+    <h1>Sorry, There are no Products here!</h1>
+</div>
+
+<div *ngIf="products.length > 0">
+
+<h3 style="color: white;">Category: {{viewCategory ? viewCategory.name : null}}</h3>
 
 <div class="allProducts">
   <p-dataView
@@ -182,3 +188,6 @@
     </div>
   </p-dialog>
 </div>
+
+</div>
+
