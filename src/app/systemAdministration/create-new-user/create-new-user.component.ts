@@ -50,6 +50,7 @@ export class CreateNewUserComponent implements OnInit {
     console.log('Creating...');
 
     if (createUserForm.valid) {
+      console.log(this.newUser.role);
       this.userService.createNewUser(this.newUser).subscribe({
         next: (response) => {
           console.log(response);

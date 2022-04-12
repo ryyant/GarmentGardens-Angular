@@ -42,8 +42,8 @@
       &nbsp; -->
 
       <div style="padding: 5px;">
-        <span *ngIf="sessionService.getCurrentUser().role == 0">CUSTOMER</span>
-        <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span>
+        <span>{{sessionService.getCurrentUser().role}}</span>
+        <!-- <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span> -->
       </div>
 
         <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>

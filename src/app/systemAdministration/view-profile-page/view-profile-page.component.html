@@ -96,10 +96,15 @@
             </tr>
             <tr>
                 <td width="50%" style="font-weight: bold;">Account Type</td>
-                <td width="30%">
-                    <input #username="ngModel" id="role" name="role" type="text" [(ngModel)]="currUser.role" required
-                        pInputText disabled />
+                <td width="30%" >
+                        <!-- <h4 *ngIf="currUser.role == 0">CUSTOMER</h4>
+                        <h4 *ngIf="currUser.role == 1">SELLER</h4> -->
+                        <p-selectButton id="role" name="role" #role="ngModel" [options]="stateOptions" [(ngModel)]="formRole" optionLabel="label" optionValue="value" required="true" [disabled] = true></p-selectButton>
+    
+                    <!-- <input #role="ngModel" id="role" name="role" type="text" [(ngModel)]="currUser.role" required
+                        pInputText disabled /> -->
                 </td>
+
             </tr>
         </table>
         <br />

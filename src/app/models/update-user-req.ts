@@ -1,9 +1,9 @@
 import { User } from '../models/user';
 
-export class UpdateUserReq {
-  userEntity: User | undefined;
+export class UpdateProfileReq {
+  currentUser: User | undefined;
 
-  constructor(userEntity?: User) {
-    this.userEntity = userEntity;
+  constructor(currentUser?: User) {
+    this.currentUser = currentUser;
   }
 }

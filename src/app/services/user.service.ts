@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 import { SessionService } from '../services/session.service';
 import { User } from '../models/user';
 import { CreateUserReq } from '../models/create-user-req';
-import { UpdateUserReq } from '../models/update-user-req';
+import { UpdateProfileReq } from '../models/update-user-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -50,11 +50,11 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  updateUser(currUser: User): Observable<number> {
-    let updateUserReq: UpdateUserReq = new UpdateUserReq(currUser);
+  updateUser(currUser: User): Observable<any> {
+    let updateProfileReq: UpdateProfileReq = new UpdateProfileReq(currUser);
 
     return this.httpClient
-      .put<number>(this.baseUrl, updateUserReq, httpOptions)
+      .post<any>(this.baseUrl, updateProfileReq, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

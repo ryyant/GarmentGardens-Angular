@@ -25,6 +25,7 @@ export class ViewProfilePageComponent implements OnInit {
   yearRange: string = '1921:' + new Date().getFullYear();
   maxDate: Date = new Date();
 
+  formRole: String | undefined;
   stateOptions: any[];
 
   constructor(
@@ -39,38 +40,33 @@ export class ViewProfilePageComponent implements OnInit {
 
     this.resultSuccess = false;
     this.resultError = false;
+
+    this.formRole = this.currUser.role;
     this.stateOptions = [
       { label: 'Customer', value: 'CUSTOMER' },
       { label: 'Seller', value: 'SELLER' },
     ];
+
+    this.currUser.role = RoleEnum.CUSTOMER;
+    console.log(typeof this.formRole);
+    console.log(this.formRole);
+    console.log(RoleEnum.CUSTOMER);
+    
+    console.log(this.currUser.role);
   }
 
   ngOnInit(): void {
     this.checkLogin();
     let dateString = new String(this.currUser.dateOfBirth);
     let updateString = dateString.slice(0, 10);
-    //console.log(updateString);
     this.currUser.dateOfBirth = new Date(updateString);
-
-    //console.log('Customer Role Type ::' + typeof this.currUser.role);
-    //console.log(this.currUser.role);
-    // if (this.sessionService.getCurrentUser().role == 0) {
-    //   this.currUser.role = RoleEnum.CUSTOMER;
-    // } else {
-    //   this.currUser.role = RoleEnum.SELLER;
-    // }
   }
 
   updateProfile(updateProfileForm: NgForm) {
     this.submitted = true;
-    let tempUser: User = Object.assign({}, this.currUser);
-    tempUser.dateOfBirth = undefined;
-    tempUser.password = this.sessionService.getPassword();
-/*     console.log('Temp User role is ::' + tempUser.role);
-    console.log('Temp User role type is ::' + typeof tempUser.role); */
 
     if (updateProfileForm.valid) {
-      this.userService.updateUser(tempUser).subscribe({
+      this.userService.updateUser(this.currUser).subscribe({
         next: (response) => {
           this.sessionService.setCurrentUser(this.currUser);
           this.resultError = false;
