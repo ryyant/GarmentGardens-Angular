@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SessionService } from '../../services/session.service';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product';
+import { SessionService } from '../services/session.service';
+import { ProductService } from '../services/product.service';
+import { Product } from '../models/product'
 
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
-  selector: 'app-view-all-tops',
-  templateUrl: './view-all-tops.component.html',
-  styleUrls: ['./view-all-tops.component.css']
+  selector: 'app-view-product-by-category',
+  templateUrl: './view-product-by-category.component.html',
+  styleUrls: ['./view-product-by-category.component.css']
 })
-export class ViewAllTopsComponent implements OnInit 
-{
-  products: any[];
+export class ViewProductByCategoryComponent implements OnInit {
+  products: Product[];
 	display: boolean;
 	productToView: Product;
-
-  sortKey: string;
   
+  categoryId: string | null;
+
+
   sortOptions: SelectItem[] = [];
 
   sortOrder: number = 0;
-
+  sortKey: string = "";
   sortField: string = "";
 
   dummyValue: number = 1;
@@ -36,6 +36,7 @@ export class ViewAllTopsComponent implements OnInit
     private primengConfig: PrimeNGConfig)
   {
     this.products = new Array();
+    this.categoryId = null;
     this.display = false;
 		this.productToView = new Product();
   }
@@ -44,16 +45,22 @@ export class ViewAllTopsComponent implements OnInit
   {
     this.checkAccessRight()
 
-    this.productService.getFilteredProducts(1).subscribe({
-      next:(response)=>{ for(let i=0;i<response.length;i++) {
-        console.log(response[i].name)
-      }
-        this.products = response;
-      },
-      error:(error)=>{
-        console.log('********** ViewAllProductsComponent.ts: ' + error);
-      }
-    });
+    this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
+
+    if(this.categoryId != null) {
+      this.productService.getFilteredProducts(parseInt(this.categoryId)).subscribe({
+        next:(response)=>{ 
+          for(let i=0;i<response.length;i++) {
+          console.log(response[i].name)
+        }
+          this.products = response;
+        },
+        error:(error)=>{
+          console.log('********** ViewAllProductsComponent.ts: ' + error);
+        }
+      });
+    }
+
 
     this.sortOptions = [
       { label: 'Price High to Low', value: '!price' },
@@ -62,9 +69,6 @@ export class ViewAllTopsComponent implements OnInit
 
     this.primengConfig.ripple = true;
   }
-
-
-
 
   showDialog(productToView: Product)
 	{
@@ -78,7 +82,7 @@ export class ViewAllTopsComponent implements OnInit
     this.productToView = productToView;
   }
 
-  onSortChange(event: any) {
+  onSortChange(event: { value: any; }) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {
@@ -89,9 +93,7 @@ export class ViewAllTopsComponent implements OnInit
         this.sortOrder = 1;
         this.sortField = value;
     }
-  }
-
-
+}
 
   checkAccessRight()
 	{
@@ -100,6 +102,5 @@ export class ViewAllTopsComponent implements OnInit
 			this.router.navigate(["/accessRightError"]);
 		}
 	}
+
 }
-
-

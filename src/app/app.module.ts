@@ -60,6 +60,7 @@ import { ViewAllBottomsComponent } from './systemAdministration/view-all-bottoms
 import { ViewAllTopsComponent } from './systemAdministration/view-all-tops/view-all-tops.component';
 import { ViewAllUndergarmentsComponent } from './systemAdministration/view-all-undergarments/view-all-undergarments.component';
 import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headwears/view-all-headwears.component';
+import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headw
     ViewAllTopsComponent,
     ViewAllUndergarmentsComponent,
     ViewAllHeadwearsComponent,
+    ViewProductByCategoryComponent,
   ],
   imports: [
     AppRoutingModule,

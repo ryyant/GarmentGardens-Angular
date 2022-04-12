@@ -15,16 +15,14 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ViewAllProductsComponent implements OnInit 
 {
-  products: any[];
+  products: Product[];
 	display: boolean;
 	productToView: Product;
-
-  sortKey: string;
   
   sortOptions: SelectItem[] = [];
 
   sortOrder: number = 0;
-
+  sortKey: string = "";
   sortField: string = "";
 
   dummyValue: number = 1;
@@ -45,7 +43,8 @@ export class ViewAllProductsComponent implements OnInit
     this.checkAccessRight()
 
     this.productService.getProducts().subscribe({
-      next:(response)=>{ for(let i=0;i<response.length;i++) {
+      next:(response)=>{ 
+        for(let i=0;i<response.length;i++) {
         console.log(response[i].name)
       }
         this.products = response;
@@ -63,9 +62,6 @@ export class ViewAllProductsComponent implements OnInit
     this.primengConfig.ripple = true;
   }
 
-
-
-
   showDialog(productToView: Product)
 	{
     this.display = true;
@@ -78,7 +74,7 @@ export class ViewAllProductsComponent implements OnInit
     this.productToView = productToView;
   }
 
-  onSortChange(event: any) {
+  onSortChange(event: { value: any; }) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {
@@ -89,9 +85,7 @@ export class ViewAllProductsComponent implements OnInit
         this.sortOrder = 1;
         this.sortField = value;
     }
-  }
-
-
+}
 
   checkAccessRight()
 	{
