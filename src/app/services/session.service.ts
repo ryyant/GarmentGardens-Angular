@@ -3,151 +3,142 @@ import { Injectable } from '@angular/core';
 import { RoleEnum } from '../models/role-enum';
 import { User } from '../models/user';
 import { MessageOfTheDay } from '../models/message-of-the-day';
+import { CreditCard } from '../models/credit-card';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class SessionService
-{
-  constructor()
-  {
+export class SessionService {
+  constructor() {
   }
 
 
 
-  getIsLogin(): boolean
-  {
-    if(sessionStorage['isLogin'] == "true")
-    {
+  getIsLogin(): boolean {
+    if (sessionStorage['isLogin'] == "true") {
       return true;
     }
-    else
-    {
+    else {
       return false;
     }
   }
 
 
 
-  setIsLogin(isLogin: boolean): void
-  {
+  setIsLogin(isLogin: boolean): void {
     sessionStorage['isLogin'] = isLogin;
   }
 
-  getMotds(): MessageOfTheDay[]
-  {
+  getMotds(): MessageOfTheDay[] {
     return JSON.parse(sessionStorage['motds']);
   }
 
 
 
-  setMotds(motds: MessageOfTheDay[]): void
-  {
+  setMotds(motds: MessageOfTheDay[]): void {
     sessionStorage['motds'] = JSON.stringify(motds);
   }
 
 
-  getCurrentUser(): User
-  {
+  getCurrentUser(): User {
     return JSON.parse(sessionStorage['currentUser']);
   }
 
 
 
-  setCurrentUser(currentUser: User | null): void
-  {		 
+  setCurrentUser(currentUser: User | null): void {
     sessionStorage['currentUser'] = JSON.stringify(currentUser);
   }
 
 
 
-  getUsername(): string
-  {
+  getUsername(): string {
     return sessionStorage['username'];
   }
 
 
 
-  setUsername(username: string | undefined): void
-  {
+  setUsername(username: string | undefined): void {
     sessionStorage['username'] = username;
   }
-  
-  
-  
-  getPassword(): string
-  {
+
+
+
+  getPassword(): string {
     return sessionStorage['password'];
   }
 
 
 
-  setPassword(password: string | undefined): void
-  {
+  setPassword(password: string | undefined): void {
     sessionStorage['password'] = password;
   }
-  
-  
-  
-  checkAccessRight(path : string): boolean
-  {
+
+  getCreditCard(): CreditCard | undefined {
+    const creditCard = sessionStorage.getItem('creditCard');
+
+    if (typeof creditCard === 'string') {
+      return JSON.parse(creditCard);
+    } else {
+      return undefined;
+    }
+  }
+
+  setCreditCard(creditCard: CreditCard): void {
+    sessionStorage.setItem('creditCard', JSON.stringify(creditCard));
+  }
+
+
+  checkAccessRight(path: string): boolean {
     console.log("********** path: " + path);
 
-    if(this.getIsLogin())
-    {
+    if (this.getIsLogin()) {
       let user: User = this.getCurrentUser();
 
-      if(user.role == RoleEnum.CUSTOMER)
-      {
-        if(path == "/cashierOperation/checkout" ||
-            path == "/cashierOperation/voidRefund" ||
-            path == "/cashierOperation/viewMySaleTransactions" ||
-            path == "/systemAdministration/viewAllProducts" ||
-            path == "/systemAdministration/viewAllBottoms" ||
-            path == "/systemAdministration/viewAllTops" ||
-            path == "/systemAdministration/viewAllHeadwears" ||
-            path == "/systemAdministration/viewAllUndergarments")
-        {
+      if (user.role == RoleEnum.CUSTOMER) {
+        if (path == "/cashierOperation/checkout" ||
+          path == "/cashierOperation/voidRefund" ||
+          path == "/cashierOperation/viewMySaleTransactions" ||
+          path == "/systemAdministration/viewAllProducts" ||
+          path == "/systemAdministration/viewAllBottoms" ||
+          path == "/systemAdministration/viewAllTops" ||
+          path == "/systemAdministration/viewAllHeadwears" ||
+          path == "/systemAdministration/viewAllUndergarments") {
           return true;
         }
-        else
-        {
+        else {
           return false;
         }
       }
-      else if(user.role == RoleEnum.SELLER)
-      {
-        if(path == "/cashierOperation/checkout" ||
-            path == "/cashierOperation/viewMySaleTransactions" ||
-            path.startsWith("/systemAdministration/viewStaffDetails") ||
-            path == "/systemAdministration/viewAllStaffs" ||
-            path == "/systemAdministration/createNewProduct" ||
-            path.startsWith("/systemAdministration/viewProductDetails") ||
-            path.startsWith("/systemAdministration/updateProduct") ||
-            path.startsWith("/systemAdministration/deleteProduct") ||
-            path == "/systemAdministration/viewAllProducts" ||
-            path == "/systemAdministration/searchProductsByName" ||
-            path == "/systemAdministration/filterProductsByCategory" ||
-            path == "/systemAdministration/filterProductsByTags" ||
-            path == "/systemAdministration/viewAllBottoms" ||
-            path == "/systemAdministration/viewAllTops" ||
-            path == "/systemAdministration/viewAllHeadwears" ||
-            path == "/systemAdministration/viewAllUndergarments")
-        {
+      else if (user.role == RoleEnum.SELLER) {
+        if (path == "/cashierOperation/checkout" ||
+          path == "/cashierOperation/viewMySaleTransactions" ||
+          path.startsWith("/systemAdministration/viewStaffDetails") ||
+          path == "/systemAdministration/viewAllStaffs" ||
+          path == "/systemAdministration/createNewProduct" ||
+          path.startsWith("/systemAdministration/viewProductDetails") ||
+          path.startsWith("/systemAdministration/updateProduct") ||
+          path.startsWith("/systemAdministration/deleteProduct") ||
+          path == "/systemAdministration/viewAllProducts" ||
+          path == "/systemAdministration/searchProductsByName" ||
+          path == "/systemAdministration/filterProductsByCategory" ||
+          path == "/systemAdministration/filterProductsByTags" ||
+          path == "/systemAdministration/viewAllBottoms" ||
+          path == "/systemAdministration/viewAllTops" ||
+          path == "/systemAdministration/viewAllHeadwears" ||
+          path == "/systemAdministration/viewAllUndergarments") {
           return true;
         }
-        else
-        {
+        else {
           return false;
         }
       }
 
       return false;
     }
-    else
-    {
+    else {
       return false;
     }
   }

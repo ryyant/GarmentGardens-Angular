@@ -1,6 +1,6 @@
 <div>
     <h2>My Profile</h2>
-    <p>Manage your profile</p>
+    <p> Manage Your Profile</p>
 
     <hr style="opacity: 0.1" />
 
@@ -120,4 +120,52 @@
             </span>
         </div>
     </form>
+
+    <p>Manage your Wallet</p>
+
+    <hr style="opacity: 0.1" />
+
+    <form #updateCCForm="ngForm" class="updateProfileForm">
+        <!-- <div *ngIf="resultError == true" class="boxErrorMessage">
+            {{message}}
+        </div>
+        <div *ngIf="resultSuccess == true" class="boxSuccessMessage">
+            {{message}}
+        </div> -->
+        <p-table [value]="creditCards" [rowHover]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="creditCardNumber">
+                        Credit Card Number<p-sortIcon field="creditCardNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="nameOnCard">
+                        Name On Card<p-sortIcon field="nameOnCard"></p-sortIcon>
+                    </th>
+                    <th style="width: 5rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-creditCard>
+                <tr>
+                    <td>
+                        {{ creditCard.creditCardNumber }}
+                    </td>
+                    <td>{{ creditCard.nameOnCard }}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are
+                    {{ creditCards ? creditCards.length : 0 }} credit cards.
+                </div>
+            </ng-template>
+        </p-table>
+        <br />
+        <br />
+
+    </form>
+
+
 </div>

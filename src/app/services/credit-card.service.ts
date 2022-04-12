@@ -10,8 +10,10 @@ import { Advertiser } from "../../app/models/advertiser";
 import { CreateCreditCardReq } from '../models/create-credit-card-req';
 import { UpdateCreditCardReq } from '../models/update-credit-card-req';
 
+import { User } from '../models/user';
+
 const httpOptions = {
-	headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 
@@ -28,63 +30,59 @@ export class CreditCardService {
 
   getCreditCards(userId: number): Observable<CreditCard[]> {
     return this.httpClient.get<CreditCard[]>(this.baseUrl + "/retrieveAllCreditCards/" + userId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
-    (
-      catchError(this.handleError)
-    );
+      (
+        catchError(this.handleError)
+      );
   }
 
   getCreditCardByCreditCardId(creditCardId: number): Observable<CreditCard> {
     return this.httpClient.get<CreditCard>(this.baseUrl + "/retrieveCreditCard/" + creditCardId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
-    (
-      catchError(this.handleError)
-    );
+      (
+        catchError(this.handleError)
+      );
   }
 
   createNewCreditCard(holderName?: string, creditCardNumber?: string, cvv?: string, expiryDate?: Date, billingAddress?: string, user?: User, advertiser?: Advertiser): Observable<CreditCard> {
     let createCreditCardReq: CreateCreditCardReq = new CreateCreditCardReq(this.sessionService.getUsername(), this.sessionService.getPassword(), holderName, creditCardNumber, cvv, expiryDate, billingAddress, user, advertiser);
-  
+
     return this.httpClient.put<CreditCard>(this.baseUrl, createCreditCardReq, httpOptions).pipe
-    (
-      catchError(this.handleError)
-    );
+      (
+        catchError(this.handleError)
+      );
   }
 
   updateCreditCard(holderName?: string, creditCardNumber?: string, cvv?: string, expiryDate?: Date, billingAddress?: string, user?: User, advertiser?: Advertiser): Observable<any> {
     let updateCreditCardReq: UpdateCreditCardReq = new UpdateCreditCardReq(this.sessionService.getUsername(), this.sessionService.getPassword(), holderName, creditCardNumber, cvv, expiryDate, billingAddress, user, advertiser);
-  
+
     return this.httpClient.put<any>(this.baseUrl, updateCreditCardReq, httpOptions).pipe
-    (
-      catchError(this.handleError)
-    );
+      (
+        catchError(this.handleError)
+      );
   }
 
-  deleteCreditCard(creditCardId: number): Observable<any>
-  {
+  deleteCreditCard(creditCardId: number): Observable<any> {
     return this.httpClient.delete<any>(this.baseUrl + "/" + creditCardId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
-    (
-      catchError(this.handleError)
-    );
+      (
+        catchError(this.handleError)
+      );
   }
 
 
 
-  private handleError(error: HttpErrorResponse)
-  {
+  private handleError(error: HttpErrorResponse) {
     let errorMessage: string = "";
-    
-    if (error.error instanceof ErrorEvent) 
-    {		
+
+    if (error.error instanceof ErrorEvent) {
       errorMessage = "An unknown error has occurred: " + error.error;
-    } 
-    else 
-    {		
+    }
+    else {
       errorMessage = "A HTTP error has occurred: " + `HTTP ${error.status}: ${error.error}`;
     }
-    
+
     console.error(errorMessage);
-    
+
     return throwError(() => new Error(errorMessage));
   }
-  
+
 
 }
