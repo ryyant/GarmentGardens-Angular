@@ -1,1 +1,31 @@
-<p>view-seller-products works!</p>
+<app-breadcrumb [pageName]="'viewAllProducts'"></app-breadcrumb>
+			
+<h3>Seller Products</h3>
+<br/>
+
+<table id="tableProductCatalogue" style="width:100%; cellpadding: 3px; cellspacing: 1px;">
+    <thead>
+        <tr>				
+            <th>SKU Code</th>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity on Hand</th>
+            <th>Unit Price</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.skuCode}}</td>
+            <td>{{product.productId}}</td>				
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td class="cellnumber">{{product.quantityOnHand}}</td>
+            <td class="cellnumber">{{product.unitPrice | currency}}</td>
+            <td>{{(product.category != null)?(product.category.name):('')}}</td>
+            <td><a routerLink="/systemAdministration/viewProductDetails/{{product.productId}}">View</a></td>
+        </tr>
+    </tbody>
+</table>
