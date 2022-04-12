@@ -33,7 +33,7 @@ export class CategoryService
 
   getCategories(): Observable<Category[]>
   {		
-    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveAllCategories?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveAllCategories").pipe
     (
       catchError(this.handleError)
     );
@@ -41,7 +41,7 @@ export class CategoryService
 
   getRootCategories(): Observable<Category[]>
   {		
-    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveOnlyParentCategories?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveOnlyParentCategories").pipe
     (
       catchError(this.handleError)
     );
@@ -49,7 +49,7 @@ export class CategoryService
 
   getSubCategories(categoryId : number): Observable<Category[]>
   {	
-    return this.httpClient.get<Category[]>(this.baseUrl + "/getSubCategories/" + categoryId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Category[]>(this.baseUrl + "/getSubCategories/" + categoryId).pipe
     (
       catchError(this.handleError)
     );
@@ -57,7 +57,7 @@ export class CategoryService
 
   getLeafCategories(): Observable<Category[]>
   {		
-    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveAllLeafCategories?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Category[]>(this.baseUrl + "/retrieveAllLeafCategories").pipe
     (
       catchError(this.handleError)
     );

@@ -35,7 +35,7 @@ export class ProductService
 
   getProducts(): Observable<Product[]>
   {				
-    return this.httpClient.get<Product[]>(this.baseUrl + "/retrieveAllProducts?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Product[]>(this.baseUrl + "/retrieveAllProducts").pipe
     (
       catchError(this.handleError)
     );
@@ -43,7 +43,7 @@ export class ProductService
 
   getFilteredProducts(categoryId: number): Observable<Product[]>
   {				
-    return this.httpClient.get<Product[]>(this.baseUrl + "/retrieveAllProductsFiltered/" + categoryId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    return this.httpClient.get<Product[]>(this.baseUrl + "/retrieveAllProductsFiltered/" + categoryId).pipe
     (
       catchError(this.handleError)
     );
@@ -54,7 +54,7 @@ export class ProductService
 	
     getProductByProductId(productId: number): Observable<Product>
     {
-      return this.httpClient.get<Product>(this.baseUrl + "/retrieveProduct/" + productId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+      return this.httpClient.get<Product>(this.baseUrl + "/retrieveProduct/" + productId).pipe
       (
         catchError(this.handleError)
       );

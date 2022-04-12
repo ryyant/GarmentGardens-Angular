@@ -20,41 +20,31 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit() {
 
+    // MENU FOR ANYONE
     this.restrictedMenu = [
       {
-        label: 'All Products',
-        routerLink: ['/systemAdministration/viewAllProducts'],
+        label: 'Browse',
         items: [
-            {
-            label: 'Top',
-            routerLink: ['/systemAdministration/viewAllTops'],
-            },
-            {
-              label: 'Headwear',
-              routerLink: ['/systemAdministration/viewAllHeadwears'],
-            },
-            {
-              label: 'Bottom',
-              routerLink: ['/systemAdministration/viewAllBottoms'],
-            },
-            {
-              label: 'Undergarment',
-              routerLink: ['/systemAdministration/viewAllUndergarments'],
-            },
+          {
+            label: 'All',
+            routerLink: ['/systemAdministration/viewAllProducts'],
+          },
         ]
       }
     ]
 
-      // this.categoryService.getRootCategories().subscribe({
-      //   next: (rootCategories) => {
-      //       let items = this.restrictedMenu[0].items;
-      //       this.addToTree(items, rootCategories);
-      //   },
-      //   error: (error) => {
-      //     console.log('Generating Root Categories error, ' + error);
-      //   }
-      // })
+    // THIS IS TO GENERATE ALL THE CATEGORIES, IMPORTANT!!
+    this.categoryService.getRootCategories().subscribe({
+      next: (rootCategories) => {
+          let items = this.restrictedMenu[0].items;
+          this.addToTree(items, rootCategories);
+      },
+      error: (error) => {
+        console.log('Generating Root Categories error, ' + error);
+      }
+    })
 
+      // MENU FOR LOGGED-IN USERS
     this.menu = [
         this.restrictedMenu[0],
         {
@@ -131,7 +121,7 @@ export class MainMenuComponent implements OnInit {
             if (treeItems) {
               treeItems.push({
                 label: categories[i].name,
-                routerLink: ['/' + categories[i].name]
+                routerLink: ['/viewAllProducts:' + categories[i].name]
               });
             }
           }
