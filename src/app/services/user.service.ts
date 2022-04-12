@@ -25,7 +25,7 @@ export class UserService {
   constructor(
     private httpClient: HttpClient,
     private sessionService: SessionService
-  ) {}
+  ) { }
 
   userLogin(
     username: string | undefined,
@@ -34,10 +34,10 @@ export class UserService {
     return this.httpClient
       .get<User>(
         this.baseUrl +
-          '/userLogin?username=' +
-          username +
-          '&password=' +
-          password
+        '/userLogin?username=' +
+        username +
+        '&password=' +
+        password
       )
       .pipe(catchError(this.handleError));
   }
@@ -54,7 +54,7 @@ export class UserService {
     let updateProfileReq: UpdateProfileReq = new UpdateProfileReq(currUser);
 
     return this.httpClient
-      .post<any>(this.baseUrl, updateProfileReq, httpOptions)
+      .post<any>(this.baseUrl + '/updateProfile', updateProfileReq, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

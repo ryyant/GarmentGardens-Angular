@@ -51,7 +51,7 @@ export class ViewProfilePageComponent implements OnInit {
     console.log(typeof this.formRole);
     console.log(this.formRole);
     console.log(RoleEnum.CUSTOMER);
-    
+
     console.log(this.currUser.role);
   }
 
@@ -70,6 +70,8 @@ export class ViewProfilePageComponent implements OnInit {
         next: (response) => {
           this.sessionService.setCurrentUser(this.currUser);
           this.resultError = false;
+          this.resultSuccess = true;
+          this.message = 'You have updated your profile successfully'
         },
         error: (error) => {
           this.resultError = true;
