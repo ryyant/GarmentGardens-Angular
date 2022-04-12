@@ -9,11 +9,11 @@ import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
-  selector: 'app-view-all-products',
-  templateUrl: './view-all-products.component.html',
-  styleUrls: ['./view-all-products.component.css']
+  selector: 'app-view-all-tops',
+  templateUrl: './view-all-tops.component.html',
+  styleUrls: ['./view-all-tops.component.css']
 })
-export class ViewAllProductsComponent implements OnInit 
+export class ViewAllTopsComponent implements OnInit 
 {
   products: any[];
 	display: boolean;
@@ -44,7 +44,7 @@ export class ViewAllProductsComponent implements OnInit
   {
     this.checkAccessRight()
 
-    this.productService.getProducts().subscribe({
+    this.productService.getFilteredProducts(1).subscribe({
       next:(response)=>{ for(let i=0;i<response.length;i++) {
         console.log(response[i].name)
       }
@@ -101,4 +101,5 @@ export class ViewAllProductsComponent implements OnInit
 		}
 	}
 }
+
 

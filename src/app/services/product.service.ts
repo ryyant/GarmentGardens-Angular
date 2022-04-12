@@ -40,6 +40,15 @@ export class ProductService
       catchError(this.handleError)
     );
   }
+
+  getFilteredProducts(categoryId: number): Observable<Product[]>
+  {				
+    return this.httpClient.get<Product[]>(this.baseUrl + "/retrieveAllProductsFiltered/" + categoryId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
 	
 	
 	

@@ -104,7 +104,11 @@ export class SessionService
         if(path == "/cashierOperation/checkout" ||
             path == "/cashierOperation/voidRefund" ||
             path == "/cashierOperation/viewMySaleTransactions" ||
-            path == "/systemAdministration/viewAllProducts")
+            path == "/systemAdministration/viewAllProducts" ||
+            path == "/systemAdministration/viewAllBottoms" ||
+            path == "/systemAdministration/viewAllTops" ||
+            path == "/systemAdministration/viewAllHeadwears" ||
+            path == "/systemAdministration/viewAllUndergarments")
         {
           return true;
         }
@@ -126,7 +130,11 @@ export class SessionService
             path == "/systemAdministration/viewAllProducts" ||
             path == "/systemAdministration/searchProductsByName" ||
             path == "/systemAdministration/filterProductsByCategory" ||
-            path == "/systemAdministration/filterProductsByTags")
+            path == "/systemAdministration/filterProductsByTags" ||
+            path == "/systemAdministration/viewAllBottoms" ||
+            path == "/systemAdministration/viewAllTops" ||
+            path == "/systemAdministration/viewAllHeadwears" ||
+            path == "/systemAdministration/viewAllUndergarments")
         {
           return true;
         }

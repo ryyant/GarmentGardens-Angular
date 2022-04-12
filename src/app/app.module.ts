@@ -56,6 +56,10 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
+import { ViewAllBottomsComponent } from './systemAdministration/view-all-bottoms/view-all-bottoms.component';
+import { ViewAllTopsComponent } from './systemAdministration/view-all-tops/view-all-tops.component';
+import { ViewAllUndergarmentsComponent } from './systemAdministration/view-all-undergarments/view-all-undergarments.component';
+import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headwears/view-all-headwears.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,10 @@ import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards
     ViewProfilePageComponent,
     ViewSellerProductsComponent,
     ViewAllRewardsComponent,
+    ViewAllBottomsComponent,
+    ViewAllTopsComponent,
+    ViewAllUndergarmentsComponent,
+    ViewAllHeadwearsComponent,
   ],
   imports: [
     AppRoutingModule,

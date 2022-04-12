@@ -13,6 +13,10 @@ import { DeleteProductComponent } from './systemAdministration/delete-product/de
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
+import { ViewAllBottomsComponent } from './systemAdministration/view-all-bottoms/view-all-bottoms.component';
+import { ViewAllTopsComponent } from './systemAdministration/view-all-tops/view-all-tops.component';
+import { ViewAllHeadwearsComponent } from './systemAdministration/view-all-headwears/view-all-headwears.component';
+import { ViewAllUndergarmentsComponent } from './systemAdministration/view-all-undergarments/view-all-undergarments.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -31,7 +35,11 @@ const routes: Routes = [
   { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsComponent },
   { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent},
   { path: 'systemAdministration/viewProfilePage', component: ViewProfilePageComponent},
-  { path: 'systemAdministration/viewSellerProducts', component: ViewSellerProductsComponent}
+  { path: 'systemAdministration/viewSellerProducts', component: ViewSellerProductsComponent},
+  { path: 'systemAdministration/viewAllBottoms', component: ViewAllBottomsComponent},
+  { path: 'systemAdministration/viewAllTops', component: ViewAllTopsComponent},
+  { path: 'systemAdministration/viewAllHeadwears', component: ViewAllHeadwearsComponent},
+  { path: 'systemAdministration/viewAllUndergarments', component: ViewAllUndergarmentsComponent}
 ];
 
 @NgModule({

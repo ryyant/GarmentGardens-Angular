@@ -22,25 +22,38 @@ export class MainMenuComponent implements OnInit {
 
     this.restrictedMenu = [
       {
-        label: 'Browse',
+        label: 'All Products',
+        routerLink: ['/systemAdministration/viewAllProducts'],
         items: [
-          {
-            label: 'All',
-            routerLink: ['/systemAdministration/viewAllProducts'],
-          },
+            {
+            label: 'Top',
+            routerLink: ['/systemAdministration/viewAllTops'],
+            },
+            {
+              label: 'Headwear',
+              routerLink: ['/systemAdministration/viewAllHeadwears'],
+            },
+            {
+              label: 'Bottom',
+              routerLink: ['/systemAdministration/viewAllBottoms'],
+            },
+            {
+              label: 'Undergarment',
+              routerLink: ['/systemAdministration/viewAllUndergarments'],
+            },
         ]
       }
     ]
 
-      this.categoryService.getRootCategories().subscribe({
-        next: (rootCategories) => {
-            let items = this.restrictedMenu[0].items;
-            this.addToTree(items, rootCategories);
-        },
-        error: (error) => {
-          console.log('Generating Root Categories error, ' + error);
-        }
-      })
+      // this.categoryService.getRootCategories().subscribe({
+      //   next: (rootCategories) => {
+      //       let items = this.restrictedMenu[0].items;
+      //       this.addToTree(items, rootCategories);
+      //   },
+      //   error: (error) => {
+      //     console.log('Generating Root Categories error, ' + error);
+      //   }
+      // })
 
     this.menu = [
         this.restrictedMenu[0],
