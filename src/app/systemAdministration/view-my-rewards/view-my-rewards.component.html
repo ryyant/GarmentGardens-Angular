@@ -1,23 +1,86 @@
 
-<app-breadcrumb [pageName]="'viewAllRewards'"></app-breadcrumb>
+<app-breadcrumb [pageName]="'myRewards'"></app-breadcrumb>
 
-<h3>All Rewards</h3>
-
-<p-virtualScroller [value]="rewards" scrollHeight="500px" [itemSize]="150">
-    <ng-template pTemplate="item" let-reward>
-        <div>
-            <div class="rewardName">Name: {{reward.rewardName}}</div>
-            <img class="img" src="assets/promoCode.png"/>
-            <div class="rewardDate"> Expiry Date: {{reward.expiryDate}}</div>
-            <p-button class="viewButton"
-            label="View"
-            (onClick)="showDialog(reward)">
-            </p-button>
-        </div>
-        
+<h3 style="color: white;">My Rewards</h3>
+<div class="allrewards">
+  <p-dataView 
+  #dv
+  [value]="rewards"
+  [paginator]="true"
+  [rows]="9"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  >
+    <ng-template pTemplate="header">
+      <div class="dataHeader">
+        <p-dropdown
+        [options]="sortOptions"
+        [(ngModel)]="sortKey"
+        placeholder="Sort By"
+        (onChange)="onSortChange($event)"
+        [style]="{'min-width': '15em' }"
+        class="glow">
+        </p-dropdown>
+        <span>
+          <i class="pi pi-search"></i>
+          &nbsp;
+          <input
+            class="glow"
+            type="search"
+            pInputText
+            placeholder="Search by Name"
+          />
+          <!-- INCOMPLETE -->
+        </span>
+      </div>
+      <p-dataViewLayoutOptions
+      style="width: 100%; text-align: center">
+      </p-dataViewLayoutOptions>
     </ng-template>
 
-    <p-dialog
+    <ng-template let-reward pTemplate="listItem">
+      <div
+        class="reward-list-item glow"
+        (click)="showDialog(reward)"
+        style="cursor: pointer"
+      >
+        <img class="img" src="../../../assets/promoCode.png"/>
+        <div class="reward-list-detail">
+          <div class="reward-name">{{reward.rewardName}}</div>
+          <div class="reward-description"> Use By: {{reward.expiryDate}}</div>
+          <div class="reward-grid-item-bottom">
+            <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-reward pTemplate="gridItem">
+      <div
+        [ngClass]="{'reward-grid-item': true ,
+                    'card': true,
+                    'glow': true}"
+        (click)="showDialog(reward)"
+        style="cursor: pointer"
+      >
+        <div class="reward-grid-item-top">
+          <div>
+
+            <span class="reward-category">{{ reward.rewardName }}</span>
+          </div>
+        </div>
+        <div class="reward-grid-item-content">
+          <img class="img" src="../../../assets/promoCode.png" />
+          <div class="reward-name">{{ reward.rewardName }}</div>
+          <div class="reward-description">Use By: {{ reward.expiryDate }}</div>
+        </div>
+        <div class="reward-grid-item-bottom">
+          <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+  <p-dialog
     *ngIf="display"
     header="View Reward Details"
     [(visible)]="display"
@@ -30,7 +93,29 @@
         <h1 style="font-size: 40px">
           {{ rewardToView.rewardName }}
         </h1>
+        <p-button
+        label="Redeem Reward"
+        (onClick)="useReward(rewardToView)"
+      ></p-button>
       </span>
+
+      <table width="100%" [cellSpacing]="20">
+        <tr>
+          <td style="width: 30%">
+            <p>Reward ID: {{ rewardToView.rewardId }}</p>
+            <p>Reward Name: {{ rewardToView.rewardName }}</p>
+            <img
+              style="border-radius: 15px; margin: 20px"
+              src="../../../assets/promoCode.png"
+            />
+          </td>
+          <div style="text-align: left">
+            <h3>Description:</h3>
+            <p>{{ rewardToView.expiryDate }}</p>
+          </div>
+        </tr>
+      </table>
+
     </div>
   </p-dialog>
-</p-virtualScroller>
+</div>

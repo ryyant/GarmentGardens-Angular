@@ -75,7 +75,10 @@ export class ViewAllRewardsComponent implements OnInit {
       }
     })
     console.log(this.message)
+    window.location.reload();
   }
+
+  
 
   showDialog(rewardToView: Reward)
   {

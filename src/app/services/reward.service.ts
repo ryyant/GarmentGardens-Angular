@@ -32,6 +32,13 @@ export class RewardService {
     );
   }
 
+  getMyRewards(userId?: number): Observable<Reward[]> {
+    return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveRewardsByUserId/" + userId).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
   redeemReward(userId?: number, rewardId?: number): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + "/redeemReward/" + rewardId + "/" + userId).pipe
     (
@@ -39,8 +46,8 @@ export class RewardService {
     );
   }
 
-  getRewardByUserId(user: User): Observable<Reward[]> {
-    return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveRewardByUserId/" + user.userId).pipe
+  useReward(userId?: number, rewardId?: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/useReward/" + rewardId + "/" + userId).pipe
     (
       catchError(this.handleError)
     );
@@ -52,6 +59,7 @@ export class RewardService {
       catchError(this.handleError)
     );
   }
+
 
 
 

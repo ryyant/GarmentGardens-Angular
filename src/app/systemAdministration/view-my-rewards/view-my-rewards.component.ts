@@ -16,8 +16,14 @@ export class ViewMyRewardsComponent implements OnInit {
   rewards: Reward[];
   display: boolean;
   rewardToView: Reward;
+  rewardToUse: Reward;
 
   sortOptions: SelectItem[] = [];
+
+
+  resultSuccess: boolean;
+	resultError: boolean;
+	message: string | undefined;
 
   sortOrder: number = 0;
   sortKey: string = "";
@@ -31,10 +37,13 @@ export class ViewMyRewardsComponent implements OnInit {
       this.rewards = new Array();
       this.display = false;
       this.rewardToView = new Reward();
+      this.rewardToUse = new Reward();
+      this.resultSuccess = false;
+      this.resultError = false;
      }
 
   ngOnInit(): void {
-    this.rewardService.getRewardByUserId(this.sessionService.getCurrentUser()).subscribe({
+    this.rewardService.getMyRewards(this.sessionService.getCurrentUser().userId).subscribe({
       next:(response)=> {
         this.rewards = response;
       },
@@ -47,7 +56,41 @@ export class ViewMyRewardsComponent implements OnInit {
   showDialog(rewardToView: Reward)
   {
     this.display = true;
-    this.rewardToView = this.rewardToView;
+    this.rewardToView = rewardToView;
+  }
+
+  useReward(rewardToUse: Reward) {
+    this.rewardToUse = rewardToUse;
+    console.log(rewardToUse);
+    this.rewardService.redeemReward(this.sessionService.getCurrentUser().userId, rewardToUse.rewardId).subscribe({
+      next:(response)=>{
+        this.resultSuccess = true;
+        this.resultError = false;
+        this.message = "Reward used successfully";
+      },
+      error:(error)=>{
+        this.resultError = true;
+        this.resultSuccess = false;
+        this.message = "An error has occurred while using the reward: " + error;
+        
+        console.log('********** ViewAllRewardsComponent.ts: ' + error);
+      }
+    })
+    console.log(this.message)
+
+    window.location.reload();
+  }
+  onSortChange(event: { value: any; }) {
+    let value = event.value;
+  
+    if (value.indexOf('!') === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+    }
+    else {
+        this.sortOrder = 1;
+        this.sortField = value;
+    }
   }
 
 }

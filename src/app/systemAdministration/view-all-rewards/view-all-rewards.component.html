@@ -1,6 +1,7 @@
 
-<app-breadcrumb [pageName]="'viewAllRewards'"></app-breadcrumb>
+<app-breadcrumb [pageName]="'allRewards'"></app-breadcrumb>
 
+<h3 style="color: white;">All Available Rewards</h3>
 <div class="allrewards">
   <p-dataView 
   #dv
@@ -50,17 +51,13 @@
           <div class="reward-grid-item-bottom">
             <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
           </div>
-          <p-button
-          label="Redeem Reward"
-          
-        ></p-button>
         </div>
       </div>
     </ng-template>
 
     <ng-template let-reward pTemplate="gridItem">
       <div
-        [ngClass]="{'reward-grid-item': true,
+        [ngClass]="{'reward-grid-item': true ,
                     'card': true,
                     'glow': true}"
         (click)="showDialog(reward)"
@@ -75,14 +72,10 @@
         <div class="reward-grid-item-content">
           <img class="img" src="../../../assets/promoCode.png" />
           <div class="reward-name">{{ reward.rewardName }}</div>
-          <div class="reward-description">Use By: {{ reward.expiryDate | date: 'EEE, MMM d, yy'}}</div>
+          <div class="reward-description">Use By: {{ reward.expiryDate }}</div>
         </div>
         <div class="reward-grid-item-bottom">
           <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
-          <p-button
-            label="Redeem Reward"
-            (onClick)="redeemReward(reward)"
-          ></p-button>
         </div>
       </div>
     </ng-template>
@@ -100,6 +93,10 @@
         <h1 style="font-size: 40px">
           {{ rewardToView.rewardName }}
         </h1>
+        <p-button
+        label="Redeem Reward"
+        (onClick)="redeemReward(rewardToView)"
+      ></p-button>
       </span>
 
       <table width="100%" [cellSpacing]="20">
