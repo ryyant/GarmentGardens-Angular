@@ -73,6 +73,7 @@ export class ViewAllRewardsComponent implements OnInit {
         console.log('********** UpdateProductComponent.ts: ' + error);
       }
     })
+    console.log(this.message)
   }
 
   showDialog(rewardToView: Reward)
