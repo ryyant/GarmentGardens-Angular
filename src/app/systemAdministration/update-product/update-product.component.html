@@ -33,7 +33,8 @@
         </tr>
         <tr>
             <td width="20%" style="font-weight: bold;">Name</td>
-            <td><input id="name" name="name" #name="ngModel" type="text" placeholder="Product 1" [(ngModel)]="productToUpdate.name" required="true" /></td>
+            <td><input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel"
+                [(ngModel)]="productToUpdate.name" required="true" /></td>
             <td>
                 <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
                     <div *ngIf="name.errors?.['required']">
@@ -44,7 +45,8 @@
         </tr>
         <tr>
             <td width="20%" style="font-weight: bold;">Description</td>
-            <td><input id="description" name="description" #description="ngModel" type="text" placeholder="Product 1" [(ngModel)]="productToUpdate.description" required="true" /></td>
+            <td><input pInputText placeholder="Product 1" id="description" type="text" name="description"
+                #description="ngModel" [(ngModel)]="productToUpdate.description" required="true" /></td>
             <td>
                 <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
                     <div *ngIf="description.errors?.['required']">
@@ -54,8 +56,23 @@
             </td>
         </tr>
         <tr>
+            <td width="20%" style="font-weight: bold">Image Link</td>
+            <td>
+                <input pInputText placeholder="Image Link" id="imageLink" type="text" name="imageLink"
+                    #imageLink="ngModel" [(ngModel)]="productToUpdate.imageLink" required="true" />
+            </td>
+            <td>
+                <div *ngIf="imageLink.invalid && (imageLink.dirty || imageLink.touched || submitted)" class="errorText">
+                    <div *ngIf="imageLink.errors?.['required']">
+                        Image Link is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
             <td width="20%" style="font-weight: bold;">Quantity On Hand</td>
-            <td><input id="quantityOnHand" name="quantityOnHand" #quantityOnHand="ngModel" type="text" placeholder="99" [(ngModel)]="productToUpdate.quantityOnHand" required="true" /></td>
+            <td><input pInputText placeholder="99" id="quantityOnHand" type="number" name="quantityOnHand"
+                #quantityOnHand="ngModel" [(ngModel)]="productToUpdate.quantityOnHand" required="true" /></td>
             <td>
                 <div *ngIf="quantityOnHand.invalid && (quantityOnHand.dirty || quantityOnHand.touched || submitted)" class="errorText">
                     <div *ngIf="quantityOnHand.errors?.['required']">
@@ -66,7 +83,8 @@
         </tr>
         <tr>
             <td width="20%" style="font-weight: bold;">Unit Price</td>
-            <td><input id="unitPrice" name="unitPrice" #unitPrice="ngModel" type="text" placeholder="10.00" [(ngModel)]="productToUpdate.unitPrice" required="true" /></td>
+            <td> <input pInputText placeholder="10.00" id="unitPrice" type="number" name="unitPrice" #unitPrice="ngModel"
+                [(ngModel)]="productToUpdate.unitPrice" required="true" /></td>
             <td>
                 <div *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched || submitted)" class="errorText">
                     <div *ngIf="unitPrice.errors?.['required']">
@@ -75,7 +93,7 @@
                 </div>
             </td>
         </tr>			
-        <tr>
+        <!-- <tr>
             <td width="20%" style="font-weight: bold;">Product Rating</td>
             <td><input id="productRating" name="productRating" #productRating="ngModel" type="range" [(ngModel)]="productToUpdate.productRating" required="true" min="1" max="5" />&nbsp;<span style="vertical-align: top;">{{productToUpdate.productRating}}</span></td>
             <td>
@@ -85,7 +103,7 @@
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr> -->
         <tr>
             <td width="20%" style="font-weight: bold;">Category</td>
             <td>
