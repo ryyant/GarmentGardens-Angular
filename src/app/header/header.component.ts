@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit
 
   userLogin(): void
   {
-    this.sessionService.setUsername(this.username);
-		this.sessionService.setPassword(this.password);
+    // this.sessionService.setUsername(this.username);
+		// this.sessionService.setPassword(this.password);
 					
 		this.userService.userLogin(this.username, this.password).subscribe({
       next:(response)=>{

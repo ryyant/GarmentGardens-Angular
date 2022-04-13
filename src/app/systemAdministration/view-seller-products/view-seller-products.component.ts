@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { User } from 'src/app/models/user';
 import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
@@ -14,6 +14,7 @@ import { Product } from '../../models/product';
 export class ViewSellerProductsComponent implements OnInit {
 
   products: Product[] | null;
+  currUser: User;
 
   
   constructor(private router: Router,
@@ -21,11 +22,14 @@ export class ViewSellerProductsComponent implements OnInit {
     public sessionService: SessionService,
     private productService: ProductService) { 
       this.products = new Array();
+      this.currUser = this.sessionService.getCurrentUser();
     }
 
   ngOnInit(): void {
     
-    this.productService.getSellerProducts().subscribe({
+    
+
+    this.productService.getSellerProducts(this.currUser).subscribe({
       next: (response) => {
         for (let i = 0; i < response.length; i++) {
           console.log(response[i].name)
@@ -36,9 +40,9 @@ export class ViewSellerProductsComponent implements OnInit {
         console.log('********** ViewAllSellerProductsComponent.ts: ' + error);
       }
     });
-
-
   }
+
+
 
   
 

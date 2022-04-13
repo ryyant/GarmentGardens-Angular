@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { User } from '../models/user';
 
 import { SessionService } from '../services/session.service';
 import { Product } from '../models/product';
@@ -29,8 +30,6 @@ export class ProductService {
     private httpClient: HttpClient,
     private sessionService: SessionService
   ) {
-    this.username = this.sessionService.getUsername();
-    this.password = this.sessionService.getPassword();
   }
 
   getProducts(): Observable<Product[]> {
@@ -40,11 +39,10 @@ export class ProductService {
   }
 
 
-  getSellerProducts(): Observable<Product[]> {
+  getSellerProducts(user: User): Observable<Product[]> {
     
     return this.httpClient
-      .get<Product[]>(this.baseUrl + '/retrieveAllSellerProducts?username=' + this.username + '&password=' +
-      this.password).pipe(catchError(this.handleError));
+      .get<Product[]>(this.baseUrl + '/retrieveAllSellerProducts?username=' + user.username).pipe(catchError(this.handleError));
   }
 
   getFilteredProducts(categoryId: number): Observable<Product[]> {
