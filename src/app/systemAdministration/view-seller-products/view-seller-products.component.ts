@@ -66,9 +66,15 @@ export class ViewSellerProductsComponent implements OnInit {
     this.productToView = productToView;
   }
 
-  viewProductDetails() {
-    this.router.navigate(["/systemAdministration/viewProductDetails/" + this.productToView.productId]);
+  deleteProduct() {
+    this.router.navigate(["/systemAdministration/deleteProduct/" + this.productToView.productId]);
   }
+
+  updateProduct(){
+    this.router.navigate(["/systemAdministration/updateProduct/" + this.productToView.productId]);
+  }
+
+  
 
   addToCart() {
     // CALL SERVICE HERE, TAKE IN qtyToAdd

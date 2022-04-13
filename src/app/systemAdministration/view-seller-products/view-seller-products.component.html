@@ -186,12 +186,17 @@
           </div>
         </tr>
         <tr>
-          <td><p-button
-            label="View More"
-            (onClick)="viewProductDetails()"
+          <td><p-button style="text-align: center"
+            label="Update"
+            (onClick)="updateProduct()"
           >
           </p-button></td>
-          <td><h3>Quantity: </h3></td>
+          <td><p-button style="text-align: center"
+            label="Delete"
+            (onClick)="deleteProduct()">
+          </p-button>
+          </td>
+          <!-- <td><h3>Quantity: </h3></td>
           <td>
             <input
               pInputText
@@ -211,7 +216,7 @@
               (onClick)="addToCart()"
             >
             </p-button>
-          </td>
+          </td> -->
         </tr>
       </table>
 
