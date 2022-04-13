@@ -1,57 +1,118 @@
 <app-breadcrumb [pageName]="'viewProductDetails'"></app-breadcrumb>
-			
-<h3>View Product Details</h3>
-<br/>
-    
-<span *ngIf="retrieveProductError == true" style="color:red;">Product ID {{productId}} does not exist!</span>		
 
-<div *ngIf="retrieveProductError == false">
-    <a routerLink="/systemAdministration/viewSellerProducts">Back</a> | 	
-    <a routerLink="/systemAdministration/updateProduct/{{productId}}">Update</a> | 		
-    <a routerLink="/systemAdministration/deleteProduct/{{productId}}">Delete</a>
+<div style="display: inline-flex; align-items: center">
+  <a
+    routerLink="/systemAdministration/viewSellerProducts"
+    style="color: white; margin: 15px"
+    ><i class="pi pi-arrow-circle-left"></i>
+  </a>
+  <h2>View Product Details</h2>
 </div>
-<br/>	
 
-<table *ngIf="retrieveProductError == false && productToView != null" width="100%">
-    <tr>
-        <td width="20%" style="font-weight: bold;">Product ID</td>
-        <td>{{productToView.productId}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">SKU Code</td>
-        <td>{{productToView.skuCode}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Name</td>
-        <td>{{productToView.name}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Description</td>
-        <td>{{productToView.description}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Quantity On Hand</td>
-        <td>{{productToView.quantityOnHand}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Unit Price</td>
-        <td>{{productToView.unitPrice | currency}}</td>
-    </tr>		
-    <tr>
-        <td width="20%" style="font-weight: bold;">Product Rating</td>
-        <td>{{productToView.productRating}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Category</td>
-        <td>{{(productToView.category != null)?(productToView.category.name):('')}}</td>
-    </tr>
-    <tr>
-        <td width="20%" style="font-weight: bold;">Tag(s)</td>
-        <td>
-            <ul style="margin-left: 20px;">
-                <li *ngFor="let tag of productToView.tags">{{tag.name}}</li>
-            </ul>
-        </td>
-    </tr>
-    
+<span *ngIf="retrieveProductError == true" style="color: red"
+  >Product ID {{ productId }} does not exist!</span
+>
+
+<div *ngIf="showMessage && error == false" class="boxSuccessMessage" >
+    {{errorMessage}}
+</div>
+
+<div *ngIf="showMessage && error == true" class="boxErrorMessage">
+    {{errorMessage}}
+</div>
+<br />
+
+<table
+  *ngIf="retrieveProductError == false && productToView != null"
+  width="100%"
+>
+  <tr>
+    <td width="40%" style="text-align: center">
+      <img class="img" src="{{ productToView.imageLink }}" />
+      <div
+        *ngIf="sessionService.getCurrentUser().role == 'SELLER' && retrieveProductError == false"
+        style="margin: 15px 0px 15px 0px"
+      >
+        <a routerLink="/systemAdministration/updateProduct/{{ productId }}"
+          ><button
+            pButton
+            type="button"
+            class="p-button-rounded p-button-outlined"
+            value="Register"
+          >
+            Update
+          </button>
+        </a>
+        &nbsp;
+          <button
+            pButton
+            type="button"
+            class="p-button-rounded p-button-outlined"
+            value="Register"
+            style="color: red"
+            (click)="deleteProduct()"
+          >
+            Delete
+          </button>
+      </div>
+    </td>
+    <td>
+      <div class="garmentCard">
+        <table style="text-align: center">
+          <tr>
+            <td width="20%" style="font-weight: bold">Product ID</td>
+            <td>{{ productToView.productId }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">SKU Code</td>
+            <td>{{ productToView.skuCode }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Name</td>
+            <td>{{ productToView.name }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Description</td>
+            <td>{{ productToView.description }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Quantity On Hand</td>
+            <td>{{ productToView.quantityOnHand }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Unit Price</td>
+            <td>{{ productToView.unitPrice | currency }}</td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Product Rating</td>
+            <td>
+              <p-rating
+                [ngModel]="productToView.productRating"
+                [readonly]="true"
+                [cancel]="false"
+              ></p-rating>
+            </td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Category</td>
+            <td>
+              {{
+                productToView.category != null
+                  ? productToView.category.name
+                  : ""
+              }}
+            </td>
+          </tr>
+          <tr>
+            <td width="20%" style="font-weight: bold">Tag(s)</td>
+            <td>
+              <div *ngFor="let tag of productToView.tags">{{ tag.name }}</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
 </table>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

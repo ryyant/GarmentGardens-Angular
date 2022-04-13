@@ -11,7 +11,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DataViewModule } from 'primeng/dataview';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
@@ -35,9 +34,8 @@ import { DialogModule } from 'primeng/dialog';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CarouselModule } from 'primeng/carousel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
-
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,14 +47,12 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AccessRightErrorComponent } from './access-right-error/access-right-error.component';
 
-
 import { CheckoutComponent } from './cashierOperation/checkout/checkout.component';
 import { ViewMySaleTransactionsComponent } from './cashierOperation/view-my-sale-transactions/view-my-sale-transactions.component';
 import { CreateNewProductComponent } from './systemAdministration/create-new-product/create-new-product.component';
 import { ViewAllProductsComponent } from './systemAdministration/view-all-products/view-all-products.component';
 import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
 import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
-import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
@@ -65,6 +61,7 @@ import { ViewProductByCategoryComponent } from './view-product-by-category/view-
 import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-details/view-reward-details.component';
 import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -82,7 +79,6 @@ import { ViewDisputesComponent } from './systemAdministration/view-disputes/view
     ViewAllProductsComponent,
     ViewProductDetailsComponent,
     UpdateProductComponent,
-    DeleteProductComponent,
     CreateNewUserComponent,
     ViewProfilePageComponent,
     ViewSellerProductsComponent,
@@ -132,7 +128,7 @@ import { ViewDisputesComponent } from './systemAdministration/view-disputes/view
     FieldsetModule,
     VirtualScrollerModule
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
