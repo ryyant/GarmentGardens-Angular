@@ -15,7 +15,8 @@ export class MainMenuComponent implements OnInit {
   constructor(private router: Router, public sessionService: SessionService, private categoryService: CategoryService
     ) {}
 
-  menu: MenuItem[] = [];
+  menuCustomer: MenuItem[] = [];
+  menuSeller: MenuItem[] = [];
   restrictedMenu: MenuItem[] = [];
 
   ngOnInit() {
@@ -45,7 +46,7 @@ export class MainMenuComponent implements OnInit {
     })
 
       // MENU FOR LOGGED-IN USERS
-    this.menu = [
+    this.menuCustomer = [
         this.restrictedMenu[0],
         {
           label: 'Rewards',
@@ -77,12 +78,37 @@ export class MainMenuComponent implements OnInit {
           },
         ],
       },
+    ];
+
+      this.menuSeller  = [
+        this.restrictedMenu[0],
+        {
+          label: 'Rewards',
+          items: [
+            {
+              label: 'My Rewards',
+              routerLink: ['/systemAdministration/viewMyRewards'],
+            },
+            {
+              label: 'All Rewards',
+              routerLink: ['/systemAdministration/viewAllRewards'],
+            },
+          ],
+        },
       {
-        label: 'Seller',
+        label: 'Customer',
         items: [
           {
-            label: 'Manage Products',
-            routerLink: ['/systemAdministration/viewSellerProducts'],
+            label: 'Transactions',
+            routerLink: ['/systemAdministration/'],
+          },
+          {
+            label: 'Cart',
+            routerLink: ['/systemAdministration/'],
+          },
+          {
+            label: 'Disputes',
+            routerLink: ['/systemAdministration/viewDisputes'],
           },
         ],
       },
