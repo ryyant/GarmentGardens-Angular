@@ -1,36 +1,55 @@
 
 <app-breadcrumb [pageName]="'viewAllRewards'"></app-breadcrumb>
 
-<h3>All Rewards</h3>
-
-<p-virtualScroller [value]="rewards" scrollHeight="500px" [itemSize]="150">
-    <ng-template pTemplate="item" let-reward>
-        <div>
-            <div class="rewardName">Name: {{reward.rewardName}}</div>
-            <img class="img" src="assets/promoCode.png"/>
-            <div class="rewardDate"> Expiry Date: {{reward.expiryDate}}</div>
-            <p-button class="viewButton"
-            label="View"
-            (onClick)="showDialog(reward)">
-            </p-button>
-        </div>
-        
+<div class="allProducts">
+  <p-dataView 
+  #dv
+  [value]="rewards"
+  [paginator]="true"
+  [rows]="9"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  layout="grid"
+  >
+    <ng-template pTemplate="header">
+      <div class="dataHeader">
+        <p-dropdown
+        [options]="sortOptions"
+        [(ngModel)]="sortKey"
+        placeholder="Sort By"
+        (onChange)="onSortChange($event)"
+        [style]="{'min-width': '15em' }"
+        class="glow">
+        </p-dropdown>
+        <span>
+          <i class="pi pi-search"></i>
+          &nbsp;
+          <input
+            class="glow"
+            type="search"
+            pInputText
+            placeholder="Search by Name"
+          />
+          <!-- INCOMPLETE -->
+        </span>
+      </div>
+      <p-dataViewLayoutOptions
+      style="width: 100%; text-align: center">
+      </p-dataViewLayoutOptions>
     </ng-template>
 
-    <p-dialog
-    *ngIf="display"
-    header="View Reward Details"
-    [(visible)]="display"
-    [style]="{ width: '50vw' }"
-    [modal]="true"
-    [resizable]="false"
-  >
-    <div style="display: inline-block">
-      <span>
-        <h1 style="font-size: 40px">
-          {{ rewardToView.rewardName }}
-        </h1>
-      </span>
-    </div>
-  </p-dialog>
-</p-virtualScroller>
+    <ng-template let-reward pTemplate="listItem">
+      <div
+        class="product-list-item glow"
+        (click)="showDialog(reward)"
+        style="cursor: pointer"
+      >
+        <img class="img" src="../../../assets/promoCode.png"/>
+        <div class="product-list-detail">
+          <div class="product-name">{{reward.rewardName}}</div>
+          <div class="product-description">{{reward.expiryDate}}</div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

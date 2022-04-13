@@ -63,6 +63,7 @@ import { ViewSellerProductsComponent } from './systemAdministration/view-seller-
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
 import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
 import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-details/view-reward-details.component';
+import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-d
     ViewAllRewardsComponent,
     ViewProductByCategoryComponent,
     ViewRewardDetailsComponent,
+    ViewMyRewardsComponent,
   ],
   imports: [
     AppRoutingModule,

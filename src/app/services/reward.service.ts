@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { SessionService } from '../services/session.service';
 import { Reward } from '../models/reward';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,20 @@ export class RewardService {
 
   getRewards(): Observable<Reward[]> {
     return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveAllRewards/").pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
+  getAvailableRewards(): Observable<Reward[]> {
+    return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveAvailableRewards/").pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
+  getRewardByUserId(user: User): Observable<Reward[]> {
+    return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveRewardByUserId/" + user.userId).pipe
     (
       catchError(this.handleError)
     );

@@ -4,17 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import {RewardService } from '../../services/reward.service';
 import { Reward } from 'src/app/models/reward';
-
-import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-view-all-rewards',
-  templateUrl: './view-all-rewards.component.html',
-  styleUrls: ['./view-all-rewards.component.css']
+  selector: 'app-view-my-rewards',
+  templateUrl: './view-my-rewards.component.html',
+  styleUrls: ['./view-my-rewards.component.css']
 })
-export class ViewAllRewardsComponent implements OnInit {
-
+export class ViewMyRewardsComponent implements OnInit {
   rewards: Reward[];
   display: boolean;
   rewardToView: Reward;
@@ -33,19 +31,17 @@ export class ViewAllRewardsComponent implements OnInit {
       this.rewards = new Array();
       this.display = false;
       this.rewardToView = new Reward();
-    }
+     }
 
-
-  ngOnInit(): void
-  {
-    this.rewardService.getAvailableRewards().subscribe({
-      next:(response)=>{
+  ngOnInit(): void {
+    this.rewardService.getRewardByUserId(this.sessionService.getCurrentUser()).subscribe({
+      next:(response)=> {
         this.rewards = response;
       },
       error:(error)=> {
-        console.log('********** ViewAllRewardsComponent.ts: ' + error);
+        console.log("********** ViewMyRewardsComponent.ts " + error);
       }
-    });
+    })
   }
 
   showDialog(rewardToView: Reward)
@@ -54,20 +50,4 @@ export class ViewAllRewardsComponent implements OnInit {
     this.rewardToView = this.rewardToView;
   }
 
-  viewRewardDetails() {
-    this.router.navigate(["/systemAdministration/viewRewardDetails/" + this.rewardToView.rewardId])
-  }
-
-  onSortChange(event: { value: any; }) {
-  let value = event.value;
-
-  if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-  }
-  else {
-      this.sortOrder = 1;
-      this.sortField = value;
-  }
-}
 }
