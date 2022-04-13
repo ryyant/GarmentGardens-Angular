@@ -32,6 +32,13 @@ export class RewardService {
     );
   }
 
+  redeemReward(userId: number, rewardId: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + "/redeemReward/" + rewardId + "/" + userId).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
   getRewardByUserId(user: User): Observable<Reward[]> {
     return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveRewardByUserId/" + user.userId).pipe
     (

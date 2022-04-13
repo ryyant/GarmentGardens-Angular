@@ -1,7 +1,7 @@
 
 <app-breadcrumb [pageName]="'viewAllRewards'"></app-breadcrumb>
 
-<div class="allProducts">
+<div class="allrewards">
   <p-dataView 
   #dv
   [value]="rewards"
@@ -9,7 +9,6 @@
   [rows]="9"
   [sortField]="sortField"
   [sortOrder]="sortOrder"
-  layout="grid"
   >
     <ng-template pTemplate="header">
       <div class="dataHeader">
@@ -40,16 +39,85 @@
 
     <ng-template let-reward pTemplate="listItem">
       <div
-        class="product-list-item glow"
+        class="reward-list-item glow"
         (click)="showDialog(reward)"
         style="cursor: pointer"
       >
         <img class="img" src="../../../assets/promoCode.png"/>
-        <div class="product-list-detail">
-          <div class="product-name">{{reward.rewardName}}</div>
-          <div class="product-description">{{reward.expiryDate}}</div>
+        <div class="reward-list-detail">
+          <div class="reward-name">{{reward.rewardName}}</div>
+          <div class="reward-description"> Use By: {{reward.expiryDate}}</div>
+          <div class="reward-grid-item-bottom">
+            <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
+          </div>
+          <p-button
+          label="Redeem Reward"
+          
+        ></p-button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-reward pTemplate="gridItem">
+      <div
+        [ngClass]="{'reward-grid-item': true,
+                    'card': true,
+                    'glow': true}"
+        (click)="showDialog(reward)"
+        style="cursor: pointer"
+      >
+        <div class="reward-grid-item-top">
+          <div>
+
+            <span class="reward-category">{{ reward.rewardName }}</span>
+          </div>
+        </div>
+        <div class="reward-grid-item-content">
+          <img class="img" src="../../../assets/promoCode.png" />
+          <div class="reward-name">{{ reward.rewardName }}</div>
+          <div class="reward-description">Use By: {{ reward.expiryDate | date: 'EEE, MMM d, yy'}}</div>
+        </div>
+        <div class="reward-grid-item-bottom">
+          <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
+          <p-button
+            label="Redeem Reward"
+          ></p-button>
         </div>
       </div>
     </ng-template>
   </p-dataView>
+  <p-dialog
+    *ngIf="display"
+    header="View Reward Details"
+    [(visible)]="display"
+    [style]="{ width: '50vw' }"
+    [modal]="true"
+    [resizable]="false"
+  >
+    <div style="display: inline-block">
+      <span>
+        <h1 style="font-size: 40px">
+          {{ rewardToView.rewardName }}
+        </h1>
+      </span>
+
+      <table width="100%" [cellSpacing]="20">
+        <tr>
+          <td style="width: 30%">
+            <p>Reward ID: {{ rewardToView.rewardId }}</p>
+            <p>Reward Name: {{ rewardToView.rewardName }}</p>
+            <img
+              style="border-radius: 15px; margin: 20px"
+              src="../../../assets/promoCode.png"
+            />
+          </td>
+          <div style="text-align: left">
+            <h3>Description:</h3>
+            <p>{{ rewardToView.expiryDate }}</p>
+          </div>
+        </tr>
+      </table>
+
+    </div>
+  </p-dialog>
 </div>
