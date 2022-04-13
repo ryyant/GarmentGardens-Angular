@@ -81,6 +81,7 @@
           <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
           <p-button
             label="Redeem Reward"
+            (onClick)="redeemReward(reward)"
           ></p-button>
         </div>
       </div>
