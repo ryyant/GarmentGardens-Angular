@@ -1,6 +1,6 @@
 <header>
-  <p-menubar >
-    <ng-template pTemplate="start" >
+  <p-menubar>
+    <ng-template pTemplate="start">
       <a href="#" routerLink="/">
         <img src="assets/images/gg-brandlogo-glow.png" width="20%" height="20%" />
       </a>
@@ -24,10 +24,10 @@
           Login
         </button>
 
-        <a routerLink="/systemAdministration/createNewUser">        
+        <a routerLink="/systemAdministration/createNewUser">
           <button pButton type="button" class="p-button-rounded p-button-outlined" value="Register">
-          Register
-        </button></a>
+            Register
+          </button></a>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
         <!-- <span *ngIf="sessionService.getCurrentUser().role == 1">SELLER</span> -->
       </div>
 
-        <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>
+      <button pButton type="button" icon="pi pi-user" class="p-button-rounded" (click)="viewProfile()"></button>
 
 
       <br />
