@@ -47,7 +47,7 @@
         <img class="img" src="../../../assets/promoCode.png"/>
         <div class="reward-list-detail">
           <div class="reward-name">{{reward.rewardName}}</div>
-          <div class="reward-description"> Use By: {{reward.expiryDate}}</div>
+          <div class="reward-description"> Use By: {{parseDate(reward.expiryDate) | date}}</div>
           <div class="reward-grid-item-bottom">
             <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>
           </div>
@@ -72,7 +72,7 @@
         <div class="reward-grid-item-content">
           <img class="img" src="../../../assets/promoCode.png" />
           <div class="reward-name">{{ reward.rewardName }}</div>
-          <div class="reward-description">Use By: {{ reward.expiryDate }}</div>
+          <div class="reward-description">Use By: {{ parseDate(reward.expiryDate) | date }}</div>
         </div>
         <div class="reward-grid-item-bottom">
           <span class="reward-price" style="margin: 0 auto;">Discount value: ${{ reward.rewardName.substring(9,12) }}</span>

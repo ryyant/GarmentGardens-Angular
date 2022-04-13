@@ -59,6 +59,17 @@ export class ViewMyRewardsComponent implements OnInit {
     this.rewardToView = rewardToView;
   }
 
+  parseDate(d: Date | undefined)
+    {		
+      if(d != null)
+      {
+          return d.toString().replace('[UTC]', '');
+      }
+      else
+      {
+          return '';
+      }
+    }
   useReward(rewardToUse: Reward) {
     this.rewardToUse = rewardToUse;
     console.log(rewardToUse);

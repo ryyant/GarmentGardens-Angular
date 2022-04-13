@@ -77,6 +77,17 @@ export class ViewAllRewardsComponent implements OnInit {
     console.log(this.message)
     window.location.reload();
   }
+  parseDate(d: Date | undefined)
+    {		
+      if(d != null)
+      {
+          return d.toString().replace('[UTC]', '');
+      }
+      else
+      {
+          return '';
+      }
+    }
 
   
 

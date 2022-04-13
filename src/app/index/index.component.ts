@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageOfTheDay } from '../models/message-of-the-day';
+import { MotdService } from '../services/motd.service';
 
 import { SessionService } from '../services/session.service';
 
@@ -12,13 +14,14 @@ import { SessionService } from '../services/session.service';
 })
 export class IndexComponent implements OnInit
 {
-  
+  messageOfTheDays: MessageOfTheDay []
 
 
 
-  constructor(public sessionService: SessionService)
+  constructor(public sessionService: SessionService,
+            private motdService: MotdService)
   {
-    
+    this.messageOfTheDays = new Array();
   }
 
 
@@ -31,6 +34,15 @@ export class IndexComponent implements OnInit
       console.log('*********** HERE 2')
       
     }
+
+    this.motdService.getMotds().subscribe({
+      next:(response)=>{
+        this.messageOfTheDays=response;
+      },
+      error:(error)=> {
+        console.log('******** MessageOfTheDay index.ts' + error)
+      }
+    })
   }	
     
 
