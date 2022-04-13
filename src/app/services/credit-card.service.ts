@@ -28,8 +28,8 @@ export class CreditCardService {
     private sessionService: SessionService) {
   }
 
-  getCreditCards(userId: number): Observable<CreditCard[]> {
-    return this.httpClient.get<CreditCard[]>(this.baseUrl + "/retrieveAllCreditCards/" + userId + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+  getCreditCards(): Observable<CreditCard[]> {
+    return this.httpClient.get<CreditCard[]>(this.baseUrl + "/retrieveAllCreditCards/" + "?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
       (
         catchError(this.handleError)
       );
