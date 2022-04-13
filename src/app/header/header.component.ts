@@ -66,7 +66,9 @@ export class HeaderComponent implements OnInit
 				if(user != null)
 				{
 					this.sessionService.setIsLogin(true);
-					this.sessionService.setCurrentUser(user);					
+					this.sessionService.setCurrentUser(user);	
+          this.sessionService.setUsername(this.username);
+          this.sessionService.setPassword(this.password);		
 					this.loginError = false;
           console.log('Successful Login');
 
@@ -98,6 +100,8 @@ export class HeaderComponent implements OnInit
   {
     this.sessionService.setIsLogin(false);
     this.sessionService.setCurrentUser(null);
+    this.sessionService.setUsername("");
+    this.sessionService.setPassword("");
     this.sessionService.setMotds(new Array());
 
     this.router.navigate(["/index"]);

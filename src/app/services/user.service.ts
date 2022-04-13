@@ -40,6 +40,7 @@ export class UserService {
         password
       )
       .pipe(catchError(this.handleError));
+
   }
 
   createNewUser(newUser: User): Observable<number> {
