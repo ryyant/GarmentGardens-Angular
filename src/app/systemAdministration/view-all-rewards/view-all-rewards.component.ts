@@ -58,7 +58,7 @@ export class ViewAllRewardsComponent implements OnInit {
 
   redeemReward(rewardToRedeem: Reward) {
     this.rewardToRedeem = rewardToRedeem;
-    
+    console.log(rewardToRedeem);
     this.rewardService.redeemReward(this.sessionService.getCurrentUser().userId, rewardToRedeem.rewardId).subscribe({
       next:(response)=>{
         this.resultSuccess = true;
