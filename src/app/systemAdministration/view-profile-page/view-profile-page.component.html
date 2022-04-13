@@ -135,11 +135,17 @@
         <p-table [value]="creditCards" [rowHover]="true">
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="creditCardNumber">
-                        Credit Card Number<p-sortIcon field="creditCardNumber"></p-sortIcon>
+                    <th>
+                        Credit Card Number
                     </th>
-                    <th pSortableColumn="nameOnCard">
-                        Name On Card<p-sortIcon field="nameOnCard"></p-sortIcon>
+                    <th>
+                        Name On Card
+                    </th>
+                    <th>
+                        CVV
+                    </th>
+                    <th>
+                        Expiry Date
                     </th>
                     <th style="width: 5rem"></th>
                 </tr>
@@ -149,16 +155,24 @@
                     <td>
                         {{ creditCard.creditCardNumber }}
                     </td>
-                    <td>{{ creditCard.nameOnCard }}</td>
                     <td>
-                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"></button>
+                        {{ creditCard.holderName }}
+                    </td>
+                    <td>
+                        {{ creditCard.cvv }}
+                    </td>
+                    <td>
+                        {{ creditCard.expiryDate }}
+                    </td>
+                    <td>
+                        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are
-                    {{ creditCards ? creditCards.length : 0 }} credit cards.
+                    You have registered
+                    {{ creditCards ? creditCards.length : 0 }} credit cards in your wallet.
                 </div>
             </ng-template>
         </p-table>
