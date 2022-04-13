@@ -1,1 +1,125 @@
-<p>update-product works!</p>
+<app-breadcrumb [pageName]="'updateProduct'"></app-breadcrumb>
+			
+<h3>Update Product</h3>
+<br/>
+
+<span *ngIf="retrieveProductError == true" style="color:red;">Product ID {{productId}} does not exist!</span>
+
+<div *ngIf="resultSuccess == true" style="color:blue;">
+    {{message}}
+</div>
+
+<div *ngIf="resultError == true" style="color:red;">
+    {{message}}
+</div>
+
+<div *ngIf="retrieveProductError == false">
+    <a routerLink="/systemAdministration/viewSellerProducts">Back</a>
+</div>
+<br/>		
+    
+<form *ngIf="retrieveProductError == false && productToUpdate != null" #updateProductForm="ngForm" (ngSubmit)="update(updateProductForm)" >
+
+    <table width="100%">
+        <tr>
+            <td width="20%" style="font-weight: bold;">Product ID</td>
+            <td>{{productToUpdate.productId}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">SKU Code</td>
+            <td>{{productToUpdate.skuCode}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Name</td>
+            <td><input id="name" name="name" #name="ngModel" type="text" placeholder="Product 1" [(ngModel)]="productToUpdate.name" required="true" /></td>
+            <td>
+                <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
+                    <div *ngIf="name.errors?.['required']">
+                        Name is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Description</td>
+            <td><input id="description" name="description" #description="ngModel" type="text" placeholder="Product 1" [(ngModel)]="productToUpdate.description" required="true" /></td>
+            <td>
+                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
+                    <div *ngIf="description.errors?.['required']">
+                        Description is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Quantity On Hand</td>
+            <td><input id="quantityOnHand" name="quantityOnHand" #quantityOnHand="ngModel" type="text" placeholder="99" [(ngModel)]="productToUpdate.quantityOnHand" required="true" /></td>
+            <td>
+                <div *ngIf="quantityOnHand.invalid && (quantityOnHand.dirty || quantityOnHand.touched || submitted)" class="errorText">
+                    <div *ngIf="quantityOnHand.errors?.['required']">
+                        Quantity On Hand is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Unit Price</td>
+            <td><input id="unitPrice" name="unitPrice" #unitPrice="ngModel" type="text" placeholder="10.00" [(ngModel)]="productToUpdate.unitPrice" required="true" /></td>
+            <td>
+                <div *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched || submitted)" class="errorText">
+                    <div *ngIf="unitPrice.errors?.['required']">
+                        Unit Price is required.
+                    </div>
+                </div>
+            </td>
+        </tr>			
+        <tr>
+            <td width="20%" style="font-weight: bold;">Product Rating</td>
+            <td><input id="productRating" name="productRating" #productRating="ngModel" type="range" [(ngModel)]="productToUpdate.productRating" required="true" min="1" max="5" />&nbsp;<span style="vertical-align: top;">{{productToUpdate.productRating}}</span></td>
+            <td>
+                <div *ngIf="productRating.invalid && (productRating.dirty || productRating.touched || submitted)" class="errorText">
+                    <div *ngIf="productRating.errors?.['required']">
+                        Product Rating is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Category</td>
+            <td>
+                <select id="category" name="category" #category="ngModel" [(ngModel)]="categoryId" required="true">
+                    <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.name}}</option>
+                </select>
+                
+            </td>
+            <td>
+                <div *ngIf="category.invalid && (category.dirty || category.touched || submitted)" class="errorText">
+                    <div *ngIf="category.errors != null && category.errors['required']">
+                        Category is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold;">Tags</td>
+            <td>
+                <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
+                    <option *ngFor="let tag of tags" value="{{tag.tagId}}">{{tag.name}}</option>
+                </select>
+                
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">					
+                <input type="submit" value="Update" />
+            </td>
+        </tr>
+        
+    </table>
+    
+</form>
