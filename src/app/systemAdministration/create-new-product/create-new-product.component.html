@@ -30,8 +30,6 @@
         <tr>
             <td width="20%" style="font-weight: bold">Name</td>
             <td>
-                <!-- <input id="name" name="name" #name="ngModel" type="text" placeholder="Product 1"
-                    [(ngModel)]="newProduct.name" required="true" /> -->
                 <input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel"
                     [(ngModel)]="newProduct.name" required="true" />
             </td>
@@ -48,12 +46,23 @@
                     #description="ngModel" [(ngModel)]="newProduct.description" required="true" />
             </td>
             <td>
-                <div *ngIf="
-            description.invalid &&
-            (description.dirty || description.touched || submitted)
-          " class="errorText">
+                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
                     <div *ngIf="description.errors?.['required']">
                         Description is required.
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" style="font-weight: bold">Image Link</td>
+            <td>
+                <input pInputText placeholder="Image Link" id="imageLink" type="text" name="imageLink"
+                    #imageLink="ngModel" [(ngModel)]="newProduct.imageLink" required="true" />
+            </td>
+            <td>
+                <div *ngIf="imageLink.invalid && (imageLink.dirty || imageLink.touched || submitted)" class="errorText">
+                    <div *ngIf="imageLink.errors?.['required']">
+                        Image Link is required.
                     </div>
                 </div>
             </td>
