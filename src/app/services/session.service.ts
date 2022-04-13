@@ -101,7 +101,8 @@ export class SessionService {
         if (path == "/cashierOperation/checkout" ||
           path == "/cashierOperation/voidRefund" ||
           path == "/systemAdministration/viewProfilePage" ||
-          path == "/cashierOperation/viewMySaleTransactions") {
+          path == "/cashierOperation/viewMySaleTransactions" ||
+          path == "/systemAdministration/viewDisputes") {
           return true;
         }
         else {

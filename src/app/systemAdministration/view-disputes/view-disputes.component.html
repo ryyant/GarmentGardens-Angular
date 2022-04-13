@@ -1,0 +1,23 @@
+<app-breadcrumb [pageName]="'viewAllDisputes'"></app-breadcrumb>
+			
+<h3>View All Disputes</h3>
+<br/>
+
+<table id="tableProductCatalogue" style="width:100%; cellpadding: 3px; cellspacing: 1px;">
+    <thead>
+        <tr>				
+            <th>Dispute ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Dispute Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dispute of disputes">
+            <td>{{dispute.disputeId}}</td>
+            <td>{{dispute.title}}</td>				
+            <td>{{dispute.description}}</td>
+            <td>{{dispute.disputeStatus}}</td>
+        </tr>
+    </tbody>
+</table>

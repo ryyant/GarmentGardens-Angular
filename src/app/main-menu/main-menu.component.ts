@@ -73,7 +73,7 @@ export class MainMenuComponent implements OnInit {
           },
           {
             label: 'Disputes',
-            routerLink: ['/systemAdministration/'],
+            routerLink: ['/systemAdministration/viewDisputes'],
           },
         ],
       },
@@ -83,10 +83,6 @@ export class MainMenuComponent implements OnInit {
           {
             label: 'Manage Products',
             routerLink: ['/systemAdministration/viewSellerProducts'],
-          },
-          {
-            label: 'Disputes',
-            routerLink: ['/systemAdministration/'],
           },
         ],
       },
