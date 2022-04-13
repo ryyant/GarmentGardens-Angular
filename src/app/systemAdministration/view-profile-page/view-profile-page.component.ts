@@ -68,16 +68,13 @@ export class ViewProfilePageComponent implements OnInit {
     let updateString = dateString.slice(0, 10);
     this.currUser.dateOfBirth = new Date(updateString);
 
-    let currUserId = this.currUser.userId;
+    this.creditCardService.getCreditCards().subscribe({
+      next: (response) => {
+        this.creditCards = response;
+      }
+    })
+    console.log("reached...")
 
-    if (this.currUser.creditCards) {
-      console.log("User has credit cards registered")
-      console.log(typeof this.currUser.creditCards)
-      console.log("Length" + this.currUser.creditCards.length)
-
-      this.creditCards = this.currUser.creditCards;
-
-    }
   }
 
   updateProfile(updateProfileForm: NgForm) {

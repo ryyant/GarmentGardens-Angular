@@ -1,0 +1,36 @@
+
+<app-breadcrumb [pageName]="'viewAllRewards'"></app-breadcrumb>
+
+<h3>All Rewards</h3>
+
+<p-virtualScroller [value]="rewards" scrollHeight="500px" [itemSize]="150">
+    <ng-template pTemplate="item" let-reward>
+        <div>
+            <div class="rewardName">Name: {{reward.rewardName}}</div>
+            <img class="img" src="assets/promoCode.png"/>
+            <div class="rewardDate"> Expiry Date: {{reward.expiryDate}}</div>
+            <p-button class="viewButton"
+            label="View"
+            (onClick)="showDialog(reward)">
+            </p-button>
+        </div>
+        
+    </ng-template>
+
+    <p-dialog
+    *ngIf="display"
+    header="View Reward Details"
+    [(visible)]="display"
+    [style]="{ width: '50vw' }"
+    [modal]="true"
+    [resizable]="false"
+  >
+    <div style="display: inline-block">
+      <span>
+        <h1 style="font-size: 40px">
+          {{ rewardToView.rewardName }}
+        </h1>
+      </span>
+    </div>
+  </p-dialog>
+</p-virtualScroller>
