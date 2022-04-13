@@ -22,15 +22,29 @@ const httpOptions = {
 export class ProductService {
   baseUrl: string = '/api/Product';
 
+  username: string | undefined;
+  password: string | undefined;
+
   constructor(
     private httpClient: HttpClient,
     private sessionService: SessionService
-  ) {}
+  ) {
+    this.username = this.sessionService.getUsername();
+    this.password = this.sessionService.getPassword();
+  }
 
   getProducts(): Observable<Product[]> {
     return this.httpClient
       .get<Product[]>(this.baseUrl + '/retrieveAllProducts')
       .pipe(catchError(this.handleError));
+  }
+
+
+  getSellerProducts(): Observable<Product[]> {
+    
+    return this.httpClient
+      .get<Product[]>(this.baseUrl + '/retrieveAllSellerProducts?username=' + this.username + '&password=' +
+      this.password).pipe(catchError(this.handleError));
   }
 
   getFilteredProducts(categoryId: number): Observable<Product[]> {

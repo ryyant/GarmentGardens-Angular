@@ -25,7 +25,7 @@ export class ViewSellerProductsComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.productService.getProducts().subscribe({
+    this.productService.getSellerProducts().subscribe({
       next: (response) => {
         for (let i = 0; i < response.length; i++) {
           console.log(response[i].name)
@@ -33,7 +33,7 @@ export class ViewSellerProductsComponent implements OnInit {
         this.products = response;
       },
       error: (error) => {
-        console.log('********** ViewAllProductsComponent.ts: ' + error);
+        console.log('********** ViewAllSellerProductsComponent.ts: ' + error);
       }
     });
 
