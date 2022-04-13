@@ -41,6 +41,8 @@ export class ViewDisputesComponent implements OnInit {
 
   checkAccessRight()
 	{
+    console.log(this.checkAccessRight);
+    
 		if(!this.sessionService.checkAccessRight(this.router.url))
 		{
 			this.router.navigate(["/accessRightError"]);
