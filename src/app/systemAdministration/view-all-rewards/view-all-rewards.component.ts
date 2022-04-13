@@ -54,6 +54,7 @@ export class ViewAllRewardsComponent implements OnInit {
         console.log('********** ViewAllRewardsComponent.ts: ' + error);
       }
     });
+    console.log(this.rewards);
   }
 
   redeemReward(rewardToRedeem: Reward) {
