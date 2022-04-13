@@ -27,7 +27,10 @@ export class ViewProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    console.log("Hello")
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
+    console.log("Product Id " + this.productId);
 
     if (this.productId != null) {
       this.productService
@@ -35,6 +38,7 @@ export class ViewProductDetailsComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.productToView = response;
+            console.log(this.productToView)
           },
           error: (error) => {
             this.retrieveProductError = true;
@@ -44,9 +48,5 @@ export class ViewProductDetailsComponent implements OnInit {
     }
   }
 
-  checkAccessRight() {
-    if (!this.sessionService.checkAccessRight(this.router.url)) {
-      this.router.navigate(['/accessRightError']);
-    }
-  }
+  
 }
