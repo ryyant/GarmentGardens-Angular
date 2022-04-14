@@ -18,7 +18,6 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
   providers: [MessageService],
 })
 export class ViewProfilePageComponent implements OnInit {
-  submitted: boolean;
   currUser: User;
 
   resultSuccess: boolean;
@@ -30,6 +29,13 @@ export class ViewProfilePageComponent implements OnInit {
   CCmessage: string | undefined;
   creditCards: CreditCard[];
 
+  newCC: CreditCard;
+  submitted: boolean;
+  ccMessage: string | undefined;
+
+  deleteCCSuccess: boolean;
+  deleteCCError: boolean;
+  deleteCCmessage: string | undefined;
 
   yearRange: string = '1921:' + new Date().getFullYear();
   maxDate: Date = new Date();
@@ -60,6 +66,11 @@ export class ViewProfilePageComponent implements OnInit {
     this.resultCCSuccess = false;
     this.resultCCError = false;
     this.creditCards = new Array();
+    this.newCC = new CreditCard();
+    this.submitted = false;
+
+    this.deleteCCSuccess = false;
+    this.deleteCCError = false;
   }
 
   ngOnInit(): void {
@@ -71,10 +82,9 @@ export class ViewProfilePageComponent implements OnInit {
     this.creditCardService.getCreditCards().subscribe({
       next: (response) => {
         this.creditCards = response;
-      }
-    })
-    console.log("reached...")
-
+      },
+    });
+    console.log('reached...');
   }
 
   updateProfile(updateProfileForm: NgForm) {
@@ -86,7 +96,7 @@ export class ViewProfilePageComponent implements OnInit {
           this.sessionService.setCurrentUser(this.currUser);
           this.resultError = false;
           this.resultSuccess = true;
-          this.message = 'You have updated your profile successfully'
+          this.message = 'You have updated your profile successfully';
         },
         error: (error) => {
           this.resultError = true;
@@ -99,9 +109,77 @@ export class ViewProfilePageComponent implements OnInit {
     }
   }
 
+  create(createCCForm: NgForm) {
+    this.submitted = true;
+
+    console.log('Creating...');
+
+    if (createCCForm.valid) {
+      this.creditCardService.createNewCreditCard(this.newCC).subscribe({
+        next: (response) => {
+          console.log(response);
+          let newCreditCardId: number = response;
+          this.resultCCSuccess = true;
+          this.resultCCError = false;
+          this.ccMessage =
+            'New credit card ' + newCreditCardId + ' created successfully';
+
+          this.newCC = new CreditCard();
+          createCCForm.resetForm();
+          createCCForm.reset();
+        },
+        error: (error) => {
+          this.resultCCError = true;
+          this.resultCCSuccess = false;
+          this.message =
+            'An error has occurred while creating the new credit card: ' +
+            error;
+
+          console.log('********** ViewProfileComponent.ts: ' + error);
+        },
+      });
+    } else {
+      console.log('fail');
+    }
+  }
+
+  deleteCreditCard(creditCard: CreditCard) {
+    let creditCardId = Number(creditCard.creditCardId);
+    let userId = Number(this.currUser.userId);
+    console.log(
+      'Deleting Credit Card ' +
+        creditCard.creditCardId +
+        ' For UserId ' +
+        userId
+    );
+    console.log('type of userId: ' + typeof userId + ' ' + userId);
+    console.log('type of ccId: ' + typeof creditCardId + ' ' + creditCardId);
+    this.creditCardService.deleteCreditCard(userId, creditCardId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.deleteCCSuccess = true;
+        this.deleteCCError = false;
+        this.deleteCCmessage =
+          'Credit card ' + creditCardId + ' deleted successfully';
+      },
+      error: (error) => {
+        this.deleteCCSuccess = false;
+        this.deleteCCError = true;
+        this.deleteCCmessage =
+          'An error has occured when deleting credit card: ' + error;
+        console.log('********** ViewProfileComponent.ts- delete CC: ' + error);
+      },
+    });
+  }
+
   checkLogin() {
     if (!this.sessionService.getIsLogin()) {
       this.router.navigate(['/accessRightError']);
     }
+  }
+
+  clear() {
+    this.submitted = false;
+    this.newCC = new CreditCard();
   }
 }

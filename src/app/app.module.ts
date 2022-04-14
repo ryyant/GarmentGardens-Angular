@@ -35,7 +35,8 @@ import { DialogModule } from 'primeng/dialog';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CarouselModule } from 'primeng/carousel';
-import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { AccordionModule } from 'primeng/accordion';
 
 
 
@@ -126,9 +127,10 @@ import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-d
     TooltipModule,
     DialogModule,
     FieldsetModule,
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    AccordionModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -125,13 +125,7 @@
 
     <hr style="opacity: 0.1" />
 
-    <form #updateCCForm="ngForm" class="updateProfileForm">
-        <!-- <div *ngIf="resultError == true" class="boxErrorMessage">
-            {{message}}
-        </div>
-        <div *ngIf="resultSuccess == true" class="boxSuccessMessage">
-            {{message}}
-        </div> -->
+    <form>
         <p-table [value]="creditCards" [rowHover]="true">
             <ng-template pTemplate="header">
                 <tr>
@@ -165,7 +159,8 @@
                         {{ creditCard.expiryDate }}
                     </td>
                     <td>
-                        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+                        <button pButton Ripple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                            (click)="deleteCreditCard(creditCard)"></button>
                     </td>
                 </tr>
             </ng-template>
@@ -176,8 +171,98 @@
                 </div>
             </ng-template>
         </p-table>
-        <br />
-        <br />
+        <!-- <button pButton type="button" icon="pi pi-plus" label="Add New Credit Card" type="submit"
+            class="p-button-outlined"></button> -->
+    </form>
+    <form #createCCForm="ngForm" (ngSubmit)="create(createCCForm)" class="createCCForm">
+        <p-accordion>
+            <p-accordionTab header="Add New Credit Card">
+                <div *ngIf="resultCCSuccess == true" class="boxSuccessMessage">
+                    {{ccMessage}}
+                </div>
+
+                <div *ngIf="resultCCError == true" class="boxErrorMessage">
+                    {{ccMessage}}
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">Credit Card Holder Name</td>
+                        <td width="100%">
+                            <input #holderName="ngModel" id="holderName" name="holderName" type="text"
+                                [(ngModel)]="newCC.holderName" required pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="holderName.invalid && (holderName.dirty || holderName.touched )"
+                                class="errorText">
+                                <div *ngIf="holderName.errors?.['required']" class="errorMessage">
+                                    Name is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">Credit Card Number</td>
+                        <td width="100%">
+                            <input #creditCardNumber="ngModel" id="creditCardNumber" name="creditCardNumber" type="text"
+                                [(ngModel)]="newCC.creditCardNumber" required pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched )"
+                                class="errorText">
+                                <div *ngIf="creditCardNumber.errors?.['required']" class="errorMessage">
+                                    Credit Card Number is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">CVV</td>
+                        <td width="100%">
+                            <input #cvv="ngModel" id="cvv" name="cvv" type="text" [(ngModel)]="newCC.cvv" required
+                                pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched )" class="errorText">
+                                <div *ngIf="cvv.errors?.['required']" class="errorMessage">
+                                    CVV is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">Expiry Date</td>
+                        <td width="100%">
+                            <p-calendar #expiryDate="ngModel" id="expiryDate" name="expiryDate"
+                                [(ngModel)]="newCC.expiryDate" [required]="true" [yearNavigator]="true"
+                                [monthNavigator]="true" [minDate]="maxDate" [yearRange]="yearRange"></p-calendar>
+                        </td>
+                        <td>
+                            <div *ngIf="expiryDate.invalid && (expiryDate.dirty || expiryDate.touched)"
+                                class="errorText">
+                                <div *ngIf="expiryDate.errors != null && expiryDate.errors['required']"
+                                    class="errorMessage">
+                                    Expiry Date is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <button pButton (click)="clear()" type="reset" value="Clear"
+                                class="p-button-rounded p-button-text">
+                                Clear
+                            </button>
+                            &nbsp;
+
+                            <button pButton type="submit" class="p-button-rounded p-button-outlined" value="Create">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </p-accordionTab>
+        </p-accordion>
+
 
     </form>
 
