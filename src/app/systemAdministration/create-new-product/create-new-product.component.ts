@@ -101,8 +101,6 @@ export class CreateNewProductComponent implements OnInit {
 
     this.submitted = true;
 
-    console.log('Hiiiiiiiiiiiiiiiiiiiiiii');
-
     if (createProductForm.valid) {
       this.productService.createNewProduct(this.newProduct, this.categoryId, longTagIds).subscribe({
         next: (response) => {

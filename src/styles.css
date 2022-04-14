@@ -127,3 +127,16 @@ a:hover {
 .glow {
     box-shadow: 0 2px 4px 2px #C5E1A5;
 }
+
+img {
+    border-radius: 15px;
+}
+
+.garmentCard {
+    box-shadow: 0 2px 4px 2px #C5E1A5;
+    border-radius: 5px;
+    background-color: #252525;
+    padding: 15px;
+    width: 95%;
+    text-align: center;
+  }

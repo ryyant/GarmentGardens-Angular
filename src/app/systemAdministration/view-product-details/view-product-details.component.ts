@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-view-product-details',
@@ -12,10 +13,15 @@ import { Product } from '../../models/product';
 })
 export class ViewProductDetailsComponent implements OnInit {
   productId: string | null;
-  productToView: Product | null;
+  productToView: Product;
   retrieveProductError: boolean;
+  error: boolean;
+  showMessage: boolean;
+  errorMessage: string | undefined;
+  productDeleted: boolean;
 
   constructor(
+    private confirmationService: ConfirmationService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
@@ -24,21 +30,20 @@ export class ViewProductDetailsComponent implements OnInit {
     this.productId = null;
     this.productToView = new Product();
     this.retrieveProductError = false;
+    this.error = false;
+    this.showMessage = false;
+    this.productDeleted = false;
   }
 
   ngOnInit(): void {
-
-    console.log("Hello")
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
-    console.log("Product Id " + this.productId);
-
     if (this.productId != null) {
       this.productService
         .getProductByProductId(parseInt(this.productId))
         .subscribe({
           next: (response) => {
             this.productToView = response;
-            console.log(this.productToView)
+            console.log(this.productToView);
           },
           error: (error) => {
             this.retrieveProductError = true;
@@ -48,5 +53,30 @@ export class ViewProductDetailsComponent implements OnInit {
     }
   }
 
-  
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        //Actual logic to perform a confirmation
+        this.deleteProduct();
+      },
+    });
+  }
+
+  deleteProduct() {
+    if (this.productId != null) {
+      this.productService.deleteProduct(parseInt(this.productId)).subscribe({
+        next: (response) => {
+          this.showMessage = true;
+          this.errorMessage = 'Successfully deleted!';
+          this.productDeleted = true;
+        },
+        error: (error) => {
+          this.error = true;
+          this.showMessage = true;
+          this.errorMessage = error;
+        },
+      });
+    }
+  }
 }

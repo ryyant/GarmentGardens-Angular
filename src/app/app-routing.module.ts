@@ -9,12 +9,13 @@ import { CreateNewProductComponent } from './systemAdministration/create-new-pro
 import { ViewAllProductsComponent } from './systemAdministration/view-all-products/view-all-products.component';
 import { ViewProductDetailsComponent } from './systemAdministration/view-product-details/view-product-details.component';
 import { UpdateProductComponent } from './systemAdministration/update-product/update-product.component';
-import { DeleteProductComponent } from './systemAdministration/delete-product/delete-product.component';
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
+import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
+import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -28,15 +29,15 @@ const routes: Routes = [
   { path: 'systemAdministration/viewProductDetails/:productId', component: ViewProductDetailsComponent },
   { path: 'systemAdministration/updateProduct', component: UpdateProductComponent },
   { path: 'systemAdministration/updateProduct/:productId', component: UpdateProductComponent },
-  { path: 'systemAdministration/deleteProduct', component: DeleteProductComponent },
-  { path: 'systemAdministration/deleteProduct/:productId', component: DeleteProductComponent },
   { path: 'systemAdministration/viewAllProductsPf', component: ViewAllProductsComponent },
   { path: 'systemAdministration/createNewUser', component: CreateNewUserComponent},
   { path: 'systemAdministration/viewProfilePage', component: ViewProfilePageComponent},
   { path: 'systemAdministration/viewSellerProducts', component: ViewSellerProductsComponent},
   { path: 'systemAdministration/viewProductByCategory', component: ViewProductByCategoryComponent},
   { path: 'systemAdministration/viewProductByCategory/:categoryId', component: ViewProductByCategoryComponent},
-  { path: 'systemAdministration/viewAllRewards', component: ViewAllRewardsComponent}
+  { path: 'systemAdministration/viewAllRewards', component: ViewAllRewardsComponent},
+  { path: 'systemAdministration/viewMyRewards', component: ViewMyRewardsComponent},
+  { path: 'systemAdministration/viewDisputes', component: ViewDisputesComponent}
 ];
 
 @NgModule({

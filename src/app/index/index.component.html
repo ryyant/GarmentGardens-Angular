@@ -36,6 +36,15 @@
 </article>
 
 <article *ngIf="sessionService.getIsLogin() == true" style="width: 95%;">
+  <h1>Message Of The Day</h1>
+
+  <p-tabView>
+    <p-tabPanel *ngFor="let motd of messageOfTheDays" header="{{motd.title}}, {{parseDate(motd.messageDate) | date}}">
+      <h3>{{motd.message}}</h3>
+    </p-tabPanel>
+    
+  </p-tabView>
+  <br/>
   <p-fieldset legend="Welcome">
     What Do You Feel Like Getting Today? 
   </p-fieldset>

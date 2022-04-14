@@ -15,11 +15,17 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ViewAllRewardsComponent implements OnInit {
 
+
   rewards: Reward[];
   display: boolean;
   rewardToView: Reward;
-
+  rewardToRedeem: Reward;
   sortOptions: SelectItem[] = [];
+
+  resultSuccess: boolean;
+	resultError: boolean;
+	message: string | undefined;
+
 
   sortOrder: number = 0;
   sortKey: string = "";
@@ -33,12 +39,15 @@ export class ViewAllRewardsComponent implements OnInit {
       this.rewards = new Array();
       this.display = false;
       this.rewardToView = new Reward();
+      this.rewardToRedeem = new Reward();
+      this.resultSuccess = false;
+      this.resultError = false;
     }
 
 
   ngOnInit(): void
   {
-    this.rewardService.getRewards().subscribe({
+    this.rewardService.getAvailableRewards().subscribe({
       next:(response)=>{
         this.rewards = response;
       },
@@ -46,12 +55,47 @@ export class ViewAllRewardsComponent implements OnInit {
         console.log('********** ViewAllRewardsComponent.ts: ' + error);
       }
     });
+    console.log(this.rewards);
   }
+
+  redeemReward(rewardToRedeem: Reward) {
+    this.rewardToRedeem = rewardToRedeem;
+    console.log(rewardToRedeem);
+    this.rewardService.redeemReward(this.sessionService.getCurrentUser().userId, rewardToRedeem.rewardId).subscribe({
+      next:(response)=>{
+        this.resultSuccess = true;
+        this.resultError = false;
+        this.message = "Reward redeemed successfully";
+      },
+      error:(error)=>{
+        this.resultError = true;
+        this.resultSuccess = false;
+        this.message = "An error has occurred while redeeming the reward: " + error;
+        
+        console.log('********** UpdateProductComponent.ts: ' + error);
+      }
+    })
+    console.log(this.message)
+    window.location.reload();
+  }
+  parseDate(d: Date | undefined)
+    {		
+      if(d != null)
+      {
+          return d.toString().replace('[UTC]', '');
+      }
+      else
+      {
+          return '';
+      }
+    }
+
+  
 
   showDialog(rewardToView: Reward)
   {
     this.display = true;
-    this.rewardToView = this.rewardToView;
+    this.rewardToView = rewardToView;
   }
 
   viewRewardDetails() {

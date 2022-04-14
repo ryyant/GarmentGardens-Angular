@@ -36,7 +36,6 @@
         </span>
       </div>
       <p-dataViewLayoutOptions
-        style="width: 100%; text-align: center"
       ></p-dataViewLayoutOptions>
     </ng-template>
 
@@ -106,19 +105,19 @@
   </p-dataView>
 
   <p-dialog
-    *ngIf="display"
-    header="View Product Details"
-    [(visible)]="display"
-    [style]="{ width: '50vw' }"
-    [modal]="true"
-    [resizable]="false"
-  >
-    <div style="display: inline-block">
-      <span>
-        <h1 style="font-size: 40px">
-          {{ productToView.name }}
-        </h1>
-      </span>
+  header="View Product Details"
+  [(visible)]="display"
+  [style]="{ width: '50vw', height: '50vw' }"
+  [modal]="true"
+  [resizable]="false"
+  style="min-width: 40%;"
+>
+  <div style="display: inline-block;">
+    <span>
+      <h1 style="font-size: 40px">
+        {{ productToView.name }}
+      </h1>
+    </span>
 
       <table width="100%" [cellSpacing]="20">
         <tr>
@@ -155,7 +154,7 @@
             (onClick)="viewProductDetails()"
           >
           </p-button></td>
-          <td><h3>Quantity: </h3></td>
+          <td><h3>Quantity:</h3></td>
           <td>
             <input
               pInputText

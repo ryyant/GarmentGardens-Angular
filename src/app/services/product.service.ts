@@ -42,7 +42,7 @@ export class ProductService {
   getSellerProducts(user: User): Observable<Product[]> {
     
     return this.httpClient
-      .get<Product[]>(this.baseUrl + '/retrieveAllSellerProducts?username=' + user.username).pipe(catchError(this.handleError));
+      .get<Product[]>(this.baseUrl + '/retrieveAllSellerProducts/' + user.userId).pipe(catchError(this.handleError));
   }
 
   getFilteredProducts(categoryId: number): Observable<Product[]> {
