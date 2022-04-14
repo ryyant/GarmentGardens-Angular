@@ -37,8 +37,8 @@
             type="search"
             pInputText
             placeholder="Search by Name"
+            (input)="dv.filter($any($event.target).value, 'contains')"
           />
-          <!-- INCOMPLETE -->
         </span>
       </div>
       <p-dataViewLayoutOptions

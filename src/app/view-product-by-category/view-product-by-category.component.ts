@@ -58,10 +58,10 @@ export class ViewProductByCategoryComponent implements OnInit {
       }
    })
 
-    this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' }
-    ];
+   this.sortOptions = [
+    { label: 'Price High to Low', value: '!unitPrice' },
+    { label: 'Price Low to High', value: 'unitPrice' }
+  ];
 
     this.primengConfig.ripple = true;
   }

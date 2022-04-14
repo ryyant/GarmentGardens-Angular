@@ -25,12 +25,12 @@
           <i class="pi pi-search"></i>
           &nbsp;
           <input
-            class="glow"
-            type="search"
-            pInputText
-            placeholder="Search by Name"
-          />
-          <!-- INCOMPLETE -->
+          class="glow"
+          type="search"
+          pInputText
+          placeholder="Search by Name"
+          (input)="dv.filter($any($event.target).value, 'contains')"
+        />
         </span>
       </div>
       <p-dataViewLayoutOptions

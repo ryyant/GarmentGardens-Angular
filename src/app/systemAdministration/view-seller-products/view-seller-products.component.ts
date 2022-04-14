@@ -46,8 +46,8 @@ export class ViewSellerProductsComponent implements OnInit {
     this.renderProducts();
 
     this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' },
+      { label: 'Price High to Low', value: '!unitPrice' },
+      { label: 'Price Low to High', value: 'unitPrice' }
     ];
 
     this.primengConfig.ripple = true;

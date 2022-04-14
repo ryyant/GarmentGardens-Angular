@@ -50,8 +50,8 @@ export class ViewAllProductsComponent implements OnInit
     });
 
     this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' }
+      { label: 'Price High to Low', value: '!unitPrice' },
+      { label: 'Price Low to High', value: 'unitPrice' }
     ];
 
     this.primengConfig.ripple = true;
@@ -70,12 +70,14 @@ export class ViewAllProductsComponent implements OnInit
 
   addToCart()
 	{
-    // CALL SERVICE HERE, TAKE IN qtyToAdd
+    // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
   }
 
   onSortChange(event: { value: any; }) {
     let value = event.value;
 
+    console.log("Sorting");
+    console.log(value);
     if (value.indexOf('!') === 0) {
         this.sortOrder = -1;
         this.sortField = value.substring(1, value.length);
