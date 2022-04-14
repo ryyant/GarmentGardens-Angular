@@ -5,27 +5,19 @@ import { User } from '../models/user';
 import { MessageOfTheDay } from '../models/message-of-the-day';
 import { CreditCard } from '../models/credit-card';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
-  constructor() {
-  }
-
-
+  constructor() {}
 
   getIsLogin(): boolean {
-    if (sessionStorage['isLogin'] == "true") {
+    if (sessionStorage['isLogin'] == 'true') {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
-
-
 
   setIsLogin(isLogin: boolean): void {
     sessionStorage['isLogin'] = isLogin;
@@ -35,42 +27,37 @@ export class SessionService {
     return JSON.parse(sessionStorage['motds']);
   }
 
-
-
   setMotds(motds: MessageOfTheDay[]): void {
     sessionStorage['motds'] = JSON.stringify(motds);
   }
-
 
   getCurrentUser(): User {
     return JSON.parse(sessionStorage['currentUser']);
   }
 
-
-
   setCurrentUser(currentUser: User | null): void {
     sessionStorage['currentUser'] = JSON.stringify(currentUser);
   }
 
+  getUserId(): number {
+    return sessionStorage['userId'];
+  }
 
+  setUserId(): number {
+    return sessionStorage['userId'];
+  }
 
   getUsername(): string {
     return sessionStorage['username'];
   }
 
-
-
   setUsername(username: string | undefined): void {
     sessionStorage['username'] = username;
   }
 
-
-
   getPassword(): string {
     return sessionStorage['password'];
   }
-
-
 
   setPassword(password: string | undefined): void {
     sessionStorage['password'] = password;
@@ -90,22 +77,22 @@ export class SessionService {
     sessionStorage.setItem('creditCard', JSON.stringify(creditCard));
   }
 
-
   checkAccessRight(path: string): boolean {
-    console.log("********** path: " + path);
+    console.log('********** path: ' + path);
 
     if (this.getIsLogin()) {
       let user: User = this.getCurrentUser();
 
       if (user.role == RoleEnum.CUSTOMER) {
-        if (path == "/cashierOperation/checkout" ||
-          path == "/cashierOperation/voidRefund" ||
-          path == "/systemAdministration/viewProfilePage" ||
-          path == "/cashierOperation/viewMySaleTransactions" ||
-          path == "/systemAdministration/viewDisputes") {
+        if (
+          path == '/cashierOperation/checkout' ||
+          path == '/cashierOperation/voidRefund' ||
+          path == '/systemAdministration/viewProfilePage' ||
+          path == '/cashierOperation/viewMySaleTransactions' ||
+          path == '/systemAdministration/viewDisputes'
+        ) {
           return true;
-        }
-        else {
+        } else {
           return false;
         }
       }
@@ -117,15 +104,13 @@ export class SessionService {
           path.startsWith("/systemAdministration/deleteProduct") ||
           path == "/systemAdministration/viewDisputes") {
           return true;
-        }
-        else {
+        } else {
           return false;
         }
       }
 
       return false;
-    }
-    else {
+    } else {
       return false;
     }
   }

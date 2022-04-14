@@ -39,10 +39,10 @@ export class CreateNewUserComponent implements OnInit {
     this.stateOptions = [
       { label: 'Customer', value: 'CUSTOMER' },
       { label: 'Seller', value: 'SELLER' },
-    ];  
+    ];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   create(createUserForm: NgForm) {
     this.submitted = true;
@@ -54,10 +54,10 @@ export class CreateNewUserComponent implements OnInit {
       this.userService.createNewUser(this.newUser).subscribe({
         next: (response) => {
           console.log(response);
-          let newProductId: number = response;
+          let newUserId: number = response;
           this.resultSuccess = true;
           this.resultError = false;
-          this.message = 'New user ' + newProductId + ' created successfully';
+          this.message = 'New user ' + newUserId + ' created successfully';
 
           this.newUser = new User();
           createUserForm.resetForm();

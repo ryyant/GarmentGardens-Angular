@@ -35,8 +35,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CarouselModule } from 'primeng/carousel';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {VirtualScrollerModule} from 'primeng/virtualscroller';
-import {AccordionModule} from 'primeng/accordion';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { AccordionModule } from 'primeng/accordion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -128,7 +128,7 @@ import { ConfirmationService } from 'primeng/api';
     DialogModule,
     FieldsetModule,
     VirtualScrollerModule,
-    AccordionModule
+    AccordionModule,
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent],
