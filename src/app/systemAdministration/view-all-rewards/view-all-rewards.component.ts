@@ -15,6 +15,7 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ViewAllRewardsComponent implements OnInit {
 
+
   rewards: Reward[];
   display: boolean;
   rewardToView: Reward;
