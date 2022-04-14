@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 import { Product } from '../../models/product';
 
 import { SelectItem } from 'primeng/api';
@@ -31,6 +32,7 @@ export class ViewAllProductsComponent implements OnInit
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
     private productService: ProductService,
+    private cartService: CartService,
     private primengConfig: PrimeNGConfig)
   {
     this.products = new Array();
@@ -70,7 +72,18 @@ export class ViewAllProductsComponent implements OnInit
 
   addToCart()
 	{
+    if (this.qtyToAdd == 0) {
+      console.log("Requires qty input!");
+    }
+
     // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
+    this.cartService.addToCart(this.productToView, this.qtyToAdd).subscribe({
+      next:(response)=>{
+      },
+      error:(error)=>{
+        console.log('********** Add to cart: ' + error);
+      }
+    });
   }
 
   onSortChange(event: { value: any; }) {
