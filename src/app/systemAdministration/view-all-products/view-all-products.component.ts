@@ -77,16 +77,17 @@ export class ViewAllProductsComponent implements OnInit
     if (this.qtyToAdd == 0 || this.qtyToAdd > this.productToView.quantityOnHand ) {
       console.log("Invalid quantity input!");
       this.invalidQty = true;
+    } else {
+      this.invalidQty = false;
+      // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
+      this.cartService.addToCart(this.productToView, this.qtyToAdd).subscribe({
+        next: (response) => {
+        },
+        error: (error) => {
+          console.log('********** Add to cart: ' + error);
+        }
+      });
     }
-
-    // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
-    this.cartService.addToCart(this.productToView, this.qtyToAdd).subscribe({
-      next:(response)=>{
-      },
-      error:(error)=>{
-        console.log('********** Add to cart: ' + error);
-      }
-    });
   }
 
   onSortChange(event: { value: any; }) {
