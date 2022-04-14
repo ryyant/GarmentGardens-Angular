@@ -114,7 +114,8 @@ export class SessionService {
           path == "/systemAdministration/viewSellerProducts" ||
           path == "/systemAdministration/createNewProduct" ||
           path.startsWith("/systemAdministration/updateProduct") ||
-          path.startsWith("/systemAdministration/deleteProduct")) {
+          path.startsWith("/systemAdministration/deleteProduct") ||
+          path == "/systemAdministration/viewDisputes") {
           return true;
         }
         else {
