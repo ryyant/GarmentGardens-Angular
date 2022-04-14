@@ -172,8 +172,14 @@
               icon="pi pi-shopping-cart"
               label="Add To Cart"
               (onClick)="addToCart()"
+
             >
             </p-button>
+          </td>
+          <td>
+            <div *ngIf="invalidQty == true" style="text-align: center;" class="boxErrorMessage">
+              Invalid Quantiy Added to Cart
+            </div>
           </td>
         </tr>
       </table>

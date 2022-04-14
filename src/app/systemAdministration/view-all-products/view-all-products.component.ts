@@ -19,6 +19,7 @@ export class ViewAllProductsComponent implements OnInit
   products: Product[];
 	display: boolean;
 	productToView: Product;
+  invalidQty: boolean;
   
   sortOptions: SelectItem[] = [];
 
@@ -38,6 +39,7 @@ export class ViewAllProductsComponent implements OnInit
     this.products = new Array();
     this.display = false;
 		this.productToView = new Product();
+    this.invalidQty = false;
   }
 
   ngOnInit(): void
@@ -72,8 +74,9 @@ export class ViewAllProductsComponent implements OnInit
 
   addToCart()
 	{
-    if (this.qtyToAdd == 0) {
-      console.log("Requires qty input!");
+    if (this.qtyToAdd == 0 || this.qtyToAdd > this.productToView.quantityOnHand ) {
+      console.log("Invalid quantity input!");
+      this.invalidQty = true;
     }
 
     // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
