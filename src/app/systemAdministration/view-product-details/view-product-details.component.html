@@ -9,16 +9,18 @@
   <h2>View Product Details</h2>
 </div>
 
-<span *ngIf="retrieveProductError == true" style="color: red"
-  >Product ID {{ productId }} does not exist!</span
->
+<div>
+  <h1 *ngIf="retrieveProductError == true" style="color: red">
+    Product ID {{ productId }} does not exist!
+  </h1>
+</div>
 
-<div *ngIf="showMessage && error == false" class="boxSuccessMessage" >
-    {{errorMessage}}
+<div *ngIf="showMessage && error == false" class="boxSuccessMessage">
+  {{ errorMessage }}
 </div>
 
 <div *ngIf="showMessage && error == true" class="boxErrorMessage">
-    {{errorMessage}}
+  {{ errorMessage }}
 </div>
 <br />
 
@@ -30,7 +32,13 @@
     <td width="40%" style="text-align: center">
       <img class="img" src="{{ productToView.imageLink }}" />
       <div
-        *ngIf="sessionService.getCurrentUser().role == 'SELLER' && retrieveProductError == false"
+        *ngIf="
+          sessionService.getCurrentUser().role == 'SELLER' &&
+          sessionService.getCurrentUser().userId ==
+            productToView.seller?.userId &&
+          retrieveProductError == false &&
+          productDeleted == false
+        "
         style="margin: 15px 0px 15px 0px"
       >
         <a routerLink="/systemAdministration/updateProduct/{{ productId }}"
@@ -44,16 +52,16 @@
           </button>
         </a>
         &nbsp;
-          <button
-            pButton
-            type="button"
-            class="p-button-rounded p-button-outlined"
-            value="Register"
-            style="color: red"
-            (click)="deleteProduct()"
-          >
-            Delete
-          </button>
+        <button
+          pButton
+          type="button"
+          class="p-button-rounded p-button-outlined"
+          value="Register"
+          style="color: red"
+          (click)="deleteProduct()"
+        >
+          Delete
+        </button>
       </div>
     </td>
     <td>
@@ -115,4 +123,7 @@
   </tr>
 </table>
 
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>

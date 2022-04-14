@@ -96,15 +96,11 @@ export class MainMenuComponent implements OnInit {
           ],
         },
       {
-        label: 'Customer',
+        label: 'Seller',
         items: [
           {
-            label: 'Transactions',
-            routerLink: ['/systemAdministration/'],
-          },
-          {
-            label: 'Cart',
-            routerLink: ['/systemAdministration/'],
+            label: 'Manage Products',
+            routerLink: ['/systemAdministration/viewSellerProducts'],
           },
           {
             label: 'Disputes',

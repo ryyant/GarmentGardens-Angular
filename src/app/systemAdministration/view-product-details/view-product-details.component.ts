@@ -18,6 +18,7 @@ export class ViewProductDetailsComponent implements OnInit {
   error: boolean;
   showMessage: boolean;
   errorMessage: string | undefined;
+  productDeleted: boolean;
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -31,11 +32,11 @@ export class ViewProductDetailsComponent implements OnInit {
     this.retrieveProductError = false;
     this.error = false;
     this.showMessage = false;
+    this.productDeleted = false;
   }
 
   ngOnInit(): void {
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
-
     if (this.productId != null) {
       this.productService
         .getProductByProductId(parseInt(this.productId))
@@ -68,7 +69,7 @@ export class ViewProductDetailsComponent implements OnInit {
         next: (response) => {
           this.showMessage = true;
           this.errorMessage = 'Successfully deleted!';
-          this.router.navigate(['/systemAdministration/viewSellerProducts']);
+          this.productDeleted = true;
         },
         error: (error) => {
           this.error = true;
