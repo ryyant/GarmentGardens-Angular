@@ -20,6 +20,7 @@ export class ViewProductDetailsComponent implements OnInit {
   errorMessage: string | undefined;
   productDeleted: boolean;
   qtyToAdd: number = 0;
+  seller: boolean;
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -35,6 +36,7 @@ export class ViewProductDetailsComponent implements OnInit {
     this.error = false;
     this.showMessage = false;
     this.productDeleted = false;
+    this.seller = this.sessionService.getCurrentUser().role == "SELLER";
   }
 
   ngOnInit(): void {
