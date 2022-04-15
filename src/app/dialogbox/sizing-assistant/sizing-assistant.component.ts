@@ -21,8 +21,8 @@ export class SizingAssistantComponent implements OnInit {
   constructor(public sessionService: SessionService) {
     this.gender = "";
     this.fit=""
-    this.height=0;
-    this.weight=0;
+    this.height=155;
+    this.weight=50;
     this.recommendedSize="";
     this.displaySize = false;
   }

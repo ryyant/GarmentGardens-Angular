@@ -1,14 +1,16 @@
-<div id="top">
+<div id="top" style="text-align:center;">
     <h1>See Your Personalised Size Recommendation</h1>
     <h3>Enter Your Height and Weight below</h3>
-  </div>
+
   <div>
     <b>Gender: </b>
-    <p-dropdown placeholder="Select your Gender" [options]="genderOptions"   [(ngModel)]="gender"></p-dropdown>
+    <p-dropdown [autoDisplayFirst]="false" placeholder="Select your Gender" [options]="genderOptions"   [(ngModel)]="gender">
+      <label for="dropdown">Dropdown</label>
+    </p-dropdown>
   </div>
   <div>
     <b>Fit: </b>
-    <p-dropdown placeholder="Select your Fit" [options]="fitOptions"   [(ngModel)]="fit"></p-dropdown>
+    <p-dropdown [autoDisplayFirst]="false" placeholder="Select your Fit" [options]="fitOptions"   [(ngModel)]="fit"></p-dropdown>
   </div>
 
   <div id="bottom">
@@ -22,7 +24,7 @@
         <b>Weight: </b> 
         <input type="text" pInputText [(ngModel)] ="weight"  >
         <span>kg</span>
-        <p-slider style="margin: 20px" [(ngModel)]="weight"  [step]="0.1" [min]="50" [max]="200"></p-slider>
+        <p-knob style="display:flex; justify-content:center"[(ngModel)]="weight" [min]="20" [step]="0.1" [max]="200"></p-knob>
       </div>
 
 
@@ -34,3 +36,4 @@
     </div>
     
   </div>
+</div>

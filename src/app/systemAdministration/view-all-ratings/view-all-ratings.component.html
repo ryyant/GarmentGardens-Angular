@@ -1,0 +1,22 @@
+<p-table [value]="ratings" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        Product {{productId}} Ratings
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Description</th>
+            <th>No. of Stars</th>
+            <th>Date Of Rating</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rating>
+        <tr>
+            <td>{{rating.description}}</td>
+            <td><p-rating [readonly]="true" [(ngModel)]="rating.numberOfStars"></p-rating></td>
+            <td>{{parseDate(rating.dateOfRating) | date}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        Footer
+    </ng-template>
+</p-table>
