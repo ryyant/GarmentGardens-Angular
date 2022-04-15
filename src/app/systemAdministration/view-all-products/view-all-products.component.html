@@ -1,6 +1,6 @@
 <app-breadcrumb [pageName]="'viewAllProducts'"></app-breadcrumb>
 
-<h3 style="color: white;">All Products</h3>
+<h3 style="color: white">All Products</h3>
 
 <div class="allProducts">
   <p-dataView
@@ -35,8 +35,7 @@
           />
         </span>
       </div>
-      <p-dataViewLayoutOptions
-      ></p-dataViewLayoutOptions>
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
     </ng-template>
 
     <ng-template let-product pTemplate="listItem">
@@ -105,19 +104,34 @@
   </p-dataView>
 
   <p-dialog
-  header="View Product Details"
-  [(visible)]="display"
-  [style]="{ width: '50vw', height: '50vw' }"
-  [modal]="true"
-  [resizable]="false"
-  style="min-width: 40%;"
->
-  <div style="display: inline-block;">
-    <span>
-      <h1 style="font-size: 40px">
-        {{ productToView.name }}
-      </h1>
-    </span>
+    header="View Product Details"
+    [(visible)]="display"
+    [style]="{ width: '50vw', height: '50vw' }"
+    [modal]="true"
+    [resizable]="false"
+    style="min-width: 40%"
+  >
+    <div style="display: inline-block">
+      <span>
+        <h1 style="font-size: 40px">
+          {{ productToView.name }}
+        </h1>
+      </span>
+
+      <div
+        *ngIf="message == 'Error'"
+        style="text-align: center"
+        class="boxErrorMessage"
+      >
+        Invalid Quantiy Added to Cart
+      </div>
+      <div
+        *ngIf="message == 'Success'"
+        style="text-align: center"
+        class="boxSuccessMessage"
+      >
+        Success!
+      </div>
 
       <table width="100%" [cellSpacing]="20">
         <tr>
@@ -134,26 +148,25 @@
             <p>{{ productToView.description }}</p>
             <h3>Quantity Left:</h3>
             <p>{{ productToView.quantityOnHand }}</p>
-              <h3>Price:</h3>
-              <p>{{ productToView.unitPrice | currency }}</p>
-              <h3>Category:</h3>
-              <p>
-                {{
-                  productToView.category != null
-                    ? productToView.category.name
-                    : ""
-                }}
-              </p>
-              <h3>Tags:</h3>
-                <p *ngFor="let tag of productToView.tags">{{ tag.name }}</p>
+            <h3>Price:</h3>
+            <p>{{ productToView.unitPrice | currency }}</p>
+            <h3>Category:</h3>
+            <p>
+              {{
+                productToView.category != null
+                  ? productToView.category.name
+                  : ""
+              }}
+            </p>
+            <h3>Tags:</h3>
+            <p *ngFor="let tag of productToView.tags">{{ tag.name }}</p>
           </div>
         </tr>
         <tr>
-          <td><p-button
-            label="View More"
-            (onClick)="viewProductDetails()"
-          >
-          </p-button></td>
+          <td>
+            <p-button label="View More" (onClick)="viewProductDetails()">
+            </p-button>
+          </td>
           <td><h3>Quantity:</h3></td>
           <td>
             <input
@@ -172,18 +185,11 @@
               icon="pi pi-shopping-cart"
               label="Add To Cart"
               (onClick)="addToCart()"
-
             >
             </p-button>
           </td>
-          <td>
-            <div *ngIf="invalidQty == true" style="text-align: center;" class="boxErrorMessage">
-              Invalid Quantiy Added to Cart
-            </div>
-          </td>
         </tr>
       </table>
-
     </div>
   </p-dialog>
 </div>

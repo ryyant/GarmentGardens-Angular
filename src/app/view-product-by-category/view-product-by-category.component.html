@@ -1,146 +1,159 @@
 <app-breadcrumb [pageName]="'productByCategory'"></app-breadcrumb>
 
 <div *ngIf="products.length == 0" style="text-align: center">
-    <h1>Sorry, There are no Products here!</h1>
+  <h1>Sorry, There are no Products here!</h1>
 </div>
 
 <div *ngIf="products.length > 0">
+  <h3 style="color: white">
+    Category: {{ viewCategory ? viewCategory.name : null }}
+  </h3>
 
-<h3 style="color: white;">Category: {{viewCategory ? viewCategory.name : null}}</h3>
-
-<div class="allProducts">
-  <p-dataView
-    #dv
-    [value]="products"
-    [paginator]="true"
-    [rows]="9"
-    filterBy="name"
-    [sortField]="sortField"
-    [sortOrder]="sortOrder"
-    layout="grid"
-  >
-    <ng-template pTemplate="header">
-      <div class="dataHeader">
-        <p-dropdown
-          [options]="sortOptions"
-          [(ngModel)]="sortKey"
-          placeholder="Sort By"
-          (onChange)="onSortChange($event)"
-          [style]="{ 'min-width': '15em' }"
-          class="glow"
-        ></p-dropdown>
-        <span>
-          <i class="pi pi-search"></i>
-          &nbsp;
-          <input
+  <div class="allProducts">
+    <p-dataView
+      #dv
+      [value]="products"
+      [paginator]="true"
+      [rows]="9"
+      filterBy="name"
+      [sortField]="sortField"
+      [sortOrder]="sortOrder"
+      layout="grid"
+    >
+      <ng-template pTemplate="header">
+        <div class="dataHeader">
+          <p-dropdown
+            [options]="sortOptions"
+            [(ngModel)]="sortKey"
+            placeholder="Sort By"
+            (onChange)="onSortChange($event)"
+            [style]="{ 'min-width': '15em' }"
             class="glow"
-            type="search"
-            pInputText
-            placeholder="Search by Name"
-            (input)="dv.filter($any($event.target).value, 'contains')"
-          />
-        </span>
-      </div>
-      <p-dataViewLayoutOptions
-      ></p-dataViewLayoutOptions>
-    </ng-template>
-
-    <ng-template let-product pTemplate="listItem">
-      <div
-        class="product-list-item glow"
-        (click)="showDialog(product)"
-        style="cursor: pointer"
-      >
-        <img class="img" src="{{ product.imageLink }}" />
-        <div class="product-list-detail">
-          <div class="product-name">{{ product.name }}</div>
-          <div class="product-description">{{ product.description }}</div>
-          <p-rating
-            [ngModel]="product.rating"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
-          <i class="pi pi-tag product-category-icon"></i
-          ><span class="product-category">{{ product.category.name }}</span>
-        </div>
-        <div class="product-list-action">
-          <span class="product-price">${{ product.unitPrice }}</span>
-          <!--           <p-button
-            label="View Product"
-            (onClick)="showDialog(product)"
-          ></p-button> -->
-          <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
- -->
-        </div>
-      </div>
-    </ng-template>
-
-    <ng-template let-product pTemplate="gridItem">
-      <div
-        class="product-grid-item card glow"
-        (click)="showDialog(product)"
-        style="cursor: pointer"
-      >
-        <div class="product-grid-item-top">
-          <div>
-            <i class="pi pi-tag product-category-icon"></i>
-            <span class="product-category">{{ product.category.name }}</span>
-          </div>
-          <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
- -->
-        </div>
-        <div class="product-grid-item-content">
-          <img class="img" src="{{ product.imageLink }}" />
-          <div class="product-name">{{ product.name }}</div>
-          <div class="product-description">{{ product.description }}</div>
-          <p-rating
-            [ngModel]="product.rating"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
-        </div>
-        <div class="product-grid-item-bottom">
-          <span class="product-price">${{ product.unitPrice }}</span>
-          <!--           <p-button
-            label="View Product"
-            (onClick)="showDialog(product)"
-          ></p-button> -->
-        </div>
-      </div>
-    </ng-template>
-  </p-dataView>
-
-
-  <p-dialog
-  header="View Product Details"
-  [(visible)]="display"
-  [style]="{ width: '50vw', height: '50vw' }"
-  [modal]="true"
-  [resizable]="false"
-  style="min-width: 40%;"
->
-  <div style="display: inline-block;">
-    <span>
-      <h1 style="font-size: 40px">
-        {{ productToView.name }}
-      </h1>
-    </span>
-
-      <table width="100%" [cellSpacing]="20">
-        <tr>
-          <td style="width: 30%">
-            <p>Product ID: {{ productToView.productId }}</p>
-            <p>SKU Code: {{ productToView.skuCode }}</p>
-            <img
-              style="border-radius: 15px; margin: 20px"
-              src="{{ productToView.imageLink }}"
+          ></p-dropdown>
+          <span>
+            <i class="pi pi-search"></i>
+            &nbsp;
+            <input
+              class="glow"
+              type="search"
+              pInputText
+              placeholder="Search by Name"
+              (input)="dv.filter($any($event.target).value, 'contains')"
             />
-          </td>
-          <div style="text-align: left">
-            <h3>Description:</h3>
-            <p>{{ productToView.description }}</p>
-            <h3>Quantity Left:</h3>
-            <p>{{ productToView.quantityOnHand }}</p>
+          </span>
+        </div>
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+      </ng-template>
+
+      <ng-template let-product pTemplate="listItem">
+        <div
+          class="product-list-item glow"
+          (click)="showDialog(product)"
+          style="cursor: pointer"
+        >
+          <img class="img" src="{{ product.imageLink }}" />
+          <div class="product-list-detail">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-description">{{ product.description }}</div>
+            <p-rating
+              [ngModel]="product.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+            <i class="pi pi-tag product-category-icon"></i
+            ><span class="product-category">{{ product.category.name }}</span>
+          </div>
+          <div class="product-list-action">
+            <span class="product-price">${{ product.unitPrice }}</span>
+            <!--           <p-button
+            label="View Product"
+            (onClick)="showDialog(product)"
+          ></p-button> -->
+            <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+ -->
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template let-product pTemplate="gridItem">
+        <div
+          class="product-grid-item card glow"
+          (click)="showDialog(product)"
+          style="cursor: pointer"
+        >
+          <div class="product-grid-item-top">
+            <div>
+              <i class="pi pi-tag product-category-icon"></i>
+              <span class="product-category">{{ product.category.name }}</span>
+            </div>
+            <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+ -->
+          </div>
+          <div class="product-grid-item-content">
+            <img class="img" src="{{ product.imageLink }}" />
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-description">{{ product.description }}</div>
+            <p-rating
+              [ngModel]="product.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+          </div>
+          <div class="product-grid-item-bottom">
+            <span class="product-price">${{ product.unitPrice }}</span>
+            <!--           <p-button
+            label="View Product"
+            (onClick)="showDialog(product)"
+          ></p-button> -->
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+
+    <p-dialog
+      header="View Product Details"
+      [(visible)]="display"
+      [style]="{ width: '50vw', height: '50vw' }"
+      [modal]="true"
+      [resizable]="false"
+      style="min-width: 40%"
+    >
+      <div style="display: inline-block">
+        <span>
+          <h1 style="font-size: 40px">
+            {{ productToView.name }}
+          </h1>
+        </span>
+
+        <div
+          *ngIf="message == 'Error'"
+          style="text-align: center"
+          class="boxErrorMessage"
+        >
+          Invalid Quantiy Added to Cart
+        </div>
+        <div
+          *ngIf="message == 'Success'"
+          style="text-align: center"
+          class="boxSuccessMessage"
+        >
+          Success!
+        </div>
+        <table width="100%" [cellSpacing]="20">
+          <tr>
+            <td style="width: 30%">
+              <p>Product ID: {{ productToView.productId }}</p>
+              <p>SKU Code: {{ productToView.skuCode }}</p>
+              <img
+                style="border-radius: 15px; margin: 20px"
+                src="{{ productToView.imageLink }}"
+              />
+            </td>
+            <div style="text-align: left">
+              <h3>Description:</h3>
+              <p>{{ productToView.description }}</p>
+              <h3>Quantity Left:</h3>
+              <p>{{ productToView.quantityOnHand }}</p>
               <h3>Price:</h3>
               <p>{{ productToView.unitPrice | currency }}</p>
               <h3>Category:</h3>
@@ -152,42 +165,38 @@
                 }}
               </p>
               <h3>Tags:</h3>
-                <p *ngFor="let tag of productToView.tags">{{ tag.name }}</p>
-          </div>
-        </tr>
-        <tr>
-          <td><p-button
-            label="View More"
-            (onClick)="viewProductDetails()"
-          >
-          </p-button></td>
-          <td><h3>Quantity:</h3></td>
-          <td>
-            <input
-              pInputText
-              placeholder="1"
-              id="username"
-              type="text"
-              name="username"
-              #username="ngModel"
-              [(ngModel)]="qtyToAdd"
-              required="true"
-            />
-          </td>
-          <td>
-            <p-button
-              icon="pi pi-shopping-cart"
-              label="Add To Cart"
-              (onClick)="addToCart()"
-            >
-            </p-button>
-          </td>
-        </tr>
-      </table>
-
-    </div>
-  </p-dialog>
+              <p *ngFor="let tag of productToView.tags">{{ tag.name }}</p>
+            </div>
+          </tr>
+          <tr>
+            <td>
+              <p-button label="View More" (onClick)="viewProductDetails()">
+              </p-button>
+            </td>
+            <td><h3>Quantity:</h3></td>
+            <td>
+              <input
+                pInputText
+                placeholder="1"
+                id="username"
+                type="text"
+                name="username"
+                #username="ngModel"
+                [(ngModel)]="qtyToAdd"
+                required="true"
+              />
+            </td>
+            <td>
+              <p-button
+                icon="pi pi-shopping-cart"
+                label="Add To Cart"
+                (onClick)="addToCart()"
+              >
+              </p-button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </p-dialog>
+  </div>
 </div>
-
-</div>
-
