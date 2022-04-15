@@ -38,6 +38,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { AccordionModule } from 'primeng/accordion';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
@@ -64,6 +65,7 @@ import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/v
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 import { ConfirmationService } from 'primeng/api';
 import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
+import { SizingAssistantComponent } from './dialogbox/sizing-assistant/sizing-assistant.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my
     ViewMyRewardsComponent,
     ViewDisputesComponent,
     ViewMyCartComponent,
+    SizingAssistantComponent,
   ],
   imports: [
     AppRoutingModule,
