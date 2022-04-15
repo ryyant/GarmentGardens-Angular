@@ -123,7 +123,7 @@
         style="text-align: center"
         class="boxErrorMessage"
       >
-        Invalid Quantiy Added to Cart
+        Invalid Quantity Added to Cart
       </div>
       <div
         *ngIf="message == 'Success'"
@@ -193,3 +193,11 @@
     </div>
   </p-dialog>
 </div>
+
+<p-dialog
+  position="top"
+  [(visible)]="loginDialogue"
+  [style]="{ width: '50vw' }"
+>
+  <h1 style="color: red">Please Login!</h1>
+</p-dialog>

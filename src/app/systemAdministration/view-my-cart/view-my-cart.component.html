@@ -1,10 +1,29 @@
 <app-breadcrumb [pageName]="'myRewards'"></app-breadcrumb>
 
 <h3 style="color: white;">My Cart</h3>
-<div class="allrewards">
+<h3 style="color: white;">{{cart?.cartType}}</h3>
+<div class="garmentCard">
+  <table>
+    <tr>
+      <td><h3>Total Cart Items:</h3></td>
+      <td>{{cart?.totalCartItems}}</td>
+    </tr>
+    <tr>
+      <td><h3>Total Quantity:</h3></td>
+      <td>{{cart?.totalQuantity}}</td>
+    </tr>
+    <tr>
+      <td><h3>Total Amount:</h3></td>
+      <td>{{cart?.totalAmount}}</td>
+    </tr>
+  </table>
+</div>
+
+<br/>
+<div class="garmentCard">
   <p-dataView 
   #dv
-  [value]="carts"
+  [value]="lineItems"
   [paginator]="true"
   [rows]="9"
   [sortField]="sortField"
@@ -32,67 +51,28 @@
         />
         </span>
       </div>
-      <p-dataViewLayoutOptions
-      style="width: 100%; text-align: center">
-      </p-dataViewLayoutOptions>
     </ng-template>
 
-    <ng-template let-cart pTemplate="listItem">
+    <ng-template let-lineItem pTemplate="listItem">
       <div
-        class="cart-list-item glow"
-        (click)="showDialog(cart)"
-        style="cursor: pointer"
+        class="product-list-item glow"
       >
-        <!-- <img class="img" src="../../../assets/promoCode.png"/> -->
-        <div class="cart-list-detail">
-          <div class="cart-name">{{cart.productId}}</div>
-          <div class="cart-quantity">{{cart.quantity}}</div>
-          <div class="cart-unitPrice">${{cart.unitPrice}}</div>
-          <div class="cart-grid-item-bottom">
-            <div class="cart-subTotal">${{cart.subTotal}}</div>
-          </div>
+        <img class="img" src="{{ lineItem.product.imageLink }}" />
+        <div class="product-list-detail">
+          <div class="product-name">{{ lineItem.product.name }}</div>
+        </div>
+        <div class="product-list-action">
+          <span class="product-price">${{ lineItem.product.unitPrice }}</span>
+          <!--           <p-button
+          label="View Product"
+          (onClick)="showDialog(product)"
+        ></p-button> -->
+          <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+-->
         </div>
       </div>
     </ng-template>
 
     
   </p-dataView>
-  <!-- <p-dialog
-    *ngIf="display"
-    header="View Cart Details"
-    [(visible)]="display"
-    [style]="{ width: '50vw' }"
-    [modal]="true"
-    [resizable]="false"
-  >
-    <div style="display: inline-block">
-      <span>
-        <h1 style="font-size: 40px">
-          {{ rewardToView.rewardName }}
-        </h1>
-        <p-button
-        label="Redeem Reward"
-        (onClick)="useReward(rewardToView)"
-      ></p-button>
-      </span>
-
-      <table width="100%" [cellSpacing]="20">
-        <tr>
-          <td style="width: 30%">
-            <p>Reward ID: {{ rewardToView.rewardId }}</p>
-            <p>Reward Name: {{ rewardToView.rewardName }}</p>
-            <img
-              style="border-radius: 15px; margin: 20px"
-              src="../../../assets/promoCode.png"
-            />
-          </td>
-          <div style="text-align: left">
-            <h3>Description:</h3>
-            <p>{{ rewardToView.expiryDate }}</p>
-          </div>
-        </tr>
-      </table>
-
-    </div>
-  </p-dialog> -->
 </div>

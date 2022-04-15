@@ -11,6 +11,7 @@ import { User } from '../models/user';
 import { UpdateCartReq } from '../models/update-cart-req';
 import { Product } from '../models/product';
 import { LineItem } from '../models/line-item';
+import { Cart } from '../models/cart';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -35,8 +36,8 @@ export class CartService {
       .pipe(catchError(this.handleError));
   }
 
-  retrieveMyLineItems(user: User) : Observable<LineItem[]> {
-    return this.httpClient.get<LineItem[]>(this.baseUrl + '/retrieveMyLineItems/' + user.userId).pipe(catchError(this.handleError));
+  retrieveMyCart(user: User) : Observable<Cart> {
+    return this.httpClient.get<Cart>(this.baseUrl + '/retrieveMyCart/' + user.userId).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -17,6 +17,7 @@ import { PrimeNGConfig } from 'primeng/api';
 export class ViewAllProductsComponent implements OnInit {
   products: Product[];
   display: boolean;
+  loginDialogue: boolean;
   productToView: Product;
   message: string = '';
   qtyToAdd: number = 0;
@@ -36,6 +37,7 @@ export class ViewAllProductsComponent implements OnInit {
   ) {
     this.products = new Array();
     this.display = false;
+    this.loginDialogue = false;
     this.productToView = new Product();
     this.message = '';
   }
@@ -60,6 +62,8 @@ export class ViewAllProductsComponent implements OnInit {
 
   showDialog(productToView: Product) {
     this.display = true;
+    this.qtyToAdd = 0;
+    this.message = "";
     this.productToView = productToView;
   }
 
@@ -73,6 +77,11 @@ export class ViewAllProductsComponent implements OnInit {
   }
 
   addToCart() {
+    if (this.sessionService.getIsLogin() == false) {
+      this.loginDialogue = true;
+      return;
+    }
+
     if (
       this.productToView != null &&
       this.productToView.quantityOnHand != null
@@ -84,13 +93,13 @@ export class ViewAllProductsComponent implements OnInit {
         console.log('Invalid quantity input!');
         this.message = 'Error';
       } else {
-        this.message = "";
+        this.message = '';
         // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
         this.cartService
           .addToCart(this.productToView, this.qtyToAdd)
           .subscribe({
             next: (response) => {
-              console.log("added to cart!");
+              console.log('added to cart!');
               this.message = 'Success';
             },
             error: (error) => {

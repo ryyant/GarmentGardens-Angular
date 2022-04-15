@@ -8,6 +8,7 @@ import { LineItem } from 'src/app/models/line-item';
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { User } from 'src/app/models/user';
+import { Cart } from 'src/app/models/cart';
 
 @Component({
   selector: 'app-view-my-cart',
@@ -16,12 +17,12 @@ import { User } from 'src/app/models/user';
 })
 export class ViewMyCartComponent implements OnInit {
 
-  carts: LineItem[];
+  cart: Cart | undefined;
+  lineItems: LineItem[];
   display: boolean;
   currUser: User;
 
   sortOptions: SelectItem[] = [];
-
   sortOrder: number = 0;
   sortKey: string = "";
   sortField: string = "";
@@ -32,7 +33,7 @@ export class ViewMyCartComponent implements OnInit {
     public sessionService: SessionService,
     private cartService: CartService,
     private primengConfig: PrimeNGConfig) { 
-      this.carts = new Array();
+      this.lineItems = new Array();
       this.display = false;
       this.currUser = this.sessionService.getCurrentUser();
     }
@@ -40,20 +41,19 @@ export class ViewMyCartComponent implements OnInit {
   
     ngOnInit(): void
   {
-    this.cartService.retrieveMyLineItems(this.currUser).subscribe({
+    this.cartService.retrieveMyCart(this.currUser).subscribe({
       next:(response)=>{
-        this.carts = response;
+        this.cart = response;
+        console.log(response);
+        if (response.cartLineItems != null) {
+          this.lineItems = response.cartLineItems;
+          console.log(this.lineItems);
+        }
       },
       error:(error)=> {
         console.log('********** ViewMyCartComponent.ts: ' + error);
       }
     });
-    console.log(this.carts);
-  }
-
-  showDialog(rewardToView: LineItem)
-  {
-    this.display = true;
   }
 
   onSortChange(event: { value: any; }) {

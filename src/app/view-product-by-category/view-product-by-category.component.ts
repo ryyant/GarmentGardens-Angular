@@ -19,6 +19,7 @@ import { Category } from '../models/category';
 export class ViewProductByCategoryComponent implements OnInit {
   products: Product[];
   display: boolean;
+  loginDialogue: boolean;
   productToView: Product;
   message: string = '';
   qtyToAdd: number = 0;
@@ -43,6 +44,7 @@ export class ViewProductByCategoryComponent implements OnInit {
     this.products = new Array();
     this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
     this.display = false;
+    this.loginDialogue = false;
     this.productToView = new Product();
     this.viewCategory = new Category();
   }
@@ -96,6 +98,8 @@ export class ViewProductByCategoryComponent implements OnInit {
 
   showDialog(productToView: Product) {
     this.display = true;
+    this.qtyToAdd = 0;
+    this.message = "";
     this.productToView = productToView;
   }
 
@@ -109,6 +113,10 @@ export class ViewProductByCategoryComponent implements OnInit {
   }
 
   addToCart() {
+    if (this.sessionService.getIsLogin() == false) {
+      this.loginDialogue = true;
+      return;
+    }
     if (
       this.productToView != null &&
       this.productToView.quantityOnHand != null
