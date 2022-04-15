@@ -1,0 +1,92 @@
+<app-breadcrumb [pageName]="'myTransactions'"></app-breadcrumb>
+
+<h3 style="color: white">My Orders</h3>
+
+<div style="width: 95%;">
+  <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="showMessage && error == true" class="boxErrorMessage">
+    {{ errorMessage }}
+  </div>
+</div>
+
+
+<div class="garmentCard dataHeader">
+  <div style="display: flex; flex: 4; align-items: center; justify-content: center; ">
+    <table>
+      <tr>
+        <td>
+          <h3 class="product-price">Lifetime Orders</h3>
+          <h3 style="color: white" >{{ orders?.length }}</h3>
+        </td>
+        <td>
+          <h3 class="product-price">Lifetime Spendings</h3>
+          <h3 style="color: white" >{{ lifetimeSpendings }}</h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<br />
+<div class="garmentCard">
+  <p-dataView
+    #dv
+    [value]="orders"
+    [paginator]="true"
+    [rows]="9"
+    filterBy="lineItem.lineItemId"
+    [sortField]="sortField"
+    [sortOrder]="sortOrder"
+  >
+    <ng-template pTemplate="header">
+      <div class="dataHeader">
+        <p-dropdown
+          [options]="sortOptions"
+          [(ngModel)]="sortKey"
+          placeholder="Sort By"
+          (onChange)="onSortChange($event)"
+          [style]="{ 'min-width': '15em' }"
+          class="glow"
+        >
+        </p-dropdown>
+        <span>
+          <i class="pi pi-search"></i>
+          &nbsp;
+          <input
+            class="glow"
+            type="search"
+            pInputText
+            placeholder="Search by Name"
+            (input)="dv.filter($any($event.target).value, 'contains')"
+          />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template let-order pTemplate="listItem">
+      <div class="product-list-item glow">
+        <div class="product-list-detail">
+          <div class="product-name">{{ order.orderId }}</div>
+        </div>
+        &nbsp;
+        <div class="product-list-action">
+          <span class="product-price">Total Quantity</span>
+          <span class="product-price-2">{{ order.totalQuantity }}</span>
+        </div>
+        &nbsp;
+        <div class="product-list-action">
+          <span class="product-price">Total Amount</span>
+          <span class="product-price-2">${{ order.totalAmount }}</span>
+        </div>
+        &nbsp;
+        <!-- <div class="product-list-action">
+          <span class="product-price">Sub Total</span>
+          <span class="product-price-2">${{ order.subTotal }}</span>
+        </div> -->
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

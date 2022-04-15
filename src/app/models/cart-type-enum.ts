@@ -1,4 +1,4 @@
 export enum CartTypeEnum {
-    SELLER,
-    CUSTOMER
+    GROUPCART = "GROUPCART",
+    INDIVIDUALCART = "INDIVIDUALCART"
 }

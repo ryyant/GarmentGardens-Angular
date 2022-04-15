@@ -12,11 +12,12 @@ import { UpdateProductComponent } from './systemAdministration/update-product/up
 import { CreateNewUserComponent } from './systemAdministration/create-new-user/create-new-user.component';
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
-import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
+import { ViewProductByCategoryComponent } from './systemAdministration/view-product-by-category/view-product-by-category.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
 import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
+import { ViewMyTransactionsComponent } from './systemAdministration/view-my-transactions/view-my-transactions.component';
 import {SliderModule} from 'primeng/slider';
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'systemAdministration/viewAllRewards', component: ViewAllRewardsComponent},
   { path: 'systemAdministration/viewMyRewards', component: ViewMyRewardsComponent},
   { path: 'systemAdministration/viewDisputes', component: ViewDisputesComponent},
-  { path: 'systemAdministration/viewMyCart', component: ViewMyCartComponent}
+  { path: 'systemAdministration/viewMyCart', component: ViewMyCartComponent},
+  { path: 'systemAdministration/viewMyTransactions', component: ViewMyTransactionsComponent}
 ];
 
 @NgModule({
