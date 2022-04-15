@@ -10,6 +10,7 @@ import { SessionService } from '../services/session.service';
 import { User } from '../models/user';
 import { UpdateCartReq } from '../models/update-cart-req';
 import { Product } from '../models/product';
+import { LineItem } from '../models/line-item';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -32,6 +33,10 @@ export class CartService {
     return this.httpClient
       .post<any>(this.baseUrl + '/addToCart', updateCartReq, httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  retrieveMyLineItems(user: User) : Observable<LineItem[]> {
+    return this.httpClient.get<LineItem[]>(this.baseUrl + '/retrieveMyLineItems/' + user.userId).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

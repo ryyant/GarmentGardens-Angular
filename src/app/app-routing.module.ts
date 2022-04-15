@@ -16,6 +16,7 @@ import { ViewProductByCategoryComponent } from './view-product-by-category/view-
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
 import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
+import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -37,7 +38,8 @@ const routes: Routes = [
   { path: 'systemAdministration/viewProductByCategory/:categoryId', component: ViewProductByCategoryComponent},
   { path: 'systemAdministration/viewAllRewards', component: ViewAllRewardsComponent},
   { path: 'systemAdministration/viewMyRewards', component: ViewMyRewardsComponent},
-  { path: 'systemAdministration/viewDisputes', component: ViewDisputesComponent}
+  { path: 'systemAdministration/viewDisputes', component: ViewDisputesComponent},
+  { path: 'systemAdministration/viewMyCart', component: ViewMyCartComponent}
 ];
 
 @NgModule({

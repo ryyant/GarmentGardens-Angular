@@ -63,6 +63,7 @@ import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-d
 import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 import { ConfirmationService } from 'primeng/api';
+import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ConfirmationService } from 'primeng/api';
     ViewRewardDetailsComponent,
     ViewMyRewardsComponent,
     ViewDisputesComponent,
+    ViewMyCartComponent,
   ],
   imports: [
     AppRoutingModule,

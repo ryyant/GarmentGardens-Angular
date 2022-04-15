@@ -1,0 +1,98 @@
+<app-breadcrumb [pageName]="'myRewards'"></app-breadcrumb>
+
+<h3 style="color: white;">My Cart</h3>
+<div class="allrewards">
+  <p-dataView 
+  #dv
+  [value]="carts"
+  [paginator]="true"
+  [rows]="9"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  >
+    <ng-template pTemplate="header">
+      <div class="dataHeader">
+        <p-dropdown
+        [options]="sortOptions"
+        [(ngModel)]="sortKey"
+        placeholder="Sort By"
+        (onChange)="onSortChange($event)"
+        [style]="{'min-width': '15em' }"
+        class="glow">
+        </p-dropdown>
+        <span>
+          <i class="pi pi-search"></i>
+          &nbsp;
+          <input
+          class="glow"
+          type="search"
+          pInputText
+          placeholder="Search by Name"
+          (input)="dv.filter($any($event.target).value, 'contains')"
+        />
+        </span>
+      </div>
+      <p-dataViewLayoutOptions
+      style="width: 100%; text-align: center">
+      </p-dataViewLayoutOptions>
+    </ng-template>
+
+    <ng-template let-cart pTemplate="listItem">
+      <div
+        class="cart-list-item glow"
+        (click)="showDialog(cart)"
+        style="cursor: pointer"
+      >
+        <!-- <img class="img" src="../../../assets/promoCode.png"/> -->
+        <div class="cart-list-detail">
+          <div class="cart-name">{{cart.productId}}</div>
+          <div class="cart-quantity">{{cart.quantity}}</div>
+          <div class="cart-unitPrice">${{cart.unitPrice}}</div>
+          <div class="cart-grid-item-bottom">
+            <div class="cart-subTotal">${{cart.subTotal}}</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    
+  </p-dataView>
+  <!-- <p-dialog
+    *ngIf="display"
+    header="View Cart Details"
+    [(visible)]="display"
+    [style]="{ width: '50vw' }"
+    [modal]="true"
+    [resizable]="false"
+  >
+    <div style="display: inline-block">
+      <span>
+        <h1 style="font-size: 40px">
+          {{ rewardToView.rewardName }}
+        </h1>
+        <p-button
+        label="Redeem Reward"
+        (onClick)="useReward(rewardToView)"
+      ></p-button>
+      </span>
+
+      <table width="100%" [cellSpacing]="20">
+        <tr>
+          <td style="width: 30%">
+            <p>Reward ID: {{ rewardToView.rewardId }}</p>
+            <p>Reward Name: {{ rewardToView.rewardName }}</p>
+            <img
+              style="border-radius: 15px; margin: 20px"
+              src="../../../assets/promoCode.png"
+            />
+          </td>
+          <div style="text-align: left">
+            <h3>Description:</h3>
+            <p>{{ rewardToView.expiryDate }}</p>
+          </div>
+        </tr>
+      </table>
+
+    </div>
+  </p-dialog> -->
+</div>

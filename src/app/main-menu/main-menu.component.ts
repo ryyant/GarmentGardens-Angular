@@ -70,7 +70,7 @@ export class MainMenuComponent implements OnInit {
           },
           {
             label: 'Cart',
-            routerLink: ['/systemAdministration/'],
+            routerLink: ['/systemAdministration/viewMyCart'],
           },
           {
             label: 'Disputes',
