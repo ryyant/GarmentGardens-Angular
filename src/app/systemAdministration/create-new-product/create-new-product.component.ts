@@ -26,6 +26,7 @@ export class CreateNewProductComponent implements OnInit {
   categories: Category[];
   tags: Tag[];
 
+ 
   resultSuccess: boolean;
   resultError: boolean;
   message: string | undefined;
@@ -46,6 +47,8 @@ export class CreateNewProductComponent implements OnInit {
     this.tagIds = new Array();
     this.categories = new Array();
     this.tags = new Array();
+
+    
 
     this.resultSuccess = false;
     this.resultError = false;
@@ -69,6 +72,7 @@ export class CreateNewProductComponent implements OnInit {
         console.log('********** CreateNewProductComponent.ts: ' + error);
       }
     });
+    
 
     this.tagService.getTags().subscribe({
       next: (response) => {
@@ -78,6 +82,8 @@ export class CreateNewProductComponent implements OnInit {
         console.log('********** CreateNewProductComponent.ts: ' + error);
       }
     });
+
+    console.log(this.tags);
   }
 
 
