@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { CartService } from '../../services/cart.service';
 import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
@@ -19,12 +19,14 @@ export class ViewProductDetailsComponent implements OnInit {
   showMessage: boolean;
   errorMessage: string | undefined;
   productDeleted: boolean;
+  qtyToAdd: number = 0;
   seller: boolean;
 
   constructor(
     private confirmationService: ConfirmationService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private cartService: CartService,
     public sessionService: SessionService,
     private productService: ProductService
   ) {
@@ -45,13 +47,45 @@ export class ViewProductDetailsComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.productToView = response;
-            console.log(this.productToView);
           },
           error: (error) => {
             this.retrieveProductError = true;
-            console.log('********** ViewProductDetailsComponent.ts: ' + error);
           },
         });
+    }
+  }
+
+  addToCart() {
+    if (
+      this.productToView != null &&
+      this.productToView.quantityOnHand != null
+    ) {
+      if (
+        this.qtyToAdd == 0 ||
+        this.qtyToAdd > this.productToView.quantityOnHand
+      ) {
+        this.error = true;
+        this.showMessage = true;
+        this.errorMessage = 'Invalid quantity Input!';
+      } else {
+        this.errorMessage = '';
+        // CALL SERVICE HERE, TAKE IN qtyToAdd and productToView
+        this.cartService
+          .addToCart(this.productToView, this.qtyToAdd)
+          .subscribe({
+            next: (response) => {
+              this.error = false;
+              this.showMessage = true;
+              this.errorMessage = 'Added to Cart!';
+              this.qtyToAdd = 0;
+            },
+            error: (error) => {
+              this.error = true;
+              this.showMessage = true;
+              this.errorMessage = "Add to Cart failed!";
+            },
+          });
+      }
     }
   }
 
@@ -69,6 +103,7 @@ export class ViewProductDetailsComponent implements OnInit {
     if (this.productId != null) {
       this.productService.deleteProduct(parseInt(this.productId)).subscribe({
         next: (response) => {
+          this.error = false;
           this.showMessage = true;
           this.errorMessage = 'Successfully deleted!';
           this.productDeleted = true;
@@ -76,7 +111,7 @@ export class ViewProductDetailsComponent implements OnInit {
         error: (error) => {
           this.error = true;
           this.showMessage = true;
-          this.errorMessage = error;
+          this.errorMessage = "Delete product failed!";
         },
       });
     }
