@@ -21,6 +21,7 @@ export class ViewMyCartComponent implements OnInit {
   lineItems: LineItem[];
   display: boolean;
   currUser: User;
+  promoCode: String;
 
   sortOptions: SelectItem[] = [];
   sortOrder: number = 0;
@@ -36,6 +37,7 @@ export class ViewMyCartComponent implements OnInit {
       this.lineItems = new Array();
       this.display = false;
       this.currUser = this.sessionService.getCurrentUser();
+      this.promoCode = "";
     }
 
   
@@ -54,6 +56,10 @@ export class ViewMyCartComponent implements OnInit {
         console.log('********** ViewMyCartComponent.ts: ' + error);
       }
     });
+  }
+
+  checkout() {
+
   }
 
   onSortChange(event: { value: any; }) {

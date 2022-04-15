@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .checkout {
+      margin: 15px 0px 15px 0px;
+    }
   
   .p-dropdown {
   width: 14rem;
@@ -49,13 +53,21 @@
   margin: 0 0 0.5rem 0;
   }
   
-  .product-list-item .product-price {
-  font-size: 1.8rem;
+  .product-price {
+  font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  padding-right: 15px;
+  padding-right: 20px;
   align-self: flex-end;
   }
+
+  .product-price-2 {
+    color: #C5E1A5;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    padding-right: 20px;
+    }
   
   .product-list-item .product-list-action {
   display: flex;
@@ -64,46 +76,6 @@
   
   .product-list-item .p-button {
   margin-bottom: 0.5rem;
-  }
-  
-  .product-grid-item {
-  margin: 0.5em;
-  border: 1px solid #dee2e6;
-  width: 30%;
-  display: inline-block;
-  background-color: #191919;
-  }
-  
-  .product-grid-item .product-grid-item-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  }
-  
-  .product-grid-item .product-grid-item-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  }
-  
-  .product-grid-item .img {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 2rem 0;
-  border-radius: 15px;
-  }
-  
-  .product-grid-item .product-grid-item-content {
-  text-align: center;
-  overflow: hidden;
-  }
-  
-  .product-grid-item-content .img {
-  width: 80%;
-  }
-  
-  .product-grid-item .product-price {
-  font-size: 1.5rem;
-  font-weight: 600;
   }
   
   .card {

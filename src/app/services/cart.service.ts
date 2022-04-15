@@ -30,7 +30,6 @@ export class CartService {
 
   addToCart(productToAdd: Product, qtyToAdd: number): Observable<any> {
     let updateCartReq: UpdateCartReq = new UpdateCartReq(productToAdd, qtyToAdd, this.sessionService.getCurrentUser());
-
     return this.httpClient
       .post<any>(this.baseUrl + '/addToCart', updateCartReq, httpOptions)
       .pipe(catchError(this.handleError));

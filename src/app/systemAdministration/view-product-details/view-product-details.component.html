@@ -33,6 +33,7 @@
       <img class="img" src="{{ productToView.imageLink }}" />
       <div
         *ngIf="
+          sessionService.getIsLogin() &&
           sessionService.getCurrentUser().role == 'SELLER' &&
           sessionService.getCurrentUser().userId ==
             productToView.seller?.userId &&
@@ -61,6 +62,38 @@
           (click)="confirm()"
         >
           Delete
+        </button>
+      </div>
+      <div
+        *ngIf="
+          sessionService.getIsLogin() &&
+          sessionService.getCurrentUser().role == 'CUSTOMER' &&
+          retrieveProductError == false &&
+          productDeleted == false
+        "
+        style="margin: 15px 0px 15px 0px"
+      >
+        <input
+          pInputText
+          placeholder="1"
+          id="username"
+          type="text"
+          name="username"
+          #username="ngModel"
+          [(ngModel)]="qtyToAdd"
+          required="true"
+        />
+      </div>
+      <div>
+
+        <button
+          pButton
+          icon="pi pi-shopping-cart"
+          label="Add To Cart"
+          type="button"
+          class="p-button"
+          (click)="addToCart()"
+        >
         </button>
       </div>
     </td>

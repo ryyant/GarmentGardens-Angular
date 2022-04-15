@@ -1,78 +1,117 @@
 <app-breadcrumb [pageName]="'myRewards'"></app-breadcrumb>
 
-<h3 style="color: white;">My Cart</h3>
-<h3 style="color: white;">{{cart?.cartType}}</h3>
-<div class="garmentCard">
-  <table>
-    <tr>
-      <td><h3>Total Cart Items:</h3></td>
-      <td>{{cart?.totalCartItems}}</td>
-    </tr>
-    <tr>
-      <td><h3>Total Quantity:</h3></td>
-      <td>{{cart?.totalQuantity}}</td>
-    </tr>
-    <tr>
-      <td><h3>Total Amount:</h3></td>
-      <td>{{cart?.totalAmount}}</td>
-    </tr>
-  </table>
+<h3 style="color: white">My Cart</h3>
+<h3 style="color: white">{{ cart?.cartType }}</h3>
+<div class="garmentCard dataHeader">
+  <div style="display: flex; flex: 4; align-items: center; justify-content: center; ">
+    <table>
+      <tr>
+        <td>
+          <h3 class="product-price">Total Cart Items</h3>
+          <h3 style="color: white" >{{ cart?.totalCartItems }}</h3>
+        </td>
+        <td>
+          <h3 class="product-price">Total Quantity</h3>
+          <h3 style="color: white">{{ cart?.totalQuantity }}</h3>
+        </td>
+        <td>
+          <h3 class="product-price">Total Amount</h3>
+          <h3 style="color: white">{{ cart?.totalAmount }}</h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="checkout" style="flex: 1;">
+    <table>
+      <tr>
+        <td>
+          <h3>Promo Code:</h3>
+          <input
+            pInputText
+            placeholder="1"
+            id="promoCode"
+            type="text"
+            name="promoCode"
+            #username="ngModel"
+            [(ngModel)]="promoCode"
+            required="true"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <button
+              pButton
+              label="Checkout"
+              type="button"
+              class="p-button"
+              (click)="checkout()"
+              style="margin: 10px;"
+            ></button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 
-<br/>
+<br />
 <div class="garmentCard">
-  <p-dataView 
-  #dv
-  [value]="lineItems"
-  [paginator]="true"
-  [rows]="9"
-  [sortField]="sortField"
-  [sortOrder]="sortOrder"
+  <p-dataView
+    #dv
+    [value]="lineItems"
+    [paginator]="true"
+    [rows]="9"
+    [sortField]="sortField"
+    [sortOrder]="sortOrder"
   >
     <ng-template pTemplate="header">
       <div class="dataHeader">
         <p-dropdown
-        [options]="sortOptions"
-        [(ngModel)]="sortKey"
-        placeholder="Sort By"
-        (onChange)="onSortChange($event)"
-        [style]="{'min-width': '15em' }"
-        class="glow">
+          [options]="sortOptions"
+          [(ngModel)]="sortKey"
+          placeholder="Sort By"
+          (onChange)="onSortChange($event)"
+          [style]="{ 'min-width': '15em' }"
+          class="glow"
+        >
         </p-dropdown>
         <span>
           <i class="pi pi-search"></i>
           &nbsp;
           <input
-          class="glow"
-          type="search"
-          pInputText
-          placeholder="Search by Name"
-          (input)="dv.filter($any($event.target).value, 'contains')"
-        />
+            class="glow"
+            type="search"
+            pInputText
+            placeholder="Search by Name"
+            (input)="dv.filter($any($event.target).value, 'contains')"
+          />
         </span>
       </div>
     </ng-template>
 
     <ng-template let-lineItem pTemplate="listItem">
-      <div
-        class="product-list-item glow"
-      >
+      <div class="product-list-item glow">
         <img class="img" src="{{ lineItem.product.imageLink }}" />
         <div class="product-list-detail">
           <div class="product-name">{{ lineItem.product.name }}</div>
         </div>
+        &nbsp;
         <div class="product-list-action">
-          <span class="product-price">${{ lineItem.product.unitPrice }}</span>
-          <!--           <p-button
-          label="View Product"
-          (onClick)="showDialog(product)"
-        ></p-button> -->
-          <!--                 <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
--->
+          <span class="product-price">Quantity</span>
+          <span class="product-price-2">{{ lineItem.quantity }}</span>
+        </div>
+        &nbsp;
+        <div class="product-list-action">
+          <span class="product-price">Unit Price</span>
+          <span class="product-price-2">${{ lineItem.unitPrice }}</span>
+        </div>
+        &nbsp;
+        <div class="product-list-action">
+          <span class="product-price">Sub Total</span>
+          <span class="product-price-2">${{ lineItem.subTotal }}</span>
         </div>
       </div>
     </ng-template>
-
-    
   </p-dataView>
 </div>
