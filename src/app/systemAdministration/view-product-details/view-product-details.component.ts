@@ -5,6 +5,7 @@ import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { ConfirmationService } from 'primeng/api';
+import { RoleEnum } from 'src/app/models/role-enum';
 
 @Component({
   selector: 'app-view-product-details',
@@ -22,6 +23,12 @@ export class ViewProductDetailsComponent implements OnInit {
   qtyToAdd: number = 0;
   seller: boolean;
 
+  sizes: string[] = ["XXS", "XS", "S", "M", "L", "XL", "XXL"]
+  selectedSize: string | undefined;
+
+  recommendedSize: string | undefined;
+  displayDialog: boolean;
+  role: RoleEnum | undefined;
   constructor(
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -36,10 +43,15 @@ export class ViewProductDetailsComponent implements OnInit {
     this.error = false;
     this.showMessage = false;
     this.productDeleted = false;
+    this.displayDialog = false;
     this.seller = this.sessionService.getCurrentUser().role == "SELLER";
   }
 
   ngOnInit(): void {
+    this.recommendedSize = this.sessionService.getRecommendedSize();
+    this.selectedSize = this.recommendedSize !== null ? this.recommendedSize : undefined;
+    this.role = this.sessionService.getCurrentUser().role;
+    
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
     if (this.productId != null) {
       this.productService
@@ -54,6 +66,7 @@ export class ViewProductDetailsComponent implements OnInit {
         });
     }
   }
+
 
   addToCart() {
     if (
@@ -97,6 +110,10 @@ export class ViewProductDetailsComponent implements OnInit {
         this.deleteProduct();
       },
     });
+  }
+
+  displayDialogBox() {
+    this.displayDialog=true;
   }
 
   deleteProduct() {

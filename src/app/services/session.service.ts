@@ -11,6 +11,14 @@ import { CreditCard } from '../models/credit-card';
 export class SessionService {
   constructor() {}
 
+  setRecommendedSize(size: string): void {
+    sessionStorage['recommendedSize'] = size;
+  }
+
+  getRecommendedSize(): string {
+    return sessionStorage['recommendedSize']
+  }
+
   getIsLogin(): boolean {
     if (sessionStorage['isLogin'] == 'true') {
       return true;
@@ -22,6 +30,8 @@ export class SessionService {
   setIsLogin(isLogin: boolean): void {
     sessionStorage['isLogin'] = isLogin;
   }
+
+
 
   getMotds(): MessageOfTheDay[] {
     return JSON.parse(sessionStorage['motds']);

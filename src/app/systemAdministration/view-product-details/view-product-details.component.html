@@ -33,14 +33,27 @@
   <tr>
     <td width="40%" style="text-align: center">
       <img class="img" src="{{ productToView.imageLink }}" />
+
+      <div style="color:blanchedalmond" *ngIf="recommendedSize === undefined" style="display:inline-block;">
+        Unsure of your size? Try our Sizing Assistant
+        <p-button style="border-radius: 10px;" (onClick)="displayDialogBox()" label="?">
+        </p-button>
+      </div>
+
+      <p-dialog [(visible)]="displayDialog">
+        <app-sizing-assistant ></app-sizing-assistant>
+      </p-dialog>
+
+      <div style="color:blanchedalmond" *ngIf="recommendedSize !== undefined">
+        Your recommended size is {{recommendedSize}}
+      </div>
+      <div>
+        <b>Size: </b>
+        <p-dropdown [options]="sizes"   [(ngModel)]="selectedSize"></p-dropdown>
+      </div>
       <div
         *ngIf="
-          sessionService.getIsLogin() &&
-          sessionService.getCurrentUser().role == 'SELLER' &&
-          sessionService.getCurrentUser().userId ==
-            productToView.seller?.userId &&
-          retrieveProductError == false &&
-          productDeleted == false
+          sessionService.getIsLogin() && retrieveProductError === false && productDeleted === false
         " style="margin: 15px 0px 15px 0px">
         <a routerLink="/systemAdministration/updateProduct/{{ productId }}"><button pButton type="button"
             class="p-button-rounded p-button-outlined" value="Register">
@@ -55,8 +68,7 @@
       </div>
       <div
         *ngIf="
-          sessionService.getIsLogin() &&
-          sessionService.getCurrentUser().role == 'CUSTOMER' &&
+          role === 'CUSTOMER' &&
           retrieveProductError == false &&
           productDeleted == false
         "
@@ -91,7 +103,9 @@
         <table style="text-align: center">
           <tr>
             <td width="20%" style="font-weight: bold">Product ID</td>
-            <td>{{ productToView.productId }}</td>
+            <td>{{ productToView.productId }}
+              
+            </td>
           </tr>
           <tr>
             <td width="20%" style="font-weight: bold">SKU Code</td>
@@ -136,9 +150,9 @@
             </td>
           </tr>
         </table>
+        
       </div>
     </td>
   </tr>
 </table>
-
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { SessionService } from 'src/app/services/session.service';
+
 @Component({
   selector: 'app-sizing-assistant',
   templateUrl: './sizing-assistant.component.html',
@@ -15,69 +16,74 @@ export class SizingAssistantComponent implements OnInit {
   weight: number;
 
   displaySize: boolean;
-  sizeMessage: string;
+  recommendedSize: string;
 
   constructor(public sessionService: SessionService) {
     this.gender = "";
     this.fit=""
     this.height=0;
     this.weight=0;
-
-    this.sizeMessage = "";
+    this.recommendedSize="";
     this.displaySize = false;
   }
   
 
   ngOnInit(): void {
+    this.recommendedSize = this.sessionService.getRecommendedSize() === null ? "" : this.sessionService.getRecommendedSize();
   }
 
   generateSize(): void {
     this.displaySize = true;
-    this.sizeMessage = "Your recommended size is ";
+    
     if (this.gender == "Male") {
       if (this.weight <= 50) {
         if (this.height <= 175) {
-          this.sizeMessage = "Your recommended size is S";
+          this.recommendedSize ="S";
         } else {
-          this.sizeMessage= "Your recommended size is M";
+          this.recommendedSize ="M";
         }
       } else if (this.weight > 50 && this.weight <= 60) {
         if (this.height <= 180) {
-          this.sizeMessage= "Your recommended size is M"
+          this.recommendedSize ="M"
         } else {
-          this.sizeMessage= "Your recommended size is L";
+          this.recommendedSize ="L";
         }
       }else if (this.weight > 60 && this.weight > 80) {
         if (this.height <= 190) {
-          this.sizeMessage = "Your recommended size is L"
+          this.recommendedSize ="L"
         } else {
-          this.sizeMessage= "Your recommended size is XL";
+          this.recommendedSize = "XL";
         }
       } else {
-        this.sizeMessage = "Your recommended size is XXL"
+        this.recommendedSize = "XXL"
       }
     } else {
       if (this.weight <= 50) {
         if (this.height <= 175) {
-          this.sizeMessage = "Your recommended size is XS";
+          this.recommendedSize ="XS";
         } else {
-          this.sizeMessage= "Your recommended size is S";
+          this.recommendedSize ="S";
         }
       } else if (this.weight > 50 && this.weight <= 60) {
         if (this.height <= 180) {
-          this.sizeMessage= "Your recommended size is S"
+          this.recommendedSize ="S"
         } else {
-          this.sizeMessage= "Your recommended size is M";
+          this.recommendedSize ="M";
         }
       } else if (this.weight > 60) {
         if (this.height <= 190) {
-          this.sizeMessage= "Your recommended size is M"
+          this.recommendedSize ="M"
         } else {
-          this.sizeMessage= "Your recommended size is L";
+          this.recommendedSize ="L";
         }
       } else {
-        this.sizeMessage= "Your recommended size is XL"
+        this.recommendedSize ="XL"
       }
     }
+    this.setSessionStorageRecommendedSize();
+  }
+  
+  setSessionStorageRecommendedSize() {
+    this.sessionService.setRecommendedSize(this.recommendedSize);
   }
 }
