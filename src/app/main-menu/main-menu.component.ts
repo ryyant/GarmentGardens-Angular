@@ -11,14 +11,21 @@ import { SessionService } from '../services/session.service';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css'],
 })
+
+
 export class MainMenuComponent implements OnInit {
-  constructor(private router: Router, public sessionService: SessionService, private categoryService: CategoryService
-    ) {}
 
   menuCustomer: MenuItem[] = [];
   menuSeller: MenuItem[] = [];
   restrictedMenu: MenuItem[] = [];
+  display: boolean;
 
+  constructor(private router: Router, public sessionService: SessionService, private categoryService: CategoryService
+    ) {
+      this.display = false;
+    }
+
+  
   ngOnInit() {
 
     // MENU FOR ANYONE
@@ -153,6 +160,10 @@ export class MainMenuComponent implements OnInit {
   }
   }
 
+  showDialog() {
+    this.display = true;
+  }
+  
   userLogout(): void {
     this.sessionService.setIsLogin(false);
     this.sessionService.setCurrentUser(null);

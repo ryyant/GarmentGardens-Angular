@@ -10,14 +10,19 @@
 <ng-template [ngIf]="sessionService.getIsLogin() == true">
   <span *ngIf="sessionService.getCurrentUser().role == 'CUSTOMER'">
     <p-menubar  [model]="menuCustomer">
-      <div class="searchBar">
+      <button pButton label="Sizing Assistant" style="display: inline;" (click)="showDialog()"></button>
+      <div class="searchBar" style="display: inline;">
         <input type="text" pInputText placeholder="Search" />
         <button pButton icon="pi pi-search"></button>
       </div>
     </p-menubar>
+    <p-dialog header="Sizing Assistant" [(visible)]="display">
+        <app-sizing-assistant></app-sizing-assistant>
+    </p-dialog>
   </span>
   <span *ngIf="sessionService.getCurrentUser().role == 'SELLER'">
     <p-menubar  [model]="menuSeller">
+      <button>Size Assistant</button>
       <div class="searchBar">
         <input type="text" pInputText placeholder="Search" />
         <button pButton icon="pi pi-search"></button>

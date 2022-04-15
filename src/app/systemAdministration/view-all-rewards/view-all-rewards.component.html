@@ -93,6 +93,12 @@
         <h1 style="font-size: 40px">
           {{ rewardToView.rewardName }}
         </h1>
+        <div *ngIf="resultSuccess == true" style="color: green;">
+          <h4>{{message}}</h4>
+        </div>
+        <div *ngIf="resultError == true" style="color: rgb(201, 34, 12)">
+          <h4>{{message}}</h4>
+        </div>
         <p-button
         label="Redeem Reward"
         (onClick)="redeemReward(rewardToView)"
@@ -111,7 +117,13 @@
           </td>
           <div style="text-align: left">
             <h3>Description:</h3>
-            <p>{{ rewardToView.expiryDate }}</p>
+            <p>{{ parseDate(rewardToView.expiryDate) | date }}</p>
+          </div>
+
+          <div style="text-align: right">
+            <h3>PromoCode:</h3>
+            <p>{{ rewardToView.promoCode }}</p>
+            
           </div>
         </tr>
       </table>

@@ -1,0 +1,36 @@
+<div id="top">
+    <h1>See Your Personalised Size Recommendation</h1>
+    <h3>Enter Your Height and Weight below</h3>
+  </div>
+  <div>
+    <b>Gender: </b>
+    <p-dropdown placeholder="Select your Gender" [options]="genderOptions"   [(ngModel)]="gender"></p-dropdown>
+  </div>
+  <div>
+    <b>Fit: </b>
+    <p-dropdown placeholder="Select your Fit" [options]="fitOptions"   [(ngModel)]="fit"></p-dropdown>
+  </div>
+
+  <div id="bottom">
+    <div>
+      <b>Height: </b> 
+      <input type="text" pInputText [(ngModel)] ="height"  >
+      <span >cm</span>
+      <p-slider style="margin: 15px; display: flex; justify-content: center;" [(ngModel)]="height" orientation="vertical" [step]="0.1" [min]="50" [max]="200"></p-slider>
+    </div>
+    <div style="margin: 20px">
+        <b>Weight: </b> 
+        <input type="text" pInputText [(ngModel)] ="weight"  >
+        <span>kg</span>
+        <p-slider style="margin: 20px" [(ngModel)]="weight"  [step]="0.1" [min]="50" [max]="200"></p-slider>
+      </div>
+
+
+    <div >
+      <button label="Generate Size" pButton (click)="generateSize()"></button>
+    </div>
+    <div *ngIf="displaySize == true">
+        {{sizeMessage}}
+    </div>
+    
+  </div>

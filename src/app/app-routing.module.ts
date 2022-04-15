@@ -18,6 +18,7 @@ import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/v
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
 import { ViewMyTransactionsComponent } from './systemAdministration/view-my-transactions/view-my-transactions.component';
+import {SliderModule} from 'primeng/slider';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
