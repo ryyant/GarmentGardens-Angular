@@ -37,7 +37,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { AccordionModule } from 'primeng/accordion';
-
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -134,6 +134,7 @@ import { SizingAssistantComponent } from './dialogbox/sizing-assistant/sizing-as
     FieldsetModule,
     VirtualScrollerModule,
     AccordionModule,
+    ClipboardModule
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent],

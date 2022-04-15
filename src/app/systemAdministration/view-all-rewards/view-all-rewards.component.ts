@@ -31,6 +31,9 @@ export class ViewAllRewardsComponent implements OnInit {
   sortKey: string = "";
   sortField: string = "";
 
+  displayCopyClipboard: boolean ;
+  displayCopyClipboardMessage: string;
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
@@ -42,6 +45,8 @@ export class ViewAllRewardsComponent implements OnInit {
       this.rewardToRedeem = new Reward();
       this.resultSuccess = false;
       this.resultError = false;
+      this.displayCopyClipboard = false;
+      this.displayCopyClipboardMessage="";
     }
 
 
@@ -70,13 +75,13 @@ export class ViewAllRewardsComponent implements OnInit {
       error:(error)=>{
         this.resultError = true;
         this.resultSuccess = false;
-        this.message = "An error has occurred while redeeming the reward: " + error;
+        this.message = "An error has occurred while redeeming the reward";
         
         console.log('********** UpdateProductComponent.ts: ' + error);
       }
     })
     console.log(this.message)
-    window.location.reload();
+    // window.location.reload();
   }
   parseDate(d: Date | undefined)
     {		
@@ -98,6 +103,11 @@ export class ViewAllRewardsComponent implements OnInit {
     this.rewardToView = rewardToView;
   }
 
+  copyToClipboard() {
+    this.displayCopyClipboard = true;
+    this.displayCopyClipboardMessage="COPIED ";
+  }
+
   viewRewardDetails() {
     this.router.navigate(["/systemAdministration/viewRewardDetails/" + this.rewardToView.rewardId])
   }
@@ -114,4 +124,8 @@ export class ViewAllRewardsComponent implements OnInit {
       this.sortField = value;
   }
 }
+
+
+
+
 }

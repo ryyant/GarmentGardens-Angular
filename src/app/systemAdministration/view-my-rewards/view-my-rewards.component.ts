@@ -29,6 +29,9 @@ export class ViewMyRewardsComponent implements OnInit {
   sortKey: string = "";
   sortField: string = "";
 
+  displayCopyClipboard: boolean ;
+  displayCopyClipboardMessage: string;
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
@@ -40,6 +43,8 @@ export class ViewMyRewardsComponent implements OnInit {
       this.rewardToUse = new Reward();
       this.resultSuccess = false;
       this.resultError = false;
+      this.displayCopyClipboard = false;
+      this.displayCopyClipboardMessage="";
      }
 
   ngOnInit(): void {
@@ -73,7 +78,7 @@ export class ViewMyRewardsComponent implements OnInit {
   useReward(rewardToUse: Reward) {
     this.rewardToUse = rewardToUse;
     console.log(rewardToUse);
-    this.rewardService.redeemReward(this.sessionService.getCurrentUser().userId, rewardToUse.rewardId).subscribe({
+    this.rewardService.useReward(this.sessionService.getCurrentUser().userId, rewardToUse.rewardId).subscribe({
       next:(response)=>{
         this.resultSuccess = true;
         this.resultError = false;
@@ -91,6 +96,13 @@ export class ViewMyRewardsComponent implements OnInit {
 
     window.location.reload();
   }
+
+  copyToClipboard() {
+    this.displayCopyClipboard = true;
+    this.displayCopyClipboardMessage="COPIED TO CLIPBOARD";
+  }
+
+
   onSortChange(event: { value: any; }) {
     let value = event.value;
   
