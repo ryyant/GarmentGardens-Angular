@@ -1,11 +1,16 @@
 <app-breadcrumb [pageName]="'viewProductDetails'"></app-breadcrumb>
 
 <div style="display: inline-flex; align-items: center">
-  <a
-    routerLink="/systemAdministration/viewSellerProducts"
-    style="color: white; margin: 15px"
-    ><i class="pi pi-arrow-circle-left"></i>
-  </a>
+  <div *ngIf="seller == true">
+    <a routerLink="/systemAdministration/viewSellerProducts" style="color: white; margin: 15px"><i
+        class="pi pi-arrow-circle-left"></i>
+    </a>
+  </div>
+  <div *ngIf="seller == false">
+    <a routerLink="/systemAdministration/viewAllProducts" style="color: white; margin: 15px"><i
+        class="pi pi-arrow-circle-left"></i>
+    </a>
+  </div>
   <h2>View Product Details</h2>
 </div>
 
@@ -24,42 +29,25 @@
 </div>
 <br />
 
-<table
-  *ngIf="retrieveProductError == false && productToView != null"
-  width="100%"
->
+<table *ngIf="retrieveProductError == false && productToView != null" width="100%">
   <tr>
     <td width="40%" style="text-align: center">
       <img class="img" src="{{ productToView.imageLink }}" />
-      <div
-        *ngIf="
+      <div *ngIf="
           sessionService.getCurrentUser().role == 'SELLER' &&
           sessionService.getCurrentUser().userId ==
             productToView.seller?.userId &&
           retrieveProductError == false &&
           productDeleted == false
-        "
-        style="margin: 15px 0px 15px 0px"
-      >
-        <a routerLink="/systemAdministration/updateProduct/{{ productId }}"
-          ><button
-            pButton
-            type="button"
-            class="p-button-rounded p-button-outlined"
-            value="Register"
-          >
+        " style="margin: 15px 0px 15px 0px">
+        <a routerLink="/systemAdministration/updateProduct/{{ productId }}"><button pButton type="button"
+            class="p-button-rounded p-button-outlined" value="Register">
             Update
           </button>
         </a>
         &nbsp;
-        <button
-          pButton
-          type="button"
-          class="p-button-rounded p-button-outlined"
-          value="Register"
-          style="color: red"
-          (click)="confirm()"
-        >
+        <button pButton type="button" class="p-button-rounded p-button-outlined" value="Register" style="color: red"
+          (click)="confirm()">
           Delete
         </button>
       </div>
@@ -94,20 +82,16 @@
           <tr>
             <td width="20%" style="font-weight: bold">Product Rating</td>
             <td>
-              <p-rating
-                [ngModel]="productToView.productRating"
-                [readonly]="true"
-                [cancel]="false"
-              ></p-rating>
+              <p-rating [ngModel]="productToView.productRating" [readonly]="true" [cancel]="false"></p-rating>
             </td>
           </tr>
           <tr>
             <td width="20%" style="font-weight: bold">Category</td>
             <td>
               {{
-                productToView.category != null
-                  ? productToView.category.name
-                  : ""
+              productToView.category != null
+              ? productToView.category.name
+              : ""
               }}
             </td>
           </tr>
@@ -123,7 +107,4 @@
   </tr>
 </table>
 
-<p-confirmDialog
-  header="Confirmation"
-  icon="pi pi-exclamation-triangle"
-></p-confirmDialog>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
