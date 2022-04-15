@@ -5,20 +5,18 @@
 
   <span
     *ngIf="
-      pageName == 'checkout' ||
-      pageName == 'voidRefund' ||
-      pageName == 'viewMySaleTransactions'
+      pageName == 'myTransactions' ||
+      pageName == 'myCart' ||
+      pageName == 'customerDisputes'
     "
   >
-    > Cashier Operation
+    > Customer
   </span>
 
-  <span *ngIf="pageName == 'checkout'"> > Checkout </span>
-
-  <span *ngIf="pageName == 'voidRefund'"> > Void/Refund </span>
-
-  <span *ngIf="pageName == 'viewMySaleTransactions'">
-    > View My Sale Transactions
+  <span *ngIf="pageName == 'myCart'"> > My Cart </span>
+  
+  <span *ngIf="pageName == 'myTransactions'">
+    > View My Transactions
   </span>
 
   <span
@@ -49,6 +47,5 @@
 
   <span *ngIf="pageName == 'myRewards'"> > Rewards > My Rewards </span>
   <span *ngIf="pageName == 'allRewards'"> > Rewards > All Rewards </span>
-
 </section>
 <br />

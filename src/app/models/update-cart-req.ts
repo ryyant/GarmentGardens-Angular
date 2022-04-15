@@ -3,14 +3,19 @@ import { User } from "./user";
 
 export class UpdateCartReq {
 
+    // FOR ADD TO CART
     productToAdd: Product | undefined;
     qtyToAdd: number | undefined;
     currentUser: User | undefined; // CUSTOMER
 
-    constructor(productToAdd?: Product, qtyToAdd?: number, currentUser?: User) {
+    // FOR CHECKOUT
+    promoCode: string | undefined;
+
+    // CAN ONLY HAVE 1 CONSTRUCTOR
+    constructor(productToAdd?: Product, qtyToAdd?: number, promoCode?: string, currentUser?: User) {
         this.productToAdd = productToAdd;
         this.qtyToAdd = qtyToAdd;
+        this.promoCode = promoCode;
         this.currentUser = currentUser;
     }
-    
 }

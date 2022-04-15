@@ -12,6 +12,7 @@ import { UpdateCartReq } from '../models/update-cart-req';
 import { Product } from '../models/product';
 import { LineItem } from '../models/line-item';
 import { Cart } from '../models/cart';
+import { Order } from '../models/order';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -29,14 +30,25 @@ export class CartService {
   ) { }
 
   addToCart(productToAdd: Product, qtyToAdd: number): Observable<any> {
-    let updateCartReq: UpdateCartReq = new UpdateCartReq(productToAdd, qtyToAdd, this.sessionService.getCurrentUser());
+    let updateCartReq: UpdateCartReq = new UpdateCartReq(productToAdd, qtyToAdd, "", this.sessionService.getCurrentUser());
     return this.httpClient
       .post<any>(this.baseUrl + '/addToCart', updateCartReq, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
+  checkout(promoCode: string): Observable<any> {
+    let updateCartReq: UpdateCartReq = new UpdateCartReq(undefined, 0, promoCode, this.sessionService.getCurrentUser());
+    return this.httpClient
+      .post<any>(this.baseUrl + '/checkout', updateCartReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
   retrieveMyCart(user: User) : Observable<Cart> {
     return this.httpClient.get<Cart>(this.baseUrl + '/retrieveMyCart/' + user.userId).pipe(catchError(this.handleError));
+  }
+
+  retrieveMyOrders(user: User) : Observable<Order[]> {
+    return this.httpClient.get<Order[]>(this.baseUrl + '/retrieveMyOrders/' + user.userId).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

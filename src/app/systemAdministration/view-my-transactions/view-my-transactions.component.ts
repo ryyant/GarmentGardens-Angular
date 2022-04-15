@@ -9,18 +9,19 @@ import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { Cart } from 'src/app/models/cart';
+import { Order } from 'src/app/models/order';
 
 @Component({
-  selector: 'app-view-my-cart',
-  templateUrl: './view-my-cart.component.html',
-  styleUrls: ['./view-my-cart.component.css'],
+  selector: 'app-view-my-transactions',
+  templateUrl: './view-my-transactions.component.html',
+  styleUrls: ['./view-my-transactions.component.css']
 })
-export class ViewMyCartComponent implements OnInit {
-  cart: Cart | undefined;
-  lineItems: LineItem[];
+export class ViewMyTransactionsComponent implements OnInit {
+  orders: Order[];
   display: boolean;
   currUser: User;
   promoCode: string;
+  lifetimeSpendings: number;
 
   error: boolean;
   showMessage: boolean;
@@ -38,28 +39,28 @@ export class ViewMyCartComponent implements OnInit {
     private cartService: CartService,
     private primengConfig: PrimeNGConfig
   ) {
-    this.lineItems = new Array();
+    this.orders = new Array();
     this.display = false;
     this.currUser = this.sessionService.getCurrentUser();
     this.promoCode = '';
     this.error = false;
     this.showMessage = false;
+    this.lifetimeSpendings = 0;
   }
-
+  
   ngOnInit(): void {
-    this.cartService.retrieveMyCart(this.currUser).subscribe({
+     this.cartService.retrieveMyOrders(this.currUser).subscribe({
       next: (response) => {
-        this.cart = response;
+        this.orders = response;
         console.log(response);
-        if (response.cartLineItems != null) {
-          this.lineItems = response.cartLineItems;
-          console.log(this.lineItems);
-        }
+          // for (let i=0; i < response.length; i++) {
+          //   this.lifetimeSpendings += response[i].totalAmount;
+          // }
       },
       error: (error) => {
-        console.log('********** ViewMyCartComponent.ts: ' + error);
+        console.log('********** ViewMyOrdersComponent.ts: ' + error);
       },
-    });
+    } );
 
     this.sortOptions = [
       { label: 'Sub Total High to Low', value: '!subTotal' },
@@ -67,33 +68,6 @@ export class ViewMyCartComponent implements OnInit {
     ];
 
     this.primengConfig.ripple = true;
-  }
-
-  checkout() {
-    console.log('Checking out...');
-    if (this.lineItems.length == 0) {
-      this.error = true;
-      this.showMessage = true;
-      this.errorMessage = 'Nothing in Cart!';
-    } else {
-      this.errorMessage = '';
-      // CALL SERVICE HERE, TAKE IN USER AND PROMO CODE
-      this.cartService.checkout(this.promoCode).subscribe({
-        next: (response) => {
-          this.error = false;
-          this.showMessage = true;
-          this.errorMessage = 'Checkout Complete!';
-          this.promoCode ="";
-          this.cart = undefined;
-          this.lineItems = [];
-        },
-        error: (error) => {
-          this.error = true;
-          this.showMessage = true;
-          this.errorMessage = 'Checkout Failed!';
-        },
-      });
-    }
   }
 
   onSortChange(event: { value: any }) {

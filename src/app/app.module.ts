@@ -58,12 +58,13 @@ import { CreateNewUserComponent } from './systemAdministration/create-new-user/c
 import { ViewProfilePageComponent } from './systemAdministration/view-profile-page/view-profile-page.component';
 import { ViewSellerProductsComponent } from './systemAdministration/view-seller-products/view-seller-products.component';
 import { ViewAllRewardsComponent } from './systemAdministration/view-all-rewards/view-all-rewards.component';
-import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
+import { ViewProductByCategoryComponent } from './systemAdministration/view-product-by-category/view-product-by-category.component';
 import { ViewRewardDetailsComponent } from './systemAdministration/view-reward-details/view-reward-details.component';
 import { ViewMyRewardsComponent } from './systemAdministration/view-my-rewards/view-my-rewards.component';
 import { ViewDisputesComponent } from './systemAdministration/view-disputes/view-disputes.component';
 import { ConfirmationService } from 'primeng/api';
 import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
+import { ViewMyTransactionsComponent } from './systemAdministration/view-my-transactions/view-my-transactions.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my
     ViewMyRewardsComponent,
     ViewDisputesComponent,
     ViewMyCartComponent,
+    ViewMyTransactionsComponent,
   ],
   imports: [
     AppRoutingModule,

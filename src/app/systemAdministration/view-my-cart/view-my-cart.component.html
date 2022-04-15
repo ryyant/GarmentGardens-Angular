@@ -1,7 +1,19 @@
-<app-breadcrumb [pageName]="'myRewards'"></app-breadcrumb>
+<app-breadcrumb [pageName]="'myCart'"></app-breadcrumb>
 
-<h3 style="color: white">My Cart</h3>
-<h3 style="color: white">{{ cart?.cartType }}</h3>
+<h3 style="color: white" *ngIf="cart?.cartType == 'INDIVIDUALCART' ">My Cart</h3>
+
+<div style="width: 95%;">
+  <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="showMessage && error == true" class="boxErrorMessage">
+    {{ errorMessage }}
+  </div>
+  <br />
+</div>
+
+
 <div class="garmentCard dataHeader">
   <div style="display: flex; flex: 4; align-items: center; justify-content: center; ">
     <table>
@@ -29,13 +41,14 @@
           <h3>Promo Code:</h3>
           <input
             pInputText
-            placeholder="1"
+            placeholder="GARMENTGARDENS"
             id="promoCode"
             type="text"
             name="promoCode"
             #username="ngModel"
             [(ngModel)]="promoCode"
             required="true"
+            class="glow"
           />
         </td>
       </tr>
@@ -62,6 +75,7 @@
     [value]="lineItems"
     [paginator]="true"
     [rows]="9"
+    filterBy="product.name"
     [sortField]="sortField"
     [sortOrder]="sortOrder"
   >

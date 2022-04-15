@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
-import { SessionService } from '../services/session.service';
-import { ProductService } from '../services/product.service';
-import { CategoryService } from '../services/category.service';
-import { CartService } from '../services/cart.service';
-import { Product } from '../models/product';
+import { SessionService } from '../../services/session.service';
+import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
+import { CartService } from '../../services/cart.service';
+import { Product } from '../../models/product';
 
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
-import { Category } from '../models/category';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-view-product-by-category',
