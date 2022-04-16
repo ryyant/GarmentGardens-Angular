@@ -89,4 +89,6 @@ export class ViewMyTransactionsComponent implements OnInit {
   openLineItemsDialogue() {}
 
   rateProduct() {}
+  
+  openDispute() {}
 }

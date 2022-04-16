@@ -19,6 +19,8 @@ import { ViewDisputesComponent } from './systemAdministration/view-disputes/view
 import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my-cart.component';
 import { ViewMyTransactionsComponent } from './systemAdministration/view-my-transactions/view-my-transactions.component';
 import {SliderModule} from 'primeng/slider';
+import { DonatePageComponent } from './donate-page/donate-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -42,7 +44,9 @@ const routes: Routes = [
   { path: 'systemAdministration/viewMyRewards', component: ViewMyRewardsComponent},
   { path: 'systemAdministration/viewDisputes', component: ViewDisputesComponent},
   { path: 'systemAdministration/viewMyCart', component: ViewMyCartComponent},
-  { path: 'systemAdministration/viewMyTransactions', component: ViewMyTransactionsComponent}
+  { path: 'systemAdministration/viewMyTransactions', component: ViewMyTransactionsComponent},
+  { path: 'systemAdministration/donatePage', component: DonatePageComponent},
+  { path: 'systemAdministration/aboutUs', component: AboutUsComponent}
 ];
 
 @NgModule({

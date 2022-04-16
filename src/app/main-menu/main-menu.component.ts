@@ -32,6 +32,7 @@ export class MainMenuComponent implements OnInit {
     this.restrictedMenu = [
       {
         label: 'Browse',
+        routerLink: ['/systemAdministration/viewAllProducts'],
         items: [
           {
             label: 'All',
@@ -116,6 +117,17 @@ export class MainMenuComponent implements OnInit {
         ],
       },
     ];
+
+    this.menuCustomer.push(
+      {
+        label: 'Donate',
+        routerLink: ['/systemAdministration/donatePage'],
+      },
+      {
+        label: 'About Us',
+        routerLink: ['/systemAdministration/aboutUs'],
+      }
+    )
   }
 
 

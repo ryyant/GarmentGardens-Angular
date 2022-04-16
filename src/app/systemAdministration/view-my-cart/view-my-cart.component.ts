@@ -22,6 +22,10 @@ export class ViewMyCartComponent implements OnInit {
   currUser: User;
   promoCode: string;
 
+  totalCartItems: number;
+  totalQuantity: number;
+  totalAmount: number;
+
   error: boolean;
   showMessage: boolean;
   errorMessage: string | undefined;
@@ -44,6 +48,9 @@ export class ViewMyCartComponent implements OnInit {
     this.promoCode = '';
     this.error = false;
     this.showMessage = false;
+    this.totalCartItems = 0;
+    this.totalQuantity = 0;
+    this.totalAmount = 0;
   }
 
   ngOnInit(): void {
@@ -54,6 +61,7 @@ export class ViewMyCartComponent implements OnInit {
         if (response.cartLineItems != null) {
           this.lineItems = response.cartLineItems;
           console.log(this.lineItems);
+          this.initCartDetails();
         }
       },
       error: (error) => {
@@ -67,6 +75,25 @@ export class ViewMyCartComponent implements OnInit {
     ];
 
     this.primengConfig.ripple = true;
+  }
+
+  initCartDetails() {
+    this.clearCartDetails();
+    console.log(this.lineItems);
+    for (let i = 0; i < this.lineItems.length; i++) {
+      if (this.totalCartItems == 0) {
+        this.totalCartItems++;
+      }
+      this.totalCartItems += i;
+      this.totalQuantity += this.lineItems[i].quantity as number;
+      this.totalAmount += this.lineItems[i].subTotal as number;
+    }
+  }
+
+  clearCartDetails() {
+    this.totalCartItems = 0;
+    this.totalQuantity = 0;
+    this.totalAmount = 0;
   }
 
   checkout() {
@@ -86,6 +113,7 @@ export class ViewMyCartComponent implements OnInit {
           this.promoCode = '';
           this.cart = undefined;
           this.lineItems = [];
+          this.clearCartDetails();
         },
         error: (error) => {
           this.error = true;
@@ -104,8 +132,11 @@ export class ViewMyCartComponent implements OnInit {
         this.error = false;
         this.showMessage = true;
         this.errorMessage = 'Removed Successfully!';
-        this.lineItems = this.lineItems.filter(item => item != lineItemToRemove);
+        this.lineItems = this.lineItems.filter(
+          (item) => item != lineItemToRemove
+        );
         console.log(this.errorMessage);
+        this.initCartDetails();
       },
       error: (error) => {
         this.error = true;
@@ -126,6 +157,7 @@ export class ViewMyCartComponent implements OnInit {
         this.errorMessage = 'Cart Cleared Successfully!';
         this.lineItems = [];
         console.log(this.errorMessage);
+        this.clearCartDetails();
       },
       error: (error) => {
         this.error = true;

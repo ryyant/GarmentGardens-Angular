@@ -2,6 +2,7 @@
 
 <h3 style="color: white" *ngIf="cart?.cartType == 'INDIVIDUALCART'">My Cart</h3>
 
+
 <div style="width: 95%">
   <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
     {{ errorMessage }}
@@ -15,26 +16,29 @@
 
 <div class="garmentCard dataHeader">
   <div
-    style="display: flex; flex: 4; align-items: center; justify-content: center"
+    style="display: flex; flex: 4; align-items: center; justify-content: center; flex-direction: column;"
   >
+  <h2 style="color: white">
+    Start Making a Change, shop at Garment Gardens! 🌱
+    </h2>
     <table>
       <tr>
         <td>
           <h3 class="product-price">Total Cart Items</h3>
           <h3 style="color: white">
-            {{ cart?.totalCartItems != null ? cart?.totalCartItems : 0 }}
+            {{ totalCartItems }}
           </h3>
         </td>
         <td>
           <h3 class="product-price">Total Quantity</h3>
           <h3 style="color: white">
-            {{ cart?.totalQuantity != null ? cart?.totalQuantity : 0 }}
+            {{ totalQuantity }}
           </h3>
         </td>
         <td>
           <h3 class="product-price">Total Amount</h3>
           <h3 style="color: white">
-            {{ cart?.totalAmount != null ? cart?.totalAmount : 0 }}
+            ${{ totalAmount }}
           </h3>
         </td>
       </tr>
@@ -45,10 +49,26 @@
     <table>
       <tr>
         <td>
-          <h3>Promo Code:</h3>
+          <h3>Promo Code</h3>
           <input
             pInputText
             placeholder="GARMENTGARDENS"
+            id="promoCode"
+            type="text"
+            name="promoCode"
+            #username="ngModel"
+            [(ngModel)]="promoCode"
+            required="true"
+            class="glow"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Payment Method</h3>
+          <input
+            pInputText
+            placeholder="Paynow"
             id="promoCode"
             type="text"
             name="promoCode"
@@ -70,23 +90,17 @@
             style="margin: 10px"
           ></button>
         </td>
-        <td>
-          <button
-            pButton
-            label="Clear Cart"
-            type="button"
-            class="p-button"
-            (click)="clearCart()"
-            style="margin: 10px"
-          ></button>
-        </td>
       </tr>
     </table>
   </div>
 </div>
 
 <br />
-<div class="garmentCard">
+
+
+
+
+  <div class="garmentCard">
   <p-dataView
     #dv
     [value]="lineItems"
@@ -156,3 +170,13 @@
     </ng-template>
   </p-dataView>
 </div>
+
+<div class="garmentCard">
+  <button
+  pButton
+  label="Clear Cart"
+  type="button"
+  class="p-button"
+  (click)="clearCart()"
+  style="margin: 10px"
+></button></div>

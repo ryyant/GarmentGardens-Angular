@@ -109,7 +109,7 @@
     <p-accordionTab *ngFor="let order of orders" header="Order #{{ order.orderId }}">
       <table>
         <tr>
-          <td style="width: 70%;">
+          <td>
             <div class="product-list-item">      
               <div class="product-list-action">
                 <span class="tx-details">Total Order Items</span>
@@ -152,7 +152,18 @@
             </div>
               &nbsp;
               <div class="product-list-action">
-                <a href="https://forms.gle/h27U9N4vJwzugSRB6">
+                <button
+                pButton
+                label="Open Dispute"
+                type="button"
+                class="p-button-outlined"
+                (click)="openLineItemsDialogue()"
+                style="margin: 10px;"
+              ></button>              
+            </div>
+              &nbsp;
+              <div class="product-list-action">
+                <a href="https://forms.gle/h27U9N4vJwzugSRB6" target="_blank">
                   <button
                   pButton
                   label="Rate Us"

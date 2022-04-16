@@ -70,6 +70,8 @@ import { ViewMyCartComponent } from './systemAdministration/view-my-cart/view-my
 import { ViewMyTransactionsComponent } from './systemAdministration/view-my-transactions/view-my-transactions.component';
 import { SizingAssistantComponent } from './dialogbox/sizing-assistant/sizing-assistant.component';
 import { ViewAllRatingsComponent } from './systemAdministration/view-all-ratings/view-all-ratings.component';
+import { DonatePageComponent } from './donate-page/donate-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { ViewAllRatingsComponent } from './systemAdministration/view-all-ratings
     ViewMyCartComponent,
     ViewMyTransactionsComponent,
     SizingAssistantComponent,
-    ViewAllRatingsComponent
+    ViewAllRatingsComponent,
+    DonatePageComponent,
+    AboutUsComponent
   ],
   imports: [
     AppRoutingModule,
