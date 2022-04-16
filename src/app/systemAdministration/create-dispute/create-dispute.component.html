@@ -22,7 +22,7 @@
             <tr>
                 <td width="20%" style="font-weight: bold;">Title</td>
                 <td><input pInputText placeholder="title" id="title" type="text" name="title" #title="ngModel"
-                    [(ngModel)]="dispute.title" required="true" /></td>
+                    [(ngModel)]="newDispute.title" required="true" /></td>
                 <td>
                     <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="errorText">
                         <div *ngIf="title.errors?.['required']">
@@ -35,7 +35,7 @@
                 <td width="20%" style="font-weight: bold;">Description</td>
                 <td>
                     <input pInputText placeholder="Description" id="description" type="text" name="description"
-                    #description="ngModel" [(ngModel)]="dispute.description" required="true" /></td>
+                    #description="ngModel" [(ngModel)]="newDispute.description" required="true" /></td>
                 <td>
                     <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
                         <div *ngIf="description.errors?.['required']">

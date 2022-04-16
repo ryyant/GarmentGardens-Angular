@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -33,15 +33,17 @@ export class DisputeService {
       .get<Dispute[]>(this.baseUrl + '/viewMyDisputes?username=' + user.username).pipe(catchError(this.handleError));
   }
 
-  createNewDispute(newDispute: Dispute, orderId: string): Observable<number> {
-    let createProductReq: CreateDisputeReq = new CreateDisputeReq(
+  createNewDispute(dispute: Dispute, orderId: string): Observable<number> {
+    let createDisputeReq: CreateDisputeReq = new CreateDisputeReq(
       this.sessionService.getUsername(),
       this.sessionService.getPassword(),
-      newDispute, orderId
+      dispute , orderId
     );
 
+    console.log("This dispute works " + dispute.title);
+
     return this.httpClient
-      .put<number>(this.baseUrl, createProductReq, httpOptions)
+      .put<number>(this.baseUrl, createDisputeReq, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

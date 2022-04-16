@@ -11,6 +11,7 @@ import { SessionService } from '../services/session.service';
 import { User } from '../models/user';
 import { CreateUserReq } from '../models/create-user-req';
 import { UpdateProfileReq } from '../models/update-user-req';
+import { ChangePasswordReq } from '../models/change-password-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -25,7 +26,7 @@ export class UserService {
   constructor(
     private httpClient: HttpClient,
     private sessionService: SessionService
-  ) { }
+  ) {}
 
   userLogin(
     username: string | undefined,
@@ -34,13 +35,12 @@ export class UserService {
     return this.httpClient
       .get<User>(
         this.baseUrl +
-        '/userLogin?username=' +
-        username +
-        '&password=' +
-        password
+          '/userLogin?username=' +
+          username +
+          '&password=' +
+          password
       )
       .pipe(catchError(this.handleError));
-
   }
 
   createNewUser(newUser: User): Observable<number> {
@@ -56,6 +56,21 @@ export class UserService {
 
     return this.httpClient
       .post<any>(this.baseUrl + '/updateProfile', updateProfileReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  changePassword(currUser: User, newPassword: string): Observable<any> {
+    let changePasswordReq: ChangePasswordReq = new ChangePasswordReq(
+      currUser,
+      newPassword
+    );
+
+    return this.httpClient
+      .post<any>(
+        this.baseUrl + '/changePassword',
+        changePasswordReq,
+        httpOptions
+      )
       .pipe(catchError(this.handleError));
   }
 

@@ -186,6 +186,32 @@ export class ViewProfilePageComponent implements OnInit {
     });
   }
 
+  changePassword(changePasswordForm: NgForm) {
+    this.pwSubmitted = true;
+    if (changePasswordForm.invalid) {
+      this.changePwError = true;
+      this.changePwMessage = 'Form is incomplete';
+    } else if (this.currPw == this.oldPw && this.newPw == this.confirmPw) {
+      let newPassword = new String(this.newPw);
+      let passwordString = newPassword.toString();
+      this.userService.changePassword(this.currUser, passwordString).subscribe({
+        next: (response) => {
+          this.sessionService.setCurrentUser(this.currUser);
+          this.changePwError = false;
+          this.changePwSuccess = true;
+          this.changePwMessage = 'You have changed your password successfully';
+        },
+        error: (error) => {
+          this.changePwError = true;
+          this.changePwSuccess = false;
+          this.changePwMessage =
+            'An error has occurred while changing password: ' + error;
+          console.log(error);
+        },
+      });
+    }
+  }
+
   checkLogin() {
     if (!this.sessionService.getIsLogin()) {
       this.router.navigate(['/accessRightError']);
