@@ -1,74 +1,95 @@
 <app-breadcrumb [pageName]="'viewProductDetails'"></app-breadcrumb>
 
 <div style="display: inline-flex; align-items: center">
-  <div *ngIf="seller == true">
-    <a routerLink="/systemAdministration/viewSellerProducts" style="color: white; margin: 15px"><i
-        class="pi pi-arrow-circle-left"></i>Back
-    </a>
-  </div>
-  <div *ngIf="seller == false">
-    <a routerLink="/systemAdministration/viewAllProducts" style="color: white; margin: 15px"><i
-        class="pi pi-arrow-circle-left"></i>Back
-    </a>
-  </div>
+  <a routerLink=".." style="color: white; margin: 15px">
+    <i class="pi pi-arrow-circle-left"></i>
+  </a>
   <h2>View Product Details</h2>
 </div>
 
 <div>
-  <h1 *ngIf="retrieveProductError == true" style="color: red">
+  <h1 *ngIf="retrieveProductError === true" style="color: red">
     Product ID {{ productId }} does not exist!
   </h1>
 </div>
 
-<div *ngIf="showMessage && error == false" class="boxSuccessMessage">
+<div *ngIf="showMessage && error === false" class="boxSuccessMessage">
   {{ errorMessage }}
 </div>
 
-<div *ngIf="showMessage && error == true" class="boxErrorMessage">
+<div *ngIf="showMessage && error === true" class="boxErrorMessage">
   {{ errorMessage }}
 </div>
 <br />
 
-<table *ngIf="retrieveProductError == false && productToView != null" width="100%">
+<table
+  *ngIf="retrieveProductError === false && productToView !== null"
+  width="100%"
+>
   <tr>
     <td width="40%" style="text-align: center">
       <img class="img" src="{{ productToView.imageLink }}" />
 
-      <div style="color:blanchedalmond" *ngIf="recommendedSize === undefined" style="display:inline-block;">
+      <div
+        style="color: blanchedalmond"
+        *ngIf="recommendedSize === undefined"
+        style="display: inline-block"
+      >
         Unsure of your size? Try our Sizing Assistant
-        <p-button style="border-radius: 10px;" (onClick)="displayDialogBox()" label="?">
+        <p-button
+          style="border-radius: 10px"
+          (onClick)="displayDialogBox()"
+          label="?"
+        >
         </p-button>
       </div>
 
       <p-dialog [(visible)]="displayDialog">
-        <app-sizing-assistant ></app-sizing-assistant>
+        <app-sizing-assistant></app-sizing-assistant>
       </p-dialog>
 
-      <div style="color:blanchedalmond" *ngIf="recommendedSize !== undefined">
-        Your recommended size is {{recommendedSize}}
+      <div style="color: blanchedalmond" *ngIf="recommendedSize !== undefined">
+        Your recommended size is {{ recommendedSize }}
       </div>
       <div>
         <b>Size: </b>
-        <p-dropdown [options]="sizes"   [(ngModel)]="selectedSize"></p-dropdown>
+        <p-dropdown [options]="sizes" [(ngModel)]="selectedSize"></p-dropdown>
       </div>
       <div
         *ngIf="
-          sessionService.getIsLogin() && retrieveProductError === false && productDeleted === false
-        " style="margin: 15px 0px 15px 0px">
-        <a routerLink="/systemAdministration/updateProduct/{{ productId }}"><button pButton type="button"
-            class="p-button-rounded p-button-outlined" value="Register">
+          sessionService.getIsLogin() &&
+          this.role === 'SELLER' &&
+          retrieveProductError === false &&
+          productDeleted === false
+        "
+        style="margin: 15px 0px 15px 0px"
+      >
+        <a routerLink="/systemAdministration/updateProduct/{{ productId }}"
+          ><button
+            pButton
+            type="button"
+            class="p-button-rounded p-button-outlined"
+            value="Register"
+          >
             Update
           </button>
         </a>
         &nbsp;
-        <button pButton type="button" class="p-button-rounded p-button-outlined" value="Register" style="color: red"
-          (click)="confirm()">
+        <button
+          pButton
+          type="button"
+          class="p-button-rounded p-button-outlined"
+          value="Register"
+          style="color: red"
+          (click)="confirm()"
+        >
           Delete
         </button>
       </div>
       <div
         *ngIf="
-          role === 'CUSTOMER' &&
+          (role === undefined ||
+          role === 'CUSTOMER') &&
           retrieveProductError == false &&
           productDeleted == false
         "
@@ -86,7 +107,6 @@
         />
       </div>
       <div>
-
         <button
           pButton
           icon="pi pi-shopping-cart"
@@ -94,8 +114,7 @@
           type="button"
           class="p-button"
           (click)="addToCart()"
-        >
-        </button>
+        ></button>
       </div>
     </td>
     <td>
@@ -103,9 +122,7 @@
         <table style="text-align: center">
           <tr>
             <td width="20%" style="font-weight: bold">Product ID</td>
-            <td>{{ productToView.productId }}
-              
-            </td>
+            <td>{{ productToView.productId }}</td>
           </tr>
           <tr>
             <td width="20%" style="font-weight: bold">SKU Code</td>
@@ -130,16 +147,20 @@
           <tr>
             <td width="20%" style="font-weight: bold">Product Rating</td>
             <td>
-              <p-rating [ngModel]="productToView.productRating" [readonly]="true" [cancel]="false"></p-rating>
+              <p-rating
+                [ngModel]="productToView.productRating"
+                [readonly]="true"
+                [cancel]="false"
+              ></p-rating>
             </td>
           </tr>
           <tr>
             <td width="20%" style="font-weight: bold">Category</td>
             <td>
               {{
-              productToView.category != null
-              ? productToView.category.name
-              : ""
+                productToView.category != null
+                  ? productToView.category.name
+                  : ""
               }}
             </td>
           </tr>
@@ -150,14 +171,24 @@
             </td>
           </tr>
         </table>
-        
       </div>
     </td>
   </tr>
 </table>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<br/>
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
+<br />
 
-<div class="garmentCard" style="width:96.75%">
+<div class="garmentCard" style="width: 96.75%">
   <app-view-all-ratings></app-view-all-ratings>
 </div>
+
+<p-dialog
+  position="top"
+  [(visible)]="loginDialogue"
+  [style]="{ width: '50vw' }"
+>
+  <h1 style="color: red">Please Login!</h1>
+</p-dialog>

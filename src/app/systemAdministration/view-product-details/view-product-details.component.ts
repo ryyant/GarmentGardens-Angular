@@ -21,14 +21,15 @@ export class ViewProductDetailsComponent implements OnInit {
   errorMessage: string | undefined;
   productDeleted: boolean;
   qtyToAdd: number = 0;
-  seller: boolean;
 
   sizes: string[] = ["XXS", "XS", "S", "M", "L", "XL", "XXL"]
   selectedSize: string | undefined;
 
   recommendedSize: string | undefined;
+  loginDialogue: boolean;
   displayDialog: boolean;
   role: RoleEnum | undefined;
+
   constructor(
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -43,15 +44,22 @@ export class ViewProductDetailsComponent implements OnInit {
     this.error = false;
     this.showMessage = false;
     this.productDeleted = false;
+    this.loginDialogue = false;
     this.displayDialog = false;
-    this.seller = this.sessionService.getCurrentUser().role == "SELLER";
+    this.role = undefined;
   }
 
   ngOnInit(): void {
     this.recommendedSize = this.sessionService.getRecommendedSize();
     this.selectedSize = this.recommendedSize !== null ? this.recommendedSize : undefined;
-    this.role = this.sessionService.getCurrentUser().role;
-    
+
+    // IMPORTANT
+    if (this.sessionService?.getIsLogin() === true) {
+      this.role = this.sessionService?.getCurrentUser()?.role;
+      console.log(this.role);
+    }
+    console.log(this.role);
+
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
     if (this.productId != null) {
       this.productService
@@ -59,9 +67,12 @@ export class ViewProductDetailsComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.productToView = response;
+            console.log(response);
           },
           error: (error) => {
             this.retrieveProductError = true;
+            console.log(error);
+
           },
         });
     }
@@ -69,6 +80,10 @@ export class ViewProductDetailsComponent implements OnInit {
 
 
   addToCart() {
+    if (this.sessionService.getIsLogin() == false) {
+      this.loginDialogue = true;
+      return;
+    }
     if (
       this.productToView != null &&
       this.productToView.quantityOnHand != null
