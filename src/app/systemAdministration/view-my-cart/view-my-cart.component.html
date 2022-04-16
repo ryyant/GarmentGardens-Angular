@@ -1,40 +1,47 @@
 <app-breadcrumb [pageName]="'myCart'"></app-breadcrumb>
 
-<h3 style="color: white" *ngIf="cart?.cartType == 'INDIVIDUALCART' ">My Cart</h3>
+<h3 style="color: white" *ngIf="cart?.cartType == 'INDIVIDUALCART'">My Cart</h3>
 
-<div style="width: 95%;">
+<div style="width: 95%">
   <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
     {{ errorMessage }}
   </div>
-  
+
   <div *ngIf="showMessage && error == true" class="boxErrorMessage">
     {{ errorMessage }}
   </div>
   <br />
 </div>
 
-
 <div class="garmentCard dataHeader">
-  <div style="display: flex; flex: 4; align-items: center; justify-content: center; ">
+  <div
+    style="display: flex; flex: 4; align-items: center; justify-content: center"
+  >
     <table>
       <tr>
         <td>
           <h3 class="product-price">Total Cart Items</h3>
-          <h3 style="color: white" >{{ cart?.totalCartItems != null ? cart?.totalCartItems : 0 }}</h3>
+          <h3 style="color: white">
+            {{ cart?.totalCartItems != null ? cart?.totalCartItems : 0 }}
+          </h3>
         </td>
         <td>
           <h3 class="product-price">Total Quantity</h3>
-          <h3 style="color: white">{{ cart?.totalQuantity != null ? cart?.totalQuantity : 0 }}</h3>
+          <h3 style="color: white">
+            {{ cart?.totalQuantity != null ? cart?.totalQuantity : 0 }}
+          </h3>
         </td>
         <td>
           <h3 class="product-price">Total Amount</h3>
-          <h3 style="color: white">{{ cart?.totalAmount != null ? cart?.totalAmount : 0 }}</h3>
+          <h3 style="color: white">
+            {{ cart?.totalAmount != null ? cart?.totalAmount : 0 }}
+          </h3>
         </td>
       </tr>
     </table>
   </div>
 
-  <div class="checkout" style="flex: 1;">
+  <div class="checkout" style="flex: 1">
     <table>
       <tr>
         <td>
@@ -54,14 +61,24 @@
       </tr>
       <tr>
         <td>
-            <button
-              pButton
-              label="Checkout"
-              type="button"
-              class="p-button"
-              (click)="checkout()"
-              style="margin: 10px;"
-            ></button>
+          <button
+            pButton
+            label="Checkout"
+            type="button"
+            class="p-button"
+            (click)="checkout()"
+            style="margin: 10px"
+          ></button>
+        </td>
+        <td>
+          <button
+            pButton
+            label="Clear Cart"
+            type="button"
+            class="p-button"
+            (click)="clearCart()"
+            style="margin: 10px"
+          ></button>
         </td>
       </tr>
     </table>
@@ -124,6 +141,16 @@
         <div class="product-list-action">
           <span class="product-price">Sub Total</span>
           <span class="product-price-2">${{ lineItem.subTotal }}</span>
+        </div>
+        <div>
+          <button
+            pButton
+            label="Remove"
+            type="button"
+            class="p-button-danger"
+            (click)="removeLineItem(lineItem)"
+            style="margin: 10px"
+          ></button>
         </div>
       </div>
     </ng-template>

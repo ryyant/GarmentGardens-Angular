@@ -83,7 +83,7 @@ export class ViewMyCartComponent implements OnInit {
           this.error = false;
           this.showMessage = true;
           this.errorMessage = 'Checkout Complete!';
-          this.promoCode ="";
+          this.promoCode = '';
           this.cart = undefined;
           this.lineItems = [];
         },
@@ -94,6 +94,46 @@ export class ViewMyCartComponent implements OnInit {
         },
       });
     }
+  }
+
+  removeLineItem(lineItemToRemove: LineItem) {
+    console.log('Removing line item...');
+    // CALL SERVICE HERE
+    this.cartService.removeLineItem(lineItemToRemove).subscribe({
+      next: (response) => {
+        this.error = false;
+        this.showMessage = true;
+        this.errorMessage = 'Removed Successfully!';
+        this.lineItems = this.lineItems.filter(item => item != lineItemToRemove);
+        console.log(this.errorMessage);
+      },
+      error: (error) => {
+        this.error = true;
+        this.showMessage = true;
+        this.errorMessage = 'Remove failed!';
+        console.log(this.errorMessage);
+      },
+    });
+  }
+
+  clearCart() {
+    console.log('Clearing Cart...');
+    // CALL SERVICE HERE, TAKE IN USER AND PROMO CODE
+    this.cartService.clearCart().subscribe({
+      next: (response) => {
+        this.error = false;
+        this.showMessage = true;
+        this.errorMessage = 'Cart Cleared Successfully!';
+        this.lineItems = [];
+        console.log(this.errorMessage);
+      },
+      error: (error) => {
+        this.error = true;
+        this.showMessage = true;
+        this.errorMessage = 'Clear failed!';
+        console.log(this.errorMessage);
+      },
+    });
   }
 
   onSortChange(event: { value: any }) {

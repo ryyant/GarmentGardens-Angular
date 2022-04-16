@@ -13,6 +13,7 @@ import { Product } from '../models/product';
 import { LineItem } from '../models/line-item';
 import { Cart } from '../models/cart';
 import { Order } from '../models/order';
+import { RemoveLineItemReq } from '../models/remove-line-item-req';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -50,7 +51,21 @@ export class CartService {
   retrieveMyOrders(user: User) : Observable<Order[]> {
     return this.httpClient.get<Order[]>(this.baseUrl + '/retrieveMyOrders/' + user.userId).pipe(catchError(this.handleError));
   }
+  
+  removeLineItem(lineItemToRemove: LineItem): Observable<any> {
+    let removeLineItemReq: RemoveLineItemReq = new RemoveLineItemReq(lineItemToRemove, this.sessionService.getCurrentUser(), false);
+    return this.httpClient
+      .post<any>(this.baseUrl + '/removeCartLineItem', removeLineItemReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
 
+  clearCart(): Observable<any> {
+    let removeLineItemReq: RemoveLineItemReq = new RemoveLineItemReq(undefined, this.sessionService.getCurrentUser(), true);
+    return this.httpClient
+      .post<any>(this.baseUrl + '/clearCart', removeLineItemReq, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+  
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = '';
 
