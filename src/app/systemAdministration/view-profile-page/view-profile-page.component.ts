@@ -26,9 +26,7 @@ export class ViewProfilePageComponent implements OnInit {
 
   resultCCSuccess: boolean;
   resultCCError: boolean;
-  CCmessage: string | undefined;
   creditCards: CreditCard[];
-
   newCC: CreditCard;
   submitted: boolean;
   ccMessage: string | undefined;
@@ -36,6 +34,16 @@ export class ViewProfilePageComponent implements OnInit {
   deleteCCSuccess: boolean;
   deleteCCError: boolean;
   deleteCCmessage: string | undefined;
+  ccSubmitted: boolean;
+
+  currPw: string | undefined;
+  oldPw: string | undefined;
+  newPw: string | undefined;
+  confirmPw: string | undefined;
+  changePwSuccess: boolean;
+  changePwError: boolean;
+  changePwMessage: string | undefined;
+  pwSubmitted: boolean;
 
   yearRange: string = '1921:' + new Date().getFullYear();
   maxDate: Date = new Date();
@@ -67,11 +75,15 @@ export class ViewProfilePageComponent implements OnInit {
     this.resultCCError = false;
     this.creditCards = new Array();
     this.newCC = new CreditCard();
-    this.submitted = false;
+    this.ccSubmitted = false;
 
     this.deleteCCSuccess = false;
     this.deleteCCError = false;
-    
+
+    this.currPw = this.sessionService.getPassword();
+    this.changePwSuccess = false;
+    this.changePwError = false;
+    this.pwSubmitted = false;
   }
 
   ngOnInit(): void {
@@ -109,11 +121,10 @@ export class ViewProfilePageComponent implements OnInit {
       });
     }
     this.primengConfig.ripple = true;
-
   }
 
   create(createCCForm: NgForm) {
-    this.submitted = true;
+    this.ccSubmitted = true;
 
     console.log('Creating...');
 
@@ -134,7 +145,7 @@ export class ViewProfilePageComponent implements OnInit {
         error: (error) => {
           this.resultCCError = true;
           this.resultCCSuccess = false;
-          this.message =
+          this.ccMessage =
             'An error has occurred while creating the new credit card: ' +
             error;
 
@@ -181,8 +192,8 @@ export class ViewProfilePageComponent implements OnInit {
     }
   }
 
-  clear() {
-    this.submitted = false;
+  clearCC() {
+    this.ccSubmitted = false;
     this.newCC = new CreditCard();
   }
 }

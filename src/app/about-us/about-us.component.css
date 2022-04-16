@@ -1,0 +1,12 @@
+.map {
+    border-radius: 15px;
+    box-shadow: 0 2px 4px 2px #C5E1A5;
+    margin-left: 15%;
+    margin-right: 25%;
+}
+
+.contentBox {
+    width: 90%;
+    margin: auto;
+}
+

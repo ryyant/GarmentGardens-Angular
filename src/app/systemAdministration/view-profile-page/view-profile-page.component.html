@@ -105,20 +105,80 @@
                     <p-selectButton id="role" name="role" #role="ngModel" [options]="stateOptions"
                         [(ngModel)]="formRole" optionLabel="label" optionValue="value" required="true" [disabled]=true>
                     </p-selectButton>
-
-                    <!-- <input #role="ngModel" id="role" name="role" type="text" [(ngModel)]="currUser.role" required
-                        pInputText disabled /> -->
                 </td>
-
             </tr>
         </table>
-        <br />
-        <br />
         <div class="account-save-button">
+            <br />
             <span>
-                <p-button label="Save" type="submit"></p-button>
+                <button pButton label="Save" type="submit" class="p-button-rounded p-button-outlined"></button>
             </span>
         </div>
+    </form>
+
+    <form>
+        <p-accordion>
+            <p-accordionTab header="Change Password">
+                <div *ngIf="changePwSuccess == true" class="boxSuccessMessage">
+                    {{changePwMessage}}
+                </div>
+                <div *ngIf="changePwError == true" class="boxErrorMessage">
+                    {{changePwMessage}}
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">Old Password</td>
+                        <td width="100%">
+                            <input #holderName="ngModel" id="holderName" name="holderName" type="text"
+                                [(ngModel)]="newCC.holderName" required pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="holderName.invalid && (holderName.dirty || holderName.touched )"
+                                class="errorText">
+                                <div *ngIf="holderName.errors?.['required']" class="errorMessage">
+                                    Name is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">New Password </td>
+                        <td width="100%">
+                            <input #creditCardNumber="ngModel" id="creditCardNumber" name="creditCardNumber" type="text"
+                                [(ngModel)]="newCC.creditCardNumber" required pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched )"
+                                class="errorText">
+                                <div *ngIf="creditCardNumber.errors?.['required']" class="errorMessage">
+                                    Credit Card Number is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="font-weight: bold;">Re-enter new password</td>
+                        <td width="100%">
+                            <input #cvv="ngModel" id="cvv" name="cvv" type="text" [(ngModel)]="newCC.cvv" required
+                                pInputText />
+                        </td>
+                        <td>
+                            <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched )" class="errorText">
+                                <div *ngIf="cvv.errors?.['required']" class="errorMessage">
+                                    CVV is required.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="password-save-button">
+                    <br />
+                    <span>
+                        <button pButton label="Save" type="submit" class="p-button-rounded p-button-outlined"></button>
+                    </span>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
     </form>
 
     <p>Manage your Wallet</p>
@@ -147,16 +207,16 @@
             <ng-template pTemplate="body" let-creditCard>
                 <tr>
                     <td>
-                        {{ creditCard.creditCardNumber }}
+                        **** **** **** {{ creditCard.creditCardNumber.slice(12, 17) }}
                     </td>
                     <td>
                         {{ creditCard.holderName }}
                     </td>
                     <td>
-                        {{ creditCard.cvv }}
+                        **{{ creditCard.cvv.slice(2,3) }}
                     </td>
                     <td>
-                        {{ creditCard.expiryDate }}
+                        {{ creditCard.expiryDate.toString().slice(0,10) }}
                     </td>
                     <td>
                         <button pButton Ripple icon="pi pi-trash" class="p-button-rounded p-button-danger"
@@ -248,7 +308,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <button pButton (click)="clear()" type="reset" value="Clear"
+                            <button pButton (click)="clearCC()" type="reset" value="Clear"
                                 class="p-button-rounded p-button-text">
                                 Clear
                             </button>
@@ -262,8 +322,6 @@
                 </table>
             </p-accordionTab>
         </p-accordion>
-
-
     </form>
 
 

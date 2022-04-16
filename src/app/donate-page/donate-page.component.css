@@ -1,0 +1,16 @@
+.contentBox {
+    width: 90%;
+    margin: auto;
+}
+
+.paymentBox {
+    margin:auto;
+    width:50%;
+    height:30%;
+    border-radius: 20px;
+}
+
+.imgBox {
+    width: 60%;
+    margin:auto;
+}

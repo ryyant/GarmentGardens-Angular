@@ -38,8 +38,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { AccordionModule } from 'primeng/accordion';
 import { ClipboardModule } from 'ngx-clipboard';
-import {KnobModule} from 'primeng/knob';
-
+import { KnobModule } from 'primeng/knob';
+import { GMapModule } from 'primeng/gmap';
+import { SplitterModule } from 'primeng/splitter';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -104,7 +105,7 @@ import { CreateDisputeComponent } from './systemAdministration/create-dispute/cr
     ViewAllRatingsComponent,
     DonatePageComponent,
     AboutUsComponent,
-    CreateDisputeComponent
+    CreateDisputeComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -147,7 +148,9 @@ import { CreateDisputeComponent } from './systemAdministration/create-dispute/cr
     VirtualScrollerModule,
     AccordionModule,
     ClipboardModule,
-    KnobModule
+    KnobModule,
+    GMapModule,
+    SplitterModule,
   ],
   providers: [ConfirmationService],
   bootstrap: [AppComponent],
