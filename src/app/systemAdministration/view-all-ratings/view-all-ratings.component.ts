@@ -42,8 +42,6 @@ export class ViewAllRatingsComponent implements OnInit {
         }
       });
     }
-    console.log(this.ratings);
-    console.log(this.retrieveRatingError)
   }
 
   parseDate(d: Date | undefined)

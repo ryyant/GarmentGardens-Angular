@@ -46,6 +46,7 @@ export class ViewProductDetailsComponent implements OnInit {
     this.productDeleted = false;
     this.loginDialogue = false;
     this.displayDialog = false;
+    // UNDEFINED IS NOT LOGGED IN, REQUIRED.
     this.role = undefined;
   }
 
@@ -56,9 +57,7 @@ export class ViewProductDetailsComponent implements OnInit {
     // IMPORTANT
     if (this.sessionService?.getIsLogin() === true) {
       this.role = this.sessionService?.getCurrentUser()?.role;
-      console.log(this.role);
     }
-    console.log(this.role);
 
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
     if (this.productId != null) {

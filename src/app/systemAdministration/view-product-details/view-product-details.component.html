@@ -1,7 +1,7 @@
 <app-breadcrumb [pageName]="'viewProductDetails'"></app-breadcrumb>
 
 <div style="display: inline-flex; align-items: center">
-  <a routerLink=".." style="color: white; margin: 15px">
+  <a routerLink="/systemAdministration/viewAllProducts" style="color: white; margin: 15px">
     <i class="pi pi-arrow-circle-left"></i>
   </a>
   <h2>View Product Details</h2>
@@ -88,8 +88,7 @@
       </div>
       <div
         *ngIf="
-          (role === undefined ||
-          role === 'CUSTOMER') &&
+          (role === undefined || role === 'CUSTOMER') &&
           retrieveProductError == false &&
           productDeleted == false
         "
@@ -106,7 +105,13 @@
           required="true"
         />
       </div>
-      <div>
+      <div
+        *ngIf="
+          (role === undefined || role === 'CUSTOMER') &&
+          retrieveProductError == false &&
+          productDeleted == false
+        "
+      >
         <button
           pButton
           icon="pi pi-shopping-cart"

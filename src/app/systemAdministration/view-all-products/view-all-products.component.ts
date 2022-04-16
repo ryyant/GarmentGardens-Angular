@@ -8,6 +8,7 @@ import { Product } from '../../models/product';
 
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { RoleEnum } from 'src/app/models/role-enum';
 
 @Component({
   selector: 'app-view-all-products',
@@ -21,6 +22,7 @@ export class ViewAllProductsComponent implements OnInit {
   productToView: Product;
   message: string = '';
   qtyToAdd: number = 0;
+  role: RoleEnum | undefined;
 
   sortOptions: SelectItem[] = [];
   sortOrder: number = 0;
@@ -40,9 +42,15 @@ export class ViewAllProductsComponent implements OnInit {
     this.loginDialogue = false;
     this.productToView = new Product();
     this.message = '';
+    this.role = undefined;
   }
 
   ngOnInit(): void {
+    // IMPORTANT
+    if (this.sessionService?.getIsLogin() === true) {
+      this.role = this.sessionService?.getCurrentUser()?.role;
+    }
+
     this.productService.getProducts().subscribe({
       next: (response) => {
         this.products = response;
@@ -63,7 +71,7 @@ export class ViewAllProductsComponent implements OnInit {
   showDialog(productToView: Product) {
     this.display = true;
     this.qtyToAdd = 0;
-    this.message = "";
+    this.message = '';
     this.productToView = productToView;
   }
 

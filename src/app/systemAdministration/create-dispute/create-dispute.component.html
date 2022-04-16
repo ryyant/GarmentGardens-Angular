@@ -2,47 +2,56 @@
 
 <h3>Create Dispute</h3>
 
-<br/>
+<div *ngIf="showMessage && error === false" class="boxSuccessMessage">
+    {{ message }}
+  </div>
+  
+  <div *ngIf="showMessage && error === true" class="boxErrorMessage">
+    {{ message }}
+  </div>
+<div class="garmentCard">
 
-<form #createDisputeForm="ngForm" (ngSubmit)="create(createDisputeForm)" class="" createDisputeForm >
+    <form #createDisputeForm="ngForm" (ngSubmit)="create(createDisputeForm)" class="" createDisputeForm >
 
-    <table width="100%">
-        <tr>
-            <td width="20%" style="font-weight: bold;">Order ID</td>
-            <td>{{orderId}}</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Title</td>
-            <td><input pInputText placeholder="title" id="title" type="text" name="title" #title="ngModel"
-                [(ngModel)]="dispute.title" required="true" /></td>
-            <td>
-                <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="errorText">
-                    <div *ngIf="title.errors?.['required']">
-                        Title is required.
+        <table width="100%">
+            <tr>
+                <td width="20%" style="font-weight: bold;">Order ID</td>
+                <td>{{orderId}}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="20%" style="font-weight: bold;">Title</td>
+                <td><input pInputText placeholder="title" id="title" type="text" name="title" #title="ngModel"
+                    [(ngModel)]="dispute.title" required="true" /></td>
+                <td>
+                    <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="errorText">
+                        <div *ngIf="title.errors?.['required']">
+                            Title is required.
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Description</td>
-            <td>
-                <input pInputText placeholder="Description" id="description" type="text" name="description"
-                #description="ngModel" [(ngModel)]="dispute.description" required="true" /></td>
-            <td>
-                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
-                    <div *ngIf="description.errors?.['required']">
-                        Description is required.
+                </td>
+            </tr>
+            <tr>
+                <td width="20%" style="font-weight: bold;">Description</td>
+                <td>
+                    <input pInputText placeholder="Description" id="description" type="text" name="description"
+                    #description="ngModel" [(ngModel)]="dispute.description" required="true" /></td>
+                <td>
+                    <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
+                        <div *ngIf="description.errors?.['required']">
+                            Description is required.
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <br/>
-    <div style="padding: 25px 0px 5px 0px;" style="text-align: center">
-        <span>
-            <p-button label="Create New Dispute" type="submit"></p-button>
-        </span>
-    </div>
-    
-</form>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <div style="padding: 25px 0px 5px 0px;" style="text-align: center">
+            <span>
+                <p-button label="Create New Dispute" type="submit"></p-button>
+            </span>
+        </div>
+        
+    </form>
+
+</div>

@@ -2,144 +2,243 @@
 
 <h3>Create New Product</h3>
 
-<form #createProductForm="ngForm" (ngSubmit)="create(createProductForm)" class="" createProductForm>
-    <div *ngIf="resultSuccess == true" style="color: blue">
-        {{ message }}
-    </div>
-
-    <div *ngIf="resultError == true" style="color: red">
-        {{ message }}
-    </div>
-
-
+<div *ngIf="showMessage && error === false" class="boxSuccessMessage size95">
+    {{ message }}
+  </div>
+  
+  <div *ngIf="showMessage && error === true" class="boxErrorMessage size95">
+    {{ message }}
+  </div>
+<div class="garmentCard">
+  <form
+    #createProductForm="ngForm"
+    (ngSubmit)="create(createProductForm)"
+    class=""
+    createProductForm
+  >
     <table width="100%">
-        <tr>
-            <td width="50%" style="font-weight: bold">SKU Code</td>
-            <td width="30%">
-                <input pInputText placeholder="PROD999" id="skuCode" type="text" name="skuCode" #skuCode="ngModel"
-                    [(ngModel)]="newProduct.skuCode" required="true" />
-            </td>
-            <td>
-                <div *ngIf="skuCode.invalid && (skuCode.dirty || skuCode.touched || submitted)" class="errorText">
-                    <div *ngIf="skuCode.errors?.['required']">SKU Code is required.</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Name</td>
-            <td>
-                <input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel"
-                    [(ngModel)]="newProduct.name" required="true" />
-            </td>
-            <td>
-                <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
-                    <div *ngIf="name.errors?.['required']" class="errorMessage">Name is required.</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Description</td>
-            <td>
-                <input pInputText placeholder="Product 1" id="description" type="text" name="description"
-                    #description="ngModel" [(ngModel)]="newProduct.description" required="true" />
-            </td>
-            <td>
-                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)"
-                    class="errorText">
-                    <div *ngIf="description.errors?.['required']" class="errorMessage">
-                        Description is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Image Link</td>
-            <td>
-                <input pInputText placeholder="Image Link" id="imageLink" type="text" name="imageLink"
-                    #imageLink="ngModel" [(ngModel)]="newProduct.imageLink" required="true" />
-            </td>
-            <td>
-                <div *ngIf="imageLink.invalid && (imageLink.dirty || imageLink.touched || submitted)" class="errorText">
-                    <div *ngIf="imageLink.errors?.['required']" class="errorMessage">
-                        Image Link is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Quantity On Hand</td>
-            <td>
-                <input pInputText placeholder="99" id="quantityOnHand" type="number" name="quantityOnHand"
-                    #quantityOnHand="ngModel" [(ngModel)]="newProduct.quantityOnHand" required="true" />
-            </td>
-            <td>
-                <div *ngIf="quantityOnHand.invalid && (quantityOnHand.dirty || quantityOnHand.touched || submitted)"
-                    class="errorText">
-                    <div *ngIf="quantityOnHand.errors?.['required']" class="errorMessage">
-                        Quantity On Hand is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Unit Price</td>
-            <td>
-                <input pInputText placeholder="10.00" id="unitPrice" type="number" name="unitPrice" #unitPrice="ngModel"
-                    [(ngModel)]="newProduct.unitPrice" required="true" />
-            </td>
-            <td>
-                <div *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched || submitted)" class="errorText">
-                    <div *ngIf="unitPrice.errors?.['required']" class="errorMessage">
-                        Unit Price is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Category</td>
-            <td>
-                <select id="category" name="category" #category="ngModel" [(ngModel)]="categoryId" required="true">
-                    <option *ngFor="let category of categories" value="{{ category.categoryId }}">
-                        {{ category.name }}
-                    </option>
-                </select>
+      <tr>
+        <td width="50%" style="font-weight: bold">SKU Code</td>
+        <td width="30%">
+          <input
+            pInputText
+            placeholder="PROD999"
+            id="skuCode"
+            type="text"
+            name="skuCode"
+            #skuCode="ngModel"
+            [(ngModel)]="newProduct.skuCode"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              skuCode.invalid && (skuCode.dirty || skuCode.touched)
+            "
+            class="errorText"
+          >
+            <div *ngIf="skuCode.errors?.['required']" class="errorMessage">
+              SKU Code is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Name</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Product 1"
+            id="name"
+            type="text"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="newProduct.name"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="errorText"
+          >
+            <div *ngIf="name.errors?.['required']" class="errorMessage">
+              Name is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Description</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Product 1"
+            id="description"
+            type="text"
+            name="description"
+            #description="ngModel"
+            [(ngModel)]="newProduct.description"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              description.invalid &&
+              (description.dirty || description.touched )
+            "
+            class="errorText"
+          >
+            <div *ngIf="description.errors?.['required']" class="errorMessage">
+              Description is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Image Link</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Image Link"
+            id="imageLink"
+            type="text"
+            name="imageLink"
+            #imageLink="ngModel"
+            [(ngModel)]="newProduct.imageLink"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              imageLink.invalid &&
+              (imageLink.dirty || imageLink.touched )
+            "
+            class="errorText"
+          >
+            <div *ngIf="imageLink.errors?.['required']" class="errorMessage">
+              Image Link is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Quantity On Hand</td>
+        <td>
+          <input
+            pInputText
+            placeholder="99"
+            id="quantityOnHand"
+            type="number"
+            name="quantityOnHand"
+            #quantityOnHand="ngModel"
+            [(ngModel)]="newProduct.quantityOnHand"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              quantityOnHand.invalid &&
+              (quantityOnHand.dirty || quantityOnHand.touched )
+            "
+            class="errorText"
+          >
+            <div
+              *ngIf="quantityOnHand.errors?.['required']"
+              class="errorMessage"
+            >
+              Quantity On Hand is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Unit Price</td>
+        <td>
+          <input
+            pInputText
+            placeholder="10.00"
+            id="unitPrice"
+            type="number"
+            name="unitPrice"
+            #unitPrice="ngModel"
+            [(ngModel)]="newProduct.unitPrice"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              unitPrice.invalid &&
+              (unitPrice.dirty || unitPrice.touched )
+            "
+            class="errorText"
+          >
+            <div *ngIf="unitPrice.errors?.['required']" class="errorMessage">
+              Unit Price is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Category</td>
+        <td>
+          <select
+            id="category"
+            name="category"
+            #category="ngModel"
+            [(ngModel)]="categoryId"
+            required="true"
+          >
+            <option
+              *ngFor="let category of categories"
+              value="{{ category.categoryId }}"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </td>
 
-            <td>
-                <div *ngIf="
-            category.invalid &&
-            (category.dirty || category.touched || submitted)
-          " class="errorText">
-                    <div *ngIf="category.errors != null && category.errors['required']">
-                        Category is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="50%" style="font-weight: bold">Tags</td>
-            <td>
-                <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
-                    <option *ngFor="let tag of tags" value="{{ tag.tagId }}">
-                        {{ tag.name }}
-                    </option>
-                </select>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        
-            
-        
+        <td>
+          <div
+            *ngIf="
+              category.invalid &&
+              (category.dirty || category.touched )
+            "
+            class="errorText"
+          >
+            <div *ngIf="category.errors != null && category.errors['required']" class="errorMessage">
+              Category is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="font-weight: bold">Tags</td>
+        <td>
+          <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
+            <option *ngFor="let tag of tags" value="{{ tag.tagId }}">
+              {{ tag.name }}
+            </option>
+          </select>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
     </table>
-    <br/>
-   
-        <div style="padding: 25px 0px 5px 0px;" style="text-align: center">
-            <span>
-                <p-button label="Clear" (click)="clear()"></p-button>
-            </span>
-            &nbsp;
-            <span>
-                <p-button label="Submit" type="submit"></p-button>
-            </span>
-        </div>
-    
-</form>
+    <br />
+
+    <div style="padding: 25px 0px 5px 0px" style="text-align: center">
+      <span>
+        <p-button label="Clear" (click)="clear()"></p-button>
+      </span>
+      &nbsp;
+      <span>
+        <p-button label="Submit" type="submit"></p-button>
+      </span>
+    </div>
+  </form>
+</div>

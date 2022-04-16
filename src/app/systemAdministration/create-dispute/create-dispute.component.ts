@@ -18,8 +18,8 @@ export class CreateDisputeComponent implements OnInit {
 	orderId: string | null;
   dispute: Dispute;
 
-  resultSuccess: boolean;
-	resultError: boolean;
+  error: boolean | undefined;
+	showMessage: boolean | undefined;
 	message: string | undefined;
 
   constructor(private router: Router,
@@ -28,27 +28,28 @@ export class CreateDisputeComponent implements OnInit {
     private disputeService: DisputeService) { 
       this.dispute = new Dispute();
       this.submitted = false;
-      this.orderId = null;
-      this.resultSuccess = false;
-      this.resultError = false;
+      this.showMessage = false;
+      this.orderId = '';
+
     }
 
   ngOnInit(): void {
 
     this.orderId = this.activatedRoute.snapshot.paramMap.get('orderId');
-    
+    console.log(this.orderId);
   }
 
   create(createDisputeForm: NgForm) {
     
     this.submitted = true;
 
-    if (createDisputeForm.valid) {
+    if (createDisputeForm.valid && this.orderId !== null) {
+      console.log(this.orderId);
+
       this.disputeService.createNewDispute(this.dispute, this.orderId).subscribe({
         next: (response) => {
           let newProductId: number = response;
-          this.resultSuccess = true;
-          this.resultError = false;
+          this.error = false;
           this.message = "New dispute " + newProductId + " created successfully";
 
           this.dispute = new Dispute();
@@ -57,8 +58,7 @@ export class CreateDisputeComponent implements OnInit {
           createDisputeForm.reset();
         },
         error: (error) => {
-          this.resultError = true;
-          this.resultSuccess = false;
+          this.error = true;
           this.message = "An error has occurred while creating the new dispute: " + error;
 
           console.log('********** CreateNewProductComponent.ts: ' + error);

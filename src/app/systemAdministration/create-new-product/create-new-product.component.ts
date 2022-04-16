@@ -26,10 +26,10 @@ export class CreateNewProductComponent implements OnInit {
   categories: Category[];
   tags: Tag[];
 
- 
-  resultSuccess: boolean;
-  resultError: boolean;
-  message: string | undefined;
+
+  message: string;
+  showMessage: boolean;
+  error: boolean;
 
 
 
@@ -47,19 +47,10 @@ export class CreateNewProductComponent implements OnInit {
     this.tagIds = new Array();
     this.categories = new Array();
     this.tags = new Array();
-
-    
-
-    this.resultSuccess = false;
-    this.resultError = false;
-
+    this.message = '';
+    this.error = false;
+    this.showMessage = false;
   }
-
-  
-
-  
-
-
 
   ngOnInit(): void {
     this.checkAccessRight()
@@ -111,8 +102,8 @@ export class CreateNewProductComponent implements OnInit {
       this.productService.createNewProduct(this.newProduct, this.categoryId, longTagIds).subscribe({
         next: (response) => {
           let newProductId: number = response;
-          this.resultSuccess = true;
-          this.resultError = false;
+          this.showMessage = true;
+          this.error = false;
           this.message = "New product " + newProductId + " created successfully";
 
           this.newProduct = new Product();
@@ -123,8 +114,8 @@ export class CreateNewProductComponent implements OnInit {
           createProductForm.reset();
         },
         error: (error) => {
-          this.resultError = true;
-          this.resultSuccess = false;
+          this.showMessage = true;
+          this.error = true;
           this.message = "An error has occurred while creating the new product: " + error;
 
           console.log('********** CreateNewProductComponent.ts: ' + error);

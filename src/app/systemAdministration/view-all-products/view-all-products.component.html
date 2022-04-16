@@ -167,7 +167,9 @@
             <p-button label="View More" (onClick)="viewProductDetails()">
             </p-button>
           </td>
-          <td><h3>Quantity:</h3></td>
+          <td>
+            <h3 *ngIf="role === undefined || role === 'CUSTOMER'">Quantity:</h3>
+          </td>
           <td>
             <input
               pInputText
@@ -178,6 +180,7 @@
               #username="ngModel"
               [(ngModel)]="qtyToAdd"
               required="true"
+              *ngIf="role === undefined || role === 'CUSTOMER'"
             />
           </td>
           <td>
@@ -185,6 +188,7 @@
               icon="pi pi-shopping-cart"
               label="Add To Cart"
               (onClick)="addToCart()"
+              *ngIf="role === undefined || role === 'CUSTOMER'"
             >
             </p-button>
           </td>

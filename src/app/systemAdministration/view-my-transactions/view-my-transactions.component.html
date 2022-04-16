@@ -190,7 +190,7 @@
         <tbody>
             <tr *ngFor="let lineItem of order.lineItems">
                 <td>{{lineItem.lineItemId}}</td>
-                <td>{{lineItem.product.name}}</td>
+                <td>{{lineItem.product?.name}}</td>
                 <td>{{lineItem.quantity}}</td>				
                 <td>{{lineItem.subTotal}}</td>
                 <td>{{lineItem.unitPrice}}</td>

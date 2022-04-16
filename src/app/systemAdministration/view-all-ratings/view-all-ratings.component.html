@@ -12,11 +12,11 @@
     <ng-template pTemplate="body" let-rating>
         <tr>
             <td>{{rating.description}}</td>
-            <td><p-rating [readonly]="true" [(ngModel)]="rating.numberOfStars"></p-rating></td>
+            <td><p-rating [readonly]="true" [(ngModel)]="rating.numberOfStars" [cancel]="false"></p-rating></td>
             <td>{{parseDate(rating.dateOfRating) | date}}</td>
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-        Footer
+        Garment Gardens 2022
     </ng-template>
 </p-table>

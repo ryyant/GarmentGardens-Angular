@@ -128,6 +128,26 @@ export class MainMenuComponent implements OnInit {
         routerLink: ['/systemAdministration/aboutUs'],
       }
     )
+    this.menuSeller.push(
+      {
+        label: 'Donate',
+        routerLink: ['/systemAdministration/donatePage'],
+      },
+      {
+        label: 'About Us',
+        routerLink: ['/systemAdministration/aboutUs'],
+      }
+    )
+    this.restrictedMenu.push(
+      {
+        label: 'Donate',
+        routerLink: ['/systemAdministration/donatePage'],
+      },
+      {
+        label: 'About Us',
+        routerLink: ['/systemAdministration/aboutUs'],
+      }
+    )
   }
 
 
