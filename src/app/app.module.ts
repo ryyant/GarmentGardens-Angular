@@ -72,6 +72,7 @@ import { SizingAssistantComponent } from './dialogbox/sizing-assistant/sizing-as
 import { ViewAllRatingsComponent } from './systemAdministration/view-all-ratings/view-all-ratings.component';
 import { DonatePageComponent } from './donate-page/donate-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CreateDisputeComponent } from './systemAdministration/create-dispute/create-dispute.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     SizingAssistantComponent,
     ViewAllRatingsComponent,
     DonatePageComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    CreateDisputeComponent
   ],
   imports: [
     AppRoutingModule,

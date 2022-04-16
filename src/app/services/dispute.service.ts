@@ -7,7 +7,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
-
+import { CreateDisputeReq } from '../models/create-dispute-req';
 import { SessionService } from '../services/session.service';
 import { Dispute } from '../models/dispute';
 
@@ -31,6 +31,18 @@ export class DisputeService {
   getMyDispute(user: User): Observable<Dispute[]> {
     return this.httpClient
       .get<Dispute[]>(this.baseUrl + '/viewMyDisputes?username=' + user.username).pipe(catchError(this.handleError));
+  }
+
+  createNewDispute(newDispute: Dispute, orderId: string): Observable<number> {
+    let createProductReq: CreateDisputeReq = new CreateDisputeReq(
+      this.sessionService.getUsername(),
+      this.sessionService.getPassword(),
+      newDispute, orderId
+    );
+
+    return this.httpClient
+      .put<number>(this.baseUrl, createProductReq, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
