@@ -14,7 +14,7 @@ import { Order } from 'src/app/models/order';
 @Component({
   selector: 'app-view-my-transactions',
   templateUrl: './view-my-transactions.component.html',
-  styleUrls: ['./view-my-transactions.component.css']
+  styleUrls: ['./view-my-transactions.component.css'],
 })
 export class ViewMyTransactionsComponent implements OnInit {
   orders: Order[];
@@ -47,20 +47,18 @@ export class ViewMyTransactionsComponent implements OnInit {
     this.showMessage = false;
     this.lifetimeSpendings = 0;
   }
-  
+
   ngOnInit(): void {
-     this.cartService.retrieveMyOrders(this.currUser).subscribe({
+    this.cartService.retrieveMyOrders(this.currUser).subscribe({
       next: (response) => {
         this.orders = response;
-        console.log(response);
-          // for (let i=0; i < response.length; i++) {
-          //   this.lifetimeSpendings += response[i].totalAmount;
-          // }
+        console.log(this.orders);
+        this.initLifetimeSpending(response);
       },
       error: (error) => {
         console.log('********** ViewMyOrdersComponent.ts: ' + error);
       },
-    } );
+    });
 
     this.sortOptions = [
       { label: 'Sub Total High to Low', value: '!subTotal' },
@@ -68,6 +66,12 @@ export class ViewMyTransactionsComponent implements OnInit {
     ];
 
     this.primengConfig.ripple = true;
+  }
+
+  initLifetimeSpending(orders: Order[]) {
+    for (let i = 0; i < this.orders.length; i++) {
+      this.lifetimeSpendings += this.orders[i].totalAmount as number;
+    }
   }
 
   onSortChange(event: { value: any }) {
@@ -81,4 +85,8 @@ export class ViewMyTransactionsComponent implements OnInit {
       this.sortField = value;
     }
   }
+
+  openLineItemsDialogue() {}
+
+  rateProduct() {}
 }

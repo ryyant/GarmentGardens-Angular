@@ -72,12 +72,12 @@ export class MainMenuComponent implements OnInit {
         label: 'Customer',
         items: [
           {
-            label: 'Transactions',
-            routerLink: ['/systemAdministration/viewMyTransactions'],
-          },
-          {
             label: 'Cart',
             routerLink: ['/systemAdministration/viewMyCart'],
+          },
+          {
+            label: 'Transactions',
+            routerLink: ['/systemAdministration/viewMyTransactions'],
           },
           {
             label: 'Disputes',

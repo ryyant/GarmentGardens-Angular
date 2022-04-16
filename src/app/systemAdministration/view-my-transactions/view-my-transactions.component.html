@@ -2,28 +2,29 @@
 
 <h3 style="color: white">My Orders</h3>
 
-<div style="width: 95%;">
+<div style="width: 95%">
   <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
     {{ errorMessage }}
   </div>
-  
+
   <div *ngIf="showMessage && error == true" class="boxErrorMessage">
     {{ errorMessage }}
   </div>
 </div>
 
-
 <div class="garmentCard dataHeader">
-  <div style="display: flex; flex: 4; align-items: center; justify-content: center; ">
+  <div
+    style="display: flex; flex: 4; align-items: center; justify-content: center"
+  >
     <table>
       <tr>
         <td>
           <h3 class="product-price">Lifetime Orders</h3>
-          <h3 style="color: white" >{{ orders?.length }}</h3>
+          <h3 style="color: white">{{ orders?.length }}</h3>
         </td>
         <td>
           <h3 class="product-price">Lifetime Spendings</h3>
-          <h3 style="color: white" >{{ lifetimeSpendings }}</h3>
+          <h3 style="color: white">${{ lifetimeSpendings }}</h3>
         </td>
       </tr>
     </table>
@@ -31,7 +32,7 @@
 </div>
 
 <br />
-<div class="garmentCard">
+<!-- <div class="garmentCard">
   <p-dataView
     #dv
     [value]="orders"
@@ -40,8 +41,8 @@
     filterBy="lineItem.lineItemId"
     [sortField]="sortField"
     [sortOrder]="sortOrder"
-  >
-    <ng-template pTemplate="header">
+  > -->
+<!-- <ng-template pTemplate="header">
       <div class="dataHeader">
         <p-dropdown
           [options]="sortOptions"
@@ -64,29 +65,107 @@
           />
         </span>
       </div>
-    </ng-template>
+    </ng-template> -->
 
-    <ng-template let-order pTemplate="listItem">
+<!-- <ng-template let-order pTemplate="listItem">
       <div class="product-list-item glow">
         <div class="product-list-detail">
-          <div class="product-name">{{ order.orderId }}</div>
+          <span class="product-price">Order:</span>
+          <span class="product-price-2">{{ order.orderId }}</span>
+        </div>
+
+        &nbsp;
+        <div class="product-list-action">
+          <span class="tx-details">Total Order Items</span>
+          <span class="product-price-2">{{ order.totalOrderItem }}</span>
         </div>
         &nbsp;
         <div class="product-list-action">
-          <span class="product-price">Total Quantity</span>
+          <span class="tx-details">Total Quantity</span>
           <span class="product-price-2">{{ order.totalQuantity }}</span>
         </div>
         &nbsp;
         <div class="product-list-action">
-          <span class="product-price">Total Amount</span>
+          <span class="tx-details">Total Amount</span>
           <span class="product-price-2">${{ order.totalAmount }}</span>
         </div>
         &nbsp;
-        <!-- <div class="product-list-action">
-          <span class="product-price">Sub Total</span>
-          <span class="product-price-2">${{ order.subTotal }}</span>
-        </div> -->
+        <div class="product-list-action">
+          <span class="tx-details">Refund?</span>
+          <span class="product-price-2">{{ order.voidRefund? '✅' : '❌'}}</span>
+        </div>
+        &nbsp;
+        <div class="product-list-action">
+          <span class="tx-details">Delivery Status</span>
+          <span class="product-price-2">{{ order.deliveryStatus }}</span>
+        </div>
       </div>
-    </ng-template>
-  </p-dataView>
+    </ng-template> -->
+<!-- </p-dataView>
+</div> -->
+
+<div class="garmentCard">
+  <p-accordion [multiple]="true">
+    <p-accordionTab *ngFor="let order of orders" header="Order #{{ order.orderId }}">
+      <table>
+        <tr>
+          <td style="width: 70%;">
+            <div class="product-list-item">      
+              <div class="product-list-action">
+                <span class="tx-details">Total Order Items</span>
+                <span class="product-price-2">{{ order.totalOrderItem }}</span>
+              </div>
+              &nbsp;
+              <div class="product-list-action">
+                <span class="tx-details">Total Quantity</span>
+                <span class="product-price-2">{{ order.totalQuantity }}</span>
+              </div>
+              &nbsp;
+              <div class="product-list-action">
+                <span class="tx-details">Total Amount</span>
+                <span class="product-price-2">${{ order.totalAmount }}</span>
+              </div>
+              &nbsp;
+              <div class="product-list-action">
+                <span class="tx-details">Refund?</span>
+                <span class="product-price-2">{{ order.voidRefund? '✅' : '❌'}}</span>
+              </div>
+              &nbsp;
+              <div class="product-list-action">
+                <span class="tx-details">Delivery Status</span>
+                <span class="product-price-2">{{ order.deliveryStatus }}</span>
+              </div>
+              &nbsp;
+            </div>
+          </td>
+          <td>
+            <div class="product-list-item" style="margin-left: 15px;">
+              <div class="product-list-action">
+                <button
+                pButton
+                label="View Items"
+                type="button"
+                class="p-button"
+                (click)="openLineItemsDialogue()"
+                style="margin: 10px;"
+              ></button>              
+            </div>
+              &nbsp;
+              <div class="product-list-action">
+                <a href="https://forms.gle/h27U9N4vJwzugSRB6">
+                  <button
+                  pButton
+                  label="Rate Us"
+                  type="button"
+                  class="p-button-outlined"
+                  style="margin: 10px;"
+                ></button>  
+                </a>
+            </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </p-accordionTab>
+  </p-accordion>
 </div>

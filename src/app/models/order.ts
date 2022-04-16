@@ -11,13 +11,13 @@ export class Order {
     totalAmount: number | undefined;
     transactionDateTime: Date | undefined;
     voidRefund: boolean | undefined;
-    deliveryStatusEnum: DeliveryStatusEnum | undefined;
+    deliveryStatus: DeliveryStatusEnum | undefined;
 
     lineItems: LineItem[] | undefined;
     dispute: Dispute | undefined;
     customer: User | undefined;
 
-    constructor(orderId?: number, totalOrderItem?: number, totalQuantity?: number, totalAmount?: number, transactionDateTime?: Date, voidRefund?: boolean, deliveryStatusEnum?: DeliveryStatusEnum)
+    constructor(orderId?: number, totalOrderItem?: number, totalQuantity?: number, totalAmount?: number, transactionDateTime?: Date, voidRefund?: boolean, deliveryStatus?: DeliveryStatusEnum)
 	{
 		this.orderId = orderId;
 		this.totalOrderItem = totalOrderItem;
@@ -25,7 +25,7 @@ export class Order {
         this.totalAmount = totalAmount;
         this.transactionDateTime = transactionDateTime;
         this.voidRefund = voidRefund;
-        this.deliveryStatusEnum = deliveryStatusEnum
+        this.deliveryStatus = deliveryStatus
 
 	}
 

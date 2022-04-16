@@ -20,15 +20,15 @@
       <tr>
         <td>
           <h3 class="product-price">Total Cart Items</h3>
-          <h3 style="color: white" >{{ cart?.totalCartItems }}</h3>
+          <h3 style="color: white" >{{ cart?.totalCartItems != null ? cart?.totalCartItems : 0 }}</h3>
         </td>
         <td>
           <h3 class="product-price">Total Quantity</h3>
-          <h3 style="color: white">{{ cart?.totalQuantity }}</h3>
+          <h3 style="color: white">{{ cart?.totalQuantity != null ? cart?.totalQuantity : 0 }}</h3>
         </td>
         <td>
           <h3 class="product-price">Total Amount</h3>
-          <h3 style="color: white">{{ cart?.totalAmount }}</h3>
+          <h3 style="color: white">{{ cart?.totalAmount != null ? cart?.totalAmount : 0 }}</h3>
         </td>
       </tr>
     </table>
