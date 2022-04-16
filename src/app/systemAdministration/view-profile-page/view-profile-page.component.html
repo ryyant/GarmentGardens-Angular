@@ -186,6 +186,13 @@
     <hr style="opacity: 0.1" />
 
     <form>
+        <div *ngIf="deleteCCSuccess == true" class="boxSuccessMessage">
+            {{deleteCCmessage}}
+        </div>
+
+        <div *ngIf="deleteCCError == true" class="boxErrorMessage">
+            {{deleteCCmessage}}
+        </div>
         <p-table [value]="creditCards" [rowHover]="true">
             <ng-template pTemplate="header">
                 <tr>
