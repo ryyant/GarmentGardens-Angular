@@ -141,3 +141,11 @@ h2,
 h3 {
   color: #c5e1a5;
 }
+
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}

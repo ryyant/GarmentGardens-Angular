@@ -3,7 +3,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SessionService } from './session.service';
-import { Rating } from 'primeng/rating';
+import { CreateRatingReq } from '../models/create-rating-req';
+import { LineItem } from '../models/line-item';
+import { Order } from '../models/order';
+import { Product } from '../models/product';
+import { Rating } from '../models/rating';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +29,13 @@ export class RatingResourceService {
     (
       catchError(this.handleError)
     );
+  }
+
+  rateProduct(product: Product, rating: Rating): Observable<any> {
+    let createRatingReq: CreateRatingReq = new CreateRatingReq(this.sessionService.getCurrentUser(), product, rating);
+    return this.httpClient
+      .put<any>(this.baseUrl + '/rateProduct', createRatingReq, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse)

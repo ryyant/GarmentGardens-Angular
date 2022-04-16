@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Rating } from 'primeng/rating';
 import { RatingResourceService } from 'src/app/services/rating-resource.service';
 import { SessionService } from 'src/app/services/session.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Rating } from 'src/app/models/rating';
+
 
 @Component({
   selector: 'app-view-all-ratings',

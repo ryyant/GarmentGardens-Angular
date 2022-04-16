@@ -10,6 +10,10 @@ import { PrimeNGConfig } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { Cart } from 'src/app/models/cart';
 import { Order } from 'src/app/models/order';
+import { RatingResourceService } from 'src/app/services/rating-resource.service';
+import { NgForm } from '@angular/forms';
+import { Rating } from 'src/app/models/rating';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-view-my-transactions',
@@ -23,11 +27,13 @@ export class ViewMyTransactionsComponent implements OnInit {
   promoCode: string;
   lifetimeSpendings: number;
   lineItems: LineItem[];
+  reviewProduct: boolean;
+  selectedProduct: Product | undefined;
+  newRating: Rating;
 
-
-  error: boolean;
-  showMessage: boolean;
-  errorMessage: string | undefined;
+  error: boolean | undefined;
+	showMessage: boolean | undefined;
+	message: string | undefined;
 
 
   sortOptions: SelectItem[] = [];
@@ -39,6 +45,7 @@ export class ViewMyTransactionsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
+    public ratingResourceService: RatingResourceService,
     private cartService: CartService,
     private primengConfig: PrimeNGConfig
   ) {
@@ -50,8 +57,9 @@ export class ViewMyTransactionsComponent implements OnInit {
     this.showMessage = false;
     this.lifetimeSpendings = 0;
     this.lineItems = new Array();
-
-
+    this.reviewProduct = false;
+    this.selectedProduct = new Product();
+    this.newRating = new Rating();
   }
 
   ngOnInit(): void {
@@ -92,15 +100,46 @@ export class ViewMyTransactionsComponent implements OnInit {
     }
   }
 
-  openLineItemsDialogue() {}
-
-  rateProduct() {}
+  reviewProductDialogue(lineItem: LineItem) {
+    this.reviewProduct = true;
+    this.selectedProduct = lineItem.product;
+    this.newRating = new Rating();
+    this.error = false;
+    this.showMessage = false;
+    this.message = "";
+  }
   
   openDispute(order: Order) {
       this.router.navigate([
         '/systemAdministration/createDispute/' +
         order.orderId,
-      ]);
+      ]);  
+  }
+
+
+  review(createReviewForm: NgForm) {
+
+    if (this.selectedProduct == null || this.newRating )
     
+    if (createReviewForm.valid && this.selectedProduct != null && this.newRating != null) {
+      this.ratingResourceService.rateProduct(this.selectedProduct, this.newRating).subscribe({
+        next: (response) => {
+          this.error = false;
+          this.showMessage = true;
+          this.message = "New Review created successfully";
+
+          this.selectedProduct = new Product();
+          this.newRating = new Rating();
+
+          createReviewForm.resetForm();
+          createReviewForm.reset();
+        },
+        error: (error) => {
+          this.error = true;
+          this.showMessage = true;
+          this.message = "An error has occurred while creating the new review: " + error;
+        }
+      });
+    }
   }
 }
