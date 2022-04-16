@@ -182,18 +182,14 @@
             <tr>				
                 <th>Line Item ID</th>
                 <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Sub Total</th>
-                <th>Unit Price</th>
+                <th>Subtotal</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let lineItem of order.lineItems">
                 <td>{{lineItem.lineItemId}}</td>
-                <td>{{lineItem.product?.name}}</td>
-                <td>{{lineItem.quantity}}</td>				
-                <td>{{lineItem.subTotal}}</td>
-                <td>{{lineItem.unitPrice}}</td>
+                <td>{{lineItem.product?.name}}</td>				
+                <td>${{lineItem.unitPrice}}</td>
             </tr>
         </tbody>
     </table>

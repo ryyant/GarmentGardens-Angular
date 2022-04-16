@@ -5,6 +5,7 @@ import { DisputeService } from 'src/app/services/dispute.service';
 
 import { SessionService } from '../../services/session.service';
 import { Dispute } from 'src/app/models/dispute';
+import { DisputeStatusEnum } from 'src/app/models/dispute-status-enum';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class CreateDisputeComponent implements OnInit {
 
   submitted: boolean;
 	orderId: string | null;
-  dispute: Dispute;
+  newDispute: Dispute;
 
   error: boolean | undefined;
 	showMessage: boolean | undefined;
@@ -26,7 +27,7 @@ export class CreateDisputeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
     private disputeService: DisputeService) { 
-      this.dispute = new Dispute();
+      this.newDispute = new Dispute();
       this.submitted = false;
       this.showMessage = false;
       this.orderId = '';
@@ -44,24 +45,22 @@ export class CreateDisputeComponent implements OnInit {
     this.submitted = true;
 
     if (createDisputeForm.valid && this.orderId !== null) {
-      console.log(this.orderId);
+      console.log("This shit works " + this.orderId);
 
-      this.disputeService.createNewDispute(this.dispute, this.orderId).subscribe({
+      this.disputeService.createNewDispute(this.newDispute, this.orderId).subscribe({
         next: (response) => {
-          let newProductId: number = response;
+          let newDisputeId: number = response;
+          this.showMessage = true;
           this.error = false;
-          this.message = "New dispute " + newProductId + " created successfully";
-
-          this.dispute = new Dispute();
-          // this.newProduct.productRating = 1;
-          createDisputeForm.resetForm();
-          createDisputeForm.reset();
+          this.message = "New dispute " + newDisputeId + " created successfully";
+          console.log("Dispute" + newDisputeId);
         },
         error: (error) => {
+          this.showMessage = true;
           this.error = true;
           this.message = "An error has occurred while creating the new dispute: " + error;
 
-          console.log('********** CreateNewProductComponent.ts: ' + error);
+          console.log('********** CreateNewDisputeComponent.ts: ' + error);
         }
       });
     }
@@ -69,7 +68,7 @@ export class CreateDisputeComponent implements OnInit {
 
   clear() {
     this.submitted = false;
-    this.dispute = new Dispute();
+    this.newDispute = new Dispute();
     // this.newProduct.productRating = 1;
   }
 
