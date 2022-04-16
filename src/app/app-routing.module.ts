@@ -21,6 +21,8 @@ import { ViewMyTransactionsComponent } from './systemAdministration/view-my-tran
 import {SliderModule} from 'primeng/slider';
 import { DonatePageComponent } from './donate-page/donate-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CreateDisputeComponent } from './systemAdministration/create-dispute/create-dispute.component';
+import { CreateDisputeReq } from './models/create-dispute-req';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -46,7 +48,8 @@ const routes: Routes = [
   { path: 'systemAdministration/viewMyCart', component: ViewMyCartComponent},
   { path: 'systemAdministration/viewMyTransactions', component: ViewMyTransactionsComponent},
   { path: 'systemAdministration/donatePage', component: DonatePageComponent},
-  { path: 'systemAdministration/aboutUs', component: AboutUsComponent}
+  { path: 'systemAdministration/aboutUs', component: AboutUsComponent},
+  { path: 'systemAdministration/createDispute/:orderId', component: CreateDisputeComponent}
 ];
 
 @NgModule({

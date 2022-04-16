@@ -22,10 +22,13 @@ export class ViewMyTransactionsComponent implements OnInit {
   currUser: User;
   promoCode: string;
   lifetimeSpendings: number;
+  lineItems: LineItem[];
+
 
   error: boolean;
   showMessage: boolean;
   errorMessage: string | undefined;
+
 
   sortOptions: SelectItem[] = [];
   sortOrder: number = 0;
@@ -46,6 +49,9 @@ export class ViewMyTransactionsComponent implements OnInit {
     this.error = false;
     this.showMessage = false;
     this.lifetimeSpendings = 0;
+    this.lineItems = new Array();
+
+
   }
 
   ngOnInit(): void {
@@ -90,5 +96,11 @@ export class ViewMyTransactionsComponent implements OnInit {
 
   rateProduct() {}
   
-  openDispute() {}
+  openDispute(order: Order) {
+      this.router.navigate([
+        '/systemAdministration/createDispute/' +
+        order.orderId,
+      ]);
+    
+  }
 }

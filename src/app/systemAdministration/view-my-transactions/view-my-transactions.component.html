@@ -157,7 +157,7 @@
                 label="Open Dispute"
                 type="button"
                 class="p-button-outlined"
-                (click)="openLineItemsDialogue()"
+                (click)="openDispute(order)"
                 style="margin: 10px;"
               ></button>              
             </div>
@@ -177,6 +177,27 @@
           </td>
         </tr>
       </table>
+      <table id="tableProductCatalogue" style="width:100%; cellpadding: 3px; cellspacing: 1px;">
+        <thead>
+            <tr>				
+                <th>Line Item ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lineItem of order.lineItems">
+                <td>{{lineItem.lineItemId}}</td>
+                <td>{{lineItem.product.name}}</td>
+                <td>{{lineItem.quantity}}</td>				
+                <td>{{lineItem.subTotal}}</td>
+                <td>{{lineItem.unitPrice}}</td>
+            </tr>
+        </tbody>
+    </table>
     </p-accordionTab>
+    
   </p-accordion>
 </div>
