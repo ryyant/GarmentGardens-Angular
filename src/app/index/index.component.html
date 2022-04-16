@@ -1,6 +1,9 @@
 <app-breadcrumb></app-breadcrumb>
 
 <article *ngIf="sessionService.getIsLogin() == false" style="width: 95%;">
+
+
+
 <p-fieldset legend="Garment Gardens" >
     Garment Gardens is a one stop platform for you to get onboard the latest fashion trends and do your part for the environment as well. All our vendors have been verified to sell sustainable clothing which have been verified by industry professionals.
 </p-fieldset>
@@ -35,17 +38,36 @@
 
 </article>
 
-<article *ngIf="sessionService.getIsLogin() == true" style="width: 95%;">
-  <h1>Message Of The Day</h1>
+<article *ngIf="sessionService.getIsLogin() == true" style="width: 95%;" >
+  <h1 style="text-align: center;">Everyday Garments for a brighter Garden.</h1>
 
-  <p-tabView>
+  <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [autoplayInterval]="3000" [circular]="true">
+    <ng-template let-id pTemplate="item">
+          <a href="https://savetheearth.org/">
+            <figure>
+              <img
+                class="glow"
+                src="assets/images/indexpage{{ id }}.jpeg"
+                height="400px"
+                width="100%"
+              />
+            </figure>
+          </a>
+    </ng-template>
+</p-carousel>
+
+<br/>
+
+<h1>Message Of The Day</h1>
+
+  <p-tabView >
     <p-tabPanel *ngFor="let motd of messageOfTheDays" header="{{motd.title}}, {{parseDate(motd.messageDate) | date}}">
       <h3>{{motd.message}}</h3>
     </p-tabPanel>
     
   </p-tabView>
   <br/>
-  <p-fieldset legend="Welcome">
+  <!-- <p-fieldset legend="Welcome">
     What Do You Feel Like Getting Today? 
   </p-fieldset>
   <br/>
@@ -55,5 +77,8 @@
   <br/>
   <p-fieldset legend="Donate">
     Want to donate to Garment Gardens Reserves? Contact Us!
-  </p-fieldset>
+  </p-fieldset> -->
+
+
+
 </article>

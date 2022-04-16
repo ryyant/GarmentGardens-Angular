@@ -47,7 +47,7 @@ export class ViewProfilePageComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private primeNGConfig: PrimeNGConfig,
+    private primengConfig: PrimeNGConfig,
     public sessionService: SessionService,
     private creditCardService: CreditCardService
   ) {
@@ -71,6 +71,7 @@ export class ViewProfilePageComponent implements OnInit {
 
     this.deleteCCSuccess = false;
     this.deleteCCError = false;
+    
   }
 
   ngOnInit(): void {
@@ -107,6 +108,8 @@ export class ViewProfilePageComponent implements OnInit {
         },
       });
     }
+    this.primengConfig.ripple = true;
+
   }
 
   create(createCCForm: NgForm) {

@@ -61,6 +61,7 @@ export class ViewAllRewardsComponent implements OnInit {
       }
     });
     console.log(this.rewards);
+    this.primengConfig.ripple = true;
   }
 
   redeemReward(rewardToRedeem: Reward) {

@@ -1,4 +1,4 @@
-<ng-template [ngIf]="sessionService.getIsLogin() == false">
+<ng-template pRipple [ngIf]="sessionService.getIsLogin() == false">
   <p-menubar [model]="restrictedMenu">
     <div class="searchBar">
       <input styletype="text" pInputText placeholder="Search" />
@@ -7,7 +7,7 @@
   </p-menubar>
 </ng-template>
 
-<ng-template [ngIf]="sessionService.getIsLogin() == true">
+<ng-template pRipple [ngIf]="sessionService.getIsLogin() == true">
   <span *ngIf="sessionService.getCurrentUser().role === 'CUSTOMER'">
     <p-menubar  [model]="menuCustomer">
       <button pButton label="Sizing Assistant" style="display: inline;" (click)="showDialog()"></button>

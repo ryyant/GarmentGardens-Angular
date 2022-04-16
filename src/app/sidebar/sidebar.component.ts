@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../models/user';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   ads: number[] = [];
-
-  constructor() { 
+  loginDialogue: boolean | undefined;
+  
+  constructor(private router: Router, public sessionService: SessionService) { 
     this.ads[0] = 0;
     this.ads[1] = 1;
     this.ads[2] = 2;
@@ -16,6 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     setInterval(() => this.randomizeAds(), 5000);
+    this.loginDialogue = false;
   }
 
   randomizeAds(): void {
@@ -27,6 +32,16 @@ export class SidebarComponent implements OnInit {
         this.ads[counter] = rand;
         counter++;
       }
+    }
+  }
+
+  goToCart() {
+    console.log("go to cart");
+    if (this.sessionService.getIsLogin() == true) {
+      this.router.navigate([
+        '/systemAdministration/viewMyCart']);
+    } else {
+      this.loginDialogue = true;
     }
   }
 

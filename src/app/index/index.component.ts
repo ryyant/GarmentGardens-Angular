@@ -14,14 +14,16 @@ import { SessionService } from '../services/session.service';
 })
 export class IndexComponent implements OnInit
 {
-  messageOfTheDays: MessageOfTheDay []
+  messageOfTheDays: MessageOfTheDay[];
 
 
+  images: number[];
 
   constructor(public sessionService: SessionService,
             private motdService: MotdService)
   {
     this.messageOfTheDays = new Array();
+    this.images = [1,2,3];
   }
 
 

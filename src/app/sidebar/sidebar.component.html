@@ -1,9 +1,8 @@
 <aside class="sidebar">
-  <a routerLink="/systemAdministration/viewMyCart">
-    <div class="garmentCard myCartTab" style="width: 100%;">
+    <div class="garmentCard myCartTab" style="width: 100%" (click)="goToCart()" style="cursor: pointer;">
       <i class="pi pi-shopping-cart" style="font-size: 2rem; color: white"></i>
     </div>
-  </a>
+
   <br />
 
   <a href="https://savetheearth.org/">
@@ -41,3 +40,12 @@
     </figure>
   </a>
 </aside>
+
+
+<p-dialog
+  position="top"
+  [(visible)]="loginDialogue"
+  [style]="{ width: '50vw' }"
+>
+  <h1 style="color: red">Please Login!</h1>
+</p-dialog>
