@@ -116,7 +116,7 @@
         </div>
     </form>
 
-    <form>
+    <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)" class="changePasswordForm">
         <p-accordion>
             <p-accordionTab header="Change Password">
                 <div *ngIf="changePwSuccess == true" class="boxSuccessMessage">
@@ -129,29 +129,29 @@
                     <tr>
                         <td width="50%" style="font-weight: bold;">Old Password</td>
                         <td width="100%">
-                            <input #holderName="ngModel" id="holderName" name="holderName" type="text"
-                                [(ngModel)]="newCC.holderName" required pInputText />
+                            <input #oldPassword="ngModel" id="oldPassword" name="oldPassword" type="password"
+                                [(ngModel)]="oldPw" required pInputText />
                         </td>
                         <td>
-                            <div *ngIf="holderName.invalid && (holderName.dirty || holderName.touched )"
+                            <div *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched )"
                                 class="errorText">
-                                <div *ngIf="holderName.errors?.['required']" class="errorMessage">
-                                    Name is required.
+                                <div *ngIf="oldPassword.errors?.['required']" class="errorMessage">
+                                    Old Password is required.
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50%" style="font-weight: bold;">New Password </td>
+                        <td width="50%" style="font-weight: bold;">New Password</td>
                         <td width="100%">
-                            <input #creditCardNumber="ngModel" id="creditCardNumber" name="creditCardNumber" type="text"
-                                [(ngModel)]="newCC.creditCardNumber" required pInputText />
+                            <input #newPassword="ngModel" id="newPassword" name="newPassword" type="password"
+                                [(ngModel)]="newPw" required pInputText />
                         </td>
                         <td>
-                            <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched )"
+                            <div *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched )"
                                 class="errorText">
-                                <div *ngIf="creditCardNumber.errors?.['required']" class="errorMessage">
-                                    Credit Card Number is required.
+                                <div *ngIf="newPassword.errors?.['required']" class="errorMessage">
+                                    New Password is required.
                                 </div>
                             </div>
                         </td>
@@ -159,13 +159,14 @@
                     <tr>
                         <td width="50%" style="font-weight: bold;">Re-enter new password</td>
                         <td width="100%">
-                            <input #cvv="ngModel" id="cvv" name="cvv" type="text" [(ngModel)]="newCC.cvv" required
-                                pInputText />
+                            <input #confirmPassword="ngModel" id="confirmPassword" name="confirmPassword"
+                                type="password" [(ngModel)]="confirmPw" required pInputText />
                         </td>
                         <td>
-                            <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched )" class="errorText">
-                                <div *ngIf="cvv.errors?.['required']" class="errorMessage">
-                                    CVV is required.
+                            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched )"
+                                class="errorText">
+                                <div *ngIf="confirmPassword.errors?.['required']" class="errorMessage">
+                                    Confirmation of new password is required.
                                 </div>
                             </div>
                         </td>
