@@ -30,9 +30,9 @@ export class UpdateProductComponent implements OnInit
 	categories: Category[];
 	tags: Tag[];
 	
-	resultSuccess: boolean;
-	resultError: boolean;
-	message: string | undefined;
+	error: boolean;
+	showMessage: boolean;
+	message: string;
 
 
 
@@ -52,9 +52,9 @@ export class UpdateProductComponent implements OnInit
 
 		this.submitted = false;
 		this.retrieveProductError = false;
-		
-		this.resultSuccess = false;
-		this.resultError = false;
+    this.error = false;
+    this.showMessage = false;
+    this.message = '';
   }
 
 
@@ -137,13 +137,13 @@ export class UpdateProductComponent implements OnInit
     {
       this.productService.updateProduct(this.productToUpdate, this.categoryId, longTagIds).subscribe({
         next:(response)=>{
-          this.resultSuccess = true;
-          this.resultError = false;
+          this.showMessage = true;
+          this.error = false;
           this.message = "Product updated successfully";
         },
         error:(error)=>{
-          this.resultError = true;
-          this.resultSuccess = false;
+          this.showMessage = true;
+          this.error = true;
           this.message = "An error has occurred while updating the product: " + error;
           
           console.log('********** UpdateProductComponent.ts: ' + error);

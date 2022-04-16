@@ -28,13 +28,6 @@ export class IndexComponent implements OnInit
 
   ngOnInit(): void
   {
-    console.log('*********** HERE 1')
-    if(this.sessionService.getIsLogin())
-    {
-      console.log('*********** HERE 2')
-      
-    }
-
     this.motdService.getMotds().subscribe({
       next:(response)=>{
         this.messageOfTheDays=response;

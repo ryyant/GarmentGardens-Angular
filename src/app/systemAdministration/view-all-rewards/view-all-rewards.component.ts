@@ -80,9 +80,12 @@ export class ViewAllRewardsComponent implements OnInit {
         console.log('********** UpdateProductComponent.ts: ' + error);
       }
     })
-    console.log(this.message)
+    this.rewards = this.rewards.filter(
+      (reward) => reward != rewardToRedeem
+    );
     // window.location.reload();
   }
+
   parseDate(d: Date | undefined)
     {		
       if(d != null)
@@ -95,17 +98,17 @@ export class ViewAllRewardsComponent implements OnInit {
       }
     }
 
-  
-
   showDialog(rewardToView: Reward)
   {
     this.display = true;
     this.rewardToView = rewardToView;
+    this.resultSuccess = false;
+    this.resultError = false;
   }
 
   copyToClipboard() {
     this.displayCopyClipboard = true;
-    this.displayCopyClipboardMessage="COPIED ";
+    this.displayCopyClipboardMessage="COPIED";
   }
 
   viewRewardDetails() {

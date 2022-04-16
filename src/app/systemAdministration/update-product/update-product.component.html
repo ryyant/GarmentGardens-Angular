@@ -1,100 +1,175 @@
 <app-breadcrumb [pageName]="'updateProduct'"></app-breadcrumb>
-			
-<h3>Update Product</h3>
-<br/>
 
-<span *ngIf="retrieveProductError == true" style="color:red;">Product ID {{productId}} does not exist!</span>
+<div style="display: inline-flex; align-items: center">
+    <a routerLink="/systemAdministration/viewAllProducts" style="color: white; margin: 15px">
+      <i class="pi pi-arrow-circle-left"></i>
+    </a>
+    <h2>Update Product Details</h2>
+  </div>
 
-<div *ngIf="resultSuccess == true" style="color:blue;">
-    {{message}}
+<div *ngIf="showMessage && error === false" class="boxSuccessMessage size95">
+  {{ message }}
 </div>
 
-<div *ngIf="resultError == true" style="color:red;">
-    {{message}}
+<div *ngIf="showMessage && error === true" class="boxErrorMessage size95">
+  {{ message }}
 </div>
+<div class="garmentCard">
+  <span *ngIf="retrieveProductError == true" class="boxErrorMessage size95"
+    >Product ID {{ productId }} does not exist!</span
+  >
+  <br />
 
-<div *ngIf="retrieveProductError == false">
-    <a routerLink="/systemAdministration/viewSellerProducts" style="color: white; margin: 15px"><i
-        class="pi pi-arrow-circle-left"></i>Back</a>
-</div>
-<br/>		
-    
-<form *ngIf="retrieveProductError == false && productToUpdate != null" #updateProductForm="ngForm" (ngSubmit)="update(updateProductForm)" >
-
+  <form
+    *ngIf="retrieveProductError == false && productToUpdate != null"
+    #updateProductForm="ngForm"
+    (ngSubmit)="update(updateProductForm)"
+  >
     <table width="100%">
-        <tr>
-            <td width="20%" style="font-weight: bold;">Product ID</td>
-            <td>{{productToUpdate.productId}}</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">SKU Code</td>
-            <td>{{productToUpdate.skuCode}}</td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Name</td>
-            <td><input pInputText placeholder="Product 1" id="name" type="text" name="name" #name="ngModel"
-                [(ngModel)]="productToUpdate.name" required="true" /></td>
-            <td>
-                <div *ngIf="name.invalid && (name.dirty || name.touched || submitted)" class="errorText">
-                    <div *ngIf="name.errors?.['required']">
-                        Name is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Description</td>
-            <td><input pInputText placeholder="Product 1" id="description" type="text" name="description"
-                #description="ngModel" [(ngModel)]="productToUpdate.description" required="true" /></td>
-            <td>
-                <div *ngIf="description.invalid && (description.dirty || description.touched || submitted)" class="errorText">
-                    <div *ngIf="description.errors?.['required']">
-                        Description is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold">Image Link</td>
-            <td>
-                <input pInputText placeholder="Image Link" id="imageLink" type="text" name="imageLink"
-                    #imageLink="ngModel" [(ngModel)]="productToUpdate.imageLink" required="true" />
-            </td>
-            <td>
-                <div *ngIf="imageLink.invalid && (imageLink.dirty || imageLink.touched || submitted)" class="errorText">
-                    <div *ngIf="imageLink.errors?.['required']">
-                        Image Link is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Quantity On Hand</td>
-            <td><input pInputText placeholder="99" id="quantityOnHand" type="number" name="quantityOnHand"
-                #quantityOnHand="ngModel" [(ngModel)]="productToUpdate.quantityOnHand" required="true" /></td>
-            <td>
-                <div *ngIf="quantityOnHand.invalid && (quantityOnHand.dirty || quantityOnHand.touched || submitted)" class="errorText">
-                    <div *ngIf="quantityOnHand.errors?.['required']">
-                        Quantity On Hand is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Unit Price</td>
-            <td> <input pInputText placeholder="10.00" id="unitPrice" type="number" name="unitPrice" #unitPrice="ngModel"
-                [(ngModel)]="productToUpdate.unitPrice" required="true" /></td>
-            <td>
-                <div *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched || submitted)" class="errorText">
-                    <div *ngIf="unitPrice.errors?.['required']">
-                        Unit Price is required.
-                    </div>
-                </div>
-            </td>
-        </tr>			
-        <!-- <tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Product ID</td>
+        <td>{{ productToUpdate.productId }}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">SKU Code</td>
+        <td>{{ productToUpdate.skuCode }}</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Name</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Product 1"
+            id="name"
+            type="text"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="productToUpdate.name"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="errorText"
+          >
+            <div *ngIf="name.errors?.['required']" class="errorMessage">
+              Name is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Description</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Product 1"
+            id="description"
+            type="text"
+            name="description"
+            #description="ngModel"
+            [(ngModel)]="productToUpdate.description"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              description.invalid && (description.dirty || description.touched)
+            "
+            class="errorText"
+          >
+            <div *ngIf="description.errors?.['required']" class="errorMessage">
+              Description is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Image Link</td>
+        <td>
+          <input
+            pInputText
+            placeholder="Image Link"
+            id="imageLink"
+            type="text"
+            name="imageLink"
+            #imageLink="ngModel"
+            [(ngModel)]="productToUpdate.imageLink"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="imageLink.invalid && (imageLink.dirty || imageLink.touched)"
+            class="errorText"
+          >
+            <div *ngIf="imageLink.errors?.['required']" class="errorMessage">
+              Image Link is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Quantity On Hand</td>
+        <td>
+          <input
+            pInputText
+            placeholder="99"
+            id="quantityOnHand"
+            type="number"
+            name="quantityOnHand"
+            #quantityOnHand="ngModel"
+            [(ngModel)]="productToUpdate.quantityOnHand"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="
+              quantityOnHand.invalid &&
+              (quantityOnHand.dirty || quantityOnHand.touched)
+            "
+            class="errorText"
+          >
+            <div
+              *ngIf="quantityOnHand.errors?.['required']"
+              class="errorMessage"
+            >
+              Quantity On Hand is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Unit Price</td>
+        <td>
+          <input
+            pInputText
+            placeholder="10.00"
+            id="unitPrice"
+            type="number"
+            name="unitPrice"
+            #unitPrice="ngModel"
+            [(ngModel)]="productToUpdate.unitPrice"
+            required="true"
+          />
+        </td>
+        <td>
+          <div
+            *ngIf="unitPrice.invalid && (unitPrice.dirty || unitPrice.touched)"
+            class="errorText"
+          >
+            <div *ngIf="unitPrice.errors?.['required']" class="errorMessage">
+              Unit Price is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <!-- <tr>
             <td width="20%" style="font-weight: bold;">Product Rating</td>
             <td><input id="productRating" name="productRating" #productRating="ngModel" type="range" [(ngModel)]="productToUpdate.productRating" required="true" min="1" max="5" />&nbsp;<span style="vertical-align: top;">{{productToUpdate.productRating}}</span></td>
             <td>
@@ -105,42 +180,55 @@
                 </div>
             </td>
         </tr> -->
-        <tr>
-            <td width="20%" style="font-weight: bold;">Category</td>
-            <td>
-                <select id="category" name="category" #category="ngModel" [(ngModel)]="categoryId" required="true">
-                    <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.name}}</option>
-                </select>
-                
-            </td>
-            <td>
-                <div *ngIf="category.invalid && (category.dirty || category.touched || submitted)" class="errorText">
-                    <div *ngIf="category.errors != null && category.errors['required']">
-                        Category is required.
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="20%" style="font-weight: bold;">Tags</td>
-            <td>
-                <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
-                    <option *ngFor="let tag of tags" value="{{tag.tagId}}">{{tag.name}}</option>
-                </select>
-                
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        
-        
+      <tr>
+        <td width="20%" style="font-weight: bold">Category</td>
+        <td>
+          <select
+            id="category"
+            name="category"
+            #category="ngModel"
+            [(ngModel)]="categoryId"
+            required="true"
+          >
+            <option
+              *ngFor="let category of categories"
+              value="{{ category.categoryId }}"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <div
+            *ngIf="category.invalid && (category.dirty || category.touched)"
+            class="errorText"
+          >
+            <div
+              *ngIf="category.errors != null && category.errors['required']"
+              class="errorMessage"
+            >
+              Category is required.
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="20%" style="font-weight: bold">Tags</td>
+        <td>
+          <select id="tag" name="tag" [(ngModel)]="tagIds" multiple="true">
+            <option *ngFor="let tag of tags" value="{{ tag.tagId }}">
+              {{ tag.name }}
+            </option>
+          </select>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
     </table>
-    <br/>
-    <div style="padding: 25px 0px 5px 0px;" style="text-align: center">
-        <span>
-            <p-button label="Update Product" type="submit"></p-button>
-        </span>
+    <br />
+    <div style="padding: 25px 0px 5px 0px" style="text-align: center">
+      <span>
+        <p-button label="Update Product" type="submit"></p-button>
+      </span>
     </div>
-    
-</form>
+  </form>
+</div>

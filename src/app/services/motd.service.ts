@@ -34,7 +34,7 @@ export class MotdService
 
   getMotds(): Observable<MessageOfTheDay[]>
 	{		
-		return this.httpClient.get<MessageOfTheDay[]>(this.baseUrl + "/retrieveAllMotds?username=" + this.sessionService.getUsername() + "&password=" + this.sessionService.getPassword()).pipe
+		return this.httpClient.get<MessageOfTheDay[]>(this.baseUrl + "/retrieveAllMotds").pipe
 		(
 			catchError(this.handleError)
 		);
