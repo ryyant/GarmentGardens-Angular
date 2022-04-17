@@ -22,7 +22,7 @@ export class ViewMyCartComponent implements OnInit {
   currUser: User;
   promoCode: string;
   paymentMethods: SelectItem[];
-  paymentMethod: string;
+  paymentMethod: string | undefined;
 
   totalCartItems: number;
   totalQuantity: number;

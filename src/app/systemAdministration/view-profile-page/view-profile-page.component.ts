@@ -137,6 +137,7 @@ export class ViewProfilePageComponent implements OnInit {
           this.resultCCError = false;
           this.ccMessage =
             'New credit card ' + newCreditCardId + ' created successfully';
+          this.creditCards = this.creditCards.concat(this.newCC);
 
           this.newCC = new CreditCard();
           createCCForm.resetForm();
@@ -175,6 +176,9 @@ export class ViewProfilePageComponent implements OnInit {
         this.deleteCCError = false;
         this.deleteCCmessage =
           'Credit card ' + creditCardId + ' deleted successfully';
+        this.creditCards = this.creditCards.filter(
+          (item) => item != creditCard
+        );
       },
       error: (error) => {
         this.deleteCCSuccess = false;
