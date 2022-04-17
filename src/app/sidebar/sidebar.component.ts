@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { RoleEnum } from '../models/role-enum';
 import { User } from '../models/user';
@@ -13,7 +13,7 @@ import { UserService } from '../services/user.service';
 export class SidebarComponent implements OnInit {
   ads: number[] = [];
   loginDialogue: boolean | undefined;
-  chlorophyll: number | undefined;
+  @Input() chlorophyll: number | undefined;
 
   constructor(
     private router: Router,
@@ -29,15 +29,21 @@ export class SidebarComponent implements OnInit {
     setInterval(() => this.randomizeAds(), 5000);
     this.loginDialogue = false;
     this.chlorophyll = this.sessionService.getChlorophyll();
-      this.router.events.subscribe((val) => {
-        if (val instanceof NavigationEnd) {
-          if (this.sessionService.getIsLogin() == true) {
-          this.chlorophyll = this.sessionService.getChlorophyll();
-          }
-        }
-      });
-    
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        console.log("HERE: " +this.sessionService.getChlorophyll());
+        this.chlorophyll = this.sessionService.getChlorophyll();
+      }
+    });
+    this.reloadComponent();
   }
+
+  reloadComponent() {
+    let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([currentUrl]);
+    }
 
   randomizeAds(): void {
     let counter = 0;

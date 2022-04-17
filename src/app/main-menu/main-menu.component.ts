@@ -21,15 +21,21 @@ export class MainMenuComponent implements OnInit {
   display: boolean;
   date: Date;
   flashSaleDate: Date;
+  flashSaleEnds: Date;
   constructor(public datePipe: DatePipe, private router: Router, public sessionService: SessionService, private categoryService: CategoryService
     ) {
       this.display = false;
       this.date =new Date();
       let flash = new Date();
       flash.setHours(17);
-      flash.setMinutes(0);
+      flash.setMinutes(14);
       flash.setSeconds(0);
       this.flashSaleDate = flash;
+      let flash2 = new Date();
+      flash.setHours(17);
+      flash.setMinutes(34);
+      flash.setSeconds(0);
+      this.flashSaleEnds = flash2;
       }
 
   

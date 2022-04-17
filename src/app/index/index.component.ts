@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageOfTheDay } from '../models/message-of-the-day';
 import { MotdService } from '../services/motd.service';
-
+import { NavigationEnd, Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
 
 
@@ -19,7 +19,7 @@ export class IndexComponent implements OnInit
 
   images: number[];
 
-  constructor(public sessionService: SessionService,
+  constructor(private router: Router, public sessionService: SessionService,
             private motdService: MotdService)
   {
     this.messageOfTheDays = new Array();
@@ -38,7 +38,14 @@ export class IndexComponent implements OnInit
         console.log('******** MessageOfTheDay index.ts' + error)
       }
     })
-  }	
+    
+  }
+  reloadComponent() {
+    let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([currentUrl]);
+    }
     
 
 

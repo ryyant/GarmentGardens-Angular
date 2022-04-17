@@ -64,7 +64,7 @@
             ><span class="product-category">{{ product.category.name }}</span>
           </div>
           <div class="product-list-action">
-            <span class="product-price">${{ product.unitPrice }}</span>
+            <span class="product-price">${{ product.unitPrice | number:'1.2-2' }}</span>
             <!--           <p-button
             label="View Product"
             (onClick)="showDialog(product)"
@@ -100,7 +100,7 @@
             ></p-rating>
           </div>
           <div class="product-grid-item-bottom">
-            <span class="product-price">${{ product.unitPrice }}</span>
+            <span class="product-price">${{ product.unitPrice | number:'1.2-2' }}</span>
             <!--           <p-button
             label="View Product"
             (onClick)="showDialog(product)"
