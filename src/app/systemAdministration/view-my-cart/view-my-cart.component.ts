@@ -97,12 +97,8 @@ export class ViewMyCartComponent implements OnInit {
 
   initCartDetails() {
     this.clearCartDetails();
-    console.log(this.lineItems);
     for (let i = 0; i < this.lineItems.length; i++) {
-      if (this.totalCartItems == 0) {
-        this.totalCartItems++;
-      }
-      this.totalCartItems += i;
+      this.totalCartItems += 1;
       this.totalQuantity += this.lineItems[i].quantity as number;
       this.totalAmount += this.lineItems[i].subTotal as number;
     }
