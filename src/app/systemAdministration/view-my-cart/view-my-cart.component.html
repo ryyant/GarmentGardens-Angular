@@ -66,17 +66,18 @@
       <tr>
         <td>
           <h3>Payment Method</h3>
-          <input
-            pInputText
-            placeholder="Paynow"
-            id="promoCode"
-            type="text"
-            name="promoCode"
-            #username="ngModel"
-            [(ngModel)]="promoCode"
-            required="true"
-            class="glow"
-          />
+
+          <p-dropdown
+          id="promoCode"
+          type="text"
+          name="promoCode"
+          #username="ngModel"
+          [required]="true"
+          class="glow"
+          placeholder="Select Payment Method"
+          [options]="paymentMethods"
+          [(ngModel)]="paymentMethod"
+          ></p-dropdown>
         </td>
       </tr>
       <tr>
