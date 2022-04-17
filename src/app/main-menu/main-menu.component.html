@@ -9,8 +9,11 @@
 <!-- <h1>current Date {{date}}</h1>
 <h1>flashSale {{flashSaleDate}}</h1> -->
 
-<app-flashsales *ngIf="date > flashSaleDate" style="text-align:center"></app-flashsales>
+<!-- dontshowFlash -->
+<app-flashsales *ngIf="date < flashSaleDate" style="text-align:center"></app-flashsales>
 
+<!-- showflash -->
+<!-- <app-flashsales *ngIf="date > flashSaleDate" style="text-align:center"></app-flashsales> -->
 <ng-template pRipple [ngIf]="sessionService.getIsLogin() == true">
   <span *ngIf="sessionService.getCurrentUser().role === 'CUSTOMER'">
     <p-menubar  [model]="menuCustomer">

@@ -19,7 +19,7 @@ export class FlashsalesComponent implements OnInit {
   @Output() TimerExpired: EventEmitter<any> = new EventEmitter();
 
   @Input() SearchDate: moment.Moment = moment();
-  @Input() ElapsTime: number = 20;
+  @Input() ElapsTime: number = 1;
 
   searchEndDate: moment.Moment;
   remainingTime: number;
