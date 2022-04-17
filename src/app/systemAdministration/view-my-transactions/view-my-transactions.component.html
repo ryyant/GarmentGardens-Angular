@@ -234,7 +234,7 @@
           <tr>
             <td width="20%" style="font-weight: bold">Number of Stars</td>
             <td>
-              <input
+              <!-- <input
                 style="width: 100%"
                 pInputText
                 placeholder="stars"
@@ -244,7 +244,13 @@
                 #stars="ngModel"
                 [(ngModel)]="newRating.numberOfStars"
                 required="true"
-              />
+              /> -->
+              <p-rating
+                #stars="ngModel"
+                style="width: 100%"
+                [(ngModel)]="newRating.numberOfStars"
+                [cancel]="false"
+              ></p-rating>
             </td>
             <td>
               <div
@@ -260,7 +266,7 @@
           <tr>
             <td width="25%" style="font-weight: bold">Description</td>
             <td>
-              <!-- <input
+              <input
                 style="width: 100%"
                 pInputText
                 placeholder="Description"
@@ -270,13 +276,7 @@
                 #description="ngModel"
                 [(ngModel)]="newRating.description"
                 required="true"
-              /> -->
-              <p-rating
-                #description="ngModel"
-                style="width: 100%"
-                [(ngModel)]="newRating.description"
-                [cancel]="false"
-              ></p-rating>
+              />
             </td>
             <td>
               <div

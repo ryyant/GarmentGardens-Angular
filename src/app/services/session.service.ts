@@ -19,6 +19,15 @@ export class SessionService {
     return sessionStorage['recommendedSize']
   }
 
+
+  setChlorophyll(chloro: number | undefined): void {
+    sessionStorage['chlorophyll'] = chloro;
+  }
+
+  getChlorophyll(): number {
+    return sessionStorage['chlorophyll']
+  }
+
   getIsLogin(): boolean {
     if (sessionStorage['isLogin'] == 'true') {
       return true;

@@ -52,6 +52,8 @@ export class HeaderComponent implements OnInit {
           this.sessionService.setCurrentUser(user);
           this.sessionService.setUsername(this.username);
           this.sessionService.setPassword(this.password);
+          console.log(user.chlorophyll);
+          this.sessionService.setChlorophyll(user.chlorophyll);
           this.loginError = false;
           console.log('Successful Login');
           this.router.navigate(['/index']);
@@ -78,10 +80,12 @@ export class HeaderComponent implements OnInit {
   }
 
   userLogout(): void {
+    console.log("user logout");
     this.sessionService.setIsLogin(false);
     this.sessionService.setCurrentUser(null);
     this.sessionService.setUsername('');
     this.sessionService.setPassword('');
+    this.sessionService.setChlorophyll(0);
     this.sessionService.setMotds(new Array());
 
     this.router.navigate(['/index']);

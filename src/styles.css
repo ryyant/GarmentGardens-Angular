@@ -152,3 +152,21 @@ img {
 .size95 {
     width: 95%;
 }
+
+.flashsales {
+    background-color: #252525;
+    padding: 15px;
+    margin: 0px;
+    width: 95%;
+    text-align: center;
+    animation-name: flashAnimation;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes flashAnimation {
+    0%   {background-color: rgb(138, 220, 66);}
+    25%  {background-color: rgb(178, 178, 18);}
+    50%  {background-color: rgb(71, 167, 95);}
+    100% {background-color: #C5E1A5;}
+  }
