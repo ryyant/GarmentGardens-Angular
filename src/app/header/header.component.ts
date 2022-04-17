@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   loginError: boolean;
   errorMessage: string | undefined;
 
+  userChlorophyll: number | undefined;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

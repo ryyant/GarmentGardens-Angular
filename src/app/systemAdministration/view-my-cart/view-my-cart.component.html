@@ -38,7 +38,7 @@
         <td>
           <h3 class="product-price">Total Amount</h3>
           <h3 style="color: white">
-            ${{ totalAmount }}
+            ${{ totalAmount | number:'1.2-2'  }}
           </h3>
         </td>
       </tr>
@@ -150,12 +150,12 @@
         &nbsp;
         <div class="product-list-action">
           <span class="product-price">Unit Price</span>
-          <span class="product-price-2">${{ lineItem.unitPrice }}</span>
+          <span class="product-price-2">${{ lineItem.unitPrice | number:'1.2-2' }}</span>
         </div>
         &nbsp;
         <div class="product-list-action">
           <span class="product-price">Sub Total</span>
-          <span class="product-price-2">${{ lineItem.subTotal }}</span>
+          <span class="product-price-2">${{ lineItem.subTotal | number:'1.2-2'}}</span>
         </div>
         <div>
           <button
