@@ -32,9 +32,8 @@ export class ViewMyTransactionsComponent implements OnInit {
   newRating: Rating;
 
   error: boolean | undefined;
-	showMessage: boolean | undefined;
-	message: string | undefined;
-
+  showMessage: boolean | undefined;
+  message: string | undefined;
 
   sortOptions: SelectItem[] = [];
   sortOrder: number = 0;
@@ -106,40 +105,46 @@ export class ViewMyTransactionsComponent implements OnInit {
     this.newRating = new Rating();
     this.error = false;
     this.showMessage = false;
-    this.message = "";
-  }
-  
-  openDispute(order: Order) {
-      this.router.navigate([
-        '/systemAdministration/createDispute/' +
-        order.orderId,
-      ]);  
+    this.message = '';
   }
 
+  openDispute(order: Order) {
+    this.router.navigate([
+      '/systemAdministration/createDispute/' + order.orderId,
+    ]);
+  }
 
   review(createReviewForm: NgForm) {
+    if (
+      createReviewForm.valid &&
+      this.selectedProduct != null &&
+      this.newRating != null
+    ) {
+      this.ratingResourceService
+        .rateProduct(this.selectedProduct, this.newRating)
+        .subscribe({
+          next: (response) => {
+            this.error = false;
+            this.showMessage = true;
+            this.message = 'New Review created successfully';
 
-    if (this.selectedProduct == null || this.newRating )
-    
-    if (createReviewForm.valid && this.selectedProduct != null && this.newRating != null) {
-      this.ratingResourceService.rateProduct(this.selectedProduct, this.newRating).subscribe({
-        next: (response) => {
-          this.error = false;
-          this.showMessage = true;
-          this.message = "New Review created successfully";
+            this.selectedProduct = new Product();
+            this.newRating = new Rating();
 
-          this.selectedProduct = new Product();
-          this.newRating = new Rating();
-
-          createReviewForm.resetForm();
-          createReviewForm.reset();
-        },
-        error: (error) => {
-          this.error = true;
-          this.showMessage = true;
-          this.message = "An error has occurred while creating the new review: " + error;
-        }
-      });
+            createReviewForm.resetForm();
+            createReviewForm.reset();
+          },
+          error: (error) => {
+            this.error = true;
+            this.showMessage = true;
+            this.message =
+              'An error has occurred while creating the new review: ' + error;
+          },
+        });
+    } else {
+      this.error = true;
+      this.showMessage = true;
+      this.message = 'Please fill in the fields!';
     }
   }
 }

@@ -32,6 +32,7 @@ export class RatingResourceService {
   }
 
   rateProduct(product: Product, rating: Rating): Observable<any> {
+    console.log(rating);
     let createRatingReq: CreateRatingReq = new CreateRatingReq(this.sessionService.getCurrentUser(), product, rating);
     return this.httpClient
       .put<any>(this.baseUrl + '/rateProduct', createRatingReq, httpOptions)

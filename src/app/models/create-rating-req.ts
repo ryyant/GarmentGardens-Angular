@@ -7,12 +7,12 @@ import { Rating } from "./rating";
 export class CreateRatingReq {
     user: User | undefined;
     product: Product | undefined;
-    rating: Rating | undefined;
+    newRating: Rating | undefined;
   
-    constructor(user?: User, product?: Product, rating?: Rating)
+    constructor(user?: User, product?: Product, newRating?: Rating)
     {		
       this.user = user;
       this.product = product;
-      this.rating = rating;
+      this.newRating = newRating;
     }
   }

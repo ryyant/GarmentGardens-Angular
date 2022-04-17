@@ -2,8 +2,6 @@
 
 <h3 style="color: white">My Orders</h3>
 
-
-
 <div class="garmentCard dataHeader">
   <div
     style="display: flex; flex: 4; align-items: center; justify-content: center"
@@ -209,13 +207,13 @@
       <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
         {{ message }}
       </div>
-    
+
       <div *ngIf="showMessage && error == true" class="boxErrorMessage">
         {{ message }}
       </div>
     </div>
 
-    <div class="garmentCard" style="width: 100%;">
+    <div class="garmentCard" style="width: 100%">
       <form
         #createRatingForm="ngForm"
         (ngSubmit)="review(createRatingForm)"
@@ -226,6 +224,11 @@
           <tr>
             <td width="20%" style="font-weight: bold">Product ID</td>
             <td width="50%">{{ selectedProduct?.productId }}</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="25%" style="font-weight: bold">Product ID</td>
+            <td width="50%">{{ selectedProduct?.name }}</td>
             <td>&nbsp;</td>
           </tr>
           <tr>
@@ -255,9 +258,9 @@
             </td>
           </tr>
           <tr>
-            <td width="20%" style="font-weight: bold">Description</td>
+            <td width="25%" style="font-weight: bold">Description</td>
             <td>
-              <input
+              <!-- <input
                 style="width: 100%"
                 pInputText
                 placeholder="Description"
@@ -267,7 +270,13 @@
                 #description="ngModel"
                 [(ngModel)]="newRating.description"
                 required="true"
-              />
+              /> -->
+              <p-rating
+                #description="ngModel"
+                style="width: 100%"
+                [(ngModel)]="newRating.description"
+                [cancel]="false"
+              ></p-rating>
             </td>
             <td>
               <div
