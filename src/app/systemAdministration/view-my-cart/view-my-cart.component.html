@@ -2,7 +2,6 @@
 
 <h3 style="color: white" *ngIf="cart?.cartType == 'INDIVIDUALCART'">My Cart</h3>
 
-
 <div style="width: 95%">
   <div *ngIf="showMessage && error == false" class="boxSuccessMessage">
     {{ errorMessage }}
@@ -11,15 +10,22 @@
   <div *ngIf="showMessage && error == true" class="boxErrorMessage">
     {{ errorMessage }}
   </div>
+
   <br />
 </div>
 
 <div class="garmentCard dataHeader">
   <div
-    style="display: flex; flex: 4; align-items: center; justify-content: center; flex-direction: column;"
+    style="
+      display: flex;
+      flex: 4;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    "
   >
-  <h2 style="color: white">
-    Start Making a Change, shop at Garment Gardens! 🌱
+    <h2 style="color: white">
+      Start Making a Change, shop at Garment Gardens! 🌱
     </h2>
     <table>
       <tr>
@@ -37,9 +43,7 @@
         </td>
         <td>
           <h3 class="product-price">Total Amount</h3>
-          <h3 style="color: white">
-            ${{ totalAmount }}
-          </h3>
+          <h3 style="color: white">${{ totalAmount }}</h3>
         </td>
       </tr>
     </table>
@@ -53,10 +57,10 @@
           <input
             pInputText
             placeholder="GARMENTGARDENS"
-            id="promoCode"
+            id="selectCode"
             type="text"
-            name="promoCode"
-            #username="ngModel"
+            name="selectCode"
+            #selectCode="ngModel"
             [(ngModel)]="promoCode"
             required="true"
             class="glow"
@@ -68,15 +72,15 @@
           <h3>Payment Method</h3>
 
           <p-dropdown
-          id="promoCode"
-          type="text"
-          name="promoCode"
-          #username="ngModel"
-          [required]="true"
-          class="glow"
-          placeholder="Select Payment Method"
-          [options]="paymentMethods"
-          [(ngModel)]="paymentMethod"
+            id="selectPayment"
+            type="text"
+            name="selectPayment"
+            #selectPayment="ngModel"
+            [required]="true"
+            class="glow"
+            placeholder="Select Payment Method"
+            [options]="paymentMethods"
+            [(ngModel)]="paymentMethod"
           ></p-dropdown>
         </td>
       </tr>
@@ -87,7 +91,7 @@
             label="Checkout"
             type="button"
             class="p-button"
-            (click)="checkout()"
+            (click)="confirmCheckout()"
             style="margin: 10px"
           ></button>
         </td>
@@ -98,10 +102,7 @@
 
 <br />
 
-
-
-
-  <div class="garmentCard">
+<div class="garmentCard">
   <p-dataView
     #dv
     [value]="lineItems"
@@ -174,10 +175,75 @@
 
 <div class="garmentCard">
   <button
-  pButton
-  label="Clear Cart"
-  type="button"
-  class="p-button"
-  (click)="clearCart()"
-  style="margin: 10px"
-></button></div>
+    pButton
+    label="Clear Cart"
+    type="button"
+    class="p-button-danger"
+    (click)="clearCart()"
+    style="margin: 10px"
+  ></button>
+</div>
+
+<p-dialog
+  header="Checkout"
+  position="middle"
+  [(visible)]="checkoutDialogue"
+  [style]="{ width: '50vw' }"
+>
+  <div style="text-align: center">
+    <h1>Confirm Checkout</h1>
+
+    <div class="garmentCard" style="width: 100%">
+      <form
+        #checkoutForm="ngForm"
+        (ngSubmit)="confirmCheckout()"
+        class=""
+        checkoutForm
+      >
+        <div style="display: inline-flex">
+          <h1 style="color: white; margin: 15px">
+            Total Amount
+            <h2>{{ totalAmount }}</h2>
+          </h1>
+          <h1 style="color: white; margin: 15px">
+            With Delivery
+            <h2 style="font-size: large; color: red;" *ngIf="totalAmount < deliveryAmount">+ {{deliveryAmount - totalAmount}} </h2>
+            <h2 style="font-size: large; color: red;" *ngIf="totalAmount == deliveryAmount">(Free Delivery!)</h2>
+
+            <h2>{{ deliveryAmount }}
+            </h2>
+          </h1>
+
+          <h1 style="color: white; margin: 15px">
+            After Promo
+            <h2 style="font-size: large; color: yellow;" *ngIf="promoAmount < deliveryAmount">- {{deliveryAmount - promoAmount}} </h2>
+            <h2>{{ promoAmount }}</h2>
+          </h1>
+        </div>
+
+        <h1 style="color: white">
+          Chlorophyll Earned:
+          <h2>{{ promoAmount }}</h2>
+        </h1>
+        <h1 style="color: white">
+          Payment Payment:
+          <h2>{{ paymentMethod }}</h2>
+        </h1>
+
+        <br />
+        <div style="padding: 25px 0px 5px 0px" style="text-align: center">
+          <div>
+            <button
+              pButton
+              label="Confirm"
+              type="button"
+              class="p-button"
+              (click)="checkout()"
+              style="margin: 10px"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-dialog>

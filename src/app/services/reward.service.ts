@@ -25,6 +25,13 @@ export class RewardService {
     );
   }
 
+  getRewardbyPromoCode(promoCode?: number): Observable<Reward> {
+    return this.httpClient.get<Reward>(this.baseUrl + "/getRewardByCode/" + promoCode).pipe
+    (
+      catchError(this.handleError)
+    );
+  }
+
   getAvailableRewards(): Observable<Reward[]> {
     return this.httpClient.get<Reward[]>(this.baseUrl + "/retrieveAvailableRewards/").pipe
     (

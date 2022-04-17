@@ -12,7 +12,7 @@
     <h2>My Chlorophyll:</h2>
 
     <h2 style="color: #c5e1a5" *ngIf="this.sessionService.getIsLogin()">{{ chlorophyll }}</h2>
-    <h2 style="color: #c5e1a5" *ngIf="!this.sessionService.getIsLogin()">Login!</h2>
+    <h3 style="color: #c5e1a5" *ngIf="!this.sessionService.getIsLogin()" >Login To View</h3>
 <!--     <i
       class="pi pi-refresh"
       (click)="onRefresh()"

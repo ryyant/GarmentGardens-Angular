@@ -9,6 +9,7 @@ import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { Cart } from 'src/app/models/cart';
+import { RewardService } from 'src/app/services/reward.service';
 
 @Component({
   selector: 'app-view-my-cart',
@@ -21,8 +22,13 @@ export class ViewMyCartComponent implements OnInit {
   display: boolean;
   currUser: User;
   promoCode: string;
+  promoAmount: number;
+  deliveryAmount: number;
   paymentMethods: SelectItem[];
   paymentMethod: string | undefined;
+
+  checkoutDialogue: boolean;
+
 
   totalCartItems: number;
   totalQuantity: number;
@@ -41,6 +47,7 @@ export class ViewMyCartComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public sessionService: SessionService,
+    private rewardService: RewardService,
     private cartService: CartService,
     private primengConfig: PrimeNGConfig
   ) {
@@ -48,11 +55,15 @@ export class ViewMyCartComponent implements OnInit {
     this.display = false;
     this.currUser = this.sessionService.getCurrentUser();
     this.promoCode = '';
+    this.promoAmount = 0;
+    this.deliveryAmount = 0;
     this.error = false;
     this.showMessage = false;
     this.totalCartItems = 0;
     this.totalQuantity = 0;
     this.totalAmount = 0;
+    this.checkoutDialogue = false;
+    this.paymentMethod = 'Credit Card';
     this.paymentMethods= [
       { label: "Paynow", value: "Paynow" },
       { label: "Paylah", value: "Paylah" },
@@ -68,7 +79,6 @@ export class ViewMyCartComponent implements OnInit {
         console.log(response);
         if (response.cartLineItems != null) {
           this.lineItems = response.cartLineItems;
-          console.log(this.lineItems);
           this.initCartDetails();
         }
       },
@@ -104,8 +114,79 @@ export class ViewMyCartComponent implements OnInit {
     this.totalAmount = 0;
   }
 
+  confirmCheckout() {
+    
+    if (this.lineItems.length == 0) {
+      this.error = true;
+      this.showMessage = true;
+      this.errorMessage = 'Nothing in Cart!';
+      return;
+    }
+
+    this.errorMessage = '';
+    this.showMessage = false;
+
+    let rewardType;
+
+    // CHECK PROMO CODE FIRST
+    if (this.promoCode !== '') {
+      let integerPromoCode = 0;
+      integerPromoCode = parseInt(this.promoCode);
+      this.rewardService.getRewardbyPromoCode(integerPromoCode).subscribe({
+        next: (response) => {
+          this.checkoutDialogue = true;
+          rewardType = response.rewardEnum;
+          this.calculateFees(rewardType);
+        },
+        error: (error) => {
+          this.error = true;
+          this.showMessage = true;
+          this.errorMessage = 'Invalid PromoCode!';
+          return;
+        },
+      });
+    } else {
+      this.checkoutDialogue = true;
+      this.calculateFees('');
+    }
+  }
+
+
+  calculateFees(rewardType: any) {
+
+    this.deliveryAmount = this.totalAmount;
+    if (this.totalAmount < 30) {
+      this.deliveryAmount = this.totalAmount + 15;
+    }
+    if (this.totalAmount >= 30 && this.totalAmount < 60) {
+      this.deliveryAmount = this.totalAmount + 10;
+    }
+    if (this.totalAmount >= 60 && this.totalAmount <120) {
+      this.deliveryAmount = this.totalAmount + 5;
+    }
+    if (this.totalAmount >= 120) {
+      this.deliveryAmount = this.totalAmount;
+    }
+
+    
+    this.promoAmount = this.deliveryAmount;
+    if (rewardType === "PROMOCODE10") {
+      this.promoAmount = this.promoAmount * 0.9; 
+    }
+    if (rewardType === "PROMOCODE35") {
+      this.promoAmount = this.promoAmount * 0.65; 
+    }
+    if (rewardType === "PROMOCODE60") {
+      this.promoAmount = this.promoAmount * 0.4; 
+    }
+  }
+
+
+
   checkout() {
     console.log('Checking out...');
+    this.checkoutDialogue = false;
+
     if (this.lineItems.length == 0) {
       this.error = true;
       this.showMessage = true;

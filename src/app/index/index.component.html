@@ -40,14 +40,17 @@
 
 <h1>Message Of The Day</h1>
 
+<div style="width: 95%;">
   <p-tabView >
     <p-tabPanel *ngFor="let motd of messageOfTheDays" header="{{motd.title}}, {{parseDate(motd.messageDate) | date}}">
       <h3>{{motd.message}}</h3>
     </p-tabPanel>
-    
   </p-tabView>
+</div>
 
-<article *ngIf="sessionService.getIsLogin() == true" style="width: 95%;" >
+<br/>
+
+<article *ngIf="sessionService.getIsLogin() == true" style="width: 95%; font-size: larger;" >
   <h1 style="text-align: center;">Everyday Garments for a brighter Garden.</h1>
 
   <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [autoplayInterval]="3000" [circular]="true">
