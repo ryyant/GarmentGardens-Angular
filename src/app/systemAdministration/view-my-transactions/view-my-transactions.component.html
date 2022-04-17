@@ -179,8 +179,8 @@
             <td>{{ lineItem.lineItemId }}</td>
             <td>{{ lineItem.product?.name }}</td>
             <td>{{ lineItem.quantity }}</td>
-            <td>{{ lineItem.unitPrice }}</td>
-            <td>{{ lineItem.subTotal }}</td>
+            <td>${{ lineItem.unitPrice }}</td>
+            <td>${{ lineItem.subTotal }}</td>
             <td>
               <u
                 (click)="reviewProductDialogue(lineItem)"

@@ -8,11 +8,12 @@
       <label for="dropdown">Dropdown</label>
     </p-dropdown>
   </div>
+  &nbsp;
   <div>
     <b>Fit: </b>
     <p-dropdown [autoDisplayFirst]="false" placeholder="Select your Fit" [options]="fitOptions"   [(ngModel)]="fit"></p-dropdown>
   </div>
-
+  &nbsp;
   <div id="bottom">
     <div>
       <b>Height: </b> 
@@ -26,8 +27,6 @@
         <span>kg</span>
         <p-knob style="display:flex; justify-content:center"[(ngModel)]="weight" [min]="20" [step]="0.1" [max]="200"></p-knob>
       </div>
-
-
     <div >
       <button label="Generate Size" pButton (click)="generateSize()"></button>
     </div>
