@@ -21,6 +21,8 @@ export class ViewMyCartComponent implements OnInit {
   display: boolean;
   currUser: User;
   promoCode: string;
+  paymentMethods: SelectItem[];
+  paymentMethod: string;
 
   totalCartItems: number;
   totalQuantity: number;
@@ -51,6 +53,12 @@ export class ViewMyCartComponent implements OnInit {
     this.totalCartItems = 0;
     this.totalQuantity = 0;
     this.totalAmount = 0;
+    this.paymentMethods= [
+      { label: "Paynow", value: "Paynow" },
+      { label: "Paylah", value: "Paylah" },
+      { label: "Cash On Delivery", value: "Cash On Delivery"},
+      { label: "Credit Card", value: "Credit Card"}
+    ];
   }
 
   ngOnInit(): void {

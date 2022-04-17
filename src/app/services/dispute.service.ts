@@ -37,7 +37,7 @@ export class DisputeService {
     let createDisputeReq: CreateDisputeReq = new CreateDisputeReq(
       this.sessionService.getUsername(),
       this.sessionService.getPassword(),
-      dispute , orderId
+      dispute , orderId, dispute.title, dispute.description
     );
 
     console.log("This dispute works " + dispute.title);

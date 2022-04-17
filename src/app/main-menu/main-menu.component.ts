@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
-
+import { DatePipe } from '@angular/common';
 import { SessionService } from '../services/session.service';
 
 @Component({
@@ -19,11 +19,18 @@ export class MainMenuComponent implements OnInit {
   menuSeller: MenuItem[] = [];
   restrictedMenu: MenuItem[] = [];
   display: boolean;
-
-  constructor(private router: Router, public sessionService: SessionService, private categoryService: CategoryService
+  date: Date;
+  flashSaleDate: Date;
+  constructor(public datePipe: DatePipe, private router: Router, public sessionService: SessionService, private categoryService: CategoryService
     ) {
       this.display = false;
-    }
+      this.date =new Date();
+      let flash = new Date();
+      flash.setHours(17);
+      flash.setMinutes(0);
+      flash.setSeconds(0);
+      this.flashSaleDate = flash;
+      }
 
   
   ngOnInit() {

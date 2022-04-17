@@ -72,6 +72,8 @@ export class ProductService {
       tagIds
     );
 
+    console.log("ProductService.New Product ID: " + newProduct.productId);
+
     return this.httpClient
       .put<number>(this.baseUrl, createProductReq, httpOptions)
       .pipe(catchError(this.handleError));

@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -74,6 +74,7 @@ import { ViewAllRatingsComponent } from './systemAdministration/view-all-ratings
 import { DonatePageComponent } from './donate-page/donate-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CreateDisputeComponent } from './systemAdministration/create-dispute/create-dispute.component';
+import { FlashsalesComponent } from './flashsales/flashsales.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { CreateDisputeComponent } from './systemAdministration/create-dispute/cr
     DonatePageComponent,
     AboutUsComponent,
     CreateDisputeComponent,
+    FlashsalesComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -152,7 +154,7 @@ import { CreateDisputeComponent } from './systemAdministration/create-dispute/cr
     GMapModule,
     SplitterModule,
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
