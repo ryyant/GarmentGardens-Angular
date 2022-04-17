@@ -55,6 +55,8 @@ export class HeaderComponent implements OnInit {
           this.sessionService.setUsername(this.username);
           this.sessionService.setPassword(this.password);
           this.sessionService.setChlorophyll(user.chlorophyll);
+          console.log(this.sessionService.getChlorophyll());
+
           this.loginError = false;
           console.log('Successful Login');
           this.router.navigate(['/index']);
@@ -87,6 +89,7 @@ export class HeaderComponent implements OnInit {
     this.sessionService.setUsername('');
     this.sessionService.setPassword('');
     this.sessionService.setChlorophyll(0);
+
     this.sessionService.setMotds(new Array());
 
     this.router.navigate(['/index']);

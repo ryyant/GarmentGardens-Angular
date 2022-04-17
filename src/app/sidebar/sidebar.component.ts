@@ -31,9 +31,8 @@ export class SidebarComponent implements OnInit {
     this.chlorophyll = this.sessionService.getChlorophyll();
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        if (this.sessionService.getIsLogin() == true) {
-          this.chlorophyll = this.sessionService.getChlorophyll();
-        }
+        console.log("HERE: " +this.sessionService.getChlorophyll());
+        this.chlorophyll = this.sessionService.getChlorophyll();
       }
     });
     this.reloadComponent();
