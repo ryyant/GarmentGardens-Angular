@@ -13,7 +13,7 @@ import { UserService } from '../services/user.service';
 export class SidebarComponent implements OnInit {
   ads: number[] = [];
   loginDialogue: boolean | undefined;
-  @Input() chlorophyll: number | undefined;
+  chlorophyll: number | undefined;
 
   constructor(
     private router: Router,

@@ -212,20 +212,20 @@
             <h2 style="font-size: large; color: red;" *ngIf="totalAmount < deliveryAmount">+ {{deliveryAmount - totalAmount}} </h2>
             <h2 style="font-size: large; color: red;" *ngIf="totalAmount == deliveryAmount">(Free Delivery!)</h2>
 
-            <h2>{{ deliveryAmount }}
+            <h2>{{ deliveryAmount | number:'1.2-2' }}
             </h2>
           </h1>
 
           <h1 style="color: white; margin: 15px">
             After Promo
             <h2 style="font-size: large; color: yellow;" *ngIf="promoAmount < deliveryAmount">- {{deliveryAmount - promoAmount}} </h2>
-            <h2>{{ promoAmount }}</h2>
+            <h2>{{ promoAmount | number:'1.2-2' }}</h2>
           </h1>
         </div>
 
         <h1 style="color: white">
           Chlorophyll Earned:
-          <h2>{{ promoAmount }}</h2>
+          <h2>{{ promoAmount | number:'1.2-2' }}</h2>
         </h1>
         <h1 style="color: white">
           Payment Payment:
