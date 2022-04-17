@@ -22,6 +22,7 @@ export class ViewProductDetailsComponent implements OnInit {
   productDeleted: boolean;
   qtyToAdd: number = 0;
 
+
   sizes: string[] = ["XXS", "XS", "S", "M", "L", "XL", "XXL"]
   selectedSize: string | undefined;
 
