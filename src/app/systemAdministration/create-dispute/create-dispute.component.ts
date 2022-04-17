@@ -19,9 +19,9 @@ export class CreateDisputeComponent implements OnInit {
 	orderId: string | null;
   newDispute: Dispute;
 
-  error: boolean | undefined;
-	showMessage: boolean | undefined;
-	message: string | undefined;
+  error: boolean;
+	showMessage: boolean;
+	message: string;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -30,7 +30,8 @@ export class CreateDisputeComponent implements OnInit {
       this.newDispute = new Dispute();
       this.submitted = false;
       this.showMessage = false;
-      this.orderId = '';
+      this.message = '';
+      this.error = false;
 
     }
 
@@ -45,7 +46,6 @@ export class CreateDisputeComponent implements OnInit {
     this.submitted = true;
 
     if (createDisputeForm.valid && this.orderId !== null) {
-      console.log("This shit works " + this.orderId);
 
       this.disputeService.createNewDispute(this.newDispute, this.orderId).subscribe({
         next: (response) => {
@@ -54,6 +54,7 @@ export class CreateDisputeComponent implements OnInit {
           this.error = false;
           this.message = "New dispute " + newDisputeId + " created successfully";
           console.log("Dispute" + newDisputeId);
+          
         },
         error: (error) => {
           this.showMessage = true;
