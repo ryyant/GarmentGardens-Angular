@@ -120,6 +120,7 @@ export class ViewMyCartComponent implements OnInit {
           this.errorMessage = 'Checkout Complete!';
           this.promoCode = '';
           this.cart = undefined;
+          this.sessionService.addChlorophyll(this.totalAmount);
           this.lineItems = [];
           this.clearCartDetails();
         },

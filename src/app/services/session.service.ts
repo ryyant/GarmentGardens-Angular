@@ -28,6 +28,14 @@ export class SessionService {
     return sessionStorage['chlorophyll']
   }
 
+  addChlorophyll(toAdd: number): void {
+    sessionStorage['chlorophyll'] = parseInt(sessionStorage['chlorophyll']) + toAdd;
+  }
+
+  deductChlorophyll(toDeduct: number): void {
+    sessionStorage['chlorophyll'] = parseInt(sessionStorage['chlorophyll']) - toDeduct;
+  }
+
   getIsLogin(): boolean {
     if (sessionStorage['isLogin'] == 'true') {
       return true;

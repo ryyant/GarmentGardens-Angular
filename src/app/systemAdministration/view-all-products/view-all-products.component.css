@@ -95,6 +95,7 @@
 .product-grid-item .product-grid-item-content {
   text-align: center;
   overflow: hidden;
+  min-height: 550px;
 }
 
 .product-grid-item-content .img {

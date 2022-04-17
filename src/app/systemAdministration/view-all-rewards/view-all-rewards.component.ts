@@ -7,6 +7,7 @@ import { Reward } from 'src/app/models/reward';
 
 import { SelectItem } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { RewardEnum } from 'src/app/models/reward-enum';
 
 @Component({
   selector: 'app-view-all-rewards',
@@ -66,12 +67,29 @@ export class ViewAllRewardsComponent implements OnInit {
 
   redeemReward(rewardToRedeem: Reward) {
     this.rewardToRedeem = rewardToRedeem;
-    console.log(rewardToRedeem);
+    let currentChloro = this.sessionService.getChlorophyll();
+
+    if ((rewardToRedeem.rewardEnum == 'PROMOCODE10' && currentChloro < 200) || (rewardToRedeem.rewardEnum == 'PROMOCODE35' && currentChloro < 600) || (rewardToRedeem.rewardEnum == 'PROMOCODE60' && currentChloro < 1000)) {
+      this.resultError = true;
+      this.resultSuccess = false;
+      this.message = "Insufficient chlorophyll balance!";
+      return;
+    }
+
+
     this.rewardService.redeemReward(this.sessionService.getCurrentUser().userId, rewardToRedeem.rewardId).subscribe({
       next:(response)=>{
         this.resultSuccess = true;
         this.resultError = false;
         this.message = "Reward redeemed successfully";
+
+        if (rewardToRedeem.rewardEnum == 'PROMOCODE10') {
+          this.sessionService.deductChlorophyll(200);
+        } else if (rewardToRedeem.rewardEnum == 'PROMOCODE35') {
+          this.sessionService.deductChlorophyll(600);
+        } else if (rewardToRedeem.rewardEnum == 'PROMOCODE60') {
+          this.sessionService.deductChlorophyll(1000);
+        }
       },
       error:(error)=>{
         this.resultError = true;

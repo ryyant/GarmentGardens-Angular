@@ -14,8 +14,6 @@ export class SidebarComponent implements OnInit {
   ads: number[] = [];
   loginDialogue: boolean | undefined;
   chlorophyll: number | undefined;
-  username: string | undefined;
-  password: string | undefined;
 
   constructor(
     private router: Router,
@@ -30,48 +28,14 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => this.randomizeAds(), 5000);
     this.loginDialogue = false;
-    if (this.sessionService.getIsLogin() == true) {
-
-      this.username = this.sessionService.getUsername();
-      this.password = this.sessionService.getPassword();
-      this.chlorophyll = this.sessionService.getCurrentUser()?.chlorophyll;
-    } else {
-      this.chlorophyll = 0;
-    }
+    this.chlorophyll = this.sessionService.getChlorophyll();
     this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        this.onRefresh();
+        if (this.sessionService.getIsLogin() == true) {
+          this.chlorophyll = this.sessionService.getChlorophyll();
+        }
       }
-  });
-  }
-
-  onRefresh(): void {
-    if (this.sessionService.getIsLogin() == true) {
-      this.userService.userLogin(this.username, this.password).subscribe({
-        next: (response) => {
-          let user: User = response;
-          if (response.role?.toString() == 'CUSTOMER') {
-            user.role = RoleEnum.CUSTOMER;
-          } else if (response.role?.toString() == 'SELLER') {
-            user.role = RoleEnum.SELLER;
-          }
-
-          if (user != null) {
-            this.sessionService.setIsLogin(true);
-            this.sessionService.setCurrentUser(user);
-            this.sessionService.setUsername(this.username);
-            this.sessionService.setPassword(this.password);
-            this.chlorophyll = user.chlorophyll;
-          }
-        },
-        error: (error) => {
-          console.log('Error in Refresh');
-        },
-      });
-    } else {
-      this.chlorophyll = 0;
-      this.loginDialogue = true;
-    }
+    });
   }
 
   randomizeAds(): void {

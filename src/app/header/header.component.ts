@@ -52,7 +52,6 @@ export class HeaderComponent implements OnInit {
           this.sessionService.setCurrentUser(user);
           this.sessionService.setUsername(this.username);
           this.sessionService.setPassword(this.password);
-          console.log(user.chlorophyll);
           this.sessionService.setChlorophyll(user.chlorophyll);
           this.loginError = false;
           console.log('Successful Login');
